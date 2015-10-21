@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace InstantDelivery.Core.Entities
 {
@@ -19,5 +20,8 @@ namespace InstantDelivery.Core.Entities
 
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }
+
+        public virtual ICollection<Package> Packages { get; set; }
+
     }
 }
