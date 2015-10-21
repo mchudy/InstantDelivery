@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery", "InstantDelivery\InstantDelivery.csproj", "{2974FB34-4B86-4ABE-AFAF-701639D0D5B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Presentation", "InstantDelivery.Presentation\InstantDelivery.Presentation.csproj", "{2974FB34-4B86-4ABE-AFAF-701639D0D5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Core", "InstantDelivery.Core\InstantDelivery.Core.csproj", "{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.ViewModel", "InstantDelivery.ViewModel\InstantDelivery.ViewModel.csproj", "{03199773-6AE0-4DDC-985F-BF4BC69111FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2974FB34-4B86-4ABE-AFAF-701639D0D5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2974FB34-4B86-4ABE-AFAF-701639D0D5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2974FB34-4B86-4ABE-AFAF-701639D0D5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03199773-6AE0-4DDC-985F-BF4BC69111FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03199773-6AE0-4DDC-985F-BF4BC69111FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03199773-6AE0-4DDC-985F-BF4BC69111FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03199773-6AE0-4DDC-985F-BF4BC69111FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
