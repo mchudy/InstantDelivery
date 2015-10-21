@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InstantDelivery.Core;
+using InstantDelivery.Core.Entities;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace InstantDelivery
 {
@@ -23,6 +13,19 @@ namespace InstantDelivery
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var c = new InstantDeliveryContext())
+            {
+                c.Employees.Add(new Employee
+                {
+                    FirstName = "dafadf"
+                });
+                c.SaveChanges();
+                foreach (var em in c.Employees)
+                {
+                    Console.WriteLine(em.FirstName);
+                }
+            }
         }
     }
 }

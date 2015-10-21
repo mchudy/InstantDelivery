@@ -15,11 +15,11 @@ namespace InstantDelivery.Core.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Sex Sex { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
 
         public decimal Salary { get; set; }
-        public DateTime HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         public virtual ICollection<Package> Packages { get; set; }
 
