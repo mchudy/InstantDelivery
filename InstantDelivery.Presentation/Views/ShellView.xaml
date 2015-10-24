@@ -5,9 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstantDelivery.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="300" Width="300">
-    <StackPanel>
-        <TextBlock x:Name="FirstName"></TextBlock>
-        <Button x:Name="Whatever" Height="50"></Button>
-    </StackPanel>
+        Title="ShellView" Height="800" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button x:Name="Employees">Pracownicy</Button>
+            <Button x:Name="Vehicles">Pojazdy</Button>
+        </StackPanel>
+        <ContentControl Grid.Column="1" x:Name="ActiveItem" />
+    </Grid>
 </Window>

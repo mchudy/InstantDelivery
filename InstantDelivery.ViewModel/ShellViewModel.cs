@@ -2,23 +2,16 @@
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShellViewModel : PropertyChangedBase
+    public class ShellViewModel : Conductor<object>.Collection.OneActive
     {
-        private string name = "John";
-
-        public string FirstName
+        public void Employees()
         {
-            get { return name; }
-            set
-            {
-                name = value;
-                NotifyOfPropertyChange();
-            }
+            ActivateItem(new EmployeesViewModel());
         }
 
-        public void Whatever()
+        public void Vehicles()
         {
-            FirstName = "SDLFJ:LFDJ";
+            ActivateItem(new VehiclesViewModel());
         }
     }
 }
