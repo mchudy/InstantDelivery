@@ -27,7 +27,7 @@ namespace InstantDelivery.Core.Migrations
             //    );
             //
 
-            context.Employees.Add(new Employee
+            context.Employees.AddOrUpdate(new Employee
             {
                 FirstName = "Johnny",
                 LastName = "Rambo",
