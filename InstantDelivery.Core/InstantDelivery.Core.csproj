@@ -56,7 +56,6 @@
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
-    <Compile Include="InstantDeliveryInitializer.cs" />
     <Compile Include="Migrations\201510211659402_InitialCreate.cs" />
     <Compile Include="Migrations\201510211659402_InitialCreate.Designer.cs">
       <DependentUpon>201510211659402_InitialCreate.cs</DependentUpon>

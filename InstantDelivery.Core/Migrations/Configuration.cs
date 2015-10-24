@@ -1,3 +1,5 @@
+using InstantDelivery.Core.Entities;
+
 namespace InstantDelivery.Core.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -24,6 +26,14 @@ namespace InstantDelivery.Core.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Employees.Add(new Employee
+            {
+                FirstName = "Johnny",
+                LastName = "Rambo",
+                Gender = Gender.Male
+            });
+            context.SaveChanges();
         }
     }
 }
