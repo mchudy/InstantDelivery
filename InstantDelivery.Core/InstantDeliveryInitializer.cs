@@ -12,7 +12,7 @@ namespace InstantDelivery.Core
             {
                 FirstName = "Johnny",
                 LastName = "Rambo",
-                Sex = Sex.Man
+                Gender = Gender.Male
             });
             context.SaveChanges();
         }

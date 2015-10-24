@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace InstantDelivery.Core.Entities
 {
-    public enum Sex
+    public enum Gender
     {
-        Man,
-        Woman
+        Male,
+        Female
     };
 
     public class Employee
@@ -14,7 +14,7 @@ namespace InstantDelivery.Core.Entities
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Sex Sex { get; set; }
+        public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
 

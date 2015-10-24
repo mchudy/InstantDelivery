@@ -54,6 +54,7 @@
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
+    <Compile Include="Entities\VehicleModel.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
     <Compile Include="InstantDeliveryInitializer.cs" />
     <Compile Include="Migrations\201510211659402_InitialCreate.cs" />

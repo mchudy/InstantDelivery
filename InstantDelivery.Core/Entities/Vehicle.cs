@@ -3,10 +3,7 @@
     public class Vehicle
     {
         public int VehicleId { get; set; }
-        public double CarryWeight { get; set; }
         public string RegistrationNumber { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-
+        public virtual VehicleModel VehicleModel { get; set; }
     }
 }
