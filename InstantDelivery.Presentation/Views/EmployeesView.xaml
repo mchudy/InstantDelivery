@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBox>Employee1</TextBox>
+        <TextBox>Nie wiem moze tu jakies menu jeszcze, a na samej gorze takie menu jak jest we wszystkich apkach (otworz, pomoc, wlasciwosci, narzędzia, czynnosci, widok(..)</TextBox>
     </Grid>
 </UserControl>

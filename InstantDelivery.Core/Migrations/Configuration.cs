@@ -29,6 +29,13 @@ namespace InstantDelivery.Core.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            GenerateTestData(context);
+
+            context.SaveChanges();
+        }
+
+        private static void GenerateTestData(InstantDeliveryContext context)
+        {
             GenerateTestEmployees(context);
             GenerateTestVehicles(context);
             GenerateTestVehicleModels(context);
@@ -36,8 +43,6 @@ namespace InstantDelivery.Core.Migrations
 
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
-
-            context.SaveChanges();
         }
 
         private static void GenerateVehicleVehicleModelRelations(InstantDeliveryContext context)
@@ -113,7 +118,7 @@ namespace InstantDelivery.Core.Migrations
             var models = new[] { "Astra", "Jakiœ", "A4", "Yaris", "Benz", "Vectra", "Punto", "A6", "Corolla", "Classic" };
 
             var testVehicleModels = new List<VehicleModel>();
-            for (var i = 1; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 testVehicleModels.Add(new VehicleModel()
                 {

@@ -5,15 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstantDelivery.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="800" Width="1000">
+        Title="ShellView" Height="800" Width="1000" WindowState="Maximized" MinWidth="1024" MinHeight="680">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Button x:Name="Employees">Pracownicy</Button>
-            <Button x:Name="Vehicles">Pojazdy</Button>
+            <Label Height="100" BorderThickness="1" BorderBrush="Black">
+                <Label.Content>
+                    <AccessText TextWrapping="Wrap" Text="Nie wiem czy nie za dużo tego :P Ale większość tylko wyswietla dane, bez żadnej logiki, niech cokolwiek bedzie bo tak glupio 4 buttony miec"/>
+                </Label.Content>
+            </Label>
+            <Expander Header="Kadry" Name="Kadry" IsExpanded="True">
+                <StackPanel>
+                    <Button x:Name="Employees">Ogólne</Button>
+                    <Button x:Name="PackagesEmployes">Obsługiwane przesyłki</Button>
+                    <Button x:Name="EmployeesVehicles">Używane pojazdy</Button>
+                    <Button x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>
+                    <Button x:Name="ContactEmployees">Dane kontaktowe</Button>
+                    <Button x:Name="SalariesEmployees">Adresy zameldowania</Button>
+                    <TextBlock Text="Akcje"/>
+                    <Button x:Name="AddEmployees">Dodaj pracownika</Button>
+                    <Button x:Name="EditEmployees">Edytuj pracownika</Button>
+                    <Button x:Name="RemoveEmployees">Usuń pracownika</Button>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
+                <StackPanel>
+                    <Button x:Name="Vehicles">Ogólne</Button>
+                    <TextBlock Text="Akcje"/>
+                    <Button x:Name="AddVehicles">Dodaj pojazd</Button>
+                    <Button x:Name="RemoveVehicles">Usuń pojazd</Button>
+                    <Button x:Name="UpdateVehicles">Edytuj pojazd</Button>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Przesyłki" Name="Packages" IsExpanded="True">
+                <StackPanel>
+                    <Button x:Name="GeneralPackages">Ogólne</Button>
+                    <TextBlock Text="Akcje"/>
+                    <Button x:Name="AddPackages">Dodaj przesyłkę</Button>
+                    <Button x:Name="RemovePackages">Usuń przesyłkę</Button>
+                    <Button x:Name="EditPackages">Edytuj przesyłkę</Button>
+                    <Button x:Name="ConnectPackages">Przypisz przesyłkę</Button>
+                </StackPanel>
+            </Expander>
+            <Expander Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
+                <StackPanel>
+                    <Button x:Name="DeliveredPackages">Dostarczone paczki</Button>
+                    <Button x:Name="ManagedPackages">Efektywność pracowników</Button>
+                    <Button x:Name="GeographicDetails">Zestawienie geograficzne</Button>
+                    <Button x:Name="UsedVehicles">Użycie pojazdów</Button>
+                </StackPanel>
+            </Expander>
         </StackPanel>
         <ContentControl Grid.Column="1" x:Name="ActiveItem" />
     </Grid>
