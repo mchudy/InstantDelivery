@@ -24,5 +24,7 @@ namespace InstantDelivery.Views
         {
             InitializeComponent();
         }
+
+        // zakodzić paginację tu można? jakies ficzery na zaznaczanie / whatever
     }
 }

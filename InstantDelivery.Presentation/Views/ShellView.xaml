@@ -19,7 +19,7 @@
                  RenderOptions.BitmapScalingMode="HighQuality">
                  <Rectangle>
                      <Rectangle.Fill>
-                         <VisualBrush Visual="{DynamicResource appbar_door_enter}" />
+                         <VisualBrush Visual="{DynamicResource appbar_gift}" />
                      </Rectangle.Fill>
                  </Rectangle>
         </Grid>
@@ -29,6 +29,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -57,53 +58,44 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Label Height="100" BorderThickness="1" BorderBrush="Black">
-                <Label.Content>
-                    <AccessText TextWrapping="Wrap" Text="Nie wiem czy nie za dużo tego :P Ale większość tylko wyswietla dane, bez żadnej logiki, niech cokolwiek bedzie bo tak glupio 4 buttony miec. te akcje mozna przeniesc tu po prawej stronie i by byly widoczne odpowiednie w zaleznosci od wyboru menu"/>
-                </Label.Content>
-            </Label>
-            <Expander Header="Kadry" Name="Kadry" IsExpanded="True">
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
                 <StackPanel>
-                    <Button x:Name="Employees">Ogólne</Button>
-                    <Button x:Name="PackagesEmployes">Obsługiwane przesyłki</Button>
-                    <Button x:Name="EmployeesVehicles">Używane pojazdy</Button>
-                    <Button x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>
-                    <Button x:Name="ContactEmployees">Dane kontaktowe</Button>
-                    <Button x:Name="SalariesEmployees">Adresy zameldowania</Button>
-                    <TextBlock Text="Akcje"/>
-                    <Button x:Name="AddEmployees">Dodaj pracownika</Button>
-                    <Button x:Name="EditEmployees">Edytuj pracownika</Button>
-                    <Button x:Name="RemoveEmployees">Usuń pracownika</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees">Ogólne</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="PackagesEmployes">Obsługiwane przesyłki</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesVehicles">Używane pojazdy</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ContactEmployees">Dane kontaktowe</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="SalariesEmployees">Adresy zameldowania</Button>
                 </StackPanel>
             </Expander>
-            <Expander Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
                 <StackPanel>
-                    <Button x:Name="Vehicles">Ogólne</Button>
-                    <TextBlock Text="Akcje"/>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Vehicles">Ogólne</Button>
+                    <!--<TextBlock Text="Akcje"/>
                     <Button x:Name="AddVehicles">Dodaj pojazd</Button>
                     <Button x:Name="RemoveVehicles">Usuń pojazd</Button>
-                    <Button x:Name="UpdateVehicles">Edytuj pojazd</Button>
+                    <Button x:Name="UpdateVehicles">Edytuj pojazd</Button>-->
                 </StackPanel>
             </Expander>
-            <Expander Header="Przesyłki" Name="Packages" IsExpanded="True">
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Przesyłki" Name="Packages" IsExpanded="True">
                 <StackPanel>
-                    <Button x:Name="GeneralPackages">Ogólne</Button>
-                    <TextBlock Text="Akcje"/>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages">Ogólne</Button>
+                    <!--<TextBlock Text="Akcje"/>
                     <Button x:Name="AddPackages">Dodaj przesyłkę</Button>
                     <Button x:Name="RemovePackages">Usuń przesyłkę</Button>
                     <Button x:Name="EditPackages">Edytuj przesyłkę</Button>
-                    <Button x:Name="ConnectPackages">Przypisz przesyłkę</Button>
+                    <Button x:Name="ConnectPackages">Przypisz przesyłkę</Button>-->
                 </StackPanel>
             </Expander>
-            <Expander Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
                 <StackPanel>
-                    <Button x:Name="DeliveredPackages">Dostarczone paczki</Button>
-                    <Button x:Name="ManagedPackages">Efektywność pracowników</Button>
-                    <Button x:Name="GeographicDetails">Zestawienie geograficzne</Button>
-                    <Button x:Name="UsedVehicles">Użycie pojazdów</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="DeliveredPackages">Dostarczone paczki</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagedPackages">Efektywność pracowników</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeographicDetails">Zestawienie geograficzne</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="UsedVehicles">Użycie pojazdów</Button>
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <ContentControl Grid.Column="1" x:Name="ActiveItem" />
+        <ContentControl Grid.Column="1" x:Name="ActiveItem"/>
     </Grid>
 </controls:MetroWindow>

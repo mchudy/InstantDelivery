@@ -65,7 +65,7 @@ namespace InstantDelivery.Core.Migrations
                 var i1 = i;
                 var firstOrDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == i1);
                 if (firstOrDefault != null)
-                    firstOrDefault.Packages = new List<Package>() { context.Packages.FirstOrDefault(e => e.PackageId == i) };
+                    firstOrDefault.Packages = new List<Package>() { context.Packages.FirstOrDefault(e => e.PackageId == i1) };
             }
             var orDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == 30);
             if (orDefault != null)
