@@ -1,11 +1,56 @@
-﻿<Window x:Class="InstantDelivery.Views.ShellView"
+﻿<controls:MetroWindow x:Class="InstantDelivery.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstantDelivery.Views"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="ShellView" Height="800" Width="1000" WindowState="Maximized" MinWidth="1024" MinHeight="680">
+        x:Name="InstantDelivery" Height="800" Width="1000" WindowState="Maximized" MinWidth="1024" MinHeight="680"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}">
+<controls:MetroWindow.IconTemplate>
+    <DataTemplate>
+        <Grid Width="{TemplateBinding Width}"
+                 Height="{TemplateBinding Height}"
+                 Margin="4"
+                 Background="Transparent"
+                 RenderOptions.EdgeMode="Aliased"
+                 RenderOptions.BitmapScalingMode="HighQuality">
+                 <Rectangle>
+                     <Rectangle.Fill>
+                         <VisualBrush Visual="{DynamicResource appbar_door_enter}" />
+                     </Rectangle.Fill>
+                 </Rectangle>
+        </Grid>
+    </DataTemplate>
+</controls:MetroWindow.IconTemplate>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="settings" />
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                         Visual="{StaticResource appbar_cupcake}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="deploy cupcakes" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,7 +59,7 @@
         <StackPanel Grid.Column="0">
             <Label Height="100" BorderThickness="1" BorderBrush="Black">
                 <Label.Content>
-                    <AccessText TextWrapping="Wrap" Text="Nie wiem czy nie za dużo tego :P Ale większość tylko wyswietla dane, bez żadnej logiki, niech cokolwiek bedzie bo tak glupio 4 buttony miec"/>
+                    <AccessText TextWrapping="Wrap" Text="Nie wiem czy nie za dużo tego :P Ale większość tylko wyswietla dane, bez żadnej logiki, niech cokolwiek bedzie bo tak glupio 4 buttony miec. te akcje mozna przeniesc tu po prawej stronie i by byly widoczne odpowiednie w zaleznosci od wyboru menu"/>
                 </Label.Content>
             </Label>
             <Expander Header="Kadry" Name="Kadry" IsExpanded="True">
@@ -61,4 +106,4 @@
         </StackPanel>
         <ContentControl Grid.Column="1" x:Name="ActiveItem" />
     </Grid>
-</Window>
+</controls:MetroWindow>
