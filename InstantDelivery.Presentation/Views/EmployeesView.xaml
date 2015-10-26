@@ -2,10 +2,71 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:vm="crl-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
+             xmlns:viewModel="clr-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBox>Nie wiem moze tu jakies menu jeszcze, a na samej gorze takie menu jak jest we wszystkich apkach (otworz, pomoc, wlasciwosci, narzędzia, czynnosci, widok(..)</TextBox>
-    </Grid>
+    <UserControl.DataContext>
+        <viewModel:EmployeesViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel>
+        <DockPanel>
+            <TabControl Style="{DynamicResource MetroTabControl}">
+                <TabItem Header="Dodaj pracownika">
+                    <Grid Height="1000" VerticalAlignment="Bottom">
+                        <DataGrid ItemsSource="{Binding Employees}" IsReadOnly="True"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="true" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="True"
+                  Style="{StaticResource AzureDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
+                                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
+                                <DataGridTemplateColumn Header="Date of birth" Width="200">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding DateOfBirth}" IsDropDownOpen="False" IsTodayHighlighted="True" BorderThickness="0">
+                                                <DatePicker.Resources>
+                                                    <Style TargetType="DatePickerTextBox">
+                                                        <Setter Property="IsReadOnly" Value="True"/>
+                                                    </Style>
+                                                </DatePicker.Resources>
+                                            </DatePicker>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <controls:DataGridNumericUpDownColumn Header="Salary" 
+                                                      Binding="{Binding Salary}" 
+                                                      StringFormat="C" 
+                                                      Minimum="0" Width="200" />
+                                <DataGridTemplateColumn Header="Hire date" Width="200">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding HireDate}"  IsDropDownOpen="False" IsTodayHighlighted="True" BorderThickness="0">
+                                                <DatePicker.Resources>
+                                                    <Style TargetType="DatePickerTextBox">
+                                                        <Setter Property="IsReadOnly" Value="True"/>
+                                                    </Style>
+                                                </DatePicker.Resources>
+                                            </DatePicker>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}" Width="200" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Edytuj pracownika"></TabItem>
+                <TabItem Header="Usuń pracownika"></TabItem>
+            </TabControl>
+        </DockPanel>
+    </StackPanel>
 </UserControl>
