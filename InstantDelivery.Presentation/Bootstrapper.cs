@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Caliburn.Micro;
+using InstantDelivery.Core.Repositories;
 using InstantDelivery.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,8 @@ namespace InstantDelivery
             builder.Register<IWindowManager>(c => new WindowManager())
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
+                .InstancePerLifetimeScope();
+            builder.Register(c => new EmployeesRepository())
                 .InstancePerLifetimeScope();
 
             container = builder.Build();

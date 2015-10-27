@@ -4,35 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:vm="crl-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
-             xmlns:viewModel="clr-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <DockPanel>
-            <TabControl Style="{DynamicResource MetroTabControl}">
-                <TabItem Header="Dodaj pracownika">
-                    <Grid Height="1000" VerticalAlignment="Bottom">
-                        <DataGrid ItemsSource="{Binding Employees}"
+    <StackPanel Orientation="Vertical">
+        <DataGrid ItemsSource="{Binding Employees}" MaxHeight="800"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="true" CanUserDeleteRows="True" CanUserResizeRows="False" CanUserSortColumns="True"
-                  EnableRowVirtualization="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
-                                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
-                                <DataGridTextColumn Header="Date of birth" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" />
-                                <controls:DataGridNumericUpDownColumn Header="Salary" 
+                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee}" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
+                <DataGridTextColumn Header="Date of birth" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" IsReadOnly="True" />
+                <controls:DataGridNumericUpDownColumn Header="Salary" 
                                                       Binding="{Binding Salary}" 
                                                       StringFormat="C" 
                                                       Minimum="0" Width="200" />
-                                <DataGridTextColumn Header="Hire date" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
-                                    <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}" Width="200" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Edytuj pracownika"></TabItem>
-                <TabItem Header="Usuń pracownika"></TabItem>
-            </TabControl>
-        </DockPanel>
+                <DataGridTextColumn Header="Hire date" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}" Width="200" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="EditEmployee">Edytuj</Button>
     </StackPanel>
 </UserControl>

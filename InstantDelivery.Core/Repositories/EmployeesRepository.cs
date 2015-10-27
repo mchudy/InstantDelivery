@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace InstantDelivery.Core.Services
+
+namespace InstantDelivery.Core.Repositories
 {
     public class EmployeesRepository : IDisposable
     {
