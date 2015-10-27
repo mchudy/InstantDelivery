@@ -32,10 +32,11 @@ namespace InstantDelivery.ViewModel
 
         public void EditEmployee()
         {
-            windowManager.ShowWindow(new EmployeeEditViewModel()
+            windowManager.ShowDialog(new EmployeeEditViewModel()
             {
                 Employee = SelectedEmployee
             });
         }
+
     }
 }
