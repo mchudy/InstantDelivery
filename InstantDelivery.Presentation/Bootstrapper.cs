@@ -93,7 +93,7 @@ namespace InstantDelivery
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
             builder.Register(c => new EmployeesRepository())
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             container = builder.Build();
         }

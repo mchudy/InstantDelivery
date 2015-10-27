@@ -37,6 +37,5 @@ namespace InstantDelivery.ViewModel
                 Employee = SelectedEmployee
             });
         }
-
     }
 }
