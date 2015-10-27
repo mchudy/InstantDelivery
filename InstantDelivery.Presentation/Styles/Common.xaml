@@ -3,11 +3,14 @@
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
-        <Setter Property="Margin" Value="0 50 0 0" />
+        <Setter Property="Margin" Value="2" />
     </Style>
     <Style
        x:Key="ButtonInExpanderLeftMenu" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="0 1 0 1" />
+    </Style>
+    <Style x:Key="LeftPanel" TargetType="{x:Type StackPanel}">
+        <Setter Property="Margin" Value="10"></Setter>
     </Style>
     <Style TargetType="{x:Type TabControl}"
            x:Key="MetroTabControl">

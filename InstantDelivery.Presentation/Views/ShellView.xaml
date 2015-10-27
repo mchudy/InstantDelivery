@@ -19,7 +19,7 @@
                  RenderOptions.BitmapScalingMode="HighQuality">
                  <Rectangle>
                      <Rectangle.Fill>
-                         <VisualBrush Visual="{DynamicResource appbar_gift}" />
+                         <VisualBrush Visual="{DynamicResource appbar_box}" />
                      </Rectangle.Fill>
                  </Rectangle>
         </Grid>
@@ -33,31 +33,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="settings" />
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="20" Height="20"
-                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                         Visual="{StaticResource appbar_cupcake}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Margin="4 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="deploy cupcakes" />
-                </StackPanel>
-            </Button>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Style="{StaticResource LeftPanel}">
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees">Ogólne</Button>
@@ -96,6 +77,6 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <ContentControl Grid.Column="1" x:Name="ActiveItem"/>
+        <controls:TransitioningContentControl Grid.Column="1" x:Name="ActiveItem" Transition="Right" Margin="10"/>
     </Grid>
 </controls:MetroWindow>
