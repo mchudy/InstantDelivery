@@ -15,6 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -32,7 +33,10 @@
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}"/>
 
-        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+        <Label Content="Pensja:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Employee.Salary, StringFormat=C}" Style="{StaticResource EditDialogTextBox}"/>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}">Anuluj</Button>
             <Button x:Name="Save" Style="{StaticResource EditDialogButton}">Zapisz</Button>
         </StackPanel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 
 namespace InstantDelivery.Core.Entities
@@ -9,6 +10,7 @@ namespace InstantDelivery.Core.Entities
         Female
     };
 
+    [ImplementPropertyChanged]
     public class Employee
     {
         public int EmployeeId { get; set; }

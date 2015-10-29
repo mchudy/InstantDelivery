@@ -12,17 +12,17 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Employees}" Grid.Row="0"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="true"
+        <DataGrid ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="0"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
-                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                  EnableRowVirtualization="True" CurrentItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
                 <DataGridTextColumn Header="Date of birth" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"  />
                 <controls:DataGridNumericUpDownColumn Header="Salary" 
-                                                      Binding="{Binding Salary}" 
+                                                      Binding="{Binding Salary}"
                                                       StringFormat="C" 
                                                       Minimum="0" Width="200" />
                 <DataGridTextColumn Header="Hire date" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>

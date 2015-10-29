@@ -14,6 +14,16 @@ namespace InstantDelivery.Core.Repositories
             return context.Employees.ToList();
         }
 
+        public void Reload(Employee employee)
+        {
+            context.Entry(employee).Reload();
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
         public void Dispose()
         {
             context.Dispose();

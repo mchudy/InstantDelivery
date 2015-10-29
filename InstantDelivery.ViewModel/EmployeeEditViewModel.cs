@@ -9,12 +9,12 @@ namespace InstantDelivery.ViewModel
 
         public void Save()
         {
-
+            TryClose(true);
         }
 
         public void Cancel()
         {
-            TryClose();
+            TryClose(false);
         }
     }
 }

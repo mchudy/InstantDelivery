@@ -1,21 +1,21 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace InstantDelivery.ViewModel
 {
     public class EmployeesViewModel : Screen
     {
-        private EmployeesRepository repository;
-        private IWindowManager windowManager;
+        private readonly EmployeesRepository repository;
+        private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
 
         public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = repository.GetAll();
+            Employees = new ObservableCollection<Employee>(repository.GetAll());
         }
 
         public Employee SelectedEmployee
@@ -28,14 +28,22 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public IList<Employee> Employees { get; set; }
+        public ObservableCollection<Employee> Employees { get; set; }
 
         public void EditEmployee()
         {
-            windowManager.ShowDialog(new EmployeeEditViewModel()
+            bool? result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
                 Employee = SelectedEmployee
             });
+            if (result != true)
+            {
+                repository.Reload(SelectedEmployee);
+            }
+            else
+            {
+                repository.Save();
+            }
         }
     }
 }
