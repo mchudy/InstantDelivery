@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Core.Services;
 
 namespace InstantDelivery.ViewModel
 {
@@ -12,7 +11,8 @@ namespace InstantDelivery.ViewModel
 
         public void Employees()
         {
-            ActivateItem(new EmployeesViewModel(new EmployeesRepository()));
+            //TODO
+            ActivateItem(IoC.Get<EmployeesViewModel>());
         }
 
         public void Vehicles()

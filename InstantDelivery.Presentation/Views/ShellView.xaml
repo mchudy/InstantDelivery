@@ -3,11 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InstantDelivery.Views"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         x:Name="InstantDelivery" Height="800" Width="1000" WindowState="Maximized" MinWidth="1024" MinHeight="680"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         GlowBrush="{DynamicResource AccentColorBrush}">
 <controls:MetroWindow.IconTemplate>
     <DataTemplate>
@@ -35,8 +33,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Style="{StaticResource LeftPanel}">
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
@@ -77,6 +75,6 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <controls:TransitioningContentControl Grid.Column="1" x:Name="ActiveItem" Transition="Right" Margin="10"/>
+        <controls:TransitioningContentControl Grid.Column="1" x:Name="ActiveItem" Transition="Left" Margin="10"/>
     </Grid>
 </controls:MetroWindow>

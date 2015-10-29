@@ -1,6 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+    
+    <Style TargetType="{x:Type Button}" x:Key="EditDialogButton" BasedOn="{StaticResource {x:Type Button}}">
+       <Setter Property="Margin" Value="3"></Setter> 
+        <Setter Property="MinWidth" Value="60"></Setter>
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="EditDialogLabel" BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="MinWidth" Value="140"></Setter>
+        <Setter Property="Margin" Value="3"></Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="EditDialogTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Height" Value="23"></Setter>
+        <Setter Property="MinWidth" Value="120"></Setter>
+        <Setter Property="Margin" Value="3"></Setter>
+    </Style>
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
         <Setter Property="Margin" Value="2" />

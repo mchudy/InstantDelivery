@@ -4,35 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:vm="crl-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
-             xmlns:viewModel="clr-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <DockPanel>
-            <TabControl Style="{DynamicResource MetroTabControl}">
-                <TabItem Header="Dodaj pracownika">
-                    <Grid Height="1000" VerticalAlignment="Bottom">
-                        <DataGrid ItemsSource="{Binding Employees}"
-                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="true" CanUserDeleteRows="True" CanUserResizeRows="False" CanUserSortColumns="True"
-                  EnableRowVirtualization="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
-                                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
-                                <DataGridTextColumn Header="Date of birth" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" />
-                                <controls:DataGridNumericUpDownColumn Header="Salary" 
-                                                      Binding="{Binding Salary}" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="0"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="True"
+                  EnableRowVirtualization="True" CurrentItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
+                <DataGridTextColumn Header="Date of birth" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"  />
+                <controls:DataGridNumericUpDownColumn Header="Salary" 
+                                                      Binding="{Binding Salary}"
                                                       StringFormat="C" 
                                                       Minimum="0" Width="200" />
-                                <DataGridTextColumn Header="Hire date" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
-                                    <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}" Width="200" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Edytuj pracownika"></TabItem>
-                <TabItem Header="Usuń pracownika"></TabItem>
-            </TabControl>
-        </DockPanel>
-    </StackPanel>
+                <DataGridTextColumn Header="Hire date" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
+                <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}" Width="200" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button x:Name="EditEmployee" Width="100">Edytuj</Button>
+        </StackPanel>
+    </Grid>
 </UserControl>

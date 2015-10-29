@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace InstantDelivery.Core.Services
+
+namespace InstantDelivery.Core.Repositories
 {
     public class EmployeesRepository : IDisposable
     {
@@ -11,6 +12,16 @@ namespace InstantDelivery.Core.Services
         public IList<Employee> GetAll()
         {
             return context.Employees.ToList();
+        }
+
+        public void Reload(Employee employee)
+        {
+            context.Entry(employee).Reload();
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
         }
 
         public void Dispose()
