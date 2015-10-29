@@ -19,6 +19,14 @@ namespace InstantDelivery.Core.Repositories
             context.Entry(employee).Reload();
         }
 
+        //TODO to powinno być chyba jakieś extension method, zeby mozna bylo podpiac do kazdego zapytania
+        public IList<Employee> Page(int pageNumber, int pageSize)
+        {
+            return context.Employees.OrderBy(e => e.EmployeeId)
+                                    .Skip(pageSize * (pageNumber - 1))
+                                    .Take(pageSize).ToList();
+        }
+
         public void Save()
         {
             context.SaveChanges();

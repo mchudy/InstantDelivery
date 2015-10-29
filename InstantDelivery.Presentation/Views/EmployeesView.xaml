@@ -16,7 +16,7 @@
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" CurrentItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]">
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]; [Event Sorting] = [Action Sort()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" Width="200"/>
@@ -30,7 +30,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="EditEmployee" Width="100">Edytuj</Button>
+            <Button x:Name="EditEmployee" Width="150">Edytuj</Button>
+            <Button x:Name="NextPage" Width="150">Następna strona</Button>
+            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
+            <Button x:Name="PreviousPage" Width="150">Poprzednia strona</Button>
         </StackPanel>
     </Grid>
 </UserControl>
