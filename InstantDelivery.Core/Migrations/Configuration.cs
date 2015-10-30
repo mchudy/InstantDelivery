@@ -1,4 +1,4 @@
-using InstantDelivery.Core.Entities;
+Ôªøusing InstantDelivery.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,7 +102,7 @@ namespace InstantDelivery.Core.Migrations
         {
             var randomNumber = new Random();
             var brands = new[] { "Opel", "Fiat", "Audi", "Toyota", "Mercedez", "Opel", "Fiat", "Audi", "Toyota", "Mercedez" };
-            var models = new[] { "Astra", "Jakiú", "A4", "Yaris", "Benz", "Vectra", "Punto", "A6", "Corolla", "Classic" };
+            var models = new[] { "Astra", "Jaki≈õ", "A4", "Yaris", "Benz", "Vectra", "Punto", "A6", "Corolla", "Classic" };
 
             var testVehicleModels = new List<VehicleModel>();
             for (var i = 0; i < 10; i++)
@@ -138,16 +138,16 @@ namespace InstantDelivery.Core.Migrations
             var firstName = new[]
             {
                 "Jessie", "Jessie", "Justin", "Britney", "Ariana", "David", "Adam", "Enrique", "Ashton", "Lisa", "Bruno", "Jan",
-                "Denis", "Richard", "Witold", "Cezary", "Bart≥omiej", "Anastazja", "Mariusz", "Janusz", "Helena", "Dorota",
-                "Anna", "Henryk", "Markus", "£ukasz", "Mateusz", "Adrian", "Micha≥", "Ted", "Robin", "Marshall", "Lily",
+                "Denis", "Richard", "Witold", "Cezary", "Bart≈Çomiej", "Anastazja", "Mariusz", "Janusz", "Helena", "Dorota",
+                "Anna", "Henryk", "Markus", "≈Åukasz", "Mateusz", "Adrian", "Micha≈Ç", "Ted", "Robin", "Marshall", "Lily",
                 "Barney", "Brad", "Elliot", "John", "Jan", "Norbert", "Damian"
             };
 
             var lastName = new[]
             {
                 "James", "Rogers", "Timberlake", "Spears", "Grande", "Beckham", "Levine", "Iglesias", "Kutcher", "Row", "Mars",
-                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "Øak", "Dπbrowski", "Bπk", "Kolonko", "Swojski", "RomaÒski",
-                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "JakÛbiak", "Piasecki", "Dudek", "Nachtman", "Mosby", "Scherbatsky",
+                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "≈ªak", "DƒÖbrowski", "BƒÖk", "Kolonko", "Swojski", "Roma≈Ñski",
+                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "Jak√≥biak", "Piasecki", "Dudek", "Nachtman", "Mosby", "Scherbatsky",
                 "Erickson", "Aldrin", "Stinson", "Pitt", "Reid", "Dorian", "Andrzejewski", "Gierczak", "Damil"
             };
             var randomNumber = new Random();
