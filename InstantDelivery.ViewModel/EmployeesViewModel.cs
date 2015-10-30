@@ -2,6 +2,8 @@
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace InstantDelivery.ViewModel
 {
@@ -38,6 +40,9 @@ namespace InstantDelivery.ViewModel
             {
                 currentPage = value;
                 NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+
             }
         }
 
@@ -57,6 +62,9 @@ namespace InstantDelivery.ViewModel
             LoadPage();
         }
 
+        public bool IsEnabledNextPage => currentPage*pageSize < repository.Total;
+
+        public bool IsEnabledPreviousPage => currentPage != 1;
 
         public void PreviousPage()
         {

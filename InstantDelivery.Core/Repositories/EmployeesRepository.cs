@@ -8,6 +8,7 @@ namespace InstantDelivery.Core.Repositories
     public class EmployeesRepository : IDisposable
     {
         private InstantDeliveryContext context = new InstantDeliveryContext();
+        public int Total => context.Employees.Count();
 
         public IList<Employee> GetAll()
         {
