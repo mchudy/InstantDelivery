@@ -41,7 +41,7 @@ namespace InstantDelivery.ViewModel
                 currentPage = value;
                 NotifyOfPropertyChange();
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
 
             }
         }
@@ -81,7 +81,9 @@ namespace InstantDelivery.ViewModel
 
         public void EditEmployee()
         {
-            bool? result = windowManager.ShowDialog(new EmployeeEditViewModel
+            if (SelectedEmployee == null)
+                return;
+            var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
                 Employee = SelectedEmployee
             });
