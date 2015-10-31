@@ -55,6 +55,14 @@
         <Setter Property="Height" Value="23"></Setter>
         <Setter Property="MinWidth" Value="120"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self},  Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="Red"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
     </Style>
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
