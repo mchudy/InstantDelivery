@@ -1,8 +1,8 @@
 ﻿using InstantDelivery.Core.Entities;
+using InstantDelivery.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using InstantDelivery.Core.Enums;
 
 namespace InstantDelivery.Core.Migrations
 {
@@ -12,7 +12,7 @@ namespace InstantDelivery.Core.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "InstantDelivery.Core.InstantDeliveryContext";
         }
 

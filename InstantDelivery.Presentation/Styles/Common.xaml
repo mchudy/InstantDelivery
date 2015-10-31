@@ -11,6 +11,7 @@
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
         <Style.Triggers>
+            <!-- TODO: trzeba by to zrobić jakoś inaczej, bo jak dla każdego widoku mamy to pisać to trochę słabo-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="false" />
