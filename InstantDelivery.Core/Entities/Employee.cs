@@ -1,7 +1,7 @@
-﻿using PropertyChanged;
+﻿using InstantDelivery.Core.Enums;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Core.Entities
@@ -40,12 +40,4 @@ namespace InstantDelivery.Core.Entities
         public string Citizenship { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
     }
-
-    public enum Gender
-    {
-        [Description("Mężczyczna")]
-        Male,
-        [Description("Kobieta")]
-        Female
-    };
 }
