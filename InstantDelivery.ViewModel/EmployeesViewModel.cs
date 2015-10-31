@@ -41,7 +41,7 @@ namespace InstantDelivery.ViewModel
                 currentPage = value;
                 NotifyOfPropertyChange();
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
 
             }
         }
@@ -85,7 +85,11 @@ namespace InstantDelivery.ViewModel
                 return;
             var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
-                Employee = SelectedEmployee
+                Employee = SelectedEmployee,
+                Salary=SelectedEmployee.Salary,
+                FirstName=SelectedEmployee.FirstName,
+                LastName=SelectedEmployee.LastName,
+                PhoneNumber=SelectedEmployee.PhoneNumber
             });
             if (result != true)
             {

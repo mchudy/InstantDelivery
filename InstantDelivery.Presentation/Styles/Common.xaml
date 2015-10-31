@@ -6,16 +6,55 @@
        <Setter Property="Margin" Value="3"></Setter> 
         <Setter Property="MinWidth" Value="60"></Setter>
     </Style>
+    <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="MinWidth" Value="60"></Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_LastName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_PhoneNumber, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_Salary, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_LastName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_PhoneNumber, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_Salary, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
     <Style TargetType="{x:Type Label}" x:Key="EditDialogLabel" BasedOn="{StaticResource {x:Type Label}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="MinWidth" Value="140"></Setter>
-        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
     </Style>
     <Style TargetType="{x:Type TextBox}" x:Key="EditDialogTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Height" Value="23"></Setter>
         <Setter Property="MinWidth" Value="120"></Setter>
-        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
     </Style>
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">

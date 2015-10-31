@@ -102,6 +102,7 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmployeeValidator.cs" />
     <Compile Include="Views\VehiclesView.xaml.cs">
       <DependentUpon>VehiclesView.xaml</DependentUpon>
     </Compile>
