@@ -31,6 +31,19 @@ namespace InstantDelivery.Core.Migrations
 
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
+            GenerateEmployeeVehicleRelations(context);
+
+        }
+
+        private static void GenerateEmployeeVehicleRelations(InstantDeliveryContext context)
+        {
+            for (var i = 1; i < 30; i++)
+            {
+                var i1 = i;
+                var firstOrDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == i1);
+                if (firstOrDefault != null)
+                    firstOrDefault.Vehicle = context.Vehicles.FirstOrDefault(e => e.VehicleId == i1);
+            }
         }
 
         private static void GenerateVehicleVehicleModelRelations(InstantDeliveryContext context)

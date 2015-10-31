@@ -47,6 +47,7 @@ namespace InstantDelivery.Core.Entities
         [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]+", ErrorMessage = "Proszę podać poprawne obywatelstwo")]
         public string Citizenship { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
 
         [NotMapped]
         public int PackagesCount => Packages.Count;
