@@ -1,9 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,13 +11,13 @@ namespace InstantDelivery.ViewModel
         private Employee selectedEmployee;
         private int currentPage = 1;
         private int pageSize = 10;
-        private ObservableCollection<Employee> employees;
+        private BindableCollection<Employee> employees;
 
         public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = new ObservableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
         }
 
         public Employee SelectedEmployee
@@ -40,13 +37,12 @@ namespace InstantDelivery.ViewModel
             {
                 currentPage = value;
                 NotifyOfPropertyChange();
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
-
+                NotifyOfPropertyChange(() => IsEnabledPreviousPage);
+                NotifyOfPropertyChange(() => IsEnabledNextPage);
             }
         }
 
-        public ObservableCollection<Employee> Employees
+        public BindableCollection<Employee> Employees
         {
             get { return employees; }
             set
@@ -62,7 +58,7 @@ namespace InstantDelivery.ViewModel
             LoadPage();
         }
 
-        public bool IsEnabledNextPage => currentPage*pageSize < repository.Total;
+        public bool IsEnabledNextPage => currentPage * pageSize < repository.Total;
 
         public bool IsEnabledPreviousPage => currentPage != 1;
 
@@ -85,11 +81,7 @@ namespace InstantDelivery.ViewModel
                 return;
             var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
-                Employee = SelectedEmployee,
-                Salary=SelectedEmployee.Salary,
-                FirstName=SelectedEmployee.FirstName,
-                LastName=SelectedEmployee.LastName,
-                PhoneNumber=SelectedEmployee.PhoneNumber
+                Employee = SelectedEmployee
             });
             if (result != true)
             {
@@ -103,7 +95,7 @@ namespace InstantDelivery.ViewModel
 
         private void LoadPage()
         {
-            Employees = new ObservableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
         }
     }
 }

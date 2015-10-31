@@ -1,6 +1,7 @@
 ﻿using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Core.Entities
 {
@@ -11,15 +12,21 @@ namespace InstantDelivery.Core.Entities
     };
 
     [ImplementPropertyChanged]
-    public class Employee
+    public class Employee : ValidationBase
     {
         public int EmployeeId { get; set; }
+
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-Z]{1}[a-z]+", ErrorMessage = "Proszę podać poprawne imię")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-Z]{1}[a-z]+", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
+
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
-        //public Address PlaceOfResidence { get; set; }
         public string Email { get; set; }
         public string Pesel { get; set; }
         public string PlaceOfBirth { get; set; }
@@ -32,6 +39,5 @@ namespace InstantDelivery.Core.Entities
         public DateTime? HireDate { get; set; }
         public string Citizenship { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
-
     }
 }

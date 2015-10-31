@@ -2,8 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:views="clr-namespace:InstantDelivery.Views"
-        xmlns:repositories="clr-namespace:InstantDelivery.Core.Repositories;assembly=InstantDelivery.Core"
         Background="White"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
@@ -23,14 +21,9 @@
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:FirstNameValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName"
+                 Text="{Binding Employee.FirstName, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource EditDialogTextBox}">
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
@@ -43,13 +36,6 @@
 
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:LastNameValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
@@ -66,13 +52,6 @@
 
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:PhoneNumberValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
@@ -84,13 +63,6 @@
         </TextBox>
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="Salary" x:Name="Employee_Salary" UpdateSourceTrigger="PropertyChanged">
-                <Binding.ValidationRules>
-                        <repositories:SalaryValidationRule ValidationStep="RawProposedValue"/>
-                </Binding.ValidationRules>
-            </Binding>
-            </TextBox.Text>
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <StackPanel>
