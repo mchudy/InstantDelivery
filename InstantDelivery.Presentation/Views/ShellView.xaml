@@ -40,7 +40,7 @@
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees">Ogólne</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="AddEmployee">Dodaj pracownika</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd">Dodaj pracownika</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="PackagesEmployes">Obsługiwane przesyłki</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesVehicles">Używane pojazdy</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>

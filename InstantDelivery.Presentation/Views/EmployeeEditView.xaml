@@ -40,7 +40,7 @@
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="4" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}" />
         
-        <Label Content="Penumsja:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}"  />
+        <Label Content="Pensja:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource EditDialogTextBox}" />
 
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
