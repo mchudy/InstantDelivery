@@ -23,7 +23,6 @@ namespace InstantDelivery.Core.Repositories
 
         public void Remove(Employee employee)
         {
-            context.Employees.Attach(employee);
             context.Employees.Remove(employee);
             context.SaveChanges();
         }

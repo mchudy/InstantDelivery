@@ -105,10 +105,7 @@ namespace InstantDelivery.ViewModel
             if (result == true)
             {
                 repository.Remove(SelectedEmployee);
-            }
-            else
-            {
-                repository.Save();
+                LoadPage();
             }
         }
 

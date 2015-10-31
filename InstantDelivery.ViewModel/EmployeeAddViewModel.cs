@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
 
@@ -18,7 +19,13 @@ namespace InstantDelivery.ViewModel
 
         protected override void OnDeactivate(bool close)
         {
-            NewEmployee = null;
+            if (close)
+                NewEmployee = null;
+        }
+
+        public override void CanClose(Action<bool> callback)
+        {
+            callback(true);
         }
 
         private Employee newEmployee;
