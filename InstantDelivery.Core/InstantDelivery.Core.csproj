@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
