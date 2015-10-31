@@ -2,6 +2,8 @@
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace InstantDelivery.ViewModel
 {
@@ -10,12 +12,15 @@ namespace InstantDelivery.ViewModel
         private readonly EmployeesRepository repository;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
+        private int currentPage = 1;
+        private int pageSize = 10;
+        private ObservableCollection<Employee> employees;
 
         public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = new ObservableCollection<Employee>(repository.GetAll());
+            Employees = new ObservableCollection<Employee>(repository.Page(CurrentPage, pageSize));
         }
 
         public Employee SelectedEmployee
@@ -28,13 +33,63 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public ObservableCollection<Employee> Employees { get; set; }
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                currentPage = value;
+                NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledPreviousPage)));
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+
+            }
+        }
+
+        public ObservableCollection<Employee> Employees
+        {
+            get { return employees; }
+            set
+            {
+                employees = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+        public void NextPage()
+        {
+            CurrentPage++;
+            LoadPage();
+        }
+
+        public bool IsEnabledNextPage => currentPage*pageSize < repository.Total;
+
+        public bool IsEnabledPreviousPage => currentPage != 1;
+
+        public void PreviousPage()
+        {
+            if (CurrentPage == 1) return;
+            CurrentPage--;
+            LoadPage();
+        }
+
+        public void Sort()
+        {
+            CurrentPage = 1;
+            LoadPage();
+        }
 
         public void EditEmployee()
         {
-            bool? result = windowManager.ShowDialog(new EmployeeEditViewModel
+            if (SelectedEmployee == null)
+                return;
+            var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
-                Employee = SelectedEmployee
+                Employee = SelectedEmployee,
+                Salary=SelectedEmployee.Salary,
+                FirstName=SelectedEmployee.FirstName,
+                LastName=SelectedEmployee.LastName,
+                PhoneNumber=SelectedEmployee.PhoneNumber
             });
             if (result != true)
             {
@@ -44,6 +99,11 @@ namespace InstantDelivery.ViewModel
             {
                 repository.Save();
             }
+        }
+
+        private void LoadPage()
+        {
+            Employees = new ObservableCollection<Employee>(repository.Page(CurrentPage, pageSize));
         }
     }
 }
