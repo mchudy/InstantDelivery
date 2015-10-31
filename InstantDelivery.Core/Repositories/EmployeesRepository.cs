@@ -38,9 +38,5 @@ namespace InstantDelivery.Core.Repositories
             context.Dispose();
         }
 
-        public bool ValidateSalary()
-        {
-            return true;//txtHomePhone.Text.All(c => char.IsNumber(c));
-        }
     }
 }
