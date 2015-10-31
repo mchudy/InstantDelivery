@@ -19,5 +19,10 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(new VehiclesViewModel());
         }
+
+        public void EmployeeAdd()
+        {
+            ActivateItem(IoC.Get<EmployeeAddViewModel>());
+        }
     }
 }

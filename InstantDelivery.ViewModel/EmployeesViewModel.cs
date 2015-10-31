@@ -86,10 +86,6 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
                 Employee = SelectedEmployee,
-                Salary=SelectedEmployee.Salary,
-                FirstName=SelectedEmployee.FirstName,
-                LastName=SelectedEmployee.LastName,
-                PhoneNumber=SelectedEmployee.PhoneNumber
             });
             if (result != true)
             {

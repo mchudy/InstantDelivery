@@ -45,6 +45,11 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
+    <Style TargetType="{x:Type ComboBox}" x:Key="EditComboBoxLabel" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="MinWidth" Value="140"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+    </Style>
     <Style TargetType="{x:Type Label}" x:Key="EditDialogLabel" BasedOn="{StaticResource {x:Type Label}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="MinWidth" Value="140"></Setter>

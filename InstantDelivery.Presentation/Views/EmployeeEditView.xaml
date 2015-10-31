@@ -24,81 +24,21 @@
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
         <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:FirstNameValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
         </TextBox>
 
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:LastNameValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
         </TextBox>
 
-        <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="2"  Margin="3" VerticalAlignment="Center" />
-        <DatePicker Grid.Column="1" Grid.Row="2" Height="25"  Margin="10" x:Name="Employee_DateOfBirth" HorizontalAlignment="Right"
+        <Label Content="Data zatrudnienia:" Grid.Column="0" Grid.Row="2" Style="{StaticResource EditDialogLabel}"/>
+        <DatePicker Grid.Column="1" Grid.Row="2" Height="25"  Margin="10" x:Name="Employee_HireDate" HorizontalAlignment="Right"
                         VerticalAlignment="Center" Width="120" />
 
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <repositories:PhoneNumberValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
         </TextBox>
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource EditDialogTextBox}">
-            <TextBox.Text>
-                <Binding Path="Salary" x:Name="Employee_Salary" UpdateSourceTrigger="PropertyChanged">
-                <Binding.ValidationRules>
-                        <repositories:SalaryValidationRule ValidationStep="RawProposedValue"/>
-                </Binding.ValidationRules>
-            </Binding>
-            </TextBox.Text>
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="Employee_Salary" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
 
         <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">

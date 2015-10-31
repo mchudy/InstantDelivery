@@ -161,6 +161,7 @@ namespace InstantDelivery.Core.Migrations
                     FirstName = firstName[i],
                     LastName = lastName[i],
                     Gender = (Gender)(randomNumber.Next() % 2),
+                    PlaceOfResidence=new Address { City="Warsaw", Country="Poland", Number="2", PostalCode="23-456", State="Virdżinia", Street="alalal"},
                     DateOfBirth =
                         new DateTime((randomNumber.Next() % 100) + 1900, (randomNumber.Next() % 12) + 1, (randomNumber.Next() % 30) + 1),
                     PhoneNumber =
