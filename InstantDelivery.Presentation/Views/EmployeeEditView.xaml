@@ -41,7 +41,7 @@
         <TextBox Grid.Column="1" Grid.Row="4" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}" />
         
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="5" x:Name="Employee_Salary" Style="{StaticResource EditDialogTextBox}" />
 
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />

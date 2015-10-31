@@ -29,72 +29,72 @@
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="NewEmployee_FirstName" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
 
         <Label Content="Nazwisko:" Grid.Column="2" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="0" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="0" x:Name="NewEmployee_LastName" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
 
         <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="1" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
-        <DatePicker Grid.Column="1" Grid.Row="1" Height="25"  Margin="10" x:Name="Employee_DateOfBirth" HorizontalAlignment="Left"
+        <DatePicker Grid.Column="1" Grid.Row="1" Height="25"  Margin="10" x:Name="NewEmployee_DateOfBirth" HorizontalAlignment="Left"
                         VerticalAlignment="Center" Width="120" />
 
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="2" x:Name="NewEmployee_PhoneNumber" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_Salary" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="3" x:Name="NewEmployee_Salary" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Data zatrudnienia:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
-        <DatePicker Grid.Column="1" Grid.Row="4" Height="25"  Margin="10" x:Name="Employee_HireDate" HorizontalAlignment="Left"
+        <DatePicker Grid.Column="1" Grid.Row="4" Height="25"  Margin="10" x:Name="NewEmployee_HireDate" HorizontalAlignment="Left"
                         VerticalAlignment="Center" Width="120" />
         <Label Content="Email:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="5" x:Name="Employee_Email" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="5" x:Name="NewEmployee_Email" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="PESEL:" Grid.Column="2" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="5" x:Name="Employee_PESEL" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="5" x:Name="NewEmployee_PESEL" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Komentarz:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Height="100" x:Name="Employee_Comments" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Height="100" x:Name="NewEmployee_Comments" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Nazwisko panieńskie matki:" Grid.Column="0" Grid.Row="7" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="7" x:Name="Employee_MotherMaidenName" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="7" x:Name="NewEmployee_MotherMaidenName" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Imię matki:" Grid.Column="0" Grid.Row="8" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="8" x:Name="Employee_MotherName" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="8" x:Name="NewEmployee_MotherName" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Imię ojca:" Grid.Column="2" Grid.Row="8" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="8" x:Name="Employee_FatherName" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="8" x:Name="NewEmployee_FatherName" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Obywatelstwo:" Grid.Column="0" Grid.Row="9" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="9" x:Name="Employee_Citizenship" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="9" x:Name="NewEmployee_Citizenship" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Płeć:" Grid.Column="2" Grid.Row="9" Style="{StaticResource EditDialogLabel}"  />
-        <ComboBox Grid.Column="1" Grid.Row="2" SelectedValue="{Binding Employee.Gender}" Style="{StaticResource EditComboBoxLabel}"
-                  ItemsSource="{helpers:EnumSource {x:Type enums:Gender}}" DisplayMemberPath="Name" SelectedValuePath="Value">
+        <ComboBox Grid.Column="3" Grid.Row="9" SelectedValue="{Binding Employee.Gender}" Style="{StaticResource EditComboBoxLabel}"
+                  ItemsSource="{helpers:EnumSource {x:Type enums:Gender}}" x:Name="NewEmployee_Gender" DisplayMemberPath="Name" SelectedValuePath="Value">
         </ComboBox>
         <Label Content="Miejscowość:" Grid.Column="0" Grid.Row="10" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="10" x:Name="Employee_PlaceOfResidence_City" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="10" x:Name="NewEmployee_PlaceOfResidence_City" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Ulica:" Grid.Column="2" Grid.Row="10" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="10" x:Name="Employee_PlaceOfResidence_Street" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="10" x:Name="NewEmployee_PlaceOfResidence_Street" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Numer budynku/mieszkania:" Grid.Column="0" Grid.Row="11" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="11" x:Name="Employee_PlaceOfResidence_Number" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="11" x:Name="NewEmployee_PlaceOfResidence_Number" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Kod pocztowy:" Grid.Column="2" Grid.Row="11" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="11" x:Name="Employee_PlaceOfResidence_PostalCode" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="11" x:Name="NewEmployee_PlaceOfResidence_PostalCode" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Województwo:" Grid.Column="0" Grid.Row="12" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="12" x:Name="Employee_PlaceOfResidence_State" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="1" Grid.Row="12" x:Name="NewEmployee_PlaceOfResidence_State" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <Label Content="Kraj:" Grid.Column="2" Grid.Row="12" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="12" x:Name="Employee_PlaceOfResidence_Country" Style="{StaticResource EditDialogTextBox}">
+        <TextBox Grid.Column="3" Grid.Row="12" x:Name="NewEmployee_PlaceOfResidence_Country" Style="{StaticResource EditDialogTextBox}">
         </TextBox>
         <StackPanel Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj"></Button>
-            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton}" Content="Zapisz">
+            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton}" Content="Zapisz">  <!--BRAKUJE TEGO BY TEN GUZIK SIE AKTYWOWAŁ I DEZAKTYWOWAŁ! i nacisniecie go mogloby odswieżać widok (w sensie czyscic), no idea, anuluj tak samo chyba -->
             </Button>
         </StackPanel>
     </Grid>
