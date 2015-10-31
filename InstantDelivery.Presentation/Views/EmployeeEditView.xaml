@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:views="clr-namespace:InstantDelivery.Views"
+        xmlns:repositories="clr-namespace:InstantDelivery.Core.Repositories;assembly=InstantDelivery.Core"
         Background="White"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
@@ -26,7 +27,7 @@
             <TextBox.Text>
                 <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <views:FirstNameValidationRule ValidationStep="RawProposedValue"/>
+                        <repositories:FirstNameValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -45,7 +46,7 @@
             <TextBox.Text>
                 <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <views:LastNameValidationRule ValidationStep="RawProposedValue"/>
+                        <repositories:LastNameValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -68,7 +69,7 @@
             <TextBox.Text>
                 <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <views:PhoneNumberValidationRule ValidationStep="RawProposedValue"/>
+                        <repositories:PhoneNumberValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -86,7 +87,7 @@
             <TextBox.Text>
                 <Binding Path="Salary" x:Name="Employee_Salary" UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
-                        <views:SalaryValidationRule ValidationStep="RawProposedValue"/>
+                        <repositories:SalaryValidationRule ValidationStep="RawProposedValue"/>
                 </Binding.ValidationRules>
             </Binding>
             </TextBox.Text>

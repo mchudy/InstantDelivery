@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeAddViewModel.cs" />
     <Compile Include="EmployeeEditViewModel.cs" />
     <Compile Include="EmployeesViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />

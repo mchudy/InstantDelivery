@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
-namespace InstantDelivery.Views
+namespace InstantDelivery.Core.Repositories
 {
     public class SalaryValidationRule : ValidationRule
     {
