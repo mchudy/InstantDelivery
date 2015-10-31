@@ -104,8 +104,9 @@ namespace InstantDelivery.Core.Migrations
                         State = randomNumber.Next().ToString(),
                         Street = randomNumber.Next().ToString()
                     },
-                    Weight = i % 300,
-                    Width = i % 1000,
+                    Weight = randomNumber.Next() % 300,
+                    Width = randomNumber.Next() % 1000,
+                    Depth= randomNumber.Next() % 1000,
                 };
                 testPackages.Add(tmp);
             }
@@ -127,6 +128,9 @@ namespace InstantDelivery.Core.Migrations
                     Model = models[i],
                     Payload = (double)(randomNumber.Next() % 1000) / 2,
                     VehicleModelId = i + 1,
+                    AvailableSpaceX=randomNumber.Next() % 1000,
+                    AvailableSpaceY = randomNumber.Next() % 1000,
+                    AvailableSpaceZ = randomNumber.Next() % 1000,
                 });
             }
             context.VehicleModels.AddOrUpdate(testVehicleModels.ToArray());
