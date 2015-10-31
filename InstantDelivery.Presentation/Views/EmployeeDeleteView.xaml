@@ -1,0 +1,24 @@
+﻿<controls:MetroWindow x:Class="InstantDelivery.Views.EmployeeDeleteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
+        xmlns:enums="clr-namespace:InstantDelivery.Core.Enums;assembly=InstantDelivery.Core"
+        Background="White"
+        Height="200" Width="400" WindowStartupLocation="CenterOwner"
+        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Czy na pewno chcesz usunąć pracownika?"></Label>
+        <Button Grid.Row="1" Height="20" Width="60" Grid.Column="0" x:Name="Remove" Style="{StaticResource EditDialogButton}" Content="TAK" />
+        <Button Grid.Row="1" Height="20" Width="60" Grid.Column="1" x:Name="Cancel" Style="{StaticResource EditDialogSaveButton}" Content="NIE" />
+    </Grid>
+</controls:MetroWindow>

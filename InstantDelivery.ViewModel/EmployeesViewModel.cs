@@ -95,6 +95,26 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        public void DeleteEmployee()
+        {
+            if (SelectedEmployee == null)
+            {
+                return;
+            }
+            var result = windowManager.ShowDialog(new EmployeeDeleteViewModel
+            {
+                SelectedEmployee = SelectedEmployee
+            });
+            if (result != true)
+            {
+                repository.Remove(SelectedEmployee);
+            }
+            else
+            {
+                repository.Save();
+            }
+        }
+
         private void LoadPage()
         {
             Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));

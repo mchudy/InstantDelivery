@@ -1,6 +1,7 @@
 ﻿using InstantDelivery.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace InstantDelivery.Core.Repositories
@@ -18,6 +19,13 @@ namespace InstantDelivery.Core.Repositories
         public void Reload(Employee employee)
         {
             context.Entry(employee).Reload();
+        }
+
+        public void Remove(Employee employee)
+        {
+            context.Employees.Attach(employee);
+            context.Employees.Remove(employee);
+            context.SaveChanges();
         }
 
         //TODO to powinno być chyba jakieś extension method, zeby mozna bylo podpiac do kazdego zapytania

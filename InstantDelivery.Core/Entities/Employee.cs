@@ -9,6 +9,7 @@ namespace InstantDelivery.Core.Entities
     [ImplementPropertyChanged]
     public class Employee : ValidationBase
     {
+        [Key]
         public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
