@@ -52,7 +52,14 @@
         <Setter Property="MinWidth" Value="140"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
-    
+
+    <Style TargetType="{x:Type ComboBox}" x:Key="EditDialogComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Height" Value="23"></Setter>
+        <Setter Property="MinWidth" Value="120"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+    </Style>
+
     <Style TargetType="{x:Type TextBox}" x:Key="EditDialogTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Height" Value="23"></Setter>

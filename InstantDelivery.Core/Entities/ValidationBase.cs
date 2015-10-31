@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace InstantDelivery.Core
+namespace InstantDelivery.Core.Entities
 {
     public abstract class ValidationBase : IDataErrorInfo
     {

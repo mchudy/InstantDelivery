@@ -1,16 +1,11 @@
 ﻿using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Core.Entities
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    };
-
     [ImplementPropertyChanged]
     public class Employee : ValidationBase
     {
@@ -27,7 +22,7 @@ namespace InstantDelivery.Core.Entities
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
 
-        [Phone]
+        [Phone(ErrorMessage = "Proszę podać poprawny numer telefonu")]
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
@@ -45,4 +40,12 @@ namespace InstantDelivery.Core.Entities
         public string Citizenship { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
     }
+
+    public enum Gender
+    {
+        [Description("Mężczyczna")]
+        Male,
+        [Description("Kobieta")]
+        Female
+    };
 }
