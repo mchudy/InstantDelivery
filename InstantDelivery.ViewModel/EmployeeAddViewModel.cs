@@ -13,7 +13,12 @@ namespace InstantDelivery.ViewModel
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            newEmployee = new Employee();
+            NewEmployee = new Employee();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            NewEmployee = null;
         }
 
         private Employee newEmployee;
