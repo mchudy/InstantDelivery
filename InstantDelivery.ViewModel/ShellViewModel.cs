@@ -24,5 +24,10 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeeAddViewModel>());
         }
+
+        public void EmployeesManagedPackages()
+        {
+            ActivateItem(IoC.Get<EmployeesManagedPackagesViewModel>());
+        }
     }
 }

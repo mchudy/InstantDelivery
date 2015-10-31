@@ -41,7 +41,7 @@
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees">Ogólne</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd">Dodaj pracownika</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="PackagesEmployes">Obsługiwane przesyłki</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesManagedPackages">Obsługiwane przesyłki</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesVehicles">Używane pojazdy</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ContactEmployees">Dane kontaktowe</Button>

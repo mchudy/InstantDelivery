@@ -3,6 +3,7 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstantDelivery.Core.Entities
 {
@@ -46,5 +47,8 @@ namespace InstantDelivery.Core.Entities
         [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]+", ErrorMessage = "Proszę podać poprawne obywatelstwo")]
         public string Citizenship { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
+
+        [NotMapped]
+        public int PackagesCount => Packages.Count;
     }
 }
