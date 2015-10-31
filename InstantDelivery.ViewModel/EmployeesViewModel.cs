@@ -101,11 +101,8 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new EmployeeDeleteViewModel
-            {
-                SelectedEmployee = SelectedEmployee
-            });
-            if (result != true)
+            var result = windowManager.ShowDialog(new EmployeeDeleteViewModel());
+            if (result == true)
             {
                 repository.Remove(SelectedEmployee);
             }

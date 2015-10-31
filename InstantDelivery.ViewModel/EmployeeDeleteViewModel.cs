@@ -11,29 +11,8 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeeDeleteViewModel : Screen
     {
-        protected override void OnDeactivate(bool close)
+        public void Save()
         {
-            SelectedEmployee = null;
-        }
-
-        private Employee selectedEmployee;
-        public Employee SelectedEmployee
-        {
-            get { return selectedEmployee; }
-            set
-            {
-                selectedEmployee = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public void Remove()
-        {
-            if (SelectedEmployee == null)
-                return;
-            var repository = new EmployeesRepository();
-            repository.Remove(SelectedEmployee);
-            SelectedEmployee = null;
             TryClose(true);
         }
 
