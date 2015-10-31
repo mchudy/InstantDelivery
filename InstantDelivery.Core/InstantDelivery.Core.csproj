@@ -68,9 +68,9 @@
     <Compile Include="Migrations\201510211659402_InitialCreate.Designer.cs">
       <DependentUpon>201510211659402_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510311528432_AddEmployeeAddress.cs" />
-    <Compile Include="Migrations\201510311528432_AddEmployeeAddress.Designer.cs">
-      <DependentUpon>201510311528432_AddEmployeeAddress.cs</DependentUpon>
+    <Compile Include="Migrations\201510311549243_UpdateEmployee.cs" />
+    <Compile Include="Migrations\201510311549243_UpdateEmployee.Designer.cs">
+      <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="Migrations\201510211659402_InitialCreate.resx">
       <DependentUpon>201510211659402_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510311528432_AddEmployeeAddress.resx">
-      <DependentUpon>201510311528432_AddEmployeeAddress.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510311549243_UpdateEmployee.resx">
+      <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

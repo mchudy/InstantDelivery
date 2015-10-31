@@ -3,7 +3,6 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 
 namespace InstantDelivery.Core.Entities
 {
@@ -22,6 +21,7 @@ namespace InstantDelivery.Core.Entities
 
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public string PlaceOfBirth { get; set; }
 
         [Phone(ErrorMessage = "Proszę podać poprawny numer telefonu")]
         public string PhoneNumber { get; set; }
