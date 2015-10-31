@@ -12,11 +12,11 @@ namespace InstantDelivery.Core.Entities
         public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]+", ErrorMessage = "Proszę podać poprawne imię")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne imię")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]+", ErrorMessage = "Proszę podać poprawne nazwisko")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
