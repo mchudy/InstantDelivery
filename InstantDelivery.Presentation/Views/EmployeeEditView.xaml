@@ -21,62 +21,24 @@
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName"
-                 Text="{Binding Employee.FirstName, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource EditDialogTextBox}">
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
-        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}">
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
-        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="2"  Margin="3" VerticalAlignment="Center" />
         <DatePicker Grid.Column="1" Grid.Row="2" Height="25"  Margin="10" x:Name="Employee_DateOfBirth" HorizontalAlignment="Right"
                         VerticalAlignment="Center" Width="120" />
 
         <Label Content="Numer telefonu:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}">
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
-        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" x:Name="Employee_PhoneNumber" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource EditDialogTextBox}">
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <StackPanel>
-                        <AdornedElementPlaceholder x:Name="textBox"/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                    </StackPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
-        </TextBox>
+
+        <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource EditDialogTextBox}" />
 
         <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
-            <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj"></Button>
-            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton}" Content="Zapisz">
-            </Button>
+            <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
+            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton}" Content="Zapisz" />
         </StackPanel>
     </Grid>
 </controls:MetroWindow>

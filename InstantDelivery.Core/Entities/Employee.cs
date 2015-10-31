@@ -26,7 +26,10 @@ namespace InstantDelivery.Core.Entities
 
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+
+        [Phone]
         public string PhoneNumber { get; set; }
+
         public string Email { get; set; }
         public string Pesel { get; set; }
         public string PlaceOfBirth { get; set; }
@@ -35,6 +38,8 @@ namespace InstantDelivery.Core.Entities
         public string MotherMaidenName { get; set; }
         public string MotherName { get; set; }
         public string FatherName { get; set; }
+
+        [Range(0.0, int.MaxValue)]
         public decimal Salary { get; set; }
         public DateTime? HireDate { get; set; }
         public string Citizenship { get; set; }

@@ -6,6 +6,7 @@
        <Setter Property="Margin" Value="3"></Setter> 
         <Setter Property="MinWidth" Value="60"></Setter>
     </Style>
+    
     <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
@@ -45,16 +46,28 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="{x:Type Label}" x:Key="EditDialogLabel" BasedOn="{StaticResource {x:Type Label}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="MinWidth" Value="140"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
+    
     <Style TargetType="{x:Type TextBox}" x:Key="EditDialogTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Height" Value="23"></Setter>
         <Setter Property="MinWidth" Value="120"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
@@ -64,14 +77,17 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
+    
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
         <Setter Property="Margin" Value="2" />
     </Style>
+    
     <Style
        x:Key="ButtonInExpanderLeftMenu" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="0 1 0 1" />
     </Style>
+    
     <Style x:Key="LeftPanel" TargetType="{x:Type StackPanel}">
         <Setter Property="Margin" Value="10"></Setter>
     </Style>

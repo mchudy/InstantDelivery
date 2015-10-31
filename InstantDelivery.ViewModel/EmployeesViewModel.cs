@@ -78,7 +78,9 @@ namespace InstantDelivery.ViewModel
         public void EditEmployee()
         {
             if (SelectedEmployee == null)
+            {
                 return;
+            }
             var result = windowManager.ShowDialog(new EmployeeEditViewModel
             {
                 Employee = SelectedEmployee
