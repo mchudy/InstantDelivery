@@ -15,7 +15,7 @@
         <DataGrid ItemsSource="{Binding Rows, Mode=TwoWay}" Grid.Row="0"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
-                  EnableRowVirtualization="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+                  VerticalScrollBarVisibility="Auto" IsReadOnly="True">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue">
