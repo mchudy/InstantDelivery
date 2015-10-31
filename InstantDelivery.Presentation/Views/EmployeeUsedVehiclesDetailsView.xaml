@@ -1,0 +1,42 @@
+﻿<controls:MetroWindow x:Class="InstantDelivery.Views.EmployeeUsedVehiclesDetailsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
+        xmlns:enums="clr-namespace:InstantDelivery.Core.Enums;assembly=InstantDelivery.Core"
+        Background="White"
+        Height="650" Width="400" WindowStartupLocation="CenterOwner"
+        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="Numer rejestracyjny:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="0" IsEnabled="False" x:Name="SelectedRow_Vehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Marka:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="1" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Model:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="2" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_Model" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Ładowność:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="3" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_Payload" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Wymiar X:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="4" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_AvailableSpaceX" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Wymiar Y:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="5" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_AvailableSpaceY" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Wymiar Z:" Grid.Column="0" Grid.Row="6"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="6" IsEnabled="False" x:Name="SelectedRow_Vehicle_VehicleModel_AvailableSpaceZ" Style="{StaticResource EditDialogTextBox}" />
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Height="20" Width="60" Grid.Column="0" x:Name="CloseWindow" Style="{StaticResource EditDialogButton}" Content="Zamknij" />
+    </Grid>
+</controls:MetroWindow>
+

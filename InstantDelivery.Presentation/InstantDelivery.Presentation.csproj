@@ -104,8 +104,14 @@
     <Compile Include="Views\EmployeeEditView.xaml.cs">
       <DependentUpon>EmployeeEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmployeeUsedVehiclesDetailsView.xaml.cs">
+      <DependentUpon>EmployeeUsedVehiclesDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeesManagedPackagesView.xaml.cs">
       <DependentUpon>EmployeesManagedPackagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeesUsedVehiclesView.xaml.cs">
+      <DependentUpon>EmployeesUsedVehiclesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
@@ -179,7 +185,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EmployeeUsedVehiclesDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EmployeesManagedPackagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeesUsedVehiclesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
