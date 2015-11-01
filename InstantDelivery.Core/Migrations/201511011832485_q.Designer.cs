@@ -7,13 +7,13 @@ namespace InstantDelivery.Core.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class whatever : IMigrationMetadata
+    public sealed partial class q : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(whatever));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(q));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511011444092_whatever"; }
+            get { return "201511011832485_q"; }
         }
         
         string IMigrationMetadata.Source
