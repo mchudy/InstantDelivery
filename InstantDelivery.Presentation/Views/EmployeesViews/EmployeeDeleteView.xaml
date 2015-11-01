@@ -16,7 +16,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Czy na pewno chcesz usunąć pracownika?"></Label>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Czy na pewno chcesz usunąć?"></Label>
         <Button Grid.Row="1" Height="20" Width="60" Grid.Column="0" x:Name="Remove" Style="{StaticResource EditDialogButton}" Content="TAK" />
         <Button Grid.Row="1" Height="20" Width="60" Grid.Column="1" x:Name="Cancel" Style="{StaticResource EditDialogSaveButton}" Content="NIE" />
     </Grid>

@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="InstantDelivery.Views.VehiclesGeneralView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Vehicles, Mode=TwoWay}" Grid.Row="0"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="True"
+                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditVehicle()]; [Event Sorting] = [Action Sort()]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Numer rejestracyjny" Width="200" Binding="{Binding RegistrationNumber}"/>
+                <DataGridTextColumn Header="Marka" Binding="{Binding VehicleModel.Brand}" Width="200" />
+                <DataGridTextColumn Header="Model" Binding="{Binding VehicleModel.Model}" Width="200" />
+                <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="200" />
+                <DataGridTextColumn Header="Wymiar X" Binding="{Binding VehicleModel.AvailableSpaceX}" Width="200" />
+                <DataGridTextColumn Header="Wymiar Y" Binding="{Binding VehicleModel.AvailableSpaceY}" Width="200" />
+                <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button x:Name="EditVehicle" Width="150">Edytuj</Button>
+            <Button x:Name="DeleteVehicle" Width="150">Usuń</Button>
+            <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
+            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
+            <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

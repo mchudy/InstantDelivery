@@ -94,6 +94,8 @@ namespace InstantDelivery
                 .InstancePerLifetimeScope();
             builder.Register(c => new EmployeesRepository())
                 .InstancePerDependency();
+            builder.Register(c => new VehiclesRepository())
+                .InstancePerDependency();
 
             container = builder.Build();
         }

@@ -50,7 +50,7 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralVehicles" Content="Ogólne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehiclesGeneral" Content="Ogólne"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManageVehicles" Content="Zarządzaj pojazdami"></Button>
                 </StackPanel>
             </Expander>

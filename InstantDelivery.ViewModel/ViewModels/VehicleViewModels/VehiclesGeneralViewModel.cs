@@ -4,31 +4,29 @@ using InstantDelivery.Core.Repositories;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesViewModel : Screen
+    public class VehiclesGeneralViewModel : Screen
     {
-        private readonly EmployeesRepository repository;
+        private readonly VehiclesRepository repository;
         private readonly IWindowManager windowManager;
-        private Employee selectedEmployee;
+        private Vehicle selectedVehicle;
         private int currentPage = 1;
         private int pageSize = 10;
-        private BindableCollection<Employee> employees;
+        private BindableCollection<Vehicle> vehicles;
 
-        public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public VehiclesGeneralViewModel(VehiclesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, pageSize));
         }
 
-        public Employee SelectedEmployee
+        public Vehicle SelectedVehicle
         {
-            get { return selectedEmployee; }
+            get { return selectedVehicle; }
             set
             {
-                selectedEmployee = value;
+                selectedVehicle = value;
                 NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsSelectedAnyRow);
-
             }
         }
 
@@ -44,12 +42,12 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public BindableCollection<Employee> Employees
+        public BindableCollection<Vehicle> Vehicles
         {
-            get { return employees; }
+            get { return vehicles; }
             set
             {
-                employees = value;
+                vehicles = value;
                 NotifyOfPropertyChange();
             }
         }
@@ -71,27 +69,25 @@ namespace InstantDelivery.ViewModel
             LoadPage();
         }
 
-        public bool IsSelectedAnyRow => SelectedEmployee != null;
-
         public void Sort()
         {
             CurrentPage = 1;
             LoadPage();
         }
 
-        public void EditEmployee()
+        public void EditVehicle()
         {
-            if (SelectedEmployee == null)
+            if (SelectedVehicle == null)
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new EmployeeEditViewModel
+            var result = windowManager.ShowDialog(new VehicleEditViewModel
             {
-                Employee = SelectedEmployee
+                Vehicle = SelectedVehicle
             });
             if (result != true)
             {
-                repository.Reload(SelectedEmployee);
+                repository.Reload(SelectedVehicle);
             }
             else
             {
@@ -99,23 +95,23 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void DeleteEmployee()
+        public void DeleteVehicle()
         {
-            if (SelectedEmployee == null)
+            if (SelectedVehicle == null)
             {
                 return;
             }
             var result = windowManager.ShowDialog(new EmployeeDeleteViewModel());
             if (result == true)
             {
-                repository.Remove(SelectedEmployee);
+                repository.Remove(SelectedVehicle);
                 LoadPage();
             }
         }
 
         private void LoadPage()
         {
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, pageSize));
         }
     }
 }
