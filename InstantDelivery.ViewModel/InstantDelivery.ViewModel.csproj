@@ -67,6 +67,7 @@
     <Compile Include="ViewModels\EmployeesViewModels\ShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehicleEditViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\VehiclesAddViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesGeneralViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

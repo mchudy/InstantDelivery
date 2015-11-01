@@ -131,6 +131,9 @@
     <Compile Include="Views\VehiclesViews\VehicleEditView.xaml.cs">
       <DependentUpon>VehicleEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VehiclesViews\VehiclesAddView.xaml.cs">
+      <DependentUpon>VehiclesAddView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehiclesViews\VehiclesGeneralView.xaml.cs">
       <DependentUpon>VehiclesGeneralView.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VehiclesViews\VehicleEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehiclesViews\VehiclesAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
