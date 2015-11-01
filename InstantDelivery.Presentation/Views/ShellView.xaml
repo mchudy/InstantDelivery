@@ -50,7 +50,7 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Vehicles" Content="Ogólne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="General" Content="Ogólne"></Button>
                     <!--<TextBlock Text="Akcje"/>
                     <Button x:Name="AddVehicles">Dodaj pojazd</Button>
                     <Button x:Name="RemoveVehicles">Usuń pojazd</Button>
