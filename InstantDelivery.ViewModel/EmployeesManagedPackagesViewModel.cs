@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Windows.Data;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
 

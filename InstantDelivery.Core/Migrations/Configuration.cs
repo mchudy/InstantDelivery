@@ -1,14 +1,13 @@
-﻿using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using InstantDelivery.Core.Entities;
+using InstantDelivery.Core.Enums;
 
 namespace InstantDelivery.Core.Migrations
 {
-    using System.Data.Entity.Migrations;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<InstantDelivery.Core.InstantDeliveryContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<InstantDeliveryContext>
     {
         public Configuration()
         {
@@ -16,7 +15,7 @@ namespace InstantDelivery.Core.Migrations
             ContextKey = "InstantDelivery.Core.InstantDeliveryContext";
         }
 
-        protected override void Seed(InstantDelivery.Core.InstantDeliveryContext context)
+        protected override void Seed(InstantDeliveryContext context)
         {
             GenerateTestData(context);
             context.SaveChanges();

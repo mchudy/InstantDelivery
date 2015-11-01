@@ -1,8 +1,7 @@
-﻿using InstantDelivery.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.Core.Repositories
 {

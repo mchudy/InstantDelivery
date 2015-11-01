@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace InstantDelivery.Core.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class NewColumns : DbMigration
     {
         public override void Up()

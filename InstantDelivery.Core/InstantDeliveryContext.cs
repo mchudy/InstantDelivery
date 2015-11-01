@@ -1,5 +1,5 @@
-﻿using InstantDelivery.Core.Entities;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.Core
 {

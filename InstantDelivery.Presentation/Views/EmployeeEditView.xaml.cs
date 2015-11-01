@@ -1,8 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace InstantDelivery.Views
+﻿namespace InstantDelivery.Views
 {
     /// <summary>
     /// Interaction logic for EmployeeEditView.xaml

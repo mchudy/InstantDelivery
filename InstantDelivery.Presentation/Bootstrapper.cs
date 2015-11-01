@@ -1,12 +1,12 @@
-﻿using Autofac;
-using Caliburn.Micro;
-using InstantDelivery.Core.Repositories;
-using InstantDelivery.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using Autofac;
+using Caliburn.Micro;
+using InstantDelivery.Core.Repositories;
+using InstantDelivery.ViewModel;
 using IContainer = Autofac.IContainer;
 
 namespace InstantDelivery

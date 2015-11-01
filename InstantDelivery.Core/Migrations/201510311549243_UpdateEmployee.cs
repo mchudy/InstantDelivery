@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace InstantDelivery.Core.Migrations
 {
-    using System.Data.Entity.Migrations;
-
     public partial class UpdateEmployee : DbMigration
     {
         public override void Up()

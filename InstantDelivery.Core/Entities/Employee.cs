@@ -1,9 +1,9 @@
-﻿using InstantDelivery.Core.Enums;
-using PropertyChanged;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using InstantDelivery.Core.Enums;
+using PropertyChanged;
 
 namespace InstantDelivery.Core.Entities
 {
