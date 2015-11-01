@@ -125,7 +125,7 @@ namespace InstantDelivery.Core.Migrations
                 {
                     Brand = brands[i],
                     Model = models[i],
-                    Payload = (double)(randomNumber.Next() % 1000) / 2,
+                    Payload = (double)(randomNumber.Next() % 1000),
                     VehicleModelId = i + 1,
                     AvailableSpaceX=randomNumber.Next() % 1000,
                     AvailableSpaceY = randomNumber.Next() % 1000,
