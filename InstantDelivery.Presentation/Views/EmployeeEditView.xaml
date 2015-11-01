@@ -21,6 +21,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
@@ -42,6 +43,9 @@
         
         <Label Content="Pensja:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="5" x:Name="Employee_Salary" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Komentarz:" Grid.Column="0" Grid.Row="6"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="6" Height="100" x:Name="Employee_Comments" Style="{StaticResource EditDialogTextBox}" />
 
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />

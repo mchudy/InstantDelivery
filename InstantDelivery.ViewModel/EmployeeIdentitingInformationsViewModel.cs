@@ -4,7 +4,7 @@ using InstantDelivery.Core.Repositories;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeeIdenitingInformationsViewModel : Screen
+    public class EmployeeIdentitingInformationsViewModel : Screen
     {
         private readonly EmployeesRepository repository;
         private readonly IWindowManager windowManager;
@@ -12,7 +12,7 @@ namespace InstantDelivery.ViewModel
         private int pageSize = 20;
         private BindableCollection<Employee> rows;
 
-        public EmployeeIdenitingInformationsViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public EmployeeIdentitingInformationsViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;

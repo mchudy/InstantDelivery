@@ -39,9 +39,9 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeeContactInformationsViewModel>());
         }
-        public void EmployeeIdenitingInformations()
+        public void EmployeeIdentitingInformations()
         {
-            ActivateItem(IoC.Get<EmployeeIdenitingInformationsViewModel>());
+            ActivateItem(IoC.Get<EmployeeIdentitingInformationsViewModel>());
         }
         public void EmployeePlacesOfResidence()
         {
