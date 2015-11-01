@@ -98,9 +98,6 @@
     <Compile Include="Views\EmployeesViews\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeeContactInformationsView.xaml.cs">
-      <DependentUpon>EmployeeContactInformationsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EmployeesViews\EmployeeDeleteView.xaml.cs">
       <DependentUpon>EmployeeDeleteView.xaml</DependentUpon>
     </Compile>
@@ -109,9 +106,6 @@
     </Compile>
     <Compile Include="Views\EmployeesViews\EmployeeIdentitingInformationsView.xaml.cs">
       <DependentUpon>EmployeeIdentitingInformationsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeePlacesOfResidenceView.xaml.cs">
-      <DependentUpon>EmployeePlacesOfResidenceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesViews\EmployeeUsedVehiclesDetailsView.xaml.cs">
       <DependentUpon>EmployeeUsedVehiclesDetailsView.xaml</DependentUpon>
@@ -192,10 +186,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeeContactInformationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EmployeesViews\EmployeeDeleteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,10 +195,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EmployeesViews\EmployeeIdentitingInformationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmployeesViews\EmployeePlacesOfResidenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -55,11 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesViewModels\EmployeeContactInformationsViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeIdentitingInformationsViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesViewModels\EmployeePlacesOfResidenceViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeUsedVehiclesDetailsViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesUsedVehiclesViewModel.cs" />
