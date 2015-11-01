@@ -70,7 +70,7 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new EmployeeDeleteViewModel());
+            var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
             if (result == true)
             {
                 repository.Remove(SelectedEmployee);

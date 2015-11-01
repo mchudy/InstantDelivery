@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesViewModels\EmployeeDeleteViewModel.cs" />
+    <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeIdentitingInformationsViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeUsedVehiclesDetailsViewModel.cs" />

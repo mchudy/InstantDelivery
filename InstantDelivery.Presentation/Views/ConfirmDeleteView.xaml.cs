@@ -1,11 +1,11 @@
 ﻿namespace InstantDelivery.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeDeleteView.xaml
+    /// Interaction logic for ConfirmDeleteView.xaml
     /// </summary>
-    public partial class EmployeeDeleteView
+    public partial class ConfirmDeleteView
     {
-        public EmployeeDeleteView()
+        public ConfirmDeleteView()
         {
             InitializeComponent();
         }

@@ -98,8 +98,8 @@
     <Compile Include="Views\EmployeesViews\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeeDeleteView.xaml.cs">
-      <DependentUpon>EmployeeDeleteView.xaml</DependentUpon>
+    <Compile Include="Views\ConfirmDeleteView.xaml.cs">
+      <DependentUpon>ConfirmDeleteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesViews\EmployeeEditView.xaml.cs">
       <DependentUpon>EmployeeEditView.xaml</DependentUpon>
@@ -186,7 +186,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeeDeleteView.xaml">
+    <Page Include="Views\ConfirmDeleteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
