@@ -34,5 +34,18 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeesUsedVehiclesViewModel>());
         }
+
+        public void EmployeeContactInformations()
+        {
+            ActivateItem(IoC.Get<EmployeeContactInformationsViewModel>());
+        }
+        public void EmployeeIdenitingInformations()
+        {
+            ActivateItem(IoC.Get<EmployeeIdenitingInformationsViewModel>());
+        }
+        public void EmployeePlacesOfResidence()
+        {
+            ActivateItem(IoC.Get<EmployeePlacesOfResidenceViewModel>());
+        }
     }
 }

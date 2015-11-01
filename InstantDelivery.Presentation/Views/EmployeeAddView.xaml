@@ -94,7 +94,7 @@
         </TextBox>
         <StackPanel Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj"></Button>
-            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton2}" Content="Zapisz">  <!--BRAKUJE TEGO BY TEN GUZIK SIE AKTYWOWAŁ I DEZAKTYWOWAŁ! i nacisniecie go mogloby odswieżać widok (w sensie czyscic), no idea, anuluj tak samo chyba -->
+            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton2}" Content="Zapisz">
             </Button>
         </StackPanel>
     </Grid>

@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Windows.Data;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesManagedPackagesViewModel : Screen
+    public class EmployeeContactInformationsViewModel : Screen
     {
         private readonly EmployeesRepository repository;
         private readonly IWindowManager windowManager;
@@ -14,7 +12,7 @@ namespace InstantDelivery.ViewModel
         private int pageSize = 20;
         private BindableCollection<Employee> rows;
 
-        public EmployeesManagedPackagesViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public EmployeeContactInformationsViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;

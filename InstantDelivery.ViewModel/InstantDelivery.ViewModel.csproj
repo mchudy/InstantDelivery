@@ -55,8 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmployeeAddViewModel.cs" />
+    <Compile Include="EmployeeContactInformationsViewModel.cs" />
     <Compile Include="EmployeeDeleteViewModel.cs" />
     <Compile Include="EmployeeEditViewModel.cs" />
+    <Compile Include="EmployeeIdenitingInformationsViewModel.cs" />
+    <Compile Include="EmployeePlacesOfResidenceViewModel.cs" />
     <Compile Include="EmployeeUsedVehiclesDetailsViewModel.cs" />
     <Compile Include="EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="EmployeesUsedVehiclesViewModel.cs" />

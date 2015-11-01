@@ -39,18 +39,18 @@
         <StackPanel Grid.Column="0" Style="{StaticResource LeftPanel}">
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees">Ogólne</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd">Dodaj pracownika</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesManagedPackages">Obsługiwane przesyłki</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesUsedVehicles">Używane pojazdy</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="IdentifyEmployees">Dane identyfikacyjne</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ContactEmployees">Dane kontaktowe</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="SalariesEmployees">Adresy zameldowania</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees" Content="Ogólne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd" Content="Dodaj pracownika"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesManagedPackages" Content="Obsługiwane przesyłki"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesUsedVehicles" Content="Używane pojazdy"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeIdenitingInformations" Content="Dane identyfikacyjne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeContactInformations" Content="Dane kontaktowe"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeePlacesOfResidence" Content="Adresy zamieszkania"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Vehicles">Ogólne</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Vehicles" Content="Ogólne"></Button>
                     <!--<TextBlock Text="Akcje"/>
                     <Button x:Name="AddVehicles">Dodaj pojazd</Button>
                     <Button x:Name="RemoveVehicles">Usuń pojazd</Button>
@@ -59,7 +59,7 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Przesyłki" Name="Packages" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages">Ogólne</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages" Content="Ogólne"></Button>
                     <!--<TextBlock Text="Akcje"/>
                     <Button x:Name="AddPackages">Dodaj przesyłkę</Button>
                     <Button x:Name="RemovePackages">Usuń przesyłkę</Button>
@@ -69,10 +69,10 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="DeliveredPackages">Dostarczone paczki</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagedPackages">Efektywność pracowników</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeographicDetails">Zestawienie geograficzne</Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="UsedVehicles">Użycie pojazdów</Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="DeliveredPackages" Content="Dostarczone paczki"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagedPackages" Content="Efektywność pracowników"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeographicDetails" Content="Zestawienie geograficzne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="UsedVehicles" Content="Użycie pojazdów"></Button>
                 </StackPanel>
             </Expander>
         </StackPanel>
