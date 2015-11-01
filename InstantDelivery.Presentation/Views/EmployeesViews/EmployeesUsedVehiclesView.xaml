@@ -29,6 +29,7 @@
             <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
             <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
             <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
+            <Button x:Name="ShowVehicleDetails" IsEnabled="{Binding IsEnabledViewDetails}" Width="150" Content="Pokaż szczegóły"></Button>
         </StackPanel>
     </Grid>
 </UserControl>
