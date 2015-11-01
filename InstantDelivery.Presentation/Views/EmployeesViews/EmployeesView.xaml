@@ -20,13 +20,15 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
-                <DataGridTextColumn Header="Data urodzenia" Width="200" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"  />
+                <DataGridTextColumn Header="Data urodzenia" Width="150" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"/>
                 <controls:DataGridNumericUpDownColumn Header="Pensja" 
                                                       Binding="{Binding Salary}"
                                                       StringFormat="C" 
-                                                      Minimum="0" Width="200" />
-                <DataGridTextColumn Header="Data zatrudnienia" Width="200" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
-                <DataGridTextColumn Header="Numer telefonu" Binding="{Binding PhoneNumber}" Width="200" />
+                                                      Minimum="0" Width="100" />
+                <DataGridTextColumn Header="Data zatrudnienia" Width="150" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
+                <DataGridTextColumn Header="Numer telefonu" Binding="{Binding PhoneNumber}" Width="150" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
+                <DataGridTextColumn Header="PESEL" Binding="{Binding PESEL}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">

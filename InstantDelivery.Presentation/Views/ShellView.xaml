@@ -43,7 +43,6 @@
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd" Content="Dodaj pracownika"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesManagedPackages" Content="Obsługiwane przesyłki"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeesUsedVehicles" Content="Używane pojazdy"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeIdentitingInformations" Content="Dane identyfikacyjne"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">

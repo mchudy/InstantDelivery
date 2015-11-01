@@ -104,9 +104,6 @@
     <Compile Include="Views\EmployeesViews\EmployeeEditView.xaml.cs">
       <DependentUpon>EmployeeEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeeIdentitingInformationsView.xaml.cs">
-      <DependentUpon>EmployeeIdentitingInformationsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EmployeesViews\EmployeeUsedVehiclesDetailsView.xaml.cs">
       <DependentUpon>EmployeeUsedVehiclesDetailsView.xaml</DependentUpon>
     </Compile>
@@ -191,10 +188,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EmployeesViews\EmployeeEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EmployeesViews\EmployeeIdentitingInformationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
