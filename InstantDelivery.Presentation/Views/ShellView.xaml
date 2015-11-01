@@ -50,21 +50,14 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Pojazdy" Name="Pojazdy" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="General" Content="Ogólne"></Button>
-                    <!--<TextBlock Text="Akcje"/>
-                    <Button x:Name="AddVehicles">Dodaj pojazd</Button>
-                    <Button x:Name="RemoveVehicles">Usuń pojazd</Button>
-                    <Button x:Name="UpdateVehicles">Edytuj pojazd</Button>-->
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralVehicles" Content="Ogólne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManageVehicles" Content="Zarządzaj pojazdami"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Przesyłki" Name="Packages" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages" Content="Ogólne"></Button>
-                    <!--<TextBlock Text="Akcje"/>
-                    <Button x:Name="AddPackages">Dodaj przesyłkę</Button>
-                    <Button x:Name="RemovePackages">Usuń przesyłkę</Button>
-                    <Button x:Name="EditPackages">Edytuj przesyłkę</Button>
-                    <Button x:Name="ConnectPackages">Przypisz przesyłkę</Button>-->
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagePackages" Content="Zarządzaj przesyłkami"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
