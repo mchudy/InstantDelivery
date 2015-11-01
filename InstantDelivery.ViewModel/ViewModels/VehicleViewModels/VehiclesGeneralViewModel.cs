@@ -1,23 +1,22 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
+using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehiclesGeneralViewModel : Screen
+    public class VehiclesGeneralViewModel : PagingViewModel
     {
         private readonly VehiclesRepository repository;
         private readonly IWindowManager windowManager;
         private Vehicle selectedVehicle;
-        private int currentPage = 1;
-        private int pageSize = 10;
         private BindableCollection<Vehicle> vehicles;
 
         public VehiclesGeneralViewModel(VehiclesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, pageSize));
+            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, PageSize));
         }
 
         public Vehicle SelectedVehicle
@@ -27,18 +26,6 @@ namespace InstantDelivery.ViewModel
             {
                 selectedVehicle = value;
                 NotifyOfPropertyChange();
-            }
-        }
-
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsEnabledPreviousPage);
-                NotifyOfPropertyChange(() => IsEnabledNextPage);
             }
         }
 
@@ -52,28 +39,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void NextPage()
-        {
-            CurrentPage++;
-            LoadPage();
-        }
-
-        public bool IsEnabledNextPage => currentPage * pageSize < repository.Total;
-
-        public bool IsEnabledPreviousPage => currentPage != 1;
-
-        public void PreviousPage()
-        {
-            if (CurrentPage == 1) return;
-            CurrentPage--;
-            LoadPage();
-        }
-
-        public void Sort()
-        {
-            CurrentPage = 1;
-            LoadPage();
-        }
+        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
         public void EditVehicle()
         {
@@ -109,9 +75,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        private void LoadPage()
+        protected override void LoadPage()
         {
-            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, pageSize));
+            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, PageSize));
         }
     }
 }

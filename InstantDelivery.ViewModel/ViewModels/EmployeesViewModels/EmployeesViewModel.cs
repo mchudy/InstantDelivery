@@ -1,23 +1,22 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
+using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesViewModel : Screen
+    public class EmployeesViewModel : PagingViewModel
     {
         private readonly EmployeesRepository repository;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
-        private int currentPage = 1;
-        private int pageSize = 10;
         private BindableCollection<Employee> employees;
 
         public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
 
         public Employee SelectedEmployee
@@ -28,19 +27,6 @@ namespace InstantDelivery.ViewModel
                 selectedEmployee = value;
                 NotifyOfPropertyChange();
                 NotifyOfPropertyChange(() => IsSelectedAnyRow);
-
-            }
-        }
-
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsEnabledPreviousPage);
-                NotifyOfPropertyChange(() => IsEnabledNextPage);
             }
         }
 
@@ -54,30 +40,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void NextPage()
-        {
-            CurrentPage++;
-            LoadPage();
-        }
-
-        public bool IsEnabledNextPage => currentPage * pageSize < repository.Total;
-
-        public bool IsEnabledPreviousPage => currentPage != 1;
-
-        public void PreviousPage()
-        {
-            if (CurrentPage == 1) return;
-            CurrentPage--;
-            LoadPage();
-        }
+        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
         public bool IsSelectedAnyRow => SelectedEmployee != null;
-
-        public void Sort()
-        {
-            CurrentPage = 1;
-            LoadPage();
-        }
 
         public void EditEmployee()
         {
@@ -113,9 +78,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        private void LoadPage()
+        protected override void LoadPage()
         {
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
     }
 }

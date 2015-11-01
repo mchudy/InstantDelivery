@@ -8,6 +8,7 @@ namespace InstantDelivery.Core.Entities
 {
     public abstract class ValidationBase : IDataErrorInfo
     {
+
         public string Error
         {
             get { throw new NotImplementedException(); }

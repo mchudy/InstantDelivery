@@ -1,19 +1,13 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Repositories;
+using System;
 
 namespace InstantDelivery.ViewModel
 {
     public class VehiclesAddViewModel : Screen
     {
-        private readonly VehiclesRepository repository;
-        private readonly IWindowManager windowManager;
-
-        public VehiclesAddViewModel(VehiclesRepository repository, IWindowManager windowManager)
+        public VehiclesAddViewModel()
         {
-            this.repository = repository;
-            this.windowManager = windowManager;
             NewVehicle = new Vehicle();
         }
 

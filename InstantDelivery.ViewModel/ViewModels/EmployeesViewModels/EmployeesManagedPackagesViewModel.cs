@@ -1,34 +1,19 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Core.Repositories;
+using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesManagedPackagesViewModel : Screen
+    public class EmployeesManagedPackagesViewModel : PagingViewModel
     {
         private readonly EmployeesRepository repository;
-        private readonly IWindowManager windowManager;
-        private int currentPage = 1;
-        private int pageSize = 20;
         private BindableCollection<Employee> rows;
 
-        public EmployeesManagedPackagesViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public EmployeesManagedPackagesViewModel(EmployeesRepository repository)
         {
             this.repository = repository;
-            this.windowManager = windowManager;
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
-        }
-
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsEnabledPreviousPage);
-                NotifyOfPropertyChange(() => IsEnabledNextPage);
-            }
+            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
 
         public BindableCollection<Employee> Rows
@@ -41,32 +26,11 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void NextPage()
+        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
+
+        protected override void LoadPage()
         {
-            CurrentPage++;
-            LoadPage();
-        }
-
-        public bool IsEnabledNextPage => currentPage * pageSize < repository.Total;
-
-        public bool IsEnabledPreviousPage => currentPage != 1;
-
-        public void PreviousPage()
-        {
-            if (CurrentPage == 1) return;
-            CurrentPage--;
-            LoadPage();
-        }
-
-        public void Sort()
-        {
-            CurrentPage = 1;
-            LoadPage();
-        }
-
-        private void LoadPage()
-        {
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, pageSize));
+            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
     }
 }

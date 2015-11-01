@@ -1,19 +1,13 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Repositories;
+using System;
 
 namespace InstantDelivery.ViewModel
 {
     public class EmployeeAddViewModel : Screen
     {
-        private readonly EmployeesRepository repository;
-        private readonly IWindowManager windowManager;
-
-        public EmployeeAddViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public EmployeeAddViewModel()
         {
-            this.repository = repository;
-            this.windowManager = windowManager;
             NewEmployee = new Employee();
         }
 
