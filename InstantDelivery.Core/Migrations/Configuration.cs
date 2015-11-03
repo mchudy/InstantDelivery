@@ -1,9 +1,9 @@
-﻿using System;
+﻿using InstantDelivery.Core.Entities;
+using InstantDelivery.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Enums;
 
 namespace InstantDelivery.Core.Migrations
 {
@@ -105,7 +105,7 @@ namespace InstantDelivery.Core.Migrations
                     },
                     Weight = randomNumber.Next() % 300,
                     Width = randomNumber.Next() % 1000,
-                    Depth= randomNumber.Next() % 1000,
+                    Depth = randomNumber.Next() % 1000,
                 };
                 testPackages.Add(tmp);
             }
@@ -127,7 +127,7 @@ namespace InstantDelivery.Core.Migrations
                     Model = models[i],
                     Payload = (double)(randomNumber.Next() % 1000),
                     VehicleModelId = i + 1,
-                    AvailableSpaceX=randomNumber.Next() % 1000,
+                    AvailableSpaceX = randomNumber.Next() % 1000,
                     AvailableSpaceY = randomNumber.Next() % 1000,
                     AvailableSpaceZ = randomNumber.Next() % 1000,
                 });
@@ -178,7 +178,8 @@ namespace InstantDelivery.Core.Migrations
                     FirstName = firstName[i],
                     LastName = lastName[i],
                     Gender = (Gender)(randomNumber.Next() % 2),
-                    PlaceOfResidence=new Address { City="Warsaw", Country="Poland", Number="2", PostalCode="23-456", State="Virdżinia", Street="alalal"},
+                    PlaceOfResidence = new Address { City = "Warsaw", Country = "Poland", Number = "2", PostalCode = "23-456", State = "Virdżinia", Street = "alalal" },
+                    //TODO: Złe losowanie dat, trzeba dodawać losową liczbę dni do jakiejś ustalonej daty
                     DateOfBirth =
                         new DateTime((randomNumber.Next() % 100) + 1900, (randomNumber.Next() % 12) + 1, (randomNumber.Next() % 30) + 1),
                     PhoneNumber =

@@ -59,11 +59,9 @@
                     <Condition Binding="{Binding ElementName=NewEmployee_Gender, Path=(Validation.HasError)}" Value="false" />
                     <Condition Binding="{Binding ElementName=NewEmployee_PhoneNumber, Path=(Validation.HasError)}" Value="false" />
                     <Condition Binding="{Binding ElementName=NewEmployee_Email, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewEmployee_MotherMaidenName, Path=(Validation.HasError)}" Value="false" />
                     <Condition Binding="{Binding ElementName=NewEmployee_MotherName, Path=(Validation.HasError)}" Value="false" />
                     <Condition Binding="{Binding ElementName=NewEmployee_FatherName, Path=(Validation.HasError)}" Value="false" />
                     <Condition Binding="{Binding ElementName=NewEmployee_Salary, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewEmployee_Citizenship, Path=(Validation.HasError)}" Value="false" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="true" />
             </MultiDataTrigger>
@@ -99,19 +97,7 @@
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewEmployee_Citizenship, Path=(Validation.HasError)}" Value="true" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="false" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ElementName=NewEmployee_Email, Path=(Validation.HasError)}" Value="true" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="false" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewEmployee_MotherMaidenName, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>

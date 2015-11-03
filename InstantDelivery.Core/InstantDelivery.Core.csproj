@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201510311549243_UpdateEmployee.Designer.cs">
       <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.cs" />
+    <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.Designer.cs">
+      <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510311549243_UpdateEmployee.resx">
       <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511032025331_Employee_ReduceColumns.resx">
+      <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
