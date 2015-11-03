@@ -13,7 +13,8 @@ namespace InstantDelivery.Core
 
         public void RegisterPackage(Package package)
         {
-            throw new System.NotImplementedException();
+            context.Packages.Add(package);
+            context.SaveChanges();
         }
     }
 }
