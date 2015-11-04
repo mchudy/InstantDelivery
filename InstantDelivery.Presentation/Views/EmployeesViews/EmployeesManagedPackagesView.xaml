@@ -20,10 +20,11 @@
                 <DataTemplate>
                     <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Waga" Binding="{Binding Weight}" Width="200"/>
-                            <DataGridTextColumn Header="Długość" Binding="{Binding Length}" Width="200"/>
-                            <DataGridTextColumn Header="Wysokość" Binding="{Binding Height}" Width="200"/>
-                            <DataGridTextColumn Header="Szerokość" Binding="{Binding Width}" Width="200"/>
+                            <DataGridTextColumn Header="Numer" Binding="{Binding PackageId}" Width="200"/>
+                            <DataGridTextColumn Header="Waga" Binding="{Binding Weight}" Width="150"/>
+                            <DataGridTextColumn Header="Długość" Binding="{Binding Length}" Width="150"/>
+                            <DataGridTextColumn Header="Wysokość" Binding="{Binding Height}" Width="150"/>
+                            <DataGridTextColumn Header="Szerokość" Binding="{Binding Width}" Width="150"/>
                             <DataGridTextColumn Header="Kraj" Binding="{Binding ShippingAddress.Country}" Width="200"/>
                             <DataGridTextColumn Header="Województwo" Binding="{Binding ShippingAddress.State}" Width="200"/>
                             <DataGridTextColumn Header="Miasto" Binding="{Binding ShippingAddress.City}" Width="200"/>
@@ -35,7 +36,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
-                <DataGridTextColumn Header="Liczba paczek" Binding="{Binding PackagesCount}" Width="200"/>
+                <DataGridTextColumn Header="Liczba paczek" Binding="{Binding Packages.Count}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">

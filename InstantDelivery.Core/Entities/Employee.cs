@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstantDelivery.Core.Entities
 {
@@ -49,9 +48,6 @@ namespace InstantDelivery.Core.Entities
 
         public virtual ICollection<Package> Packages { get; set; } = new HashSet<Package>();
         public virtual Vehicle Vehicle { get; set; }
-
-        [NotMapped]
-        public int PackagesCount => Packages.Count;
     }
 
     public enum Gender
