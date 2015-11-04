@@ -1,5 +1,4 @@
 ﻿using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;

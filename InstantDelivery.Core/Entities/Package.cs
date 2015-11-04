@@ -1,4 +1,6 @@
-﻿namespace InstantDelivery.Core.Entities
+﻿using System.ComponentModel;
+
+namespace InstantDelivery.Core.Entities
 {
     public class Package
     {
@@ -14,5 +16,18 @@
         public int Width { get; set; }
         public int Depth { get; set; }
 
+        public PackageStatus Status { get; set; }
+    }
+
+    public enum PackageStatus
+    {
+        [Description("Nowa")]
+        New,
+
+        [Description("W dostawie")]
+        InDelivery,
+
+        [Description("Dostarczona")]
+        Delivered
     }
 }

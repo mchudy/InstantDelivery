@@ -27,6 +27,27 @@ namespace InstantDelivery.Tests
 
             mockSet.Verify(m => m.Add(package), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
+
         }
+        [Fact]
+        public void RegisterPackage_SetsStatusToNew()
+        {
+            var mockSet = new Mock<DbSet<Package>>();
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(m => m.Packages).Returns(mockSet.Object);
+            var service = new PackageService(mockContext.Object);
+            var package = new Package()
+            {
+                Width = 100,
+                Height = 200,
+                Depth = 150,
+                Weight = 100
+            };
+
+            service.RegisterPackage(package);
+
+            Assert.Equal(PackageStatus.New, package.Status);
+        }
+
     }
 }

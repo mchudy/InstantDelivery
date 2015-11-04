@@ -11,8 +11,10 @@ namespace InstantDelivery.Core
             this.context = context;
         }
 
+        //TODO czy powinno brać package, czy same dane
         public void RegisterPackage(Package package)
         {
+            package.Status = PackageStatus.New;
             context.Packages.Add(package);
             context.SaveChanges();
         }

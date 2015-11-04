@@ -1,7 +1,7 @@
-﻿using InstantDelivery.Core.Enums;
-using PropertyChanged;
+﻿using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -53,4 +53,12 @@ namespace InstantDelivery.Core.Entities
         [NotMapped]
         public int PackagesCount => Packages.Count;
     }
+
+    public enum Gender
+    {
+        [Description("Mężczyczna")]
+        Male,
+        [Description("Kobieta")]
+        Female
+    };
 }

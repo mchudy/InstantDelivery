@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Employee.cs" />
-    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
@@ -75,6 +74,10 @@
     <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.cs" />
     <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.Designer.cs">
       <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041625222_AddPackageStatus.cs" />
+    <Compile Include="Migrations\201511041625222_AddPackageStatus.Designer.cs">
+      <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PackageService.cs" />
@@ -96,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511032025331_Employee_ReduceColumns.resx">
       <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041625222_AddPackageStatus.resx">
+      <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
