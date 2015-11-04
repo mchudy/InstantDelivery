@@ -59,11 +59,11 @@
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Employee.cs" />
-    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
+    <Compile Include="IPricingStrategy.cs" />
     <Compile Include="Migrations\201510211659402_InitialCreate.cs" />
     <Compile Include="Migrations\201510211659402_InitialCreate.Designer.cs">
       <DependentUpon>201510211659402_InitialCreate.cs</DependentUpon>
@@ -72,8 +72,22 @@
     <Compile Include="Migrations\201510311549243_UpdateEmployee.Designer.cs">
       <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.cs" />
+    <Compile Include="Migrations\201511032025331_Employee_ReduceColumns.Designer.cs">
+      <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041625222_AddPackageStatus.cs" />
+    <Compile Include="Migrations\201511041625222_AddPackageStatus.Designer.cs">
+      <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041911103_Package_AddCost.cs" />
+    <Compile Include="Migrations\201511041911103_Package_AddCost.Designer.cs">
+      <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularPricingStrategy.cs" />
     <Compile Include="Repositories\EmployeesRepository.cs" />
     <Compile Include="Entities\ValidationBase.cs" />
     <Compile Include="Repositories\VehiclesRepository.cs" />
@@ -88,6 +102,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510311549243_UpdateEmployee.resx">
       <DependentUpon>201510311549243_UpdateEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511032025331_Employee_ReduceColumns.resx">
+      <DependentUpon>201511032025331_Employee_ReduceColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041625222_AddPackageStatus.resx">
+      <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041911103_Package_AddCost.resx">
+      <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

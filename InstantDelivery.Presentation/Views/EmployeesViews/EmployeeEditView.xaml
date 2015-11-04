@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-        xmlns:enums="clr-namespace:InstantDelivery.Core.Enums;assembly=InstantDelivery.Core"
+        xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
         Background="White"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
@@ -32,7 +32,7 @@
 
         <Label Content="Płeć:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
         <ComboBox Grid.Column="1" Grid.Row="2" SelectedValue="{Binding Employee.Gender}" Style="{StaticResource EditDialogComboBox}"
-                  ItemsSource="{helpers:EnumSource {x:Type enums:Gender}}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
+                  ItemsSource="{helpers:EnumSource {x:Type entities:Gender}}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
 
         <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}" />
         <DatePicker Grid.Column="1" Grid.Row="3" Height="25"  Margin="10" x:Name="Employee_DateOfBirth" HorizontalAlignment="Right"

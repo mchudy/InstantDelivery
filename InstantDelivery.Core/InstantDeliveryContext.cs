@@ -1,14 +1,14 @@
-﻿using System.Data.Entity;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
+using System.Data.Entity;
 
 namespace InstantDelivery.Core
 {
     public class InstantDeliveryContext : DbContext
     {
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<Package> Packages { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
+        public virtual IDbSet<Employee> Employees { get; set; }
+        public virtual IDbSet<Vehicle> Vehicles { get; set; }
+        public virtual IDbSet<Package> Packages { get; set; }
+        public virtual IDbSet<VehicleModel> VehicleModels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

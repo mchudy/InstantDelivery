@@ -21,9 +21,9 @@
                     <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Waga" Binding="{Binding Weight}" Width="200"/>
+                            <DataGridTextColumn Header="Długość" Binding="{Binding Length}" Width="200"/>
                             <DataGridTextColumn Header="Wysokość" Binding="{Binding Height}" Width="200"/>
                             <DataGridTextColumn Header="Szerokość" Binding="{Binding Width}" Width="200"/>
-                            <DataGridTextColumn Header="Głębokość" Binding="{Binding Depth}" Width="200"/>
                             <DataGridTextColumn Header="Kraj" Binding="{Binding ShippingAddress.Country}" Width="200"/>
                             <DataGridTextColumn Header="Województwo" Binding="{Binding ShippingAddress.State}" Width="200"/>
                             <DataGridTextColumn Header="Miasto" Binding="{Binding ShippingAddress.City}" Width="200"/>

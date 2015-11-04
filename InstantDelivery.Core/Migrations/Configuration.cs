@@ -1,9 +1,8 @@
-﻿using System;
+﻿using InstantDelivery.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Enums;
 
 namespace InstantDelivery.Core.Migrations
 {
@@ -92,7 +91,7 @@ namespace InstantDelivery.Core.Migrations
             {
                 var tmp = new Package
                 {
-                    Height = randomNumber.Next() % 1000,
+                    Height = randomNumber.Next() % 100,
                     PackageId = i + 1,
                     ShippingAddress =
                     {
@@ -103,9 +102,9 @@ namespace InstantDelivery.Core.Migrations
                         State = randomNumber.Next().ToString(),
                         Street = randomNumber.Next().ToString()
                     },
-                    Weight = randomNumber.Next() % 300,
-                    Width = randomNumber.Next() % 1000,
-                    Depth= randomNumber.Next() % 1000,
+                    Weight = randomNumber.Next() % 100,
+                    Width = randomNumber.Next() % 100,
+                    Length = randomNumber.Next() % 100,
                 };
                 testPackages.Add(tmp);
             }
@@ -127,7 +126,7 @@ namespace InstantDelivery.Core.Migrations
                     Model = models[i],
                     Payload = (double)(randomNumber.Next() % 1000),
                     VehicleModelId = i + 1,
-                    AvailableSpaceX=randomNumber.Next() % 1000,
+                    AvailableSpaceX = randomNumber.Next() % 1000,
                     AvailableSpaceY = randomNumber.Next() % 1000,
                     AvailableSpaceZ = randomNumber.Next() % 1000,
                 });
@@ -169,24 +168,23 @@ namespace InstantDelivery.Core.Migrations
             };
             var randomNumber = new Random();
             var testEmployees = new List<Employee>();
-
-            for (var i = 0; i < 40; i++)
+            DateTime startDate = new DateTime(1950, 1, 1);
+            int daysUntilNow = (DateTime.Now - startDate).Days;
+            for (var i = 0; i < 100; i++)
             {
                 testEmployees.Add(new Employee
                 {
                     EmployeeId = i + 1,
-                    FirstName = firstName[i],
-                    LastName = lastName[i],
+                    FirstName = firstName[randomNumber.Next() % firstName.Length],
+                    LastName = lastName[randomNumber.Next() % lastName.Length],
                     Gender = (Gender)(randomNumber.Next() % 2),
-                    PlaceOfResidence=new Address { City="Warsaw", Country="Poland", Number="2", PostalCode="23-456", State="Virdżinia", Street="alalal"},
-                    DateOfBirth =
-                        new DateTime((randomNumber.Next() % 100) + 1900, (randomNumber.Next() % 12) + 1, (randomNumber.Next() % 30) + 1),
+                    PlaceOfResidence = new Address { City = "Warsaw", Country = "Poland", Number = "2", PostalCode = "23-456", State = "Virdżinia", Street = "alalal" },
+                    DateOfBirth = startDate.AddDays(randomNumber.Next() % daysUntilNow),
                     PhoneNumber =
-                        ((randomNumber.Next() % 300) + 700).ToString() + ((randomNumber.Next() % 300) + 700).ToString() +
-                        ((randomNumber.Next() % 300) + 700).ToString(),
-                    Salary = randomNumber.Next() % 1000 + 2000,
-                    HireDate =
-                        new DateTime((randomNumber.Next() % 100) + 1900, (randomNumber.Next() % 12) + 1, (randomNumber.Next() % 30) + 1),
+                        (randomNumber.Next() % 300) + 700 + (randomNumber.Next() % 300 + 700).ToString() +
+                        (randomNumber.Next() % 300 + 700),
+                    Salary = randomNumber.Next() % 1000 + 5000,
+                    HireDate = startDate.AddDays(randomNumber.Next() % daysUntilNow)
                 });
             }
 
