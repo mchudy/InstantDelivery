@@ -47,7 +47,7 @@ namespace InstantDelivery.Core.Entities
 
         public DateTime? HireDate { get; set; }
 
-        public virtual ICollection<Package> Packages { get; set; }
+        public virtual ICollection<Package> Packages { get; set; } = new HashSet<Package>();
         public virtual Vehicle Vehicle { get; set; }
 
         [NotMapped]
