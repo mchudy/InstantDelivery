@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201511041911103_Package_AddCost.Designer.cs">
       <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511042156073_Employee_ResetAddressColumnsToDefault.cs" />
+    <Compile Include="Migrations\201511042156073_Employee_ResetAddressColumnsToDefault.Designer.cs">
+      <DependentUpon>201511042156073_Employee_ResetAddressColumnsToDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511041911103_Package_AddCost.resx">
       <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511042156073_Employee_ResetAddressColumnsToDefault.resx">
+      <DependentUpon>201511042156073_Employee_ResetAddressColumnsToDefault.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

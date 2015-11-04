@@ -20,6 +20,9 @@ namespace InstantDelivery.Core.Migrations
                     Brand = c.String(),
                     Model = c.String(),
                     Payload = c.Double(nullable: false),
+                    AvailableSpaceX = c.Int(),
+                    AvailableSpaceY = c.Int(),
+                    AvailableSpaceZ = c.Int(),
                 })
                 .PrimaryKey(t => t.VehicleModelId);
 
@@ -47,6 +50,9 @@ namespace InstantDelivery.Core.Migrations
             DropColumn("dbo.Vehicles", "CarryWeight");
             DropColumn("dbo.Vehicles", "Brand");
             DropColumn("dbo.Vehicles", "Model");
+            AddColumn("dbo.Employees", "Vehicle_VehicleId", c => c.Int());
+            CreateIndex("dbo.Employees", "Vehicle_VehicleId");
+            AddForeignKey("dbo.Employees", "Vehicle_VehicleId", "dbo.Vehicles", "VehicleId");
         }
 
         public override void Down()
@@ -82,6 +88,9 @@ namespace InstantDelivery.Core.Migrations
             RenameColumn(table: "dbo.Packages", name: "ShipAddressNumber", newName: "ShippingAddress_Number");
             RenameColumn(table: "dbo.Packages", name: "ShipAddressStreet", newName: "ShippingAddress_Street");
             RenameColumn(table: "dbo.Packages", name: "ShipAddressCity", newName: "ShippingAddress_City");
+            DropColumn("dbo.Employees", "Vehicle_VehicleId");
+            DropIndex("dbo.Employees", "Vehicle_VehicleId");
+            DropForeignKey("dbo.Employees", "Vehicle_VehicleId", "dbo.Vehicles");
         }
     }
 }

@@ -30,7 +30,6 @@ namespace InstantDelivery.Core.Migrations
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
-
         }
 
         private static void GenerateEmployeeVehicleRelations(InstantDeliveryContext context)
