@@ -19,7 +19,7 @@ namespace InstantDelivery.Tests
             {
                 Width = 100,
                 Height = 200,
-                Depth = 150,
+                Length = 150,
                 Weight = 100
             };
 
@@ -40,7 +40,7 @@ namespace InstantDelivery.Tests
             {
                 Width = 100,
                 Height = 200,
-                Depth = 150,
+                Length = 150,
                 Weight = 100
             };
 

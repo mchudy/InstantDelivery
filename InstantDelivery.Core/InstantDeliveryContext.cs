@@ -5,10 +5,10 @@ namespace InstantDelivery.Core
 {
     public class InstantDeliveryContext : DbContext
     {
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<Package> Packages { get; set; }
-        public virtual DbSet<VehicleModel> VehicleModels { get; set; }
+        public virtual IDbSet<Employee> Employees { get; set; }
+        public virtual IDbSet<Vehicle> Vehicles { get; set; }
+        public virtual IDbSet<Package> Packages { get; set; }
+        public virtual IDbSet<VehicleModel> VehicleModels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

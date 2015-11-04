@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201511041625222_AddPackageStatus.Designer.cs">
       <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511041911103_Package_AddCost.cs" />
+    <Compile Include="Migrations\201511041911103_Package_AddCost.Designer.cs">
+      <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511041625222_AddPackageStatus.resx">
       <DependentUpon>201511041625222_AddPackageStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041911103_Package_AddCost.resx">
+      <DependentUpon>201511041911103_Package_AddCost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -91,7 +91,7 @@ namespace InstantDelivery.Core.Migrations
             {
                 var tmp = new Package
                 {
-                    Height = randomNumber.Next() % 1000,
+                    Height = randomNumber.Next() % 100,
                     PackageId = i + 1,
                     ShippingAddress =
                     {
@@ -102,9 +102,9 @@ namespace InstantDelivery.Core.Migrations
                         State = randomNumber.Next().ToString(),
                         Street = randomNumber.Next().ToString()
                     },
-                    Weight = randomNumber.Next() % 300,
-                    Width = randomNumber.Next() % 1000,
-                    Depth = randomNumber.Next() % 1000,
+                    Weight = randomNumber.Next() % 100,
+                    Width = randomNumber.Next() % 100,
+                    Length = randomNumber.Next() % 100,
                 };
                 testPackages.Add(tmp);
             }
