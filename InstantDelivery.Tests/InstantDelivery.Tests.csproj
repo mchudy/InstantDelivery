@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="PackageServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularPricingStrategyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
