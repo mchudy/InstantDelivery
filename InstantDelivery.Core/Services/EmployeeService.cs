@@ -7,7 +7,7 @@ namespace InstantDelivery.Core.Repositories
 {
     public class EmployeeService : IDisposable
     {
-        private InstantDeliveryContext context = new InstantDeliveryContext();
+        private readonly InstantDeliveryContext context = new InstantDeliveryContext();
         public int Total => context.Employees.Count();
 
         public IList<Employee> GetAll()
@@ -20,13 +20,12 @@ namespace InstantDelivery.Core.Repositories
             context.Entry(employee).Reload();
         }
 
-        public void Remove(Employee employee)
+        public void RemoveEmployee(Employee employee)
         {
             context.Employees.Remove(employee);
             context.SaveChanges();
         }
 
-        //TODO to powinno być chyba jakieś extension method, zeby mozna bylo podpiac do kazdego zapytania
         public IList<Employee> Page(int pageNumber, int pageSize)
         {
             return context.Employees.OrderBy(e => e.EmployeeId)

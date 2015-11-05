@@ -64,7 +64,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void DeleteEmployee()
+        public void RemoveEmployee()
         {
             if (SelectedEmployee == null)
             {
@@ -73,7 +73,7 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
             if (result == true)
             {
-                repository.Remove(SelectedEmployee);
+                repository.RemoveEmployee(SelectedEmployee);
                 LoadPage();
             }
         }

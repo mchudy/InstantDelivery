@@ -33,7 +33,7 @@
         </DataGrid>
         <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
-            <Button x:Name="DeleteEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
+            <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
             <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
             <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
             <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
