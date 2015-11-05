@@ -7,12 +7,12 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesViewModel : PagingViewModel
     {
-        private readonly EmployeesRepository repository;
+        private readonly EmployeeService repository;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
         private BindableCollection<Employee> employees;
 
-        public EmployeesViewModel(EmployeesRepository repository, IWindowManager windowManager)
+        public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;

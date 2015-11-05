@@ -3,16 +3,16 @@ namespace InstantDelivery.Core.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddPackageStatus : DbMigration
+    public partial class wp : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Packages", "Status", c => c.Int(nullable: false));
+            AlterColumn("dbo.Vehicles", "RegistrationNumber", c => c.String(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Packages", "Status");
+            AlterColumn("dbo.Vehicles", "RegistrationNumber", c => c.String());
         }
     }
 }

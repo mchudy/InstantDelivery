@@ -26,7 +26,7 @@ namespace InstantDelivery.Core.Entities
         [Phone(ErrorMessage = "Proszę podać poprawny numer telefonu")]
         public string PhoneNumber { get; set; }
 
-        public Address PlaceOfResidence { get; set; }
+        public Address PlaceOfResidence { get; set; } = new Address();
 
         [EmailAddress(ErrorMessage = "Proszę podać poprawny email")]
         public string Email { get; set; }

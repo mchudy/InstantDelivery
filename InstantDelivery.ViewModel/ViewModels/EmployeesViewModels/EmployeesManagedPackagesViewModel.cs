@@ -7,10 +7,10 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesManagedPackagesViewModel : PagingViewModel
     {
-        private readonly EmployeesRepository repository;
+        private readonly EmployeeService repository;
         private BindableCollection<Employee> rows;
 
-        public EmployeesManagedPackagesViewModel(EmployeesRepository repository)
+        public EmployeesManagedPackagesViewModel(EmployeeService repository)
         {
             this.repository = repository;
             Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));

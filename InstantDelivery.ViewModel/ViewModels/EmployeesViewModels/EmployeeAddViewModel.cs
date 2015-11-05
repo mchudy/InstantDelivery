@@ -1,14 +1,17 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using System;
+using InstantDelivery.Core.Repositories;
 
 namespace InstantDelivery.ViewModel
 {
     public class EmployeeAddViewModel : Screen
     {
-        public EmployeeAddViewModel()
+        public EmployeeService service;
+        public EmployeeAddViewModel(EmployeeService service)
         {
             NewEmployee = new Employee();
+            this.service = service;
         }
 
         protected override void OnDeactivate(bool close)
@@ -35,6 +38,7 @@ namespace InstantDelivery.ViewModel
 
         public void Save()
         {
+            service.AddEmployee(NewEmployee);
             TryClose(true);
         }
 

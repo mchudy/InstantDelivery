@@ -5,7 +5,7 @@ using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.Core.Repositories
 {
-    public class EmployeesRepository : IDisposable
+    public class EmployeeService : IDisposable
     {
         private InstantDeliveryContext context = new InstantDeliveryContext();
         public int Total => context.Employees.Count();
@@ -32,6 +32,12 @@ namespace InstantDelivery.Core.Repositories
             return context.Employees.OrderBy(e => e.EmployeeId)
                                     .Skip(pageSize * (pageNumber - 1))
                                     .Take(pageSize).ToList();
+        }
+
+        public void AddEmployee(Employee employee)
+        {
+            context.Employees.Add(employee);
+            context.SaveChanges();
         }
 
         public void Save()

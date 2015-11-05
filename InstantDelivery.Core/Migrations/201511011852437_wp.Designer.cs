@@ -7,13 +7,13 @@ namespace InstantDelivery.Core.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Employee_ResetAddressColumnsToDefault : IMigrationMetadata
+    public sealed partial class wp : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Employee_ResetAddressColumnsToDefault));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(wp));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511042156073_Employee_ResetAddressColumnsToDefault"; }
+            get { return "201511011852437_wp"; }
         }
         
         string IMigrationMetadata.Source
