@@ -23,8 +23,8 @@ namespace InstantDelivery.Core.Migrations
         private static void GenerateTestData(InstantDeliveryContext context)
         {
             GenerateTestEmployees(context);
-            GenerateTestVehicles(context);
             GenerateTestVehicleModels(context);
+            GenerateTestVehicles(context);
             GenerateTestPackages(context);
 
             GeneratePackageEmployeeRelations(context);
@@ -125,9 +125,9 @@ namespace InstantDelivery.Core.Migrations
                     Model = models[i],
                     Payload = (double)(randomNumber.Next() % 1000),
                     VehicleModelId = i + 1,
-                    AvailableSpaceX = randomNumber.Next() % 1000,
-                    AvailableSpaceY = randomNumber.Next() % 1000,
-                    AvailableSpaceZ = randomNumber.Next() % 1000,
+                    AvailableSpaceX = (double)(randomNumber.Next() % 1000),
+                    AvailableSpaceY = (double)(randomNumber.Next() % 1000),
+                    AvailableSpaceZ = (double)(randomNumber.Next() % 1000),
                 });
             }
             context.VehicleModels.AddOrUpdate(testVehicleModels.ToArray());

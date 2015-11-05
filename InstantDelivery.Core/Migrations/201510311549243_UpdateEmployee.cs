@@ -20,9 +20,9 @@ namespace InstantDelivery.Core.Migrations
                     Brand = c.String(),
                     Model = c.String(),
                     Payload = c.Double(nullable: false),
-                    AvailableSpaceX = c.Int(),
-                    AvailableSpaceY = c.Int(),
-                    AvailableSpaceZ = c.Int(),
+                    AvailableSpaceX = c.Double(),
+                    AvailableSpaceY = c.Double(),
+                    AvailableSpaceZ = c.Double(),
                 })
                 .PrimaryKey(t => t.VehicleModelId);
 
