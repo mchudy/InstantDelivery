@@ -1,5 +1,6 @@
 ﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
+using InstantDelivery.Services;
 using Xunit;
 
 namespace InstantDelivery.Tests

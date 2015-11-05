@@ -76,6 +76,10 @@
       <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
       <Name>InstantDelivery.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
+      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
+      <Name>InstantDelivery.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
