@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.ViewModel
@@ -9,12 +10,15 @@ namespace InstantDelivery.ViewModel
     {
         private readonly EmployeeService repository;
         private readonly IWindowManager windowManager;
+
         private Employee selectedEmployee;
         private IQueryable<Employee> employees;
+
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
         private EmployeeSortingProperty? sortingProperty;
+
         private int currentPage = 1;
 
         public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
@@ -163,5 +167,13 @@ namespace InstantDelivery.ViewModel
                 .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
                 .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
+    }
+
+    public enum EmployeeSortingProperty
+    {
+        [Description("Po nazwisku")]
+        ByLastName,
+        [Description("Po imieniu")]
+        ByFirstName,
     }
 }

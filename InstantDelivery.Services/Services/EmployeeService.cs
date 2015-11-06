@@ -10,17 +10,12 @@ namespace InstantDelivery.Services
     {
         private readonly InstantDeliveryContext context = new InstantDeliveryContext();
 
-        public string LastNameFilter { get; set; } = "";
-        public string FirstNameFilter { get; set; } = "";
-        public string EmailFilter { get; set; } = "";
-        public EmployeeSortingProperty SortingProperty { get; set; } = EmployeeSortingProperty.ByFirstName;
-        public int Total { get; set; }
-
         public IQueryable<Employee> GetAll()
         {
-            Total = context.Employees.Count();
             return context.Employees;
         }
+
+        public int Total => context.Employees.Count();
 
         public void Reload(Employee employee)
         {
@@ -35,25 +30,7 @@ namespace InstantDelivery.Services
 
         public IQueryable<Employee> Page(int pageNumber, int pageSize)
         {
-            // mozna poifować zeby sql'a skrócić ewentualnie?
-            var tmp = context.Employees.Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
-                .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
-                .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
-            if (SortingProperty == EmployeeSortingProperty.ByFirstName)
-            {
-                tmp = tmp.OrderBy(e => e.FirstName);
-            }
-            else if (SortingProperty == EmployeeSortingProperty.ByLastName)
-            {
-                tmp = tmp.OrderBy(e => e.LastName);
-            }
-            else
-            {
-                tmp = tmp.OrderBy(e => e.Id);
-            }
-            Total = tmp.Count();
-
-            return tmp.Skip(pageSize * (pageNumber - 1))
+            return context.Employees.Skip(pageSize * (pageNumber - 1))
             .Take(pageSize);
         }
 
@@ -73,15 +50,5 @@ namespace InstantDelivery.Services
             context.Dispose();
         }
 
-    }
-
-    public enum EmployeeSortingProperty
-    {
-        [Description("Po nazwisku")]
-        ByLastName,
-        [Description("Po imieniu")]
-        ByFirstName,
-        [Description("Po ID")]
-        ByID
     }
 }
