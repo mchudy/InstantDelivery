@@ -1,7 +1,6 @@
 ﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -17,10 +16,10 @@ namespace InstantDelivery.Services
         public EmployeeSortingFilter SortingFilter { get; set; } = EmployeeSortingFilter.ByFirstName;
         public int Total { get; set; }
 
-        public IList<Employee> GetAll()
+        public IQueryable<Employee> GetAll()
         {
             Total = context.Employees.Count();
-            return context.Employees.ToList();
+            return context.Employees;
         }
 
         public void Reload(Employee employee)

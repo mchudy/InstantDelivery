@@ -3,21 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:InstantDelivery.Controls"
              xmlns:cal="http://www.caliburnproject.org"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:controls1="clr-namespace:InstantDelivery.Controls"
              xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
              xmlns:entities="clr-namespace:InstantDelivery.Services;assembly=InstantDelivery.Services"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
-    <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
+    <StackPanel Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
         <Label Content="Nazwisko:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetLastNameFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding LastNameFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Content="Imię:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetFirstNameFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding FirstNameFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Content="Email:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetEmailFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding EmailFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Content="Sortowanie:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
         <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding EmployeeService.EmployeeSortingFilter}" Style="{StaticResource EditComboBoxLabel}"
                   ItemsSource="{helpers:EnumSource {x:Type entities:EmployeeSortingFilter}}" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event SelectionChanged] = [Action SetSortingFilter($this.SelectedValuePath)]"></ComboBox>

@@ -38,7 +38,7 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding PESEL}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="3" x:Name="Pager" ItemsSource="{Binding Items}" PagesCount="5" />
+        <controls1:DataPager Grid.Row="3" x:Name="Pager" ItemsSource="{Binding Employees}" PagesCount="5" />
         <StackPanel Grid.Row="4" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
             <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>

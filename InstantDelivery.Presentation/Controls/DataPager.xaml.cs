@@ -122,7 +122,7 @@ namespace InstantDelivery.Controls
             PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
             if (CurrentPage > PagesCount)
             {
-                CurrentPage = PagesCount;
+                CurrentPage = PagesCount == 0 ? 1 : PagesCount;
             }
             PagedSource = new ObservableCollection<object>(ItemsSource.Page(CurrentPage, PageSize));
             OnPropertyChanged(nameof(IsEnabledNextPage));

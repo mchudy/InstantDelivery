@@ -10,26 +10,24 @@ namespace InstantDelivery.ViewModel
         private readonly EmployeeService repository;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
-        private BindableCollection<Employee> employees;
-        private IQueryable<Employee> items;
+        private IQueryable<Employee> employees;
+        private string emailFilter = string.Empty;
+        private string firstNameFilter = string.Empty;
+        private string lastNameFilter = string.Empty;
 
         public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Items = repository.GetAll().AsQueryable();
-            //Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            Employees = repository.GetAll();
         }
 
-        public int CurrentPage { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-
-        public IQueryable<Employee> Items
+        public IQueryable<Employee> Employees
         {
-            get { return items; }
+            get { return employees; }
             set
             {
-                items = value;
+                employees = value;
                 NotifyOfPropertyChange();
             }
         }
@@ -44,8 +42,6 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange(() => IsSelectedAnyRow);
             }
         }
-
-        //public bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
         public bool IsSelectedAnyRow => SelectedEmployee != null;
 
@@ -79,43 +75,50 @@ namespace InstantDelivery.ViewModel
             if (result == true)
             {
                 repository.RemoveEmployee(SelectedEmployee);
-                LoadPage();
             }
         }
 
-        protected void LoadPage()
+        public string LastNameFilter
         {
-            //OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
-            //OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+            get { return lastNameFilter; }
+            set
+            {
+                lastNameFilter = value;
+                FilterEmployees();
+            }
         }
 
-        public void SetLastNameFilter(string Text)
+        public string FirstNameFilter
         {
-            repository.LastNameFilter = Text;
-            LoadPage();
+            get { return firstNameFilter; }
+            set
+            {
+                firstNameFilter = value;
+                FilterEmployees();
+            }
         }
 
-        public void SetFirstNameFilter(string Text)
+        public string EmailFilter
         {
-            repository.FirstNameFilter = Text;
-            LoadPage();
+            get { return emailFilter; }
+            set
+            {
+                emailFilter = value;
+                FilterEmployees();
+            }
         }
 
-        public void SetEmailFilter(string Text)
+        private void FilterEmployees()
         {
-            repository.EmailFilter = Text;
-            LoadPage();
+            Employees = repository.GetAll()
+                .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
+                .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
+                .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
 
         public void SetSortingFilter(EmployeeSortingFilter filter)
         {
             repository.SortingFilter = filter;
-            LoadPage();
-        }
-
-        public void ChangePage()
-        {
-            //Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
     }
 }
