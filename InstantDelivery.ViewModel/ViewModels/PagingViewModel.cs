@@ -6,7 +6,7 @@ namespace InstantDelivery.ViewModel.ViewModels
     public abstract class PagingViewModel : Screen
     {
         private int currentPage = 1;
-        private int pageSize = 10;
+        private int pageSize = 20;
 
         public int PageSize
         {

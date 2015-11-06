@@ -13,13 +13,13 @@
              d:DesignHeight="100" d:DesignWidth="600">
     <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
         <Label Content="Nazwisko:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="100" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetLastNameFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetLastNameFilter($this.Text)]"></TextBox>
         <Label Content="Imię:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="100" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetFirstNameFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetFirstNameFilter($this.Text)]"></TextBox>
         <Label Content="Email:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="100" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetEmailFilter($this.Text)]"></TextBox>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event TextChanged] = [Action SetEmailFilter($this.Text)]"></TextBox>
         <Label Content="Sortowanie:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <ComboBox Width="100"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding EmployeeService.EmployeeSortingFilter}" Style="{StaticResource EditComboBoxLabel}"
+        <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding EmployeeService.EmployeeSortingFilter}" Style="{StaticResource EditComboBoxLabel}"
                   ItemsSource="{helpers:EnumSource {x:Type entities:EmployeeSortingFilter}}" Height="15" Margin="5 0 5 0" cal:Message.Attach="[Event SelectionChanged] = [Action SetSortingFilter($this.SelectedValuePath)]"></ComboBox>
     </StackPanel>
 </UserControl>
