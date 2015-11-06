@@ -1,25 +1,37 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesViewModel : PagingViewModel
+    public class EmployeesViewModel : Screen
     {
         private readonly EmployeeService repository;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
         private BindableCollection<Employee> employees;
+        private IQueryable<Employee> items;
+
         public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
         {
             this.repository = repository;
             this.windowManager = windowManager;
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            Items = repository.GetAll().AsQueryable();
+            //Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+        }
+
+        public int CurrentPage { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+
+        public IQueryable<Employee> Items
+        {
+            get { return items; }
+            set
+            {
+                items = value;
+                NotifyOfPropertyChange();
+            }
         }
 
         public Employee SelectedEmployee
@@ -33,18 +45,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public BindableCollection<Employee> Employees
-        {
-            get { return employees; }
-            set
-            {
-                employees = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-
-        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
+        //public bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
         public bool IsSelectedAnyRow => SelectedEmployee != null;
 
@@ -82,12 +83,10 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        protected override void LoadPage()
+        protected void LoadPage()
         {
-            Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
-            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
-            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
-
+            //OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+            //OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
         }
 
         public void SetLastNameFilter(string Text)
@@ -112,6 +111,11 @@ namespace InstantDelivery.ViewModel
         {
             repository.SortingFilter = filter;
             LoadPage();
+        }
+
+        public void ChangePage()
+        {
+            //Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
         }
     }
 }

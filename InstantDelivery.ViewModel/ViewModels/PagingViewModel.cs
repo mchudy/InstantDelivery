@@ -24,32 +24,29 @@ namespace InstantDelivery.ViewModel.ViewModels
             set
             {
                 currentPage = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsEnabledPreviousPage);
-                NotifyOfPropertyChange(() => IsEnabledNextPage);
             }
         }
 
         public void NextPage()
         {
-            CurrentPage++;
+            //CurrentPage++;
             LoadPage();
         }
 
         public abstract bool IsEnabledNextPage { get; }
 
-        public bool IsEnabledPreviousPage => currentPage != 1;
+        public bool IsEnabledPreviousPage => true;//currentPage != 1;
 
         public void PreviousPage()
         {
-            if (CurrentPage == 1) return;
-            CurrentPage--;
+            //if (CurrentPage == 1) return;
+            //CurrentPage--;
             LoadPage();
         }
 
         public void Sort()
         {
-            CurrentPage = 1;
+            //CurrentPage = 1;
             LoadPage();
         }
 

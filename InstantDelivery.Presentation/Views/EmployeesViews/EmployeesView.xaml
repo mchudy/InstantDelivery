@@ -14,11 +14,12 @@
              <RowDefinition Height="10" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar" />
         <controls1:EmployeesFilterPanel Grid.Row="0"></controls1:EmployeesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="2"
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
@@ -37,12 +38,10 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding PESEL}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="3" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
+        <controls1:DataPager Grid.Row="3" x:Name="Pager" ItemsSource="{Binding Items}" PagesCount="5" />
+        <StackPanel Grid.Row="4" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
             <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
-            <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
-            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
-            <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
         </StackPanel>
     </Grid>
 </UserControl>
