@@ -37,9 +37,9 @@ namespace InstantDelivery.Core.Migrations
             for (var i = 1; i < 30; i++)
             {
                 var i1 = i;
-                var firstOrDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == i1);
+                var firstOrDefault = context.Employees.FirstOrDefault(e => e.Id == i1);
                 if (firstOrDefault != null)
-                    firstOrDefault.Vehicle = context.Vehicles.FirstOrDefault(e => e.VehicleId == i1);
+                    firstOrDefault.Vehicle = context.Vehicles.FirstOrDefault(e => e.Id == i1);
             }
         }
 
@@ -50,9 +50,9 @@ namespace InstantDelivery.Core.Migrations
             {
                 var next = randomNumber.Next();
                 var i1 = i + 1;
-                var firstOrDefault = context.Vehicles.FirstOrDefault(e => e.VehicleId == i1);
+                var firstOrDefault = context.Vehicles.FirstOrDefault(e => e.Id == i1);
                 if (firstOrDefault != null)
-                    firstOrDefault.VehicleModel = context.VehicleModels.FirstOrDefault(e => e.VehicleModelId == ((next % 10) + 1));
+                    firstOrDefault.VehicleModel = context.VehicleModels.FirstOrDefault(e => e.Id == ((next % 10) + 1));
             }
         }
 
@@ -61,24 +61,24 @@ namespace InstantDelivery.Core.Migrations
             for (var i = 1; i < 30; i++)
             {
                 var i1 = i;
-                var firstOrDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == i1);
+                var firstOrDefault = context.Employees.FirstOrDefault(e => e.Id == i1);
                 if (firstOrDefault != null)
-                    firstOrDefault.Packages = new List<Package>() { context.Packages.FirstOrDefault(e => e.PackageId == i1) };
+                    firstOrDefault.Packages = new List<Package>() { context.Packages.FirstOrDefault(e => e.Id == i1) };
             }
-            var orDefault = context.Employees.FirstOrDefault(e => e.EmployeeId == 30);
+            var orDefault = context.Employees.FirstOrDefault(e => e.Id == 30);
             if (orDefault != null)
                 orDefault.Packages = new List<Package>()
                 {
-                    context.Packages.FirstOrDefault(e => e.PackageId ==31),
-                    context.Packages.FirstOrDefault(e => e.PackageId ==32),
+                    context.Packages.FirstOrDefault(e => e.Id ==31),
+                    context.Packages.FirstOrDefault(e => e.Id ==32),
                 };
-            var employee = context.Employees.FirstOrDefault(e => e.EmployeeId == 31);
+            var employee = context.Employees.FirstOrDefault(e => e.Id == 31);
             if (employee != null)
                 employee.Packages = new List<Package>()
                 {
-                    context.Packages.FirstOrDefault(e => e.PackageId ==33),
-                    context.Packages.FirstOrDefault(e => e.PackageId ==34),
-                    context.Packages.FirstOrDefault(e => e.PackageId ==35),
+                    context.Packages.FirstOrDefault(e => e.Id ==33),
+                    context.Packages.FirstOrDefault(e => e.Id ==34),
+                    context.Packages.FirstOrDefault(e => e.Id ==35),
                 };
         }
 
@@ -91,7 +91,7 @@ namespace InstantDelivery.Core.Migrations
                 var tmp = new Package
                 {
                     Height = randomNumber.Next() % 100,
-                    PackageId = i + 1,
+                    Id = i + 1,
                     ShippingAddress =
                     {
                         City = "Warsaw",
@@ -124,7 +124,7 @@ namespace InstantDelivery.Core.Migrations
                     Brand = brands[i],
                     Model = models[i],
                     Payload = (double)(randomNumber.Next() % 1000),
-                    VehicleModelId = i + 1,
+                    Id = i + 1,
                     AvailableSpaceX = (double)(randomNumber.Next() % 1000),
                     AvailableSpaceY = (double)(randomNumber.Next() % 1000),
                     AvailableSpaceZ = (double)(randomNumber.Next() % 1000),
@@ -142,7 +142,7 @@ namespace InstantDelivery.Core.Migrations
                 testVehicle.Add(new Vehicle()
                 {
                     RegistrationNumber = "WWW" + (randomNumber.Next() % 100 + 4000).ToString() + "PL",
-                    VehicleId = i + 1,
+                    Id = i + 1,
                 });
             }
             context.Vehicles.AddOrUpdate(testVehicle.ToArray());
@@ -173,7 +173,7 @@ namespace InstantDelivery.Core.Migrations
             {
                 testEmployees.Add(new Employee
                 {
-                    EmployeeId = i + 1,
+                    Id = i + 1,
                     FirstName = firstName[randomNumber.Next() % firstName.Length],
                     LastName = lastName[randomNumber.Next() % lastName.Length],
                     Gender = (Gender)(randomNumber.Next() % 2),

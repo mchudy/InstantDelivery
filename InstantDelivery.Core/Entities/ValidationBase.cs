@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace InstantDelivery.Core.Entities
 {
-    public abstract class ValidationBase : IDataErrorInfo
+    public abstract class ValidationBase : Entity, IDataErrorInfo
     {
 
         public string Error

@@ -9,8 +9,6 @@ namespace InstantDelivery.Core.Entities
     [ImplementPropertyChanged]
     public class Employee : ValidationBase
     {
-        public int EmployeeId { get; set; }
-
         [Required(ErrorMessage = "To pole jest wymagane")]
         [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne imię")]
         public string FirstName { get; set; }

@@ -31,7 +31,7 @@ namespace InstantDelivery.Services
         //TODO to powinno być chyba jakieś extension method, zeby mozna bylo podpiac do kazdego zapytania
         public IList<Vehicle> Page(int pageNumber, int pageSize)
         {
-            return context.Vehicles.OrderBy(e => e.VehicleId)
+            return context.Vehicles.OrderBy(e => e.Id)
                                     .Skip(pageSize * (pageNumber - 1))
                                     .Take(pageSize).ToList();
         }

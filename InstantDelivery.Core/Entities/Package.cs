@@ -3,14 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Core.Entities
 {
-    public class Package
+    public class Package : Entity
     {
         public Package()
         {
             ShippingAddress = new Address();
         }
 
-        public int PackageId { get; set; }
         public Address ShippingAddress { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]

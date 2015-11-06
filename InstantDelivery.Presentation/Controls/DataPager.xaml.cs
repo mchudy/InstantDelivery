@@ -132,7 +132,7 @@ namespace InstantDelivery.Controls
         private List<object> GetPage()
         {
             return (ItemsSource as IQueryable<object>)
-                .OrderBy(e => ((Employee)e).EmployeeId) //TODO!
+                .OrderBy(e => ((Employee)e).Id) //TODO!
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize).ToList();
         }

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using InstantDelivery.Core;
+using InstantDelivery.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using InstantDelivery.Core;
-using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.Services
 {
@@ -47,11 +46,11 @@ namespace InstantDelivery.Services
             }
             else if (SortingFilter == EmployeeSortingFilter.ByLastName)
             {
-                tmp=tmp.OrderBy(e => e.LastName);
+                tmp = tmp.OrderBy(e => e.LastName);
             }
             else
             {
-                tmp=tmp.OrderBy(e => e.EmployeeId);
+                tmp = tmp.OrderBy(e => e.Id);
             }
             Total = tmp.Count();
 
