@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar" />
         <controls1:EmployeesFilterPanel Grid.Row="0"></controls1:EmployeesFilterPanel>
-        <DataGrid ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="1"
+        <DataGrid SelectionMode="Single" ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="1"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
