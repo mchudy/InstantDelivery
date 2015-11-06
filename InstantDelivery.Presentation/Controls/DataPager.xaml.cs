@@ -1,7 +1,7 @@
 ﻿using InstantDelivery.Annotations;
 using InstantDelivery.Core.Entities;
+using InstantDelivery.Core.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -29,14 +29,14 @@ namespace InstantDelivery.Controls
         /// <summary>
         /// Źródło danych wykorzystywane do paginacji
         /// </summary>
-        public IQueryable ItemsSource
+        public IQueryable<Entity> ItemsSource
         {
-            get { return (IQueryable)GetValue(ItemsSourceProperty); }
+            get { return (IQueryable<Entity>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IQueryable),
+            DependencyProperty.Register("ItemsSource", typeof(IQueryable<Entity>),
               typeof(DataPager), new UIPropertyMetadata(null, OnPropertyChanged));
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace InstantDelivery.Controls
             }
         }
 
-        public bool IsEnabledNextPage => CurrentPage * PageSize < (ItemsSource as IQueryable<object>)?.Count();
+        public bool IsEnabledNextPage => CurrentPage * PageSize < ItemsSource?.Count();
 
         public bool IsEnabledPreviousPage => CurrentPage > 1;
 
@@ -119,22 +119,14 @@ namespace InstantDelivery.Controls
         private void LoadPage()
         {
             if (ItemsSource == null) return;
-            PagesCount = (int)Math.Ceiling((double)(ItemsSource as IQueryable<object>).Count() / PageSize);
+            PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
             if (CurrentPage > PagesCount)
             {
                 CurrentPage = PagesCount;
             }
-            PagedSource = new ObservableCollection<object>(GetPage());
+            PagedSource = new ObservableCollection<object>(ItemsSource.Page(CurrentPage, PageSize));
             OnPropertyChanged(nameof(IsEnabledNextPage));
             OnPropertyChanged(nameof(IsEnabledPreviousPage));
-        }
-
-        private List<object> GetPage()
-        {
-            return (ItemsSource as IQueryable<object>)
-                .OrderBy(e => ((Employee)e).Id) //TODO!
-                .Skip((CurrentPage - 1) * PageSize)
-                .Take(PageSize).ToList();
         }
     }
 }

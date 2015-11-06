@@ -63,6 +63,7 @@
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
+    <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
     <Compile Include="Migrations\201511062238275_InitialCreate.cs" />
     <Compile Include="Migrations\201511062238275_InitialCreate.Designer.cs">
