@@ -15,8 +15,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar" />
-        <controls1:EmployeesFilterPanel Grid.Row="0"></controls1:EmployeesFilterPanel>
+        <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <controls1:EmployeesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:EmployeesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
         <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
@@ -37,12 +37,15 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding PESEL}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="3" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
-            <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
-            <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
-            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
-            <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
-        </StackPanel>
+        <Grid Grid.Row="3" Margin="0 80 0 0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Width="Auto"  Margin="0 5 0 5">
+                <ContentControl x:Name="PagingPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+                <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Margin="40 0 40 0" Content="Poprzednia strona"></Button>
+                <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" Margin="40 0 40 0" FontSize="15"/>
+                <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Margin="40 0 40 0" Content="Następna strona"></Button>
+                <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Margin="40 0 40 0" Width="150">Usuń</Button>
+                <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Margin="40 0 40 0" Width="150">Edytuj</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
