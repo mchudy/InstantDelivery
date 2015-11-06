@@ -14,6 +14,8 @@ namespace InstantDelivery.ViewModel
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
+        private EmployeeSortingProperty? sortingProperty;
+        private int currentPage = 1;
 
         public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
         {
@@ -84,7 +86,7 @@ namespace InstantDelivery.ViewModel
             set
             {
                 lastNameFilter = value;
-                FilterEmployees();
+                UpdateEmployees();
             }
         }
 
@@ -94,7 +96,28 @@ namespace InstantDelivery.ViewModel
             set
             {
                 firstNameFilter = value;
-                FilterEmployees();
+                UpdateEmployees();
+            }
+        }
+
+        private void UpdateEmployees()
+        {
+            var newEmployees = repository.GetAll();
+            if (SortingProperty != null)
+            {
+                newEmployees = SortEmployees(newEmployees);
+            }
+            newEmployees = FilterEmployees(newEmployees);
+            Employees = newEmployees;
+        }
+
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                currentPage = value;
+                NotifyOfPropertyChange();
             }
         }
 
@@ -104,21 +127,41 @@ namespace InstantDelivery.ViewModel
             set
             {
                 emailFilter = value;
-                FilterEmployees();
+                UpdateEmployees();
             }
         }
 
-        private void FilterEmployees()
+        public EmployeeSortingProperty? SortingProperty
         {
-            Employees = repository.GetAll()
+            get { return sortingProperty; }
+            set
+            {
+                sortingProperty = value;
+                UpdateEmployees();
+            }
+        }
+
+        private IQueryable<Employee> SortEmployees(IQueryable<Employee> newEmployees)
+        {
+            if (SortingProperty == EmployeeSortingProperty.ByFirstName)
+            {
+                newEmployees = newEmployees.OrderBy(e => e.FirstName);
+                CurrentPage = 1;
+            }
+            else if (SortingProperty == EmployeeSortingProperty.ByLastName)
+            {
+                newEmployees = newEmployees.OrderBy(e => e.LastName);
+                CurrentPage = 1;
+            }
+            return newEmployees;
+        }
+
+        private IQueryable<Employee> FilterEmployees(IQueryable<Employee> newEmployees)
+        {
+            return newEmployees
                 .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
                 .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
                 .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
-        }
-
-        public void SetSortingFilter(EmployeeSortingFilter filter)
-        {
-            repository.SortingFilter = filter;
         }
     }
 }

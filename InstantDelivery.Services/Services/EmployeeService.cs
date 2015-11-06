@@ -13,7 +13,7 @@ namespace InstantDelivery.Services
         public string LastNameFilter { get; set; } = "";
         public string FirstNameFilter { get; set; } = "";
         public string EmailFilter { get; set; } = "";
-        public EmployeeSortingFilter SortingFilter { get; set; } = EmployeeSortingFilter.ByFirstName;
+        public EmployeeSortingProperty SortingProperty { get; set; } = EmployeeSortingProperty.ByFirstName;
         public int Total { get; set; }
 
         public IQueryable<Employee> GetAll()
@@ -39,11 +39,11 @@ namespace InstantDelivery.Services
             var tmp = context.Employees.Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
                 .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
                 .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
-            if (SortingFilter == EmployeeSortingFilter.ByFirstName)
+            if (SortingProperty == EmployeeSortingProperty.ByFirstName)
             {
                 tmp = tmp.OrderBy(e => e.FirstName);
             }
-            else if (SortingFilter == EmployeeSortingFilter.ByLastName)
+            else if (SortingProperty == EmployeeSortingProperty.ByLastName)
             {
                 tmp = tmp.OrderBy(e => e.LastName);
             }
@@ -75,7 +75,7 @@ namespace InstantDelivery.Services
 
     }
 
-    public enum EmployeeSortingFilter
+    public enum EmployeeSortingProperty
     {
         [Description("Po nazwisku")]
         ByLastName,
