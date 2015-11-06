@@ -111,6 +111,7 @@ namespace InstantDelivery.ViewModel
         public void SetSortingFilter(EmployeeSortingFilter filter)
         {
             repository.SortingFilter = filter;
+            LoadPage();
         }
     }
 }
