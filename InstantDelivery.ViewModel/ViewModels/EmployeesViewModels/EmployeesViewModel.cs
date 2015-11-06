@@ -1,6 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Repositories;
+using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
@@ -11,7 +15,6 @@ namespace InstantDelivery.ViewModel
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
         private BindableCollection<Employee> employees;
-
         public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
         {
             this.repository = repository;
@@ -39,6 +42,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
 
         public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
@@ -81,6 +85,32 @@ namespace InstantDelivery.ViewModel
         protected override void LoadPage()
         {
             Employees = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledNextPage)));
+
+        }
+
+        public void SetLastNameFilter(string Text)
+        {
+            repository.LastNameFilter = Text;
+            LoadPage();
+        }
+
+        public void SetFirstNameFilter(string Text)
+        {
+            repository.FirstNameFilter = Text;
+            LoadPage();
+        }
+
+        public void SetEmailFilter(string Text)
+        {
+            repository.EmailFilter = Text;
+            LoadPage();
+        }
+
+        public void SetSortingFilter(EmployeeSortingFilter filter)
+        {
+            repository.SortingFilter = filter;
         }
     }
 }

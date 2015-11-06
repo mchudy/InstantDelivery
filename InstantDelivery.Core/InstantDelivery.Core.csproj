@@ -63,18 +63,13 @@
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
-    <Compile Include="IPricingStrategy.cs" />
     <Compile Include="Migrations\201511051719096_InitialCreate.cs" />
     <Compile Include="Migrations\201511051719096_InitialCreate.Designer.cs">
       <DependentUpon>201511051719096_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Services\PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegularPricingStrategy.cs" />
-    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Entities\ValidationBase.cs" />
-    <Compile Include="Services\VehiclesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Caliburn.Micro;
-using InstantDelivery.Core.Repositories;
+using InstantDelivery.Services;
 using InstantDelivery.ViewModel;
 using IContainer = Autofac.IContainer;
 
