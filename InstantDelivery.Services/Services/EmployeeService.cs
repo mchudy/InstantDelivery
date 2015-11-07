@@ -1,7 +1,6 @@
 ﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using System;
-using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.Services
@@ -30,7 +29,9 @@ namespace InstantDelivery.Services
 
         public IQueryable<Employee> Page(int pageNumber, int pageSize)
         {
-            return context.Employees.Skip(pageSize * (pageNumber - 1))
+            return context.Employees
+                .OrderBy(e => e.Id)
+                .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize);
         }
 
