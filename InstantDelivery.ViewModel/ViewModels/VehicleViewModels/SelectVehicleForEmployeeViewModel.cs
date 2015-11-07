@@ -61,7 +61,7 @@ namespace InstantDelivery.ViewModel
         {
             this.employeeService = employeeService;
             this.vehicleService = vehicleService;
-            Vehicles = vehicleService.GetAll();//AvailableAndCurrent(SelectedVehicle);
+            Vehicles = vehicleService.GetAllAvailableAndCurrent(SelectedVehicle);
         }
 
         public void ChangeVehicleForEmployee()
@@ -71,7 +71,7 @@ namespace InstantDelivery.ViewModel
 
         public void Save()
         {
-            ChangeVehicleForEmployee();
+            employeeService.ChangeEmployeesVehicle(SelectedEmployee, selectedVehicle);
             TryClose(true);
         }
 
