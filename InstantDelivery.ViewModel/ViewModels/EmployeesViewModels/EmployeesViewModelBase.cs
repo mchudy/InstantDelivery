@@ -47,7 +47,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         protected abstract IQueryable<Employee> GetEmployees();
 
-        private void UpdateEmployees()
+        protected void UpdateEmployees()
         {
             var newEmployees = GetEmployees();
             if (SortingProperty != null)

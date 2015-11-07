@@ -11,11 +11,14 @@ namespace InstantDelivery.ViewModel
         private readonly IEmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedRow;
+        private EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel;
 
-        public EmployeesUsedVehiclesViewModel(IEmployeeService employeeService, IWindowManager windowManager)
+        public EmployeesUsedVehiclesViewModel(IEmployeeService employeeService, IWindowManager windowManager,
+            EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel)
         {
             this.employeeService = employeeService;
             this.windowManager = windowManager;
+            this.usedVehiclesDetailsViewModel = usedVehiclesDetailsViewModel;
             Employees = employeeService.GetAll();
         }
 
@@ -38,10 +41,8 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new EmployeeUsedVehiclesDetailsViewModel
-            {
-                SelectedRow = SelectedRow
-            });
+            usedVehiclesDetailsViewModel.Employee = SelectedRow;
+            var result = windowManager.ShowDialog(usedVehiclesDetailsViewModel);
             if (result != true)
             {
                 employeeService.Reload(SelectedRow);

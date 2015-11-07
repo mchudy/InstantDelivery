@@ -12,11 +12,16 @@ namespace InstantDelivery.ViewModel
         private Vehicle selectedVehicle;
         private IQueryable<Vehicle> vehicles;
         private int currentPage = 1;
+        private VehicleEditViewModel vehiclesEditViewModel;
+        private ConfirmDeleteViewModel confirmDeleteViewModel;
 
-        public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager)
+        public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager,
+           VehicleEditViewModel vehiclesEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
         {
             this.vehiclesService = vehiclesService;
             this.windowManager = windowManager;
+            this.vehiclesEditViewModel = vehiclesEditViewModel;
+            this.confirmDeleteViewModel = confirmDeleteViewModel;
             Vehicles = vehiclesService.GetAll();
         }
 
@@ -56,10 +61,9 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new VehicleEditViewModel
-            {
-                Vehicle = SelectedVehicle
-            });
+            vehiclesEditViewModel.Vehicle = SelectedVehicle;
+            var result = windowManager.ShowDialog(vehiclesEditViewModel);
+
             if (result != true)
             {
                 vehiclesService.Reload(SelectedVehicle);
@@ -76,7 +80,7 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
+            var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
                 vehiclesService.Remove(SelectedVehicle);

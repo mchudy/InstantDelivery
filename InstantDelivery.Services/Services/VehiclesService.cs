@@ -6,8 +6,13 @@ namespace InstantDelivery.Services
 {
     public class VehiclesService : IVehiclesService
     {
-        //TODO DI
-        private InstantDeliveryContext context = new InstantDeliveryContext();
+        private InstantDeliveryContext context;
+
+        public VehiclesService(InstantDeliveryContext context)
+        {
+            this.context = context;
+        }
+
         public int Total => context.Employees.Count();
 
         public IQueryable<Vehicle> GetAll()

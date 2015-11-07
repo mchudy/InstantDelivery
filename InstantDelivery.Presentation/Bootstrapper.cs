@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Caliburn.Micro;
+using InstantDelivery.Core;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel;
 using System;
@@ -93,9 +94,13 @@ namespace InstantDelivery
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
 
+            builder.Register(type => new InstantDeliveryContext())
+                .AsSelf()
+                .InstancePerDependency();
+
             builder.RegisterAssemblyTypes(typeof(EmployeeService).Assembly)
                 .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             container = builder.Build();
         }

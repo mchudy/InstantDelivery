@@ -7,7 +7,12 @@ namespace InstantDelivery.Services
 {
     public class EmployeeService : IDisposable, IEmployeeService
     {
-        private readonly InstantDeliveryContext context = new InstantDeliveryContext();
+        private readonly InstantDeliveryContext context;
+
+        public EmployeeService(InstantDeliveryContext context)
+        {
+            this.context = context;
+        }
 
         public IQueryable<Employee> GetAll()
         {
