@@ -7,13 +7,13 @@ namespace InstantDelivery.ViewModel
 {
     public class VehiclesGeneralViewModel : Screen
     {
-        private readonly VehiclesService vehiclesService;
+        private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Vehicle selectedVehicle;
         private IQueryable<Vehicle> vehicles;
         private int currentPage = 1;
 
-        public VehiclesGeneralViewModel(VehiclesService vehiclesService, IWindowManager windowManager)
+        public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager)
         {
             this.vehiclesService = vehiclesService;
             this.windowManager = windowManager;

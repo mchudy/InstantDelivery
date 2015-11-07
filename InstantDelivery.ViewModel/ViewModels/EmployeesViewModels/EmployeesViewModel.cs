@@ -8,11 +8,11 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService employeeService;
+        private readonly IEmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
 
-        public EmployeesViewModel(EmployeeService employeeService, IWindowManager windowManager)
+        public EmployeesViewModel(IEmployeeService employeeService, IWindowManager windowManager)
         {
             this.employeeService = employeeService;
             this.windowManager = windowManager;

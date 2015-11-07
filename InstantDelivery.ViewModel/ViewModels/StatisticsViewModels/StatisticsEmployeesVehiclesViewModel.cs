@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Services;
+using System.Collections.ObjectModel;
 
 namespace InstantDelivery.ViewModel
 {

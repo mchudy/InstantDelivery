@@ -28,6 +28,7 @@ namespace InstantDelivery.Core.Entities
         [Range(0, 250, ErrorMessage = "Paczka przekracza maksymalną dopuszczalną długość")]
         public double Length { get; set; }
 
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public decimal Cost { get; set; }
 
         public PackageStatus Status { get; set; }

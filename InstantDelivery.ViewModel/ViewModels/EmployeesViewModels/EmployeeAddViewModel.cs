@@ -1,14 +1,14 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
-using System;
 using InstantDelivery.Services;
+using System;
 
 namespace InstantDelivery.ViewModel
 {
     public class EmployeeAddViewModel : Screen
     {
-        public EmployeeService service;
-        public EmployeeAddViewModel(EmployeeService service)
+        public IEmployeeService service;
+        public EmployeeAddViewModel(IEmployeeService service)
         {
             NewEmployee = new Employee();
             this.service = service;
