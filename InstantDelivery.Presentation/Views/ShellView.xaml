@@ -49,7 +49,7 @@
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehiclesGeneral" Content="Ogólne"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehiclesAdd" Content="Dodaj pojazd"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManageVehicles" Content="Zarządzaj pojazdami"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehicleManage" Content="Zarządzaj pojazdami"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Przesyłki" Name="Packages" IsExpanded="True">

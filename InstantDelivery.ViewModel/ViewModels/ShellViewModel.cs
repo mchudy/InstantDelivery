@@ -59,5 +59,11 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<PackageAddViewModel>());
         }
+
+        public void VehicleManage()
+        {
+            ActivateItem(IoC.Get<VehicleManageViewModel>());
+
+        }
     }
 }

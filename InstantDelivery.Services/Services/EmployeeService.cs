@@ -13,6 +13,13 @@ namespace InstantDelivery.Services
             this.context = context;
         }
 
+        public void ChangeEmployeesVehicle(Employee employee, Vehicle selectedVehicle)
+        {
+            employee.Vehicle = selectedVehicle;
+            // context.SaveChanges(); ? chcę sejwnąć dopiero jak sie kliknie confirm
+        }
+
+
         public IQueryable<Employee> GetAll()
         {
             return context.Employees;

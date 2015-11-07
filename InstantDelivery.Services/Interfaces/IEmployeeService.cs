@@ -10,5 +10,6 @@ namespace InstantDelivery.Services
         void Reload(Employee employee);
         void RemoveEmployee(Employee employee);
         void Save();
+        void ChangeEmployeesVehicle(Employee employee, Vehicle selectedVehicle);
     }
 }

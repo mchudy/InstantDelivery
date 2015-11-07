@@ -1,0 +1,49 @@
+﻿<controls:MetroWindow x:Class="InstantDelivery.Views.SelectVehicleForEmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cal="http://www.caliburnproject.org"
+        Background="White"
+        Height="600" Width="700" WindowStartupLocation="CenterOwner"
+        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}" />
+
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Vehicles, ElementName=Pager, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="False"
+                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  VerticalScrollBarVisibility="Auto"
+                  cal:Message.Attach="[Event SelectedCellsChanged] = [Action ChangeVehicleForEmployee()]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Numer rejestracyjny pojazdu" Binding="{Binding RegistrationNumber}" Width="200" />
+                <DataGridTextColumn Header="Marka" Binding="{Binding VehicleModel.Brand}" Width="150" />
+                <DataGridTextColumn Header="Model" Binding="{Binding VehicleModel.Model}" Width="150" />
+                <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="150" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
+            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton3}" Content="Zapisz" />
+        </StackPanel>
+    </Grid>
+</controls:MetroWindow>
+
+

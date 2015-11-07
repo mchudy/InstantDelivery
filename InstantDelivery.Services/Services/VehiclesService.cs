@@ -1,6 +1,8 @@
-﻿using InstantDelivery.Core;
+﻿using System.Collections.Generic;
+using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using System.Linq;
+using Caliburn.Micro;
 
 namespace InstantDelivery.Services
 {
@@ -32,6 +34,12 @@ namespace InstantDelivery.Services
         public void Save()
         {
             context.SaveChanges();
+        }
+
+        public IObservableCollection<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
+        {
+            return
+                context.Vehicles.Where(e => (e.Id == vehicle.Id || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 1)) as IObservableCollection<Vehicle>;
         }
     }
 }

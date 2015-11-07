@@ -73,6 +73,8 @@
     <Compile Include="ViewModels\PackagesViewModels\GeneralPackagesViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageAddViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageEditViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\SelectVehicleForEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\VehicleManageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\StatisticsViewModels\StatisticsDeliveredPackagesViewModel.cs" />
