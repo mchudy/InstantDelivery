@@ -25,12 +25,4 @@ namespace InstantDelivery.ViewModel
             Budget.Add(new Population() { Name = "Podatki", Count = taxes });
         }
     }
-
-    [ImplementPropertyChanged]
-    public class Population
-    {
-        public string Name { get; set; } = string.Empty;
-
-        public int Count { get; set; } = 0;
-    }
 }

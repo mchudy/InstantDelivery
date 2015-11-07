@@ -18,7 +18,7 @@
             <metroChart:ClusteredBarChart.Series>
                 <metroChart:ChartSeries DisplayMember="Name"
                                    ItemsSource="{Binding Path=Values}"
-                                   ValueMember="Count"  IsEnabled="False" Caption="gg"/>
+                                   ValueMember="Count"  IsEnabled="False" Caption="Zestawienie ilościowe"/>
             </metroChart:ClusteredBarChart.Series>
         </metroChart:ClusteredBarChart>
 

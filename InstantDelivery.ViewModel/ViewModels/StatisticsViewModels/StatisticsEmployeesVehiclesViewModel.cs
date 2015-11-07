@@ -28,7 +28,7 @@ namespace InstantDelivery.ViewModel
 
             Values.Add(new Population() { Name = "Wszystkie paczki", Count = numberOfAllPackages });
             Values.Add(new Population() { Name = "Dostarczane paczki", Count = numberOfPackagesWithEmployee });
-            Values.Add(new Population() { Name = "Wolne paczki", Count = numberOfPackagesWithoutEmployee });
+            Values.Add(new Population() { Name = "Niedostarczane paczki", Count = numberOfPackagesWithoutEmployee });
 
 
 
