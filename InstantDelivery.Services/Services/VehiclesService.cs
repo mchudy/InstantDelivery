@@ -47,8 +47,9 @@ namespace InstantDelivery.Services
 
         public IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
         {
-            return
-                context.Vehicles.Where(e => (e.Id == vehicle.Id || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0));
+            var vehicleId = vehicle?.Id;
+            return context.Vehicles
+                .Where(e => (e.Id == vehicleId || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0));
         }
     }
 }

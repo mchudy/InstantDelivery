@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
@@ -49,7 +48,12 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService) {SelectedEmployee=SelectedEmployee, SelectedVehicle=SelectedEmployee.Vehicle, Vehicles=vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle)});
+            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService)
+            {
+                SelectedEmployee = SelectedEmployee,
+                SelectedVehicle = SelectedEmployee.Vehicle,
+                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle)
+            });
             if (result != true)
             {
                 employeesService.Reload(SelectedEmployee);
@@ -59,7 +63,6 @@ namespace InstantDelivery.ViewModel
                 employeesService.Save();
             }
         }
-        
 
         public IQueryable<Employee> Employees
         {
