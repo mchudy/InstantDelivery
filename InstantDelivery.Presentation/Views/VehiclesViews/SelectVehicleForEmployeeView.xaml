@@ -41,7 +41,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
-            <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+            <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
             <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton3}" Content="Zapisz" />
         </StackPanel>

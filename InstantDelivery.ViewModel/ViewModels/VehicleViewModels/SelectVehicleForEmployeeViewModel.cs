@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using Caliburn.Micro;
-using InstantDelivery.Core;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,6 +13,15 @@ namespace InstantDelivery.ViewModel
         public IVehiclesService vehicleService;
 
         private Employee selectedEmployee;
+
+        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
+        // to vehicles sie nie binduje, help :<
+        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService, IVehiclesService vehicleService)
+        {
+            this.employeeService = employeeService;
+            this.vehicleService = vehicleService;
+            Vehicles = vehicleService.GetAll();//AvailableAndCurrent(SelectedVehicle);
+        }
 
         public Employee SelectedEmployee
         {
@@ -53,15 +61,6 @@ namespace InstantDelivery.ViewModel
                 vehicles = value;
                 NotifyOfPropertyChange();
             }
-        }
-
-        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
-        // to vehicles sie nie binduje, help :<
-        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,IVehiclesService vehicleService)
-        {
-            this.employeeService = employeeService;
-            this.vehicleService = vehicleService;
-            Vehicles = vehicleService.GetAll();//AvailableAndCurrent(SelectedVehicle);
         }
 
         public void ChangeVehicleForEmployee()
