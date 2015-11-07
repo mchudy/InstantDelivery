@@ -1,14 +1,18 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using System;
+using InstantDelivery.Services;
 
 namespace InstantDelivery.ViewModel
 {
     public class VehiclesAddViewModel : Screen
     {
-        public VehiclesAddViewModel()
+        public IVehiclesService service;
+
+        public VehiclesAddViewModel(IVehiclesService service)
         {
             NewVehicle = new Vehicle();
+            this.service = service;
         }
 
         protected override void OnDeactivate(bool close)
@@ -33,8 +37,10 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+
         public void Save()
         {
+            service.AddVehicle(NewVehicle);
             TryClose(true);
         }
 

@@ -31,6 +31,12 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
+        public void AddVehicle(Vehicle vehicle)
+        {
+            context.Vehicles.Add(vehicle);
+            context.SaveChanges();
+        }
+
         public void Save()
         {
             context.SaveChanges();

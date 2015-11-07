@@ -15,11 +15,11 @@ namespace InstantDelivery.ViewModel
 
         public IObservableCollection<Vehicle> Vehicles;
 
+        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,IVehiclesService vehicleService)
         {
             this.employeeService = employeeService;
             this.vehicleService = vehicleService;
-            //Vehicles = vehicleService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle);
         }
 
         public void ChangeVehicleForEmployee()

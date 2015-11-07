@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Caliburn.Micro;
 
 namespace InstantDelivery.Services
@@ -10,6 +10,7 @@ namespace InstantDelivery.Services
         IQueryable<Vehicle> GetAll();
         void Reload(Vehicle vehicle);
         void Remove(Vehicle vehicle);
+        void AddVehicle(Vehicle vehicle);
         void Save();
         IObservableCollection<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
     }

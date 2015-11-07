@@ -20,10 +20,10 @@
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="Employee_FirstName" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="SelectedEmployee_FirstName" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="Employee_LastName" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="SelectedEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
         <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Vehicles, ElementName=Pager, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
