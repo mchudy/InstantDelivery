@@ -82,6 +82,7 @@
     <Compile Include="ViewModels\VehicleViewModels\VehicleEditViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesAddViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesGeneralViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\VehiclesViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:cal="http://www.caliburnproject.org"
+        xmlns:controls1="clr-namespace:InstantDelivery.Controls"
         Background="White"
         Height="600" Width="700" WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
@@ -25,7 +26,7 @@
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="SelectedEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
-        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Vehicles, ElementName=Pager, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -40,6 +41,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
             <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton3}" Content="Zapisz" />
         </StackPanel>
