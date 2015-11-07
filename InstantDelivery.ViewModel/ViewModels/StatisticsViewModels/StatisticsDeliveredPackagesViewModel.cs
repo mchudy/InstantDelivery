@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Services;
-using PropertyChanged;
+using System.Collections.ObjectModel;
 
 namespace InstantDelivery.ViewModel
 {
     public class StatisticsDeliveredPackagesViewModel : Screen
     {
-        public StatisticsService service;
-        public ObservableCollection<Population> Budget { get; } = new ObservableCollection<Population>();
+        private IStatisticsService service;
 
-        public StatisticsDeliveredPackagesViewModel(StatisticsService service)
+        public StatisticsDeliveredPackagesViewModel(IStatisticsService service)
         {
             this.service = service;
+            GenerateChart();
+        }
 
+        public ObservableCollection<Population> Budget { get; } = new ObservableCollection<Population>();
+
+        private void GenerateChart()
+        {
             var valueOfPackages = service.ValueOfAllPackages();
             var employeesSalaries = service.EmployeesSalaries();
             var taxes = service.Taxes(valueOfPackages, employeesSalaries);

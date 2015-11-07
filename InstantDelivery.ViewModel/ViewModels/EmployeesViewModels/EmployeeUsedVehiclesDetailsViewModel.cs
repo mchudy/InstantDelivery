@@ -5,8 +5,7 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeeUsedVehiclesDetailsViewModel : Screen
     {
-        public Employee SelectedRow { get; set; }
-
+        public Employee Employee { get; set; }
 
         public void CloseWindow()
         {

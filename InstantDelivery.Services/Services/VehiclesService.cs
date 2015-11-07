@@ -4,11 +4,14 @@ using System.Linq;
 
 namespace InstantDelivery.Services
 {
-    public class VehiclesService
+    public class VehiclesService : IVehiclesService
     {
-        //TODO DI
-        private InstantDeliveryContext context = new InstantDeliveryContext();
-        public int Total => context.Employees.Count();
+        private InstantDeliveryContext context;
+
+        public VehiclesService(InstantDeliveryContext context)
+        {
+            this.context = context;
+        }
 
         public IQueryable<Vehicle> GetAll()
         {

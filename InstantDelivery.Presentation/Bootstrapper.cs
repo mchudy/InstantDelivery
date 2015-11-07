@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Autofac;
+using Caliburn.Micro;
+using InstantDelivery.Core;
+using InstantDelivery.Services;
+using InstantDelivery.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
-using Autofac;
-using Caliburn.Micro;
-using InstantDelivery.Services;
-using InstantDelivery.ViewModel;
 using IContainer = Autofac.IContainer;
 
 namespace InstantDelivery
@@ -92,12 +93,19 @@ namespace InstantDelivery
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
-            builder.Register(c => new EmployeeService())
+
+            builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
+            builder.Register(type => new InstantDeliveryContext())
+                .AsSelf()
                 .InstancePerDependency();
-            builder.Register(c => new VehiclesService())
+
+            builder.RegisterAssemblyTypes(typeof(EmployeeService).Assembly)
+                .AsImplementedInterfaces()
                 .InstancePerDependency();
-            builder.Register(c => new StatisticsService())
-                .InstancePerDependency();
+
             container = builder.Build();
         }
     }

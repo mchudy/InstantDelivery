@@ -5,12 +5,13 @@ using System.Linq;
 
 namespace InstantDelivery.Services
 {
-    public class StatisticsService
+    public class StatisticsService : IStatisticsService
     {
-        private readonly InstantDeliveryContext context = new InstantDeliveryContext();
+        private readonly InstantDeliveryContext context;
 
-        public StatisticsService()
+        public StatisticsService(InstantDeliveryContext context)
         {
+            this.context = context;
         }
 
         public int ValueOfAllPackages()

@@ -4,7 +4,7 @@ using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.Services
 {
-    public class PackageService
+    public class PackageService : IPackageService
     {
         private InstantDeliveryContext context;
         private IPricingStrategy pricingStrategy;

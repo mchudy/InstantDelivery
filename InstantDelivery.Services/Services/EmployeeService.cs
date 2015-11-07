@@ -1,20 +1,22 @@
 ﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
-using System;
 using System.Linq;
 
 namespace InstantDelivery.Services
 {
-    public class EmployeeService : IDisposable
+    public class EmployeeService : IEmployeeService
     {
-        private readonly InstantDeliveryContext context = new InstantDeliveryContext();
+        private readonly InstantDeliveryContext context;
+
+        public EmployeeService(InstantDeliveryContext context)
+        {
+            this.context = context;
+        }
 
         public IQueryable<Employee> GetAll()
         {
             return context.Employees;
         }
-
-        public int Total => context.Employees.Count();
 
         public void Reload(Employee employee)
         {
@@ -27,14 +29,6 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        public IQueryable<Employee> Page(int pageNumber, int pageSize)
-        {
-            return context.Employees
-                .OrderBy(e => e.Id)
-                .Skip(pageSize * (pageNumber - 1))
-            .Take(pageSize);
-        }
-
         public void AddEmployee(Employee employee)
         {
             context.Employees.Add(employee);
@@ -45,11 +39,5 @@ namespace InstantDelivery.Services
         {
             context.SaveChanges();
         }
-
-        public void Dispose()
-        {
-            context.Dispose();
-        }
-
     }
 }

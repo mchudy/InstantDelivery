@@ -47,7 +47,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         protected abstract IQueryable<Employee> GetEmployees();
 
-        private void UpdateEmployees()
+        protected void UpdateEmployees()
         {
             var newEmployees = GetEmployees();
             if (SortingProperty != null)
@@ -86,6 +86,12 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 sortingProperty = value;
                 UpdateEmployees();
             }
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            UpdateEmployees();
         }
 
         private IQueryable<Employee> SortEmployees(IQueryable<Employee> newEmployees)

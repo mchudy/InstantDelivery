@@ -70,6 +70,8 @@
       <DependentUpon>201511062238275_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Pricing\IPricingStrategy.cs" />
+    <Compile Include="Pricing\RegularPricingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ValidationBase.cs" />
   </ItemGroup>

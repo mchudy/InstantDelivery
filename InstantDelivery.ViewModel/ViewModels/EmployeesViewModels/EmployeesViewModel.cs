@@ -8,14 +8,19 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService employeeService;
+        private readonly IEmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
+        private EmployeeEditViewModel employeeEditViewModel;
+        private ConfirmDeleteViewModel confirmDeleteViewModel;
 
-        public EmployeesViewModel(EmployeeService employeeService, IWindowManager windowManager)
+        public EmployeesViewModel(IEmployeeService employeeService, IWindowManager windowManager,
+            EmployeeEditViewModel employeeEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
         {
             this.employeeService = employeeService;
             this.windowManager = windowManager;
+            this.employeeEditViewModel = employeeEditViewModel;
+            this.confirmDeleteViewModel = confirmDeleteViewModel;
             Employees = employeeService.GetAll();
         }
 
@@ -38,10 +43,8 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new EmployeeEditViewModel
-            {
-                Employee = SelectedEmployee
-            });
+            employeeEditViewModel.Employee = SelectedEmployee;
+            var result = windowManager.ShowDialog(employeeEditViewModel);
             if (result != true)
             {
                 employeeService.Reload(SelectedEmployee);
@@ -58,7 +61,7 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
+            var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
                 employeeService.RemoveEmployee(SelectedEmployee);

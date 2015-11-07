@@ -7,9 +7,9 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService employeesService;
+        private readonly IEmployeeService employeesService;
 
-        public EmployeesManagedPackagesViewModel(EmployeeService employeesService)
+        public EmployeesManagedPackagesViewModel(IEmployeeService employeesService)
         {
             this.employeesService = employeesService;
             Employees = employeesService.GetAll();

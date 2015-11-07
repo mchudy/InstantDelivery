@@ -104,7 +104,7 @@ namespace InstantDelivery.Core.Migrations
                     Weight = randomNumber.Next() % 100,
                     Width = randomNumber.Next() % 100,
                     Length = randomNumber.Next() % 100,
-                    Cost= randomNumber.Next()%10000
+                    Cost = randomNumber.Next() % 10000
                 };
                 testPackages.Add(tmp);
             }
