@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace InstantDelivery.Views
 {
     /// <summary>
-    /// Interaction logic for PackageEditView.xaml
+    /// Interaction logic for PackageAddView.xaml
     /// </summary>
-    public partial class PackageEditView : UserControl
+    public partial class PackageAddView : UserControl
     {
-        public PackageEditView()
+        public PackageAddView()
         {
             InitializeComponent();
         }

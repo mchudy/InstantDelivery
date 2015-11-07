@@ -20,6 +20,8 @@ namespace InstantDelivery.Services
         /// <returns></returns>
         public decimal GetCost(Package package)
         {
+            if (package == null)
+                return 0;
             decimal result = DimensionalWeight(package) * package.Weight;
             if (IsSmall(package))
             {
@@ -36,6 +38,8 @@ namespace InstantDelivery.Services
 
         private decimal DimensionalWeight(Package package)
         {
+            if (package == null)
+                return 0;
             return ((decimal)package.Length * (decimal)package.Width * (decimal)package.Height) /
                     dimensionalWeightFactor;
         }

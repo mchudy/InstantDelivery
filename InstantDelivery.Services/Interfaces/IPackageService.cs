@@ -12,5 +12,6 @@ namespace InstantDelivery.Services
         void Save();
         void RemovePackage(Package selectedPackage);
         void CalculatePackageCost(Package package);
+        void AddPackage(Package newPackage);
     }
 }

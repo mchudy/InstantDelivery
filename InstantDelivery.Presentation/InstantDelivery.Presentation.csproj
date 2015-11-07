@@ -132,6 +132,9 @@
     <Compile Include="Views\PackagesView\GeneralPackagesView.xaml.cs">
       <DependentUpon>GeneralPackagesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PackagesView\PackageAddView.xaml.cs">
+      <DependentUpon>PackageAddView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PackagesView\PackageEditView.xaml.cs">
       <DependentUpon>PackageEditView.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
     <Page Include="Views\PackagesView\GeneralPackagesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PackagesView\PackageAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PackagesView\PackageEditView.xaml">
       <Generator>MSBuild:Compile</Generator>

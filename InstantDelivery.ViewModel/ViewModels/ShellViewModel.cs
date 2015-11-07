@@ -54,5 +54,10 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<GeneralPackagesViewModel>());
         }
+
+        public void PackageAdd()
+        {
+            ActivateItem(IoC.Get<PackageAddViewModel>());
+        }
     }
 }

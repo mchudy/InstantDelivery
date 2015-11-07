@@ -56,7 +56,15 @@ namespace InstantDelivery.Services
 
         public void CalculatePackageCost(Package package)
         {
+            if (package == null)
+                return;
             package.Cost = pricingStrategy.GetCost(package);
+        }
+
+        public void AddPackage(Package package)
+        {
+            context.Packages.Add(package);
+            context.SaveChanges();
         }
     }
 }

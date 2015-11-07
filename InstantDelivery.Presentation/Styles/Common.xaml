@@ -13,34 +13,34 @@
             <!-- TODO: trzeba by to zrobić jakoś inaczej, bo jak dla każdego widoku mamy to pisać to trochę słabo-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Package_Weight, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Package_Height, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Package_Width, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Package_Length, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Weight, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Height, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Width, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Length, Path=(Validation.HasError)}" Value="false" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="true" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Package_Weight, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Weight, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Package_Height, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Height, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Package_Width, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Width, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Package_Length, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Length, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
