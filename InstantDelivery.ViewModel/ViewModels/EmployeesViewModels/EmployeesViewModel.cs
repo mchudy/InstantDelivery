@@ -8,15 +8,15 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService repository;
+        private readonly EmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
 
-        public EmployeesViewModel(EmployeeService repository, IWindowManager windowManager)
+        public EmployeesViewModel(EmployeeService employeeService, IWindowManager windowManager)
         {
-            this.repository = repository;
+            this.employeeService = employeeService;
             this.windowManager = windowManager;
-            Employees = repository.GetAll();
+            Employees = employeeService.GetAll();
         }
 
         public Employee SelectedEmployee
@@ -44,11 +44,11 @@ namespace InstantDelivery.ViewModel
             });
             if (result != true)
             {
-                repository.Reload(SelectedEmployee);
+                employeeService.Reload(SelectedEmployee);
             }
             else
             {
-                repository.Save();
+                employeeService.Save();
             }
         }
 
@@ -61,13 +61,13 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
             if (result == true)
             {
-                repository.RemoveEmployee(SelectedEmployee);
+                employeeService.RemoveEmployee(SelectedEmployee);
             }
         }
 
         protected override IQueryable<Employee> GetEmployees()
         {
-            return repository.GetAll();
+            return employeeService.GetAll();
         }
     }
 }

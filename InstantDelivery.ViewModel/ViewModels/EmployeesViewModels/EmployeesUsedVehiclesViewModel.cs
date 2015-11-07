@@ -8,15 +8,15 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesUsedVehiclesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService repository;
+        private readonly EmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedRow;
 
-        public EmployeesUsedVehiclesViewModel(EmployeeService repository, IWindowManager windowManager)
+        public EmployeesUsedVehiclesViewModel(EmployeeService employeeService, IWindowManager windowManager)
         {
-            this.repository = repository;
+            this.employeeService = employeeService;
             this.windowManager = windowManager;
-            Employees = repository.GetAll();
+            Employees = employeeService.GetAll();
         }
 
         public Employee SelectedRow
@@ -44,17 +44,17 @@ namespace InstantDelivery.ViewModel
             });
             if (result != true)
             {
-                repository.Reload(SelectedRow);
+                employeeService.Reload(SelectedRow);
             }
             else
             {
-                repository.Save();
+                employeeService.Save();
             }
         }
 
         protected override IQueryable<Employee> GetEmployees()
         {
-            return repository.GetAll();
+            return employeeService.GetAll();
         }
     }
 }

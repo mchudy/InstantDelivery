@@ -7,17 +7,17 @@ namespace InstantDelivery.ViewModel
 {
     public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService repository;
+        private readonly EmployeeService employeesService;
 
-        public EmployeesManagedPackagesViewModel(EmployeeService repository)
+        public EmployeesManagedPackagesViewModel(EmployeeService employeesService)
         {
-            this.repository = repository;
-            Employees = repository.GetAll();
+            this.employeesService = employeesService;
+            Employees = employeesService.GetAll();
         }
 
         protected override IQueryable<Employee> GetEmployees()
         {
-            return repository.GetAll();
+            return employeesService.GetAll();
         }
     }
 }
