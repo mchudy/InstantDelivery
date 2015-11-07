@@ -84,7 +84,8 @@ namespace InstantDelivery.ViewModel
             if (result == true)
             {
                 vehiclesService.Remove(SelectedVehicle);
-                CurrentPage = CurrentPage;
+                Vehicles = null;
+                Vehicles = vehiclesService.GetAll();
             }
         }
     }

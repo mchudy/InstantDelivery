@@ -65,7 +65,7 @@ namespace InstantDelivery.ViewModel
             if (result == true)
             {
                 employeeService.RemoveEmployee(SelectedEmployee);
-                CurrentPage = CurrentPage;
+                UpdateEmployees();
             }
         }
 
