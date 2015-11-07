@@ -15,8 +15,13 @@ namespace InstantDelivery.Services
 
         public void ChangeEmployeesVehicle(Employee employee, Vehicle selectedVehicle)
         {
-            employee.Vehicle = selectedVehicle;
-            // context.SaveChanges(); ? chcę sejwnąć dopiero jak sie kliknie confirm
+                var owner = (from o in context.Employees
+                             select o).FirstOrDefault(o => o.Id == employee.Id);
+                var child = (from o in context.Vehicles
+                             select o).FirstOrDefault(c => c.Id == selectedVehicle.Id);
+
+            if (owner != null) owner.Vehicle = child;
+            context.SaveChanges();
         }
 
 

@@ -14,15 +14,6 @@ namespace InstantDelivery.ViewModel
 
         private Employee selectedEmployee;
 
-        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
-        // to vehicles sie nie binduje, help :<
-        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService, IVehiclesService vehicleService)
-        {
-            this.employeeService = employeeService;
-            this.vehicleService = vehicleService;
-            Vehicles = vehicleService.GetAll();//AvailableAndCurrent(SelectedVehicle);
-        }
-
         public Employee SelectedEmployee
         {
             get
@@ -63,6 +54,15 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
+        // to vehicles sie nie binduje, help :<
+        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService, IVehiclesService vehicleService)
+        {
+            this.employeeService = employeeService;
+            this.vehicleService = vehicleService;
+            Vehicles = vehicleService.GetAllAvailableAndCurrent(SelectedVehicle);
+        }
+
         public void ChangeVehicleForEmployee()
         {
             SelectedEmployee.Vehicle = SelectedVehicle;
@@ -70,7 +70,7 @@ namespace InstantDelivery.ViewModel
 
         public void Save()
         {
-            ChangeVehicleForEmployee();
+            employeeService.ChangeEmployeesVehicle(SelectedEmployee, selectedVehicle);
             TryClose(true);
         }
 
