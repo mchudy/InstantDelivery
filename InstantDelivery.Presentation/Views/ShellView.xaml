@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        x:Name="InstantDelivery" Height="800" Width="1000" WindowState="Maximized" MinWidth="1500" MinHeight="1000"
+        x:Name="InstantDelivery" Height="800" Width="1200" WindowState="Maximized" MinWidth="1200" MinHeight="600"
         GlowBrush="{DynamicResource AccentColorBrush}">
 <controls:MetroWindow.IconTemplate>
     <DataTemplate>
