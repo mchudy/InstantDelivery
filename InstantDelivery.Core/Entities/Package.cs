@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using PropertyChanged;
 
 namespace InstantDelivery.Core.Entities
 {
+    [ImplementPropertyChanged]
     public class Package : Entity
     {
         public Package()

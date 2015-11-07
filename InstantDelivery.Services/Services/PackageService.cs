@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 
@@ -30,6 +31,32 @@ namespace InstantDelivery.Services
             employee.Packages.Add(package);
             context.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<Package> GetAll()
+        {
+            return context.Packages;
+        }
+
+        public void Reload(Package selectedPackage)
+        {
+            context.Entry(selectedPackage).Reload();
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        public void RemovePackage(Package selectedPackage)
+        {
+            context.Packages.Remove(selectedPackage);
+            context.SaveChanges();
+        }
+
+        public void CalculatePackageCost(Package package)
+        {
+            package.Cost = pricingStrategy.GetCost(package);
         }
     }
 }
