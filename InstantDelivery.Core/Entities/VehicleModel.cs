@@ -4,7 +4,10 @@ namespace InstantDelivery.Core.Entities
 {
     public class VehicleModel : ValidationBase
     {
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public string Brand { get; set; }
+
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public string Model { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
