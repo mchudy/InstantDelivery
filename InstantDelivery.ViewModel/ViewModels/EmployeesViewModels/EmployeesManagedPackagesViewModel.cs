@@ -1,36 +1,23 @@
-﻿using Caliburn.Micro;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels;
+using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesManagedPackagesViewModel : PagingViewModel
+    public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService repository;
-        private BindableCollection<Employee> rows;
+        private readonly EmployeeService employeesService;
 
-        public EmployeesManagedPackagesViewModel(EmployeeService repository)
+        public EmployeesManagedPackagesViewModel(EmployeeService employeesService)
         {
-            this.repository = repository;
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            this.employeesService = employeesService;
+            Employees = employeesService.GetAll();
         }
 
-        public BindableCollection<Employee> Rows
+        protected override IQueryable<Employee> GetEmployees()
         {
-            get { return rows; }
-            set
-            {
-                rows = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
-
-        protected override void LoadPage()
-        {
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            return employeesService.GetAll();
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using InstantDelivery.Core;
+﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
+using System;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -12,17 +9,12 @@ namespace InstantDelivery.Services
     {
         private readonly InstantDeliveryContext context = new InstantDeliveryContext();
 
-        public string LastNameFilter { get; set; } = "";
-        public string FirstNameFilter { get; set; } = "";
-        public string EmailFilter { get; set; } = "";
-        public EmployeeSortingFilter SortingFilter { get; set; } = EmployeeSortingFilter.ByFirstName;
-        public int Total { get; set; }
-
-        public IList<Employee> GetAll()
+        public IQueryable<Employee> GetAll()
         {
-            Total = context.Employees.Count();
-            return context.Employees.ToList();
+            return context.Employees;
         }
+
+        public int Total => context.Employees.Count();
 
         public void Reload(Employee employee)
         {
@@ -37,25 +29,9 @@ namespace InstantDelivery.Services
 
         public IQueryable<Employee> Page(int pageNumber, int pageSize)
         {
-            // mozna poifować zeby sql'a skrócić ewentualnie?
-            var tmp = context.Employees.Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
-                .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
-                .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
-            if (SortingFilter == EmployeeSortingFilter.ByFirstName)
-            {
-                tmp = tmp.OrderBy(e => e.FirstName);
-            }
-            else if (SortingFilter == EmployeeSortingFilter.ByLastName)
-            {
-                tmp=tmp.OrderBy(e => e.LastName);
-            }
-            else
-            {
-                tmp=tmp.OrderBy(e => e.EmployeeId);
-            }
-            Total = tmp.Count();
-
-            return tmp.Skip(pageSize * (pageNumber - 1))
+            return context.Employees
+                .OrderBy(e => e.Id)
+                .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize);
         }
 
@@ -75,15 +51,5 @@ namespace InstantDelivery.Services
             context.Dispose();
         }
 
-    }
-
-    public enum EmployeeSortingFilter
-    {
-        [Description("Po nazwisku")]
-        ByLastName,
-        [Description("Po imieniu")]
-        ByFirstName,
-        [Description("Po ID")]
-        ByID
     }
 }

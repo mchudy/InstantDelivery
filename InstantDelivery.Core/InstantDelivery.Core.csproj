@@ -59,17 +59,15 @@
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
+    <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="InstantDeliveryContext.cs" />
-    <Compile Include="Migrations\201511051719096_InitialCreate.cs" />
-    <Compile Include="Migrations\201511051719096_InitialCreate.Designer.cs">
-      <DependentUpon>201511051719096_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511070946083_generationOfcostsOfPackages.cs" />
-    <Compile Include="Migrations\201511070946083_generationOfcostsOfPackages.Designer.cs">
-      <DependentUpon>201511070946083_generationOfcostsOfPackages.cs</DependentUpon>
+    <Compile Include="Migrations\201511062238275_InitialCreate.cs" />
+    <Compile Include="Migrations\201511062238275_InitialCreate.Designer.cs">
+      <DependentUpon>201511062238275_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,11 +81,8 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511051719096_InitialCreate.resx">
-      <DependentUpon>201511051719096_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511070946083_generationOfcostsOfPackages.resx">
-      <DependentUpon>201511070946083_generationOfcostsOfPackages.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511062238275_InitialCreate.resx">
+      <DependentUpon>201511062238275_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

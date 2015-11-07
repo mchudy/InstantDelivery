@@ -1,10 +1,10 @@
 ﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
+using InstantDelivery.Services;
 using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using InstantDelivery.Services;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -66,7 +66,7 @@ namespace InstantDelivery.Tests
         {
             var package = new Package
             {
-                PackageId = 1,
+                Id = 1,
                 Height = 100,
                 Weight = 100,
                 Width = 100,
@@ -78,7 +78,7 @@ namespace InstantDelivery.Tests
 
             var employee = new Employee
             {
-                EmployeeId = 1,
+                Id = 1,
                 FirstName = "A",
                 LastName = "B"
             };

@@ -62,7 +62,7 @@
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="Services\RegularPricingStrategy.cs" />
     <Compile Include="Services\StatisticsService.cs" />
-    <Compile Include="Services\VehiclesRepository.cs" />
+    <Compile Include="Services\VehiclesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InstantDelivery.Core\InstantDelivery.Core.csproj">

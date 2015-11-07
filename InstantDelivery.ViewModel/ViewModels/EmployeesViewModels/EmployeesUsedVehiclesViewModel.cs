@@ -1,23 +1,22 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
-using InstantDelivery.ViewModel.ViewModels;
-using System.ComponentModel;
 using InstantDelivery.Services;
+using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class EmployeesUsedVehiclesViewModel : PagingViewModel
+    public class EmployeesUsedVehiclesViewModel : EmployeesViewModelBase
     {
-        private readonly EmployeeService repository;
+        private readonly EmployeeService employeeService;
         private readonly IWindowManager windowManager;
         private Employee selectedRow;
-        private BindableCollection<Employee> rows;
 
-        public EmployeesUsedVehiclesViewModel(EmployeeService repository, IWindowManager windowManager)
+        public EmployeesUsedVehiclesViewModel(EmployeeService employeeService, IWindowManager windowManager)
         {
-            this.repository = repository;
+            this.employeeService = employeeService;
             this.windowManager = windowManager;
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            Employees = employeeService.GetAll();
         }
 
         public Employee SelectedRow
@@ -27,7 +26,7 @@ namespace InstantDelivery.ViewModel
             {
                 selectedRow = value;
                 NotifyOfPropertyChange();
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsEnabledViewDetails)));
+                NotifyOfPropertyChange(() => IsEnabledViewDetails);
             }
         }
 
@@ -45,29 +44,17 @@ namespace InstantDelivery.ViewModel
             });
             if (result != true)
             {
-                repository.Reload(SelectedRow);
+                employeeService.Reload(SelectedRow);
             }
             else
             {
-                repository.Save();
+                employeeService.Save();
             }
         }
 
-        public BindableCollection<Employee> Rows
+        protected override IQueryable<Employee> GetEmployees()
         {
-            get { return rows; }
-            set
-            {
-                rows = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
-
-        protected override void LoadPage()
-        {
-            Rows = new BindableCollection<Employee>(repository.Page(CurrentPage, PageSize));
+            return employeeService.GetAll();
         }
     }
 }

@@ -11,18 +11,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-             <RowDefinition Height="10" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
         <controls1:EmployeesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:EmployeesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees, Mode=TwoWay}" Grid.Row="2"
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
-                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]; [Event Sorting] = [Action Sort()]">
+                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
@@ -37,15 +40,10 @@
                 <DataGridTextColumn Header="PESEL" Binding="{Binding PESEL}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="3" Margin="0 80 0 0">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Width="Auto"  Margin="0 5 0 5">
-                <ContentControl x:Name="PagingPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
-                <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Margin="40 0 40 0" Content="Poprzednia strona"></Button>
-                <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" Margin="40 0 40 0" FontSize="15"/>
-                <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Margin="40 0 40 0" Content="Następna strona"></Button>
-                <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Margin="40 0 40 0" Width="150">Usuń</Button>
-                <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Margin="40 0 40 0" Width="150">Edytuj</Button>
-            </StackPanel>
-        </Grid>
+        <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <StackPanel Grid.Row="5" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft" Height="30">
+            <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
+            <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

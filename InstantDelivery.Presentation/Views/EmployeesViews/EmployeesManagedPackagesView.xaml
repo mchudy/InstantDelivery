@@ -3,16 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls="clr-namespace:InstantDelivery.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Rows, Mode=TwoWay}" Grid.Row="0"
+        <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar" />
+        <controls:EmployeesFilterPanel Grid.Row="0" />
+        <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
+        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
@@ -20,7 +26,7 @@
                 <DataTemplate>
                     <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Numer" Binding="{Binding PackageId}" Width="200"/>
+                            <DataGridTextColumn Header="Numer" Binding="{Binding Id}" Width="200"/>
                             <DataGridTextColumn Header="Waga" Binding="{Binding Weight}" Width="150"/>
                             <DataGridTextColumn Header="Długość" Binding="{Binding Length}" Width="150"/>
                             <DataGridTextColumn Header="Wysokość" Binding="{Binding Height}" Width="150"/>
@@ -31,7 +37,7 @@
                             <DataGridTextColumn Header="Ulica" Binding="{Binding ShippingAddress.Street}" Width="200"/>
                         </DataGrid.Columns>
                     </DataGrid>
-            </DataTemplate>
+                </DataTemplate>
             </DataGrid.RowDetailsTemplate>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
@@ -39,10 +45,6 @@
                 <DataGridTextColumn Header="Liczba paczek" Binding="{Binding Packages.Count}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150">Następna strona</Button>
-            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
-            <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150">Poprzednia strona</Button>
-        </StackPanel>
+        <controls:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
     </Grid>
 </UserControl>

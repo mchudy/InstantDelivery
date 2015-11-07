@@ -1,8 +1,7 @@
-﻿using System;
+﻿using InstantDelivery.Core;
+using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Linq;
-using InstantDelivery.Core;
-using PropertyChanged;
 
 namespace InstantDelivery.Services
 {
@@ -16,17 +15,17 @@ namespace InstantDelivery.Services
 
         public int ValueOfAllPackages()
         {
-            return (int)context.Employees.Where(e=>e.Packages.Any()).Sum(e => e.Packages.Sum(p => p.Cost));
+            return (int)context.Employees.Where(e => e.Packages.Any()).Sum(e => e.Packages.Sum(p => p.Cost));
         }
 
         public int EmployeesSalaries()
         {
-            return (int) context.Employees.Sum(e => e.Salary);
+            return (int)context.Employees.Sum(e => e.Salary);
         }
 
         public int Taxes(int valueOfPackages, int employeesSalaries)
         {
-            return (int)((valueOfPackages*0.25) + (employeesSalaries*0.40));
+            return (int)((valueOfPackages * 0.25) + (employeesSalaries * 0.40));
         }
 
         public int NumberOfEmployees()
@@ -41,12 +40,12 @@ namespace InstantDelivery.Services
 
         public int NumberOfPackagesWithEmployee()
         {
-            return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.PackageId == p.PackageId))==1);
+            return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.Id == p.Id)) == 1);
         }
 
         public int NumberOfPackagesWithoutEmployee()
         {
-            return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.PackageId == p.PackageId)) == 0);
+            return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.Id == p.Id)) == 0);
         }
 
         public int NumberOfAllPackages()
@@ -56,12 +55,12 @@ namespace InstantDelivery.Services
 
         public int NumberOfUsedVehicles()
         {
-            return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.VehicleId==p.VehicleId) ==1);
+            return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.Id == p.Id) == 1);
         }
 
         public int NumberOfUnusedVehicles()
         {
-            return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.VehicleId == p.VehicleId) == 0);
+            return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.Id == p.Id) == 0);
         }
 
         public void GenerateStatisticsEmployeesVehiclesChart(ObservableCollection<Population> Values)
@@ -72,7 +71,7 @@ namespace InstantDelivery.Services
             var numberOfPackagesWithEmployee = NumberOfPackagesWithEmployee();
             var numberOfPackagesWithoutEmployee = NumberOfPackagesWithoutEmployee();
             var numberOfUsedVehicles = NumberOfUsedVehicles();
-            var numberOfUnusedVehicles =NumberOfUnusedVehicles();
+            var numberOfUnusedVehicles = NumberOfUnusedVehicles();
             Values.Add(new Population() { Name = "Liczba pracowników", Count = numberOfEmployees });
 
             Values.Add(new Population() { Name = "Liczba pojazdów", Count = numberOfVehicles });

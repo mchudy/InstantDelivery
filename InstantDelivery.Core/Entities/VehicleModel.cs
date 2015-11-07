@@ -4,7 +4,6 @@ namespace InstantDelivery.Core.Entities
 {
     public class VehicleModel : ValidationBase
     {
-        public int VehicleModelId { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
 
