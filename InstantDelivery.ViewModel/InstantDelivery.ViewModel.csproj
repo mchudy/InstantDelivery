@@ -70,6 +70,11 @@
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesUsedVehiclesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\PackagesViewModels\GeneralPackagesViewModel.cs" />
+    <Compile Include="ViewModels\PackagesViewModels\PackageAddViewModel.cs" />
+    <Compile Include="ViewModels\PackagesViewModels\PackageEditViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\SelectVehicleForEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\VehicleManageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\StatisticsViewModels\StatisticsDeliveredPackagesViewModel.cs" />
@@ -77,6 +82,7 @@
     <Compile Include="ViewModels\VehicleViewModels\VehicleEditViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesAddViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesGeneralViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModels\VehiclesViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,9 +97,7 @@
       <Name>InstantDelivery.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\PackagesViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>

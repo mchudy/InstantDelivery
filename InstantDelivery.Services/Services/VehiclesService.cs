@@ -34,15 +34,21 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
+        public void AddVehicle(Vehicle vehicle)
+        {
+            context.Vehicles.Add(vehicle);
+            context.SaveChanges();
+        }
+
         public void Save()
         {
             context.SaveChanges();
         }
 
-        public void AddVehicle(Vehicle newVehicle)
+        public IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
         {
-            context.Vehicles.Add(newVehicle);
-            context.SaveChanges();
+            return
+                context.Vehicles.Where(e => (e.Id == vehicle.Id || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 1));
         }
     }
 }

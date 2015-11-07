@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="InstantDelivery.Views.PackageEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
+             xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
+             xmlns:cal="http://www.caliburnproject.org"
+             Background="White">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            
+        </Grid.RowDefinitions>
+
+        <Label Content="Waga:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="0" x:Name="Package_Weight" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Wysokość:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="1" x:Name="Package_Height" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Szerokość:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="2" x:Name="Package_Width" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Długość:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="3" x:Name="Package_Length" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Status:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
+        <ComboBox Grid.Column="1" Grid.Row="4" SelectedValue="{Binding Package.Status}" Style="{StaticResource EditComboBoxLabel}"
+                  ItemsSource="{helpers:EnumSource {x:Type entities:PackageStatus}}" x:Name="Package_Status" DisplayMemberPath="Name" SelectedValuePath="Value" />
+
+        <Label Content="Koszt:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="Package_Cost" Style="{StaticResource EditDialogTextBox}" />
+        
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
+            <Button x:Name="Save"  Style="{StaticResource EditDialogSaveButtonPackages}" Content="Zapisz" />
+        </StackPanel>
+    </Grid>
+</UserControl>
+

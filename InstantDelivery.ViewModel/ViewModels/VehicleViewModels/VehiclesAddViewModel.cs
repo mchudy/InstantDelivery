@@ -14,9 +14,9 @@ namespace InstantDelivery.ViewModel
         private bool addNewVehicleModel;
         private VehicleModel selectedVehicleModel;
 
-        public VehiclesAddViewModel(IVehiclesService vehiclesService)
+        public VehiclesAddViewModel(IVehiclesService service)
         {
-            this.vehiclesService = vehiclesService;
+            this.vehiclesService = service;
             NewVehicle = new Vehicle();
             //TODO
             VehicleModels = vehiclesService.GetAllModels().ToList();

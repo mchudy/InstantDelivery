@@ -9,7 +9,8 @@ namespace InstantDelivery.Services
         IQueryable<VehicleModel> GetAllModels();
         void Reload(Vehicle vehicle);
         void Remove(Vehicle vehicle);
+        void AddVehicle(Vehicle vehicle);
         void Save();
-        void AddVehicle(Vehicle newVehicle);
+        IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
     }
 }

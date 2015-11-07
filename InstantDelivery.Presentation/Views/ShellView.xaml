@@ -49,12 +49,13 @@
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehiclesGeneral" Content="Ogólne"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehiclesAdd" Content="Dodaj pojazd"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManageVehicles" Content="Zarządzaj pojazdami"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="VehicleManage" Content="Zarządzaj pojazdami"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Przesyłki" Name="Packages" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages" Content="Ogólne"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="PackageAdd" Content="Dodaj przesyłkę"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagePackages" Content="Zarządzaj przesyłkami"></Button>
                 </StackPanel>
             </Expander>

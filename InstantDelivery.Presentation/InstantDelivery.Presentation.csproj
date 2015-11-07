@@ -129,6 +129,15 @@
     <Compile Include="Views\EmployeesViews\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PackagesView\GeneralPackagesView.xaml.cs">
+      <DependentUpon>GeneralPackagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PackagesView\PackageAddView.xaml.cs">
+      <DependentUpon>PackageAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PackagesView\PackageEditView.xaml.cs">
+      <DependentUpon>PackageEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -138,8 +147,14 @@
     <Compile Include="Views\StatisticsView\StatisticsEmployeesVehiclesView.xaml.cs">
       <DependentUpon>StatisticsEmployeesVehiclesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VehiclesViews\SelectVehicleForEmployeeView.xaml.cs">
+      <DependentUpon>SelectVehicleForEmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehiclesViews\VehicleEditView.xaml.cs">
       <DependentUpon>VehicleEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VehiclesViews\VehicleManageView.xaml.cs">
+      <DependentUpon>VehicleManageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehiclesViews\VehiclesAddView.xaml.cs">
       <DependentUpon>VehiclesAddView.xaml</DependentUpon>
@@ -238,6 +253,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PackagesView\GeneralPackagesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PackagesView\PackageAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PackagesView\PackageEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -250,7 +277,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\VehiclesViews\SelectVehicleForEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VehiclesViews\VehicleEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehiclesViews\VehicleManageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

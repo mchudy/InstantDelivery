@@ -3,12 +3,50 @@
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
-
     <Style TargetType="{x:Type Button}" x:Key="EditDialogButton" BasedOn="{StaticResource {x:Type Button}}">
-       <Setter Property="Margin" Value="3"></Setter> 
+        <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
     </Style>
-
+    <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButtonPackages" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="MinWidth" Value="60"></Setter>
+        <Style.Triggers>
+            <!-- TODO: trzeba by to zrobić jakoś inaczej, bo jak dla każdego widoku mamy to pisać to trochę słabo-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPackage_Weight, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Height, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Width, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewPackage_Length, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPackage_Weight, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPackage_Height, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPackage_Width, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPackage_Length, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
     <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>

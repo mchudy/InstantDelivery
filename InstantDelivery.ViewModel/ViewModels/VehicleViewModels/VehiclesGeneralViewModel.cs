@@ -62,6 +62,7 @@ namespace InstantDelivery.ViewModel
                 return;
             }
             vehiclesEditViewModel.Vehicle = SelectedVehicle;
+
             var result = windowManager.ShowDialog(vehiclesEditViewModel);
 
             if (result != true)
