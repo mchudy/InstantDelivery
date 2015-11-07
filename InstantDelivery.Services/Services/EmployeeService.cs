@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace InstantDelivery.Services
 {
-    public class EmployeeService : IDisposable
+    public class EmployeeService : IDisposable, IEmployeeService
     {
         private readonly InstantDeliveryContext context = new InstantDeliveryContext();
 

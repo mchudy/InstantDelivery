@@ -92,12 +92,11 @@ namespace InstantDelivery
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
-            builder.Register(c => new EmployeeService())
-                .InstancePerDependency();
-            builder.Register(c => new VehiclesService())
-                .InstancePerDependency();
-            builder.Register(c => new StatisticsService())
-                .InstancePerDependency();
+
+            builder.RegisterAssemblyTypes(typeof(EmployeeService).Assembly)
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
             container = builder.Build();
         }
     }

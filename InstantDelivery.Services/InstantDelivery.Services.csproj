@@ -58,7 +58,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EmployeeService.cs" />
-    <Compile Include="Services\IPricingStrategy.cs" />
+    <Compile Include="Interfaces\IEmployeeService.cs" />
+    <Compile Include="Interfaces\IPackageService.cs" />
+    <Compile Include="Interfaces\IPricingStrategy.cs" />
+    <Compile Include="Interfaces\IStatisticsService.cs" />
+    <Compile Include="Interfaces\IVehiclesService.cs" />
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="Services\RegularPricingStrategy.cs" />
     <Compile Include="Services\StatisticsService.cs" />

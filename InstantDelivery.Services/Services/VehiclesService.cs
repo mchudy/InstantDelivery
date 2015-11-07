@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace InstantDelivery.Services
 {
-    public class VehiclesService
+    public class VehiclesService : IVehiclesService
     {
         //TODO DI
         private InstantDeliveryContext context = new InstantDeliveryContext();

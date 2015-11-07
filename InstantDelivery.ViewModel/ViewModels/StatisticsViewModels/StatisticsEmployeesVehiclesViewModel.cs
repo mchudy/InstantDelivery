@@ -6,13 +6,18 @@ namespace InstantDelivery.ViewModel
 {
     public class StatisticsEmployeesVehiclesViewModel : Screen
     {
-        public StatisticsService service;
-        public ObservableCollection<Population> Values { get; } = new ObservableCollection<Population>();
+        private IStatisticsService service;
 
-        public StatisticsEmployeesVehiclesViewModel(StatisticsService service)
+        public StatisticsEmployeesVehiclesViewModel(IStatisticsService service)
         {
             this.service = service;
+            GenerateChart();
+        }
 
+        public ObservableCollection<Population> Values { get; } = new ObservableCollection<Population>();
+
+        private void GenerateChart()
+        {
             var numberOfEmployees = service.NumberOfEmployees();
             var numberOfVehicles = service.NumberOfVehicles();
             var numberOfAllPackages = service.NumberOfAllPackages();
@@ -29,9 +34,6 @@ namespace InstantDelivery.ViewModel
             Values.Add(new Population() { Name = "Wszystkie paczki", Count = numberOfAllPackages });
             Values.Add(new Population() { Name = "Dostarczane paczki", Count = numberOfPackagesWithEmployee });
             Values.Add(new Population() { Name = "Niedostarczane paczki", Count = numberOfPackagesWithoutEmployee });
-
-
-
         }
     }
 }
