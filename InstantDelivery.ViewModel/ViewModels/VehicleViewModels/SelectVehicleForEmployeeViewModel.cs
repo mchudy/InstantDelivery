@@ -8,8 +8,11 @@ namespace InstantDelivery.ViewModel
 {
     public class SelectVehicleForEmployeeViewModel : Screen
     {
+
         public IEmployeeService employeeService;
+
         public IVehiclesService vehicleService;
+
         private Employee selectedEmployee;
 
         public Employee SelectedEmployee
@@ -53,19 +56,22 @@ namespace InstantDelivery.ViewModel
         }
 
         // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
+        // to vehicles sie nie binduje, help :<
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,IVehiclesService vehicleService)
         {
             this.employeeService = employeeService;
             this.vehicleService = vehicleService;
+            Vehicles = vehicleService.GetAllAvailableAndCurrent(SelectedVehicle);
         }
 
         public void ChangeVehicleForEmployee()
         {
-            employeeService.ChangeEmployeesVehicle(SelectedEmployee, SelectedVehicle);
+            SelectedEmployee.Vehicle = SelectedVehicle;
         }
 
         public void Save()
         {
+            ChangeVehicleForEmployee();
             TryClose(true);
         }
 
