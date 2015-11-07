@@ -55,6 +55,10 @@
       <HintPath>..\packages\DataGridFilter.1.0.3\lib\DataGridFilterLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -127,6 +131,12 @@
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsView\StatisticsDeliveredPackagesView.xaml.cs">
+      <DependentUpon>StatisticsDeliveredPackagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsView\StatisticsEmployeesVehiclesView.xaml.cs">
+      <DependentUpon>StatisticsEmployeesVehiclesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehiclesViews\VehicleEditView.xaml.cs">
       <DependentUpon>VehicleEditView.xaml</DependentUpon>
@@ -225,6 +235,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsView\StatisticsDeliveredPackagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsView\StatisticsEmployeesVehiclesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

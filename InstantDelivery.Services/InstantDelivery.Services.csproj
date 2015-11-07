@@ -61,6 +61,7 @@
     <Compile Include="Services\IPricingStrategy.cs" />
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="Services\RegularPricingStrategy.cs" />
+    <Compile Include="Services\StatisticsService.cs" />
     <Compile Include="Services\VehiclesRepository.cs" />
   </ItemGroup>
   <ItemGroup>

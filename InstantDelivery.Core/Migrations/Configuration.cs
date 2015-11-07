@@ -99,11 +99,12 @@ namespace InstantDelivery.Core.Migrations
                         Number = (randomNumber.Next()%500).ToString(),
                         PostalCode = ((randomNumber.Next()%99 + 1).ToString() + "-" + (randomNumber.Next()%999 + 1)),
                         State = randomNumber.Next().ToString(),
-                        Street = randomNumber.Next().ToString()
+                        Street = randomNumber.Next().ToString(),
                     },
                     Weight = randomNumber.Next() % 100,
                     Width = randomNumber.Next() % 100,
                     Length = randomNumber.Next() % 100,
+                    Cost= randomNumber.Next()%10000
                 };
                 testPackages.Add(tmp);
             }
