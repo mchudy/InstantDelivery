@@ -88,6 +88,12 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            UpdateEmployees();
+        }
+
         private IQueryable<Employee> SortEmployees(IQueryable<Employee> newEmployees)
         {
             if (SortingProperty == EmployeeSortingProperty.ByFirstName)
