@@ -125,55 +125,55 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="false" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="true" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=NewVehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>

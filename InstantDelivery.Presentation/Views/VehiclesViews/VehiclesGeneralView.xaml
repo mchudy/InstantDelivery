@@ -18,7 +18,7 @@
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditVehicle()]; [Event Sorting] = [Action Sort()]">
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditVehicle()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer rejestracyjny" Width="200" Binding="{Binding RegistrationNumber}"/>
                 <DataGridTextColumn Header="Marka" Binding="{Binding VehicleModel.Brand}" Width="200" />
