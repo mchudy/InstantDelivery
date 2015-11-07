@@ -22,20 +22,16 @@
         </Grid.RowDefinitions>
 
         <Label Content="Waga:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="0" x:Name="NewPackage_Weight" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="0" x:Name="NewPackage_Weight" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Wysokość:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="1" x:Name="NewPackage_Height" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="1" x:Name="NewPackage_Height" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Szerokość:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="2" x:Name="NewPackage_Width" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="2" x:Name="NewPackage_Width" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Długość:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="3" x:Name="NewPackage_Length" Style="{StaticResource EditDialogTextBox}" />
-
-        <Label Content="Status:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
-        <ComboBox Grid.Column="1" Grid.Row="4" SelectedValue="{Binding NewPackage.Status}" Style="{StaticResource EditComboBoxLabel}"
-                  ItemsSource="{helpers:EnumSource {x:Type entities:PackageStatus}}" x:Name="Package_Status" DisplayMemberPath="Name" SelectedValuePath="Value" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="3" x:Name="NewPackage_Length" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Koszt:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
         <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="NewPackage_Cost" Style="{StaticResource EditDialogTextBox}" />

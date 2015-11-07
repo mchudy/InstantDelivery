@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -18,22 +15,15 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
-        protected override void OnDeactivate(bool close)
-        {
-            if (close)
-                NewPackage = null;
-        }
-
         public override void CanClose(Action<bool> callback)
         {
             callback(true);
         }
 
-        public void RefreshCost()
+        public async void RefreshCost()
         {
-            service.CalculatePackageCost(NewPackage);
+            NewPackage.Cost = await Task.Run(() => service.CalculatePackageCost(NewPackage));
         }
-
 
         private Package newPackage;
         public Package NewPackage

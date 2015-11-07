@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
+using System.Collections.Generic;
 
 namespace InstantDelivery.Services
 {
     public interface IPackageService
     {
         bool AssignPackage(Package package, Employee employee);
-        void RegisterPackage(Package package);
+        void AddPackage(Package package);
         IEnumerable<Package> GetAll();
         void Reload(Package selectedPackage);
         void Save();
         void RemovePackage(Package selectedPackage);
-        void CalculatePackageCost(Package package);
-        void AddPackage(Package newPackage);
+        decimal CalculatePackageCost(Package package);
     }
 }

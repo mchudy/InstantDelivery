@@ -1,7 +1,7 @@
 ﻿
-using System.Collections.Generic;
 using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
+using System.Collections.Generic;
 
 namespace InstantDelivery.Services
 {
@@ -16,7 +16,7 @@ namespace InstantDelivery.Services
             this.pricingStrategy = pricingStrategy;
         }
 
-        public void RegisterPackage(Package package)
+        public void AddPackage(Package package)
         {
             package.Status = PackageStatus.New;
             package.Cost = pricingStrategy.GetCost(package);
@@ -54,17 +54,9 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        public void CalculatePackageCost(Package package)
+        public decimal CalculatePackageCost(Package package)
         {
-            if (package == null)
-                return;
-            package.Cost = pricingStrategy.GetCost(package);
-        }
-
-        public void AddPackage(Package package)
-        {
-            context.Packages.Add(package);
-            context.SaveChanges();
+            return pricingStrategy.GetCost(package);
         }
     }
 }
