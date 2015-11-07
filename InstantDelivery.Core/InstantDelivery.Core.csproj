@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201511062238275_InitialCreate.Designer.cs">
       <DependentUpon>201511062238275_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511072018450_somechanges.cs" />
+    <Compile Include="Migrations\201511072018450_somechanges.Designer.cs">
+      <DependentUpon>201511072018450_somechanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
@@ -85,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511062238275_InitialCreate.resx">
       <DependentUpon>201511062238275_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511072018450_somechanges.resx">
+      <DependentUpon>201511072018450_somechanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

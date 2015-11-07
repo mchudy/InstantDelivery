@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Linq;
+using Caliburn.Micro;
 using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
@@ -9,11 +10,47 @@ namespace InstantDelivery.ViewModel
     {
         public IEmployeeService employeeService;
         public IVehiclesService vehicleService;
-        public Employee SelectedEmployee { get; set; }
+        private Employee selectedEmployee;
 
-        public Vehicle SelectedVehicle { get; set; }
+        public Employee SelectedEmployee
+        {
+            get
+            {
+                return selectedEmployee;
+            }
+            set
+            {
+                selectedEmployee = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
-        public IObservableCollection<Vehicle> Vehicles;
+        private Vehicle selectedVehicle;
+
+        public Vehicle SelectedVehicle
+        {
+            get
+            {
+                return selectedVehicle;
+            }
+            set
+            {
+                selectedVehicle = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+        private IQueryable<Vehicle> vehicles;
+
+        public IQueryable<Vehicle> Vehicles
+        {
+            get { return vehicles; }
+            set
+            {
+                vehicles = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
         // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,IVehiclesService vehicleService)

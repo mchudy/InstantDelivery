@@ -42,10 +42,10 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        public IObservableCollection<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
+        public IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
         {
             return
-                context.Vehicles.Where(e => (e.Id == vehicle.Id || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 1)) as IObservableCollection<Vehicle>;
+                context.Vehicles.Where(e => (e.Id == vehicle.Id || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 1));
         }
     }
 }

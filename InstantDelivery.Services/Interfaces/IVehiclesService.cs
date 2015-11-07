@@ -12,6 +12,6 @@ namespace InstantDelivery.Services
         void Remove(Vehicle vehicle);
         void AddVehicle(Vehicle vehicle);
         void Save();
-        IObservableCollection<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
+        IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
     }
 }
