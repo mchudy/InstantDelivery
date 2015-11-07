@@ -105,6 +105,7 @@
     <Compile Include="Controls\EmployeesFilterPanel.xaml.cs">
       <DependentUpon>EmployeesFilterPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EnumToDescriptionConverter.cs" />
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />

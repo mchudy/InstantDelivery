@@ -3,11 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:controls1="clr-namespace:InstantDelivery.Controls"
-             xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-             xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -20,13 +17,13 @@
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditPackage()]; [Event Sorting] = [Action Sort()]">
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditPackage()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Waga [kg]" Binding="{Binding Weight}" Width="200"/>
                 <DataGridTextColumn Header="Wysokość [mm]" Binding="{Binding Height}" Width="200"/>
                 <DataGridTextColumn Header="Długość [mm]" Binding="{Binding Length}" Width="150" />
                 <DataGridTextColumn Header="Koszt [$]" Binding="{Binding Cost}" Width="200" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}"  Width="150" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status, Converter={StaticResource EnumToDescription}}"  Width="150" />
             </DataGrid.Columns>
         </DataGrid>
             <controls1:DataPager Grid.Row="1" x:Name="Pager" ItemsSource="{Binding Packages}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />

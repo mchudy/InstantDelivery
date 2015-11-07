@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ContentControl x:Name="EmployeesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar" />
+        <ContentControl x:Name="EmployeesFilterPanel" />
         <controls1:EmployeesFilterPanel Grid.Row="0" />
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
         <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"

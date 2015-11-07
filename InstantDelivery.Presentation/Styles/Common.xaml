@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:converters="clr-namespace:InstantDelivery.Converters">
 
+    <converters:EnumToDescriptionConverter x:Key="EnumToDescription" />
     <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     <Style TargetType="{x:Type Button}" x:Key="EditDialogButton" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>

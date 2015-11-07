@@ -52,7 +52,7 @@
         <TextBox Grid.Column="1" Grid.Row="5" x:Name="NewEmployee_Email" Style="{StaticResource EditDialogTextBox}" />
 
             <Label Content="PESEL:" Grid.Column="2" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="5" x:Name="NewEmployee_PESEL" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="3" Grid.Row="5" x:Name="NewEmployee_Pesel" Style="{StaticResource EditDialogTextBox}" />
 
             <Label Content="Komentarz:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Height="100" x:Name="NewEmployee_Comments" Style="{StaticResource EditDialogTextBox}" />

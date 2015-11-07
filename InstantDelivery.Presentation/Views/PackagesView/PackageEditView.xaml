@@ -22,16 +22,16 @@
         </Grid.RowDefinitions>
 
         <Label Content="Waga:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="0" x:Name="Package_Weight" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="0" x:Name="Package_Weight" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Wysokość:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="1" x:Name="Package_Height" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="1" x:Name="Package_Height" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Szerokość:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="2" x:Name="Package_Width" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="2" x:Name="Package_Width" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Długość:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]; [Event Sorting] = [Action Sort()]" Grid.Column="1" Grid.Row="3" x:Name="Package_Length" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="3" x:Name="Package_Length" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Status:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
         <ComboBox Grid.Column="1" Grid.Row="4" SelectedValue="{Binding Package.Status}" Style="{StaticResource EditComboBoxLabel}"

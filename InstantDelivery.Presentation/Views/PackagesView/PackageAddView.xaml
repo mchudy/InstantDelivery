@@ -1,8 +1,6 @@
 ﻿<UserControl x:Class="InstantDelivery.Views.PackageAddView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-             xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
              xmlns:cal="http://www.caliburnproject.org"
              Background="White">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
