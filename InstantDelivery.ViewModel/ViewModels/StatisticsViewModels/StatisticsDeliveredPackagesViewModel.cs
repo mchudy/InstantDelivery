@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Services;
-using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,16 +14,19 @@ namespace InstantDelivery.ViewModel
             GenerateChart();
         }
 
-        public ObservableCollection<Population> Budget { get; } = new ObservableCollection<Population>();
+        public BindableCollection<Population> Budget { get; } = new BindableCollection<Population>();
 
-        private void GenerateChart()
+        private async void GenerateChart()
         {
-            var valueOfPackages = service.ValueOfAllPackages();
-            var employeesSalaries = service.EmployeesSalaries();
-            var taxes = service.Taxes(valueOfPackages, employeesSalaries);
-            Budget.Add(new Population() { Name = "Wartość dostarczanych paczek", Count = valueOfPackages });
-            Budget.Add(new Population() { Name = "Pensje pracowników", Count = employeesSalaries });
-            Budget.Add(new Population() { Name = "Podatki", Count = taxes });
+            await Task.Run(() =>
+            {
+                var valueOfPackages = service.ValueOfAllPackages();
+                var employeesSalaries = service.EmployeesSalaries();
+                var taxes = service.Taxes(valueOfPackages, employeesSalaries);
+                Budget.Add(new Population() { Name = "Wartość dostarczanych paczek", Count = valueOfPackages });
+                Budget.Add(new Population() { Name = "Pensje pracowników", Count = employeesSalaries });
+                Budget.Add(new Population() { Name = "Podatki", Count = taxes });
+            });
         }
     }
 }

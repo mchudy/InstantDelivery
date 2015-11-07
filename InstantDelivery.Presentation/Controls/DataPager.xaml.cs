@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -117,7 +118,7 @@ namespace InstantDelivery.Controls
             control.LoadPage();
         }
 
-        private void LoadPage()
+        private async void LoadPage()
         {
             if (ItemsSource == null) return;
             PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
@@ -125,7 +126,15 @@ namespace InstantDelivery.Controls
             {
                 CurrentPage = PagesCount == 0 ? 1 : PagesCount;
             }
-            PagedSource = new ObservableCollection<object>(ItemsSource.Page(CurrentPage, PageSize));
+            ObservableCollection<object> collection = null;
+            var itemsSource = ItemsSource;
+            var currentPage = CurrentPage;
+            var pageSize = PageSize;
+            await Task.Run(() =>
+            {
+                collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
+            });
+            PagedSource = collection;
             OnPropertyChanged(nameof(IsEnabledNextPage));
             OnPropertyChanged(nameof(IsEnabledPreviousPage));
         }

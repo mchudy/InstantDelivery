@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Caliburn.Micro;
 using InstantDelivery.Core;
+using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using IContainer = Autofac.IContainer;
@@ -97,6 +99,13 @@ namespace InstantDelivery
             builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            // workaround initializing the context and therefore enabling the async operations
+            // (DbContext intialization is not threadsafe)
+            using (var context = new InstantDeliveryContext())
+            {
+                context.Set<Employee>().Any();
+            }
 
             builder.Register(type => new InstantDeliveryContext())
                 .AsSelf()

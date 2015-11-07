@@ -2,6 +2,7 @@
 using InstantDelivery.Core.Entities;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
@@ -47,15 +48,18 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         protected abstract IQueryable<Employee> GetEmployees();
 
-        protected void UpdateEmployees()
+        protected async void UpdateEmployees()
         {
-            var newEmployees = GetEmployees();
-            if (SortingProperty != null)
+            await Task.Run(() =>
             {
-                newEmployees = SortEmployees(newEmployees);
-            }
-            newEmployees = FilterEmployees(newEmployees);
-            Employees = newEmployees;
+                var newEmployees = GetEmployees();
+                if (SortingProperty != null)
+                {
+                    newEmployees = SortEmployees(newEmployees);
+                }
+                newEmployees = FilterEmployees(newEmployees);
+                Employees = newEmployees;
+            });
         }
 
         public int CurrentPage
