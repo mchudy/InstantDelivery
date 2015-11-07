@@ -1,5 +1,4 @@
 ﻿using InstantDelivery.Core.Entities;
-using InstantDelivery.Services;
 
 namespace InstantDelivery.Services
 {

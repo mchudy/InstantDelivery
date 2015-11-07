@@ -94,6 +94,10 @@ namespace InstantDelivery
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
 
+            builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
             builder.Register(type => new InstantDeliveryContext())
                 .AsSelf()
                 .InstancePerDependency();
