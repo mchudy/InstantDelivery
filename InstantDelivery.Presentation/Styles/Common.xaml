@@ -179,21 +179,38 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton3" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
+        <Setter Property="IsEnabled" Value="true" />
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ElementName=Vehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="false" />
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="false" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Vehicle_RegistrationNumber, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Brand, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Model, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Payload, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="false" />
+                    <Condition Binding="{Binding ElementName=VehicleModel, Path=SelectedItem}" Value="{x:Null}" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
@@ -203,42 +220,49 @@
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Brand, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Brand, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Model, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Model, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_Payload, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_Payload, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceX, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceY, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding ElementName=Vehicle_VehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=NewVehicleModel_AvailableSpaceZ, Path=(Validation.HasError)}" Value="true" />
+                    <Condition Binding="{Binding ElementName=AddNewVehicleModel, Path=IsChecked}" Value="true" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="IsEnabled" Value="false" />
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="{x:Type ComboBox}" x:Key="EditComboBoxLabel" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="MinWidth" Value="140"></Setter>
@@ -283,11 +307,11 @@
     </Style>
     
     <Style x:Key="VehicleModelTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource EditDialogTextBox}">
-        <Setter Property="Visibility" Value="{Binding ElementName=NewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
+        <Setter Property="Visibility" Value="{Binding ElementName=AddNewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
     </Style>
 
     <Style x:Key="VehicleModelLabel" TargetType="{x:Type Label}" BasedOn="{StaticResource EditDialogLabel}">
-        <Setter Property="Visibility" Value="{Binding ElementName=NewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
+        <Setter Property="Visibility" Value="{Binding ElementName=AddNewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
     </Style>
 
     <Style

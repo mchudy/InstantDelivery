@@ -10,5 +10,6 @@ namespace InstantDelivery.Services
         void Reload(Vehicle vehicle);
         void Remove(Vehicle vehicle);
         void Save();
+        void AddVehicle(Vehicle newVehicle);
     }
 }

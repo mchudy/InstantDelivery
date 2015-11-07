@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201511071315597_CascadeSetNullDelete.Designer.cs">
       <DependentUpon>201511071315597_CascadeSetNullDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511071854184_VehicleModelValidation.cs" />
+    <Compile Include="Migrations\201511071854184_VehicleModelValidation.Designer.cs">
+      <DependentUpon>201511071854184_VehicleModelValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511071315597_CascadeSetNullDelete.resx">
       <DependentUpon>201511071315597_CascadeSetNullDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511071854184_VehicleModelValidation.resx">
+      <DependentUpon>201511071854184_VehicleModelValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
