@@ -4,14 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls="clr-namespace:InstantDelivery.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Vehicles, Mode=TwoWay}" Grid.Row="0"
+        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="0"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
@@ -26,12 +29,10 @@
                 <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="1" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
+        <controls:DataPager Grid.Row="2" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <StackPanel Grid.Row="3" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditVehicle" Width="150">Edytuj</Button>
             <Button x:Name="DeleteVehicle" Width="150">Usuń</Button>
-            <Button x:Name="NextPage" IsEnabled="{Binding IsEnabledNextPage}" Width="150" Content="Następna strona"></Button>
-            <TextBlock x:Name="CurrentPage" Width="50" TextAlignment="Center" FontSize="15"/>
-            <Button x:Name="PreviousPage" IsEnabled="{Binding IsEnabledPreviousPage}" Width="150" Content="Poprzednia strona"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

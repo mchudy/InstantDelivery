@@ -1,22 +1,33 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehiclesGeneralViewModel : PagingViewModel
+    public class VehiclesGeneralViewModel : Screen
     {
-        private readonly VehiclesRepository repository;
+        private readonly VehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Vehicle selectedVehicle;
-        private BindableCollection<Vehicle> vehicles;
+        private IQueryable<Vehicle> vehicles;
+        private int currentPage = 1;
 
-        public VehiclesGeneralViewModel(VehiclesRepository repository, IWindowManager windowManager)
+        public VehiclesGeneralViewModel(VehiclesService vehiclesService, IWindowManager windowManager)
         {
-            this.repository = repository;
+            this.vehiclesService = vehiclesService;
             this.windowManager = windowManager;
-            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, PageSize));
+            Vehicles = vehiclesService.GetAll();
+        }
+
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                currentPage = value;
+                NotifyOfPropertyChange();
+            }
         }
 
         public Vehicle SelectedVehicle
@@ -29,7 +40,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public BindableCollection<Vehicle> Vehicles
+        public IQueryable<Vehicle> Vehicles
         {
             get { return vehicles; }
             set
@@ -38,8 +49,6 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
-
-        public override bool IsEnabledNextPage => CurrentPage * PageSize < repository.Total;
 
         public void EditVehicle()
         {
@@ -53,11 +62,11 @@ namespace InstantDelivery.ViewModel
             });
             if (result != true)
             {
-                repository.Reload(SelectedVehicle);
+                vehiclesService.Reload(SelectedVehicle);
             }
             else
             {
-                repository.Save();
+                vehiclesService.Save();
             }
         }
 
@@ -70,14 +79,9 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
             if (result == true)
             {
-                repository.Remove(SelectedVehicle);
-                LoadPage();
+                vehiclesService.Remove(SelectedVehicle);
+                CurrentPage = CurrentPage;
             }
-        }
-
-        protected override void LoadPage()
-        {
-            Vehicles = new BindableCollection<Vehicle>(repository.Page(CurrentPage, PageSize));
         }
     }
 }

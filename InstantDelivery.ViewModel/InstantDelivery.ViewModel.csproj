@@ -64,7 +64,6 @@
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesUsedVehiclesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\PagingViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehicleEditViewModel.cs" />
