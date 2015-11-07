@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using InstantDelivery.Core;
+using PropertyChanged;
 
 namespace InstantDelivery.Services
 {
@@ -61,5 +63,32 @@ namespace InstantDelivery.Services
         {
             return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.VehicleId == p.VehicleId) == 0);
         }
+
+        public void GenerateStatisticsEmployeesVehiclesChart(ObservableCollection<Population> Values)
+        {
+            var numberOfEmployees = NumberOfEmployees();
+            var numberOfVehicles = NumberOfVehicles();
+            var numberOfAllPackages = NumberOfAllPackages();
+            var numberOfPackagesWithEmployee = NumberOfPackagesWithEmployee();
+            var numberOfPackagesWithoutEmployee = NumberOfPackagesWithoutEmployee();
+            var numberOfUsedVehicles = NumberOfUsedVehicles();
+            var numberOfUnusedVehicles =NumberOfUnusedVehicles();
+            Values.Add(new Population() { Name = "Liczba pracowników", Count = numberOfEmployees });
+
+            Values.Add(new Population() { Name = "Liczba pojazdów", Count = numberOfVehicles });
+            Values.Add(new Population() { Name = "Używane pojazdy", Count = numberOfUsedVehicles });
+            Values.Add(new Population() { Name = "Nieużywane pojazdy", Count = numberOfUnusedVehicles });
+
+            Values.Add(new Population() { Name = "Wszystkie paczki", Count = numberOfAllPackages });
+            Values.Add(new Population() { Name = "Dostarczane paczki", Count = numberOfPackagesWithEmployee });
+            Values.Add(new Population() { Name = "Wolne paczki", Count = numberOfPackagesWithoutEmployee });
+        }
+    }
+    [ImplementPropertyChanged]
+    public class Population
+    {
+        public string Name { get; set; } = string.Empty;
+
+        public int Count { get; set; } = 0;
     }
 }
