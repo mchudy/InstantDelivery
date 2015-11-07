@@ -18,40 +18,51 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Content="Numer rejestracyjny:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="NewVehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="0" x:Name="NewVehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Marka:" Grid.Column="2" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="3" Grid.Row="0"  x:Name="NewVehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
+        <Label Content="Model samochodu:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}" />
+        <ComboBox x:Name="VehicleModel" Grid.Column="1" Height="30" Grid.Row="1" ItemsSource="{Binding VehicleModels}" 
+                  Style="{StaticResource EditDialogComboBox}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" {0} {1} ">
+                                <Binding Path="Brand" />
+                                <Binding Path="Model" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
-        <Label Content="Model:" Grid.Column="0" Grid.Row="1" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
-        <TextBox Grid.Column="1" Grid.Row="1"  x:Name="NewVehicle_VehicleModel_Model" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
+        <CheckBox Grid.Row="1" Grid.Column="3" x:Name="NewVehicleModel" VerticalAlignment="Center">Dodaj nowy typ samochodu</CheckBox>
 
-        <Label Content="Ładowność:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="NewVehicle_VehicleModel_Payload" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
-        <Label Content="Wymiar X:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="3" x:Name="NewVehicle_VehicleModel_AvailableSpaceX" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
-        <Label Content="Wymiar Y:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
-        <TextBox Grid.Column="1" Grid.Row="4"  x:Name="NewVehicle_VehicleModel_AvailableSpaceY" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
-        <Label Content="Wymiar Z:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="5" x:Name="NewVehicle_VehicleModel_AvailableSpaceZ" Style="{StaticResource EditDialogTextBox}">
-        </TextBox>
+        <Label Content="Marka:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource VehicleModelLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="2"  x:Name="NewVehicle_VehicleModel_Brand" Style="{StaticResource VehicleModelTextBox}" />
 
-        <StackPanel Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+        <Label Content="Model:" Grid.Column="0" Grid.Row="3" Style="{StaticResource VehicleModelLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="3"  x:Name="NewVehicle_VehicleModel_Model" Style="{StaticResource VehicleModelTextBox}" />
+
+        <Label Content="Ładowność:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource VehicleModelLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="NewVehicle_VehicleModel_Payload" Style="{StaticResource VehicleModelTextBox}" />
+
+        <Label Content="Wymiar X:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource VehicleModelLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="5" x:Name="NewVehicle_VehicleModel_AvailableSpaceX" Style="{StaticResource VehicleModelTextBox}" />
+
+        <Label Content="Wymiar Y:" Grid.Column="0" Grid.Row="6" Style="{StaticResource VehicleModelLabel}" />
+        <TextBox Grid.Column="1" Grid.Row="6"  x:Name="NewVehicle_VehicleModel_AvailableSpaceY" Style="{StaticResource VehicleModelTextBox}" />
+
+        <Label Content="Wymiar Z:" Grid.Column="0" Grid.Row="7" Style="{StaticResource VehicleModelLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="7" x:Name="NewVehicle_VehicleModel_AvailableSpaceZ" Style="{StaticResource VehicleModelTextBox}" />
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj"></Button>
             <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton5}" Content="Zapisz">
             </Button>

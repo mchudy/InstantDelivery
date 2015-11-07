@@ -1,15 +1,24 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
+using InstantDelivery.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
     public class VehiclesAddViewModel : Screen
     {
-        public VehiclesAddViewModel()
+        private IVehiclesService vehiclesService;
+
+        public VehiclesAddViewModel(IVehiclesService vehiclesService)
         {
+            this.vehiclesService = vehiclesService;
             NewVehicle = new Vehicle();
+            VehicleModels = vehiclesService.GetAllModels().ToList();
         }
+
+        public IEnumerable<VehicleModel> VehicleModels { get; set; }
 
         protected override void OnDeactivate(bool close)
         {

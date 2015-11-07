@@ -18,6 +18,11 @@ namespace InstantDelivery.Services
             return context.Vehicles;
         }
 
+        public IQueryable<VehicleModel> GetAllModels()
+        {
+            return context.VehicleModels;
+        }
+
         public void Reload(Vehicle vehicle)
         {
             context.Entry(vehicle).Reload();
