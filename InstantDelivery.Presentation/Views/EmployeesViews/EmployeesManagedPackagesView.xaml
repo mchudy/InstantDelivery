@@ -24,7 +24,7 @@
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <DataGrid ItemsSource="{Binding Packages, RelativeSource={RelativeSource AncestorType=DataGrid}}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
+                    <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Numer" Binding="{Binding Id}" Width="200"/>
                             <DataGridTextColumn Header="Waga" Binding="{Binding Weight}" Width="150"/>

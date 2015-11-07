@@ -13,8 +13,6 @@ namespace InstantDelivery.Services
             this.context = context;
         }
 
-        public int Total => context.Employees.Count();
-
         public IQueryable<Vehicle> GetAll()
         {
             return context.Vehicles;
