@@ -16,6 +16,7 @@ namespace InstantDelivery.Controls
     /// </summary>
     public partial class DataPager : UserControl, INotifyPropertyChanged
     {
+        private const int initiallPageSize = 30;
         private int pagesCount;
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int),
-              typeof(DataPager), new UIPropertyMetadata(10, OnPropertyChanged));
+              typeof(DataPager), new UIPropertyMetadata(initiallPageSize, OnPropertyChanged));
 
         public int PagesCount
         {
