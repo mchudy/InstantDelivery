@@ -25,6 +25,11 @@ namespace InstantDelivery.Services
 
         public void RemoveEmployee(Employee employee)
         {
+            foreach (var package in employee.Packages
+                .Where(p => p.Status == PackageStatus.InDelivery))
+            {
+                package.Status = PackageStatus.New;
+            }
             context.Employees.Remove(employee);
             context.SaveChanges();
         }

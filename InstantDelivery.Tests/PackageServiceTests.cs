@@ -74,7 +74,7 @@ namespace InstantDelivery.Tests
                 Status = PackageStatus.New
             };
             var packages = new List<Package> { package }.AsQueryable();
-            var packagesMockSet = GetMockSet(packages);
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
 
             var employee = new Employee
             {
@@ -83,7 +83,7 @@ namespace InstantDelivery.Tests
                 LastName = "B"
             };
             var employees = new List<Employee> { employee }.AsQueryable();
-            var employeesMockSet = GetMockSet(employees);
+            var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
@@ -105,16 +105,6 @@ namespace InstantDelivery.Tests
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(m => m.Packages).Returns(mockSet.Object);
             return mockContext;
-        }
-
-        private static Mock<DbSet<T>> GetMockSet<T>(IQueryable<T> data) where T : class
-        {
-            var mockSet = new Mock<DbSet<T>>();
-            mockSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            return mockSet;
         }
     }
 }

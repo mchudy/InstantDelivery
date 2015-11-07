@@ -73,6 +73,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeServiceTests.cs" />
+    <Compile Include="MockDbSetHelper.cs" />
     <Compile Include="PackageServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularPricingStrategyTests.cs" />
