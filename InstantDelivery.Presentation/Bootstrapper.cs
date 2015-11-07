@@ -96,7 +96,8 @@ namespace InstantDelivery
                 .InstancePerDependency();
             builder.Register(c => new VehiclesRepository())
                 .InstancePerDependency();
-
+            builder.Register(c => new StatisticsService())
+                .InstancePerDependency();
             container = builder.Build();
         }
     }

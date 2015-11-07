@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201511051719096_InitialCreate.Designer.cs">
       <DependentUpon>201511051719096_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511070946083_generationOfcostsOfPackages.cs" />
+    <Compile Include="Migrations\201511070946083_generationOfcostsOfPackages.Designer.cs">
+      <DependentUpon>201511070946083_generationOfcostsOfPackages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ValidationBase.cs" />
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511051719096_InitialCreate.resx">
       <DependentUpon>201511051719096_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511070946083_generationOfcostsOfPackages.resx">
+      <DependentUpon>201511070946083_generationOfcostsOfPackages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

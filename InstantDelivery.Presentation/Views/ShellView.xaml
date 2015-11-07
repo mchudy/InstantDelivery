@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        x:Name="InstantDelivery" Height="800" Width="1000" WindowState="Maximized" MinWidth="1024" MinHeight="680"
+        x:Name="InstantDelivery" Height="800" Width="1000" WindowState="Maximized" MinWidth="1500" MinHeight="1000"
         GlowBrush="{DynamicResource AccentColorBrush}">
 <controls:MetroWindow.IconTemplate>
     <DataTemplate>
@@ -37,7 +37,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Style="{StaticResource LeftPanel}">
-            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" IsExpanded="True">
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Kadry" Name="Kadry" VerticalAlignment="Center" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="Employees" Content="Ogólne"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="EmployeeAdd" Content="Dodaj pracownika"></Button>
@@ -60,10 +60,8 @@
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
                 <StackPanel>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="DeliveredPackages" Content="Dostarczone paczki"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagedPackages" Content="Efektywność pracowników"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeographicDetails" Content="Zestawienie geograficzne"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="UsedVehicles" Content="Użycie pojazdów"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="StatisticsDeliveredPackages" Content="Zestawienie budżetowe"></Button>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="StatisticsEmployeesVehicles" Content="Zestawienie ilościowe"></Button>
                 </StackPanel>
             </Expander>
         </StackPanel>
