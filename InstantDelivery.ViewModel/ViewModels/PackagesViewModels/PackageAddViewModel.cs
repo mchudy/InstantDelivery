@@ -36,10 +36,14 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void Save()
+        public async void Save()
         {
-            service.RegisterPackage(NewPackage);
+            var packageToSave = NewPackage;
             TryClose(true);
+            await Task.Run(() =>
+            {
+                service.RegisterPackage(packageToSave);
+            });
         }
 
         public void Cancel()

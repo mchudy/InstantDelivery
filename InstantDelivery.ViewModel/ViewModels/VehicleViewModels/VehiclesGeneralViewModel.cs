@@ -3,6 +3,7 @@ using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -43,7 +44,7 @@ namespace InstantDelivery.ViewModel
 
         public bool IsSelectedAnyRow => SelectedVehicle != null;
 
-        public void EditVehicle()
+        public async void EditVehicle()
         {
             if (SelectedVehicle == null)
             {
@@ -52,30 +53,35 @@ namespace InstantDelivery.ViewModel
             vehiclesEditViewModel.Vehicle = SelectedVehicle;
 
             var result = windowManager.ShowDialog(vehiclesEditViewModel);
-
-            if (result != true)
+            await Task.Run(() =>
             {
-                vehiclesService.Reload(SelectedVehicle);
-            }
-            else
-            {
-                vehiclesService.Save();
-            }
+                if (result != true)
+                {
+                    vehiclesService.Reload(SelectedVehicle);
+                }
+                else
+                {
+                    vehiclesService.Save();
+                }
+            });
         }
 
-        public void DeleteVehicle()
+        public async void DeleteVehicle()
         {
             if (SelectedVehicle == null)
             {
                 return;
             }
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
-            if (result == true)
+            await Task.Run(() =>
             {
-                vehiclesService.Remove(SelectedVehicle);
-                Vehicles = null;
-                Vehicles = vehiclesService.GetAll();
-            }
+                if (result == true)
+                {
+                    vehiclesService.Remove(SelectedVehicle);
+                    Vehicles = null;
+                    Vehicles = vehiclesService.GetAll();
+                }
+            });
         }
     }
 }

@@ -4,6 +4,7 @@ using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -43,7 +44,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void EditVehicleForEmployee()
+        public async void EditVehicleForEmployee()
         {
             if (SelectedEmployee == null)
             {
@@ -56,14 +57,17 @@ namespace InstantDelivery.ViewModel
                 Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle),
                 HasVehicle = SelectedEmployee.Vehicle != null
             });
-            if (result != true)
+            await Task.Run(() =>
             {
-                employeesService.Reload(SelectedEmployee);
-            }
-            else
-            {
-                employeesService.Save();
-            }
+                if (result != true)
+                {
+                    employeesService.Reload(SelectedEmployee);
+                }
+                else
+                {
+                    employeesService.Save();
+                }
+            });
         }
 
     }

@@ -2,6 +2,7 @@
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -36,10 +37,14 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public void Save()
+        public async void Save()
         {
-            service.AddEmployee(NewEmployee);
+            var EmployeeToAdd = NewEmployee;
             TryClose(true);
+            await Task.Run(() =>
+            {
+                service.AddEmployee(EmployeeToAdd);
+            });
         }
 
         public void Cancel()

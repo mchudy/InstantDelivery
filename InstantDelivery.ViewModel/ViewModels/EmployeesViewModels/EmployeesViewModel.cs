@@ -3,6 +3,7 @@ using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -37,7 +38,7 @@ namespace InstantDelivery.ViewModel
 
         public bool IsSelectedAnyRow => SelectedEmployee != null;
 
-        public void EditEmployee()
+        public async void EditEmployee()
         {
             if (SelectedEmployee == null)
             {
@@ -45,28 +46,34 @@ namespace InstantDelivery.ViewModel
             }
             employeeEditViewModel.Employee = SelectedEmployee;
             var result = windowManager.ShowDialog(employeeEditViewModel);
-            if (result != true)
+            await Task.Run(() =>
             {
-                employeeService.Reload(SelectedEmployee);
-            }
-            else
-            {
-                employeeService.Save();
-            }
+                if (result != true)
+                {
+                    employeeService.Reload(SelectedEmployee);
+                }
+                else
+                {
+                    employeeService.Save();
+                }
+            });
         }
 
-        public void RemoveEmployee()
+        public async void RemoveEmployee()
         {
             if (SelectedEmployee == null)
             {
                 return;
             }
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
-            if (result == true)
+            await Task.Run(() =>
             {
-                employeeService.RemoveEmployee(SelectedEmployee);
-                UpdateEmployees();
-            }
+                if (result == true)
+                {
+                    employeeService.RemoveEmployee(SelectedEmployee);
+                    UpdateEmployees();
+                }
+            });
         }
 
         protected override IQueryable<Employee> GetEmployees()

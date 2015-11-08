@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 
@@ -47,15 +48,18 @@ namespace InstantDelivery.ViewModel
 
         protected abstract IQueryable<Vehicle> GetVehicles();
 
-        protected void UpdateVehicles()
+        protected async void UpdateVehicles()
         {
-            var newVehicles = GetVehicles();
-            if (SortingProperty != null)
+            await Task.Run(() =>
             {
-                newVehicles = SortVehicles(newVehicles);
-            }
-            newVehicles = FilterVehicles(newVehicles);
-            Vehicles = newVehicles;
+                var newVehicles = GetVehicles();
+                if (SortingProperty != null)
+                {
+                    newVehicles = SortVehicles(newVehicles);
+                }
+                newVehicles = FilterVehicles(newVehicles);
+                Vehicles = newVehicles;
+            });
         }
 
         public int CurrentPage

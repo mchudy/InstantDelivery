@@ -3,6 +3,7 @@ using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -35,7 +36,7 @@ namespace InstantDelivery.ViewModel
 
         public bool IsEnabledViewDetails => SelectedRow != null;
 
-        public void ShowVehicleDetails()
+        public async void ShowVehicleDetails()
         {
             if (SelectedRow == null)
             {
@@ -43,14 +44,17 @@ namespace InstantDelivery.ViewModel
             }
             usedVehiclesDetailsViewModel.Employee = SelectedRow;
             var result = windowManager.ShowDialog(usedVehiclesDetailsViewModel);
-            if (result != true)
+            await Task.Run(() =>
             {
-                employeeService.Reload(SelectedRow);
-            }
-            else
-            {
-                employeeService.Save();
-            }
+                if (result != true)
+                {
+                    employeeService.Reload(SelectedRow);
+                }
+                else
+                {
+                    employeeService.Save();
+                }
+            });
         }
 
         protected override IQueryable<Employee> GetEmployees()

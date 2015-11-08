@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
@@ -29,7 +30,7 @@ namespace InstantDelivery.ViewModel
 
         public bool IsSelectedAnyRow => SelectedPackage != null;
 
-        public void EditPackage()
+        public async void EditPackage()
         {
             if (SelectedPackage == null)
             {
@@ -40,29 +41,36 @@ namespace InstantDelivery.ViewModel
                 service = repository,
                 Package = SelectedPackage
             });
-            if (result != true)
+            await Task.Run(() =>
             {
-                repository.Reload(SelectedPackage);
-            }
-            else
-            {
-                repository.Save();
-            }
+                if (result != true)
+                {
+                    repository.Reload(SelectedPackage);
+                }
+                else
+                {
+                    repository.Save();
+                }
+            });
         }
 
-        public void RemovePackage()
+        public async void RemovePackage()
         {
             if (SelectedPackage == null)
             {
                 return;
             }
             var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
-            if (result == true)
-            {
-                repository.RemovePackage(SelectedPackage);
-                UpdatePackages();
 
-            }
+            await Task.Run(() =>
+            {
+                if (result == true)
+                {
+                    repository.RemovePackage(SelectedPackage);
+                    UpdatePackages();
+
+                }
+            });
         }
     }
 }

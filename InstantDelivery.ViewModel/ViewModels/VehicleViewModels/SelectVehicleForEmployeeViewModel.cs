@@ -3,6 +3,8 @@ using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using PropertyChanged;
 using System.Linq;
+using System.Threading.Tasks;
+using Action = System.Action;
 
 namespace InstantDelivery.ViewModel
 {
@@ -26,14 +28,20 @@ namespace InstantDelivery.ViewModel
 
         public IQueryable<Vehicle> Vehicles { get; set; }
 
-        public void Save()
+        public async void Save()
         {
             if (!HasVehicle)
             {
                 SelectedVehicle = null;
             }
-            employeeService.ChangeEmployeesVehicle(SelectedEmployee, SelectedVehicle);
+            var VehicleToSave = SelectedVehicle;
+            var EmployeeToUpdate = SelectedEmployee;
             TryClose(true);
+            await Task.Run(() =>
+            {
+                employeeService.ChangeEmployeesVehicle(EmployeeToUpdate, VehicleToSave);
+                
+            });
         }
 
         public void Cancel()

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading.Tasks;
+using System.Windows.Forms;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using Screen = Caliburn.Micro.Screen;
@@ -10,10 +11,14 @@ namespace InstantDelivery.ViewModel
         public IPackageService service;
         public Package Package { get; set; }
 
-        public void Save()
+        public async void Save()
         {
-            service.CalculatePackageCost(Package);
+            var PackageToSave = Package;
             TryClose(true);
+            await Task.Run(() =>
+            {
+                service.CalculatePackageCost(Package);
+            });
         }
 
         public void Cancel()
@@ -21,9 +26,12 @@ namespace InstantDelivery.ViewModel
             TryClose(false);
         }
 
-        public void RefreshCost()
+        public async void RefreshCost()
         {
-            service.CalculatePackageCost(Package);
+            await Task.Run(() =>
+            {
+                service.CalculatePackageCost(Package);
+            });
         }
     }
 }
