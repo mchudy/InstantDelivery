@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Core;
+﻿using System;
+using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using Moq;
@@ -9,8 +10,15 @@ using Xunit;
 
 namespace InstantDelivery.Tests
 {
+
     public class PackageServiceTests
     {
+        private Employee employee = new Employee
+        {
+            Id = 1,
+            FirstName = "A",
+            LastName = "B"
+        };
         [Fact]
         public void RegisterPackage_AddsPackageToDatabase()
         {
@@ -105,6 +113,140 @@ namespace InstantDelivery.Tests
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(m => m.Packages).Returns(mockSet.Object);
             return mockContext;
+        }
+
+        [Fact]
+        public void RegisterPackage_ForValidatedPackage_ShouldAddNewPackage()
+        {
+            var package = new Package
+            {
+                Id = 1,
+                Height = 100,
+                Weight = 100,
+                Width = 100,
+                Length = 100,
+                Status = PackageStatus.New
+            };
+            var packages = new List<Package>().AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+
+
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+
+            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+
+            service.RegisterPackage(package);
+
+            packagesMockSet.Verify(m => m.Add(It.IsAny<Package>()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [Fact]
+        public void GetAllPackages_ShouldReturnAllPackages()
+        {
+            var packages = new List<Package>
+            {
+                new Package() {Id=1},
+                new Package() {Id=2},
+                new Package() {Id=3 }
+            }
+            .AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+
+            var result = service.GetAll();
+            var count = result.Count();
+            Assert.Equal(count, 3);
+        }
+
+
+        [Fact]
+        public void ReloadPackage_ShouldReloadPackageData()
+        {
+            var packages = new List<Package>() {new Package() {Height=5} }.AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var selected = packagesMockSet.Object.FirstOrDefault();
+            if (selected == null) return;
+            packagesMockSet.Object.Attach(selected);
+            selected.Height = 10;
+            service.Reload(selected);
+            Assert.Equal(selected.Height, 5);
+        }
+
+        [Fact]
+        public void SavePackage_ShouldSavePackage()
+        {
+            var packages = new List<Package>() { new Package() { Height = 5 } }.AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var selected = packagesMockSet.Object.FirstOrDefault();
+            if (selected == null) return;
+            packagesMockSet.Object.Attach(selected);
+            selected.Height = 10;
+            service.Save();
+            var result = packagesMockSet.Object.FirstOrDefault();
+            if (result != null) Assert.Equal(result.Height, 10);
+        }
+
+
+        [Fact]
+        public void RemovePackage_ShouldRemovePackageAndDetachItFromEmployee()
+        {
+            var package = new Package
+            {
+                Id = 1,
+                Status = PackageStatus.InDelivery
+            };
+            var packages = new List<Package> { package }.AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+
+            var employees = new List<Employee> { employee }.AsQueryable();
+            employee.Packages.Add(package);
+            var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
+
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
+            var employeesService = new EmployeeService(mockContext.Object);
+            var packagesService = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            mockContext.Object.Employees.Attach(employee);
+            employeesMockSet.Object.Attach(employee);
+
+            packagesService.RemovePackage(package);
+
+            employeesService.Reload(employee);
+            Assert.Equal(employee.Packages.Count(), 0);
+        }
+
+        [Fact]
+        public void CalculatePackageCost()
+        {
+            var package = new Package
+            {
+                Id = 1,
+                Width=10,
+                Height=10,
+                Length=10,
+                Weight=10
+            };
+            var packages = new List<Package> { package }.AsQueryable();
+            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            var packagesService = new PackageService(mockContext.Object, new RegularPricingStrategy());
+
+            var result = packagesService.CalculatePackageCost(package);
+            Assert.Equal(result, (decimal)0.750);
         }
     }
 }

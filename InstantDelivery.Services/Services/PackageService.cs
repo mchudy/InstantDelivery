@@ -23,7 +23,6 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        //TODO sprawdzanie czy paczka mieści się w samochodzie / transakcja(?)
         public bool AssignPackage(Package package, Employee employee)
         {
             package.Status = PackageStatus.InDelivery;

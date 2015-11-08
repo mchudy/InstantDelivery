@@ -4,7 +4,7 @@ namespace InstantDelivery.Services
 {
     public class RegularPricingStrategy : IPricingStrategy
     {
-        private const decimal dimensionalWeightFactor = 2000;
+        private const decimal dimensionalWeightFactor = 20000;
         private const decimal largePackageFactor = 1.5M;
 
         /// <summary>
