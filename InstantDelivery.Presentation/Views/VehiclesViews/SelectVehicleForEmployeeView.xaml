@@ -3,10 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:controls1="clr-namespace:InstantDelivery.Controls"
-        Background="White"
         Height="600" Width="700" WindowStartupLocation="CenterOwner"
-        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False"
-        ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
+        Style="{StaticResource DialogWindow}" >
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -27,7 +25,7 @@
         <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" x:Name="SelectedEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
         <CheckBox Grid.Row="2" x:Name="HasVehicle" Grid.Column="0">Pracownik posiadający pojazd</CheckBox>
-        
+
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" Visibility="{Binding IsChecked, ElementName=HasVehicle, Converter={StaticResource BoolToVisibility}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -39,7 +37,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
-            </Grid.ColumnDefinitions>            
+            </Grid.ColumnDefinitions>
             <Label Content="Marka:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
             <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" x:Name="SelectedVehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}" />
 
