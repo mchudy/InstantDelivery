@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace InstantDelivery.Controls
 {
@@ -18,7 +19,7 @@ namespace InstantDelivery.Controls
     public partial class DataPager : UserControl, INotifyPropertyChanged
     {
         private const int initiallPageSize = 30;
-        private int pagesCount;
+        private int pagesCount = 1;
 
         /// <summary>
         /// Tworzy nową kontrolkę
@@ -128,18 +129,22 @@ namespace InstantDelivery.Controls
         private async void LoadPage()
         {
             if (ItemsSource == null) return;
-            PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
-            ObservableCollection<object> collection = null;
-            var itemsSource = ItemsSource;
-            var currentPage = CurrentPage;
-            var pageSize = PageSize;
-            await Task.Run(() =>
+            await Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(async () =>
             {
-                collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
-            });
-            PagedSource = collection;
-            OnPropertyChanged(nameof(IsEnabledNextPage));
-            OnPropertyChanged(nameof(IsEnabledPreviousPage));
+                PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
+                ObservableCollection<object> collection = null;
+                var itemsSource = ItemsSource;
+                var currentPage = CurrentPage;
+                var pageSize = PageSize;
+                await Task.Run(
+                        () =>
+                        {
+                            collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
+                        });
+                PagedSource = collection;
+                OnPropertyChanged(nameof(IsEnabledNextPage));
+                OnPropertyChanged(nameof(IsEnabledPreviousPage));
+            }));
         }
     }
 }

@@ -116,9 +116,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         private IQueryable<Employee> FilterEmployees(IQueryable<Employee> newEmployees)
         {
             return newEmployees
-                .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
-                .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
-                .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
+               .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
+               .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
+               .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
 
