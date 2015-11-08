@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku dodawania pracownika
+    /// </summary>
     public class EmployeeAddViewModel : Screen
     {
+        /// <summary>
+        /// Serwis pracowników.
+        /// </summary>
         public IEmployeeService service;
+        /// <summary>
+        /// Konstruktor modelu widoku
+        /// </summary>
+        /// <param name="service"></param>
         public EmployeeAddViewModel(IEmployeeService service)
         {
             NewEmployee = new Employee();
@@ -27,6 +37,9 @@ namespace InstantDelivery.ViewModel
         }
 
         private Employee newEmployee;
+        /// <summary>
+        /// Aktualnie tworzony pracownik.
+        /// </summary>
         public Employee NewEmployee
         {
             get { return newEmployee; }
@@ -36,7 +49,9 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
-
+        /// <summary>
+        /// Zapisuje zmiany dokonane w widoku.
+        /// </summary>
         public async void Save()
         {
             var EmployeeToAdd = NewEmployee;
@@ -46,7 +61,9 @@ namespace InstantDelivery.ViewModel
                 service.AddEmployee(EmployeeToAdd);
             });
         }
-
+        /// <summary>
+        /// Anuluje zmiany dokonane w widoku.
+        /// </summary>
         public void Cancel()
         {
             TryClose(false);

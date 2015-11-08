@@ -8,13 +8,21 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    ///  Model widoku zarządzania pojazdami.
+    /// </summary>
     public class VehicleManageViewModel : EmployeesViewModelBase
     {
         private readonly IEmployeeService employeesService;
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
-
+        /// <summary>
+        /// Konstruktor modelu widoku
+        /// </summary>
+        /// <param name="employeesService"></param>
+        /// <param name="windowManager"></param>
+        /// <param name="vehiclesService"></param>
         public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager, IVehiclesService vehiclesService)
         {
             this.employeesService = employeesService;
@@ -23,16 +31,24 @@ namespace InstantDelivery.ViewModel
             Employees = employeesService.GetAll();
         }
 
+        /// <summary>
+        /// Flaga informująca o tym czy zaznaczony jest jakiś wiersz.
+        /// </summary>
         public bool IsSelectedAnyRow
         {
             get { return SelectedEmployee != null; }
         }
-
+        /// <summary>
+        /// Metoda zwraca kolekcję wszystkich pracowników.
+        /// </summary>
+        /// <returns></returns>
         protected override IQueryable<Employee> GetEmployees()
         {
             return employeesService.GetAll();
         }
-
+        /// <summary>
+        /// Aktualnie zaznaczony wiersz w tabeli danych.
+        /// </summary>
         public Employee SelectedEmployee
         {
             get { return selectedEmployee; }
@@ -43,7 +59,9 @@ namespace InstantDelivery.ViewModel
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
-
+        /// <summary>
+        /// Delegat zdarzenia kliknięcia w przycisk przechodzący do widoku edycji pojazdu.
+        /// </summary>
         public async void EditVehicleForEmployee()
         {
             if (SelectedEmployee == null)

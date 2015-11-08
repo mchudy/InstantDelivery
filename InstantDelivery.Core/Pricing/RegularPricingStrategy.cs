@@ -8,7 +8,7 @@ namespace InstantDelivery.Services
         private const decimal largePackageFactor = 1.5M;
 
         /// <summary>
-        /// Oblicza koszt danej paczki
+        /// Metoda oblicza koszt danej paczki
         /// </summary>
         /// <remarks>
         /// Koszt jest obliczany na podstawie następującego wzoru:
@@ -29,13 +29,21 @@ namespace InstantDelivery.Services
             }
             return result;
         }
-
+        /// <summary>
+        /// Metoda zwraca informację, czy paczka jest mała.
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         private bool IsSmall(Package package)
         {
             return package.Height <= 50 && package.Length <= 50 &&
                    package.Width <= 50;
         }
-
+        /// <summary>
+        /// Metoda oblicza wielkość wymiarową.
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         private decimal DimensionalWeight(Package package)
         {
             if (package == null)

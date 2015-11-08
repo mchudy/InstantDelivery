@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
+    /// <summary>
+    /// Bazowy model widoku dla innych widoków pracowników.
+    /// </summary>
     public abstract class EmployeesViewModelBase : Screen
     {
         private IQueryable<Employee> employees;
@@ -15,7 +18,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
         private EmployeeSortingProperty? sortingProperty;
-
+        /// <summary>
+        /// Kolekcja skojarzona z tabelą danych.
+        /// </summary>
         public IQueryable<Employee> Employees
         {
             get { return employees; }
@@ -25,7 +30,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 NotifyOfPropertyChange();
             }
         }
-
+        /// <summary>
+        /// Filtr nazwiska wybrany przez użytkownika.
+        /// </summary>
         public string LastNameFilter
         {
             get { return lastNameFilter; }
@@ -35,7 +42,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 UpdateEmployees();
             }
         }
-
+        /// <summary>
+        /// Filtr imienia wybrany przez użytkownika.
+        /// </summary>
         public string FirstNameFilter
         {
             get { return firstNameFilter; }
@@ -61,7 +70,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 Employees = newEmployees;
             });
         }
-
+        /// <summary>
+        /// Aktualna strona.
+        /// </summary>
         public int CurrentPage
         {
             get { return currentPage; }
@@ -71,7 +82,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 NotifyOfPropertyChange();
             }
         }
-
+        /// <summary>
+        /// Filtr adresu email wybrany przez użytkownika.
+        /// </summary>
         public string EmailFilter
         {
             get { return emailFilter; }
@@ -81,7 +94,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 UpdateEmployees();
             }
         }
-
+        /// <summary>
+        /// Kryterium sortowania wybrane przez użytkownika.
+        /// </summary>
         public EmployeeSortingProperty? SortingProperty
         {
             get { return sortingProperty; }
@@ -121,7 +136,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
-
+    /// <summary>
+    /// Definicja kryterium sortowania.
+    /// </summary>
     public enum EmployeeSortingProperty
     {
         [Description("Po nazwisku")]

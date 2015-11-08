@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Ogólny model widoku pojazdów.
+    /// </summary>
     public class VehiclesGeneralViewModel : VehiclesViewModelBase
     {
         private readonly IVehiclesService vehiclesService;
@@ -15,6 +18,13 @@ namespace InstantDelivery.ViewModel
         private VehicleEditViewModel vehiclesEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
 
+        /// <summary>
+        /// Konstruktor widoku.
+        /// </summary>
+        /// <param name="vehiclesService"></param>
+        /// <param name="windowManager"></param>
+        /// <param name="vehiclesEditViewModel"></param>
+        /// <param name="confirmDeleteViewModel"></param>
         public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager,
            VehicleEditViewModel vehiclesEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
         {
@@ -30,7 +40,9 @@ namespace InstantDelivery.ViewModel
             return vehiclesService.GetAll();
         }
 
-
+        /// <summary>
+        /// Aktualnie zaznaczony wiersz tabeli danych.
+        /// </summary>
         public Vehicle SelectedVehicle
         {
             get { return selectedVehicle; }
@@ -41,9 +53,14 @@ namespace InstantDelivery.ViewModel
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
-
+        /// <summary>
+        /// Flaga informująca o tym czy jest zaznaczony aktualnie jakiś wiersz w tabeli danych.
+        /// </summary>
         public bool IsSelectedAnyRow => SelectedVehicle != null;
 
+        /// <summary>
+        /// Delegat zdarzenia przejścia do widoku edycji pojazdu.
+        /// </summary>
         public async void EditVehicle()
         {
             if (SelectedVehicle == null)
@@ -65,7 +82,9 @@ namespace InstantDelivery.ViewModel
                 }
             });
         }
-
+        /// <summary>
+        /// Delegat zdarzenia usuwania pojazdu.
+        /// </summary>
         public async void DeleteVehicle()
         {
             if (SelectedVehicle == null)

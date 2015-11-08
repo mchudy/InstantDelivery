@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku pracowników.
+    /// </summary>
     public class EmployeesViewModel : EmployeesViewModelBase
     {
         private readonly IEmployeeService employeeService;
@@ -13,7 +16,13 @@ namespace InstantDelivery.ViewModel
         private Employee selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
-
+        /// <summary>
+        /// Konstruktor modelu widoku
+        /// </summary>
+        /// <param name="employeeService"></param>
+        /// <param name="windowManager"></param>
+        /// <param name="employeeEditViewModel"></param>
+        /// <param name="confirmDeleteViewModel"></param>
         public EmployeesViewModel(IEmployeeService employeeService, IWindowManager windowManager,
             EmployeeEditViewModel employeeEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
         {
@@ -23,7 +32,9 @@ namespace InstantDelivery.ViewModel
             this.confirmDeleteViewModel = confirmDeleteViewModel;
             Employees = employeeService.GetAll();
         }
-
+        /// <summary>
+        /// Aktualnie zaznaczony wiersz w tabeli danych.
+        /// </summary>
         public Employee SelectedEmployee
         {
             get { return selectedEmployee; }
@@ -34,9 +45,13 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange(() => IsSelectedAnyRow);
             }
         }
-
+        /// <summary>
+        /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz w tabeli danych.
+        /// </summary>
         public bool IsSelectedAnyRow => SelectedEmployee != null;
-
+        /// <summary>
+        /// Delegat zdarzenia przejścia do widoku edycji pracownika.
+        /// </summary>
         public void EditEmployee()
         {
             if (SelectedEmployee == null)
@@ -54,7 +69,9 @@ namespace InstantDelivery.ViewModel
                 employeeService.Save();
             }
         }
-
+        /// <summary>
+        /// Delegat zdarzenia usuwania pracownika.
+        /// </summary>
         public void RemoveEmployee()
         {
             if (SelectedEmployee == null)

@@ -7,11 +7,19 @@ using InstantDelivery.Services;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model woidoku ogólnego paczek.
+    /// </summary>
     public class GeneralPackagesViewModel : PackagesViewModelBase
     {
         private readonly IPackageService repository;
         private readonly IWindowManager windowManager;
 
+        /// <summary>
+        /// Konstruktor modelu widoku
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="windowManager"></param>
         public GeneralPackagesViewModel(IPackageService repository, IWindowManager windowManager)
         {
             this.repository = repository;
@@ -19,7 +27,9 @@ namespace InstantDelivery.ViewModel
             Packages = repository.GetAll();
 
         }
-
+        /// <summary>
+        /// Aktualnie zaznaczony wiersz tabeli danych.
+        /// </summary>
         public Package SelectedPackage { get; set; }
 
         protected override IQueryable<Package> GetPackages()
@@ -27,9 +37,13 @@ namespace InstantDelivery.ViewModel
             return repository.GetAll();
         }
 
-
+        /// <summary>
+        /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz.
+        /// </summary>
         public bool IsSelectedAnyRow => SelectedPackage != null;
-
+        /// <summary>
+        /// Delegat zdarzenia przejścia do widoku edycji paczki.
+        /// </summary>
         public async void EditPackage()
         {
             if (SelectedPackage == null)
@@ -53,7 +67,9 @@ namespace InstantDelivery.ViewModel
                 }
             });
         }
-
+        /// <summary>
+        /// Delegat zdarzenia usuwania paczki przez użytkownika.
+        /// </summary>
         public async void RemovePackage()
         {
             if (SelectedPackage == null)

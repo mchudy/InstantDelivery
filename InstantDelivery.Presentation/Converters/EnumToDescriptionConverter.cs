@@ -6,6 +6,9 @@ using System.Windows.Data;
 
 namespace InstantDelivery.Converters
 {
+    /// <summary>
+    /// Konwerter enumów do bindowania
+    /// </summary>
     public class EnumToDescriptionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

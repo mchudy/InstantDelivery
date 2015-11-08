@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace InstantDelivery.Core.Entities
 {
+    /// <summary>
+    /// Pomocnicza klasa do walidacji danych.
+    /// </summary>
     public abstract class ValidationBase : Entity, IDataErrorInfo
     {
 
