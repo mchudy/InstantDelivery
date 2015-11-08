@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace InstantDelivery.Controls
 {
@@ -39,7 +40,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IQueryable<Entity>),
-              typeof(DataPager), new UIPropertyMetadata(null, OnPropertyChanged));
+                typeof(DataPager), new UIPropertyMetadata(null, OnPropertyChanged));
 
         /// <summary>
         /// Kolekcja zawierająca aktualną stronę danych ze źródłówej kolekcji
@@ -52,7 +53,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty PagedSourceProperty =
             DependencyProperty.Register("PagedSource", typeof(ObservableCollection<object>),
-              typeof(DataPager));
+                typeof(DataPager));
 
         /// <summary>
         /// Aktualny numer strony
@@ -65,7 +66,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty CurrentPageProperty =
             DependencyProperty.Register("CurrentPage", typeof(int),
-              typeof(DataPager), new UIPropertyMetadata(1, OnPropertyChanged));
+                typeof(DataPager), new UIPropertyMetadata(1, OnPropertyChanged));
 
         /// <summary>
         /// Aktualny rozmiar strony
@@ -78,7 +79,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int),
-              typeof(DataPager), new UIPropertyMetadata(initiallPageSize, OnPropertyChanged));
+                typeof(DataPager), new UIPropertyMetadata(initiallPageSize, OnPropertyChanged));
 
         public int PagesCount
         {
@@ -132,7 +133,7 @@ namespace InstantDelivery.Controls
             control.LoadPage();
         }
 
-        private async void LoadPage()
+        private void LoadPage()
         {
             if (ItemsSource == null) return;
             var itemsSource = ItemsSource;
@@ -141,13 +142,17 @@ namespace InstantDelivery.Controls
             PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
             OnPropertyChanged(nameof(IsEnabledNextPage));
             OnPropertyChanged(nameof(IsEnabledPreviousPage));
-            ObservableCollection<object> collection = null;
-            await Task.Run(
+
+            Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(async () =>
+            {
+                ObservableCollection<object> collection = null;
+                await Task.Run(
                     () =>
                     {
                         collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
                     });
-            PagedSource = collection;
+                PagedSource = collection;
+            }));
         }
     }
 }
