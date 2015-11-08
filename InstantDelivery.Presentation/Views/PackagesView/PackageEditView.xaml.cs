@@ -18,7 +18,7 @@ namespace InstantDelivery.Views
     /// <summary>
     /// Interaction logic for PackageEditView.xaml
     /// </summary>
-    public partial class PackageEditView : UserControl
+    public partial class PackageEditView
     {
         public PackageEditView()
         {
