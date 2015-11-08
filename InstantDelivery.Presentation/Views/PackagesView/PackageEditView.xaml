@@ -2,12 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
         xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
-        xmlns:cal="http://www.caliburnproject.org"
-        Background="White"
         Height="700" Width="450" WindowStartupLocation="CenterOwner"
-        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
+         Style="{StaticResource DialogWindow}">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

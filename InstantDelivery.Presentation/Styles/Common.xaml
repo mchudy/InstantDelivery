@@ -219,7 +219,7 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton3" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
@@ -302,7 +302,7 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="{x:Type ComboBox}" x:Key="EditComboBoxLabel" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="MinWidth" Value="140"></Setter>
@@ -345,7 +345,7 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="VehicleModelTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource EditDialogTextBox}">
         <Setter Property="Visibility" Value="{Binding ElementName=AddNewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
     </Style>
@@ -358,7 +358,7 @@
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
         <Setter Property="Margin" Value="2" />
     </Style>
-    
+
     <Style
        x:Key="ButtonInExpanderLeftMenu" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="0 1 0 1" />
@@ -366,5 +366,17 @@
 
     <Style x:Key="LeftPanel" TargetType="{x:Type StackPanel}">
         <Setter Property="Margin" Value="10"></Setter>
+    </Style>
+
+    <Style x:Key="DialogWindow" TargetType="controls:MetroWindow">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="ShowTitleBar" Value="False" />
+        <Setter Property="ShowIconOnTitleBar" Value="False" />
+        <Setter Property="ShowMinButton" Value="False" />
+        <Setter Property="ShowMaxRestoreButton" Value="False" />
+        <Setter Property="ShowSystemMenuOnRightClick" Value="False" />
+        <Setter Property="ShowCloseButton" Value="False" />
     </Style>
 </ResourceDictionary>

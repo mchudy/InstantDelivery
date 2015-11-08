@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using InstantDelivery.Core.Entities;
 using System.Linq;
-using InstantDelivery.Core.Entities;
-using System.Collections.Generic;
 
 namespace InstantDelivery.Services
 {

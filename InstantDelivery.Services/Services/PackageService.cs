@@ -1,9 +1,6 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
-using InstantDelivery.Core;
+﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
