@@ -15,10 +15,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ContentControl x:Name="VehiclesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <ContentControl x:Name="VehiclesFilterPanel" />
         <controls:VehiclesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls:VehiclesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
+        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"

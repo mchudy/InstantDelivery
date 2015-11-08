@@ -20,7 +20,7 @@
         <ContentControl x:Name="EmployeesFilterPanel" />
         <controls1:EmployeesFilterPanel Grid.Row="0" />
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
+        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
