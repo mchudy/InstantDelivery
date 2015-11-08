@@ -1,0 +1,111 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+    
+    <Style TargetType="{x:Type Button}" x:Key="EmployeeEditSaveButton" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="MinWidth" Value="60"></Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_LastName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_PhoneNumber, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=Employee_Salary, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_LastName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_PhoneNumber, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=Employee_Salary, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="EmployeeAddSaveButton" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="MinWidth" Value="60"></Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_FirstName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_LastName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_Gender, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_PhoneNumber, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_Email, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_MotherName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_FatherName, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=NewEmployee_Salary, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_FirstName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_LastName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_PhoneNumber, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_Salary, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_Gender, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_Email, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_MotherName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewEmployee_FatherName, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

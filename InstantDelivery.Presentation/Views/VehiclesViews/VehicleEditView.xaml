@@ -44,7 +44,7 @@
 
         <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
-            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton5}" Content="Zapisz" />
+            <Button x:Name="Save" Style="{StaticResource VehicleEditSaveButton}" Content="Zapisz" />
         </StackPanel>
     </Grid>
 </controls:MetroWindow>

@@ -15,7 +15,6 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public void Employees()
         {
-            //TODO
             ActivateItem(IoC.Get<EmployeesViewModel>());
         }
 

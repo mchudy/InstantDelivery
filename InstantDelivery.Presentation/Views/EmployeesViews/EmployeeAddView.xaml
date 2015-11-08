@@ -87,7 +87,7 @@
 
             <StackPanel Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj"></Button>
-            <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton2}" Content="Zapisz">
+            <Button x:Name="Save" Style="{StaticResource EmployeeAddSaveButton}" Content="Zapisz">
             </Button>
         </StackPanel>
     </Grid>

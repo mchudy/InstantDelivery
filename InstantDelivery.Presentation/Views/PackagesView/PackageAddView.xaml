@@ -59,7 +59,7 @@
         
         <StackPanel Grid.Row="12" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
-            <Button x:Name="Save"  Style="{StaticResource EditDialogSaveButtonPackages}" Content="Zapisz" />
+            <Button x:Name="Save"  Style="{StaticResource AddPackageSaveButton}" Content="Zapisz" />
         </StackPanel>
     </Grid>
 </UserControl>
