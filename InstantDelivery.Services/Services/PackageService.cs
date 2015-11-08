@@ -31,6 +31,31 @@ namespace InstantDelivery.Services
             return true;
         }
 
+        public Employee GetAssignedEmployee(Package package)
+        {
+            if (package == null) return null;
+            return context.Employees.FirstOrDefault(e => e.Packages.Count(p => p.Id == package.Id) > 0);
+        }
+
+        public IQueryable<Employee> GetAvailableEmployees(Package package)
+        {
+            return context.Employees
+                .Where(e => (double)(e.Packages.Where(p => p.Id != package.Id).Sum(p => p.Weight) + package.Weight) <
+                            e.Vehicle.VehicleModel.Payload);
+        }
+
+        public void MarkAsDelivered(Package package)
+        {
+            //using (var transaction = context.Database.BeginTransaction())
+            //{
+            package.Status = PackageStatus.Delivered;
+            var owner = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
+            owner?.Packages.Remove(package);
+            context.SaveChanges();
+            //  transaction.Commit();
+            //}
+        }
+
         public IQueryable<Package> GetAll()
         {
             return context.Packages;

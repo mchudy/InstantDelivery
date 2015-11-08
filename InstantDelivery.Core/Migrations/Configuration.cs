@@ -93,11 +93,12 @@ namespace InstantDelivery.Core.Migrations
                     Height = randomNumber.Next() % 100,
                     Id = i + 1,
                     ShippingAddress =
+                    new Address()
                     {
                         City = "Warsaw",
                         Country = "Poland",
-                        Number = (randomNumber.Next()%500).ToString(),
-                        PostalCode = ((randomNumber.Next()%99 + 1).ToString() + "-" + (randomNumber.Next()%999 + 1)),
+                        Number = (randomNumber.Next() % 500).ToString(),
+                        PostalCode = ((randomNumber.Next() % 99 + 1).ToString() + "-" + (randomNumber.Next() % 999 + 1)),
                         State = randomNumber.Next().ToString(),
                         Street = randomNumber.Next().ToString(),
                     },

@@ -1,24 +1,40 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Forms;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using PropertyChanged;
+using System.Linq;
+using System.Threading.Tasks;
 using Screen = Caliburn.Micro.Screen;
 
 namespace InstantDelivery.ViewModel
 {
+    [ImplementPropertyChanged]
     public class PackageEditViewModel : Screen
     {
-        public IPackageService service;
-        public Package Package { get; set; }
+        private readonly IPackageService service;
 
-        public async void Save()
+        public PackageEditViewModel(IPackageService service)
         {
-            var PackageToSave = Package;
+            this.service = service;
+        }
+
+        public bool IsPackageDataReadOnly => Package.Status != PackageStatus.New;
+
+        public Package Package { get; set; }
+        public IQueryable<Employee> Employees { get; set; }
+        public Employee SelectedEmployee { get; set; }
+        public bool IsDelivered { get; set; }
+
+        public void Save()
+        {
             TryClose(true);
-            await Task.Run(() =>
+            if (Package.Status == PackageStatus.New && SelectedEmployee != null)
             {
-                service.CalculatePackageCost(Package);
-            });
+                service.AssignPackage(Package, SelectedEmployee);
+            }
+            else if (Package.Status == PackageStatus.InDelivery && IsDelivered)
+            {
+                service.MarkAsDelivered(Package);
+            }
         }
 
         public void Cancel()
