@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehiclesGeneralViewModel : Screen
+    public class VehiclesGeneralViewModel : VehiclesViewModelBase
     {
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
@@ -25,15 +25,11 @@ namespace InstantDelivery.ViewModel
             Vehicles = vehiclesService.GetAll();
         }
 
-        public int CurrentPage
+        protected override IQueryable<Vehicle> GetVehicles()
         {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
+            return vehiclesService.GetAll();
         }
+
 
         public Vehicle SelectedVehicle
         {
@@ -41,16 +37,6 @@ namespace InstantDelivery.ViewModel
             set
             {
                 selectedVehicle = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public IQueryable<Vehicle> Vehicles
-        {
-            get { return vehicles; }
-            set
-            {
-                vehicles = value;
                 NotifyOfPropertyChange();
             }
         }

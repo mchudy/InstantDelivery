@@ -49,10 +49,11 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService) {SelectedEmployee=SelectedEmployee, SelectedVehicle=SelectedEmployee.Vehicle, Vehicles=vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle)});
+            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService) {SelectedEmployee=SelectedEmployee, employeeService=employeesService, vehicleService=vehiclesService, SelectedVehicle=SelectedEmployee.Vehicle, Vehicles=vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle)});
             if (result != true)
             {
                 employeesService.Reload(SelectedEmployee);
+                //TryClose(false);
             }
             else
             {
