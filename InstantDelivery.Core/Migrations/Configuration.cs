@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Text;
 
 namespace InstantDelivery.Core.Migrations
 {
@@ -20,9 +22,54 @@ namespace InstantDelivery.Core.Migrations
 
         protected override void Seed(InstantDeliveryContext context)
         {
-            GenerateTestData(context);
-            context.SaveChanges();
+            try
+            {
+                GenerateTestData(context);
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+                throw new DbEntityValidationException("Entity Validation Failed - errors follow:\n" + sb, ex);
+            }
         }
+
+        private static Random random = new Random();
+
+        private static readonly string[][] cities =
+        {
+            new[] {"Kraków", "Polska"},
+            new[] {"Warszawa", "Polska"},
+            new[] {"Poznań", "Polska"},
+            new[] {"Gdańsk", "Polska"},
+            new[] {"Paryż", "Francja"},
+            new[] {"Londyn", "Wielka Brytania"},
+            new[] {"Barcelona", "Hiszpania"},
+        };
+
+        private static readonly string[] streets =
+        {
+            "Aleje Jerozolimskie",
+            "Koszykowa",
+            "Noakowskiego",
+            "Nowy Świat",
+        };
+
+        private static readonly string[] states =
+        {
+            "mazowieckie",
+            "pomorskie",
+            "małopolskie"
+        };
 
         private static void GenerateTestData(InstantDeliveryContext context)
         {
@@ -41,75 +88,67 @@ namespace InstantDelivery.Core.Migrations
             for (var i = 1; i < 30; i++)
             {
                 var i1 = i;
-                var firstOrDefault = context.Employees.FirstOrDefault(e => e.Id == i1);
-                if (firstOrDefault != null)
-                    firstOrDefault.Vehicle = context.Vehicles.FirstOrDefault(e => e.Id == i1);
+                var employee = context.Employees.Find(i1);
+                if (employee != null)
+                    employee.Vehicle = context.Vehicles.FirstOrDefault(e => e.Id == i1);
             }
         }
 
         private static void GenerateVehicleVehicleModelRelations(InstantDeliveryContext context)
         {
             var randomNumber = new Random();
-            for (var i = 0; i < 30; i++)
+            for (var i = 1; i <= 30; i++)
             {
                 var next = randomNumber.Next();
-                var i1 = i + 1;
-                var firstOrDefault = context.Vehicles.FirstOrDefault(e => e.Id == i1);
-                if (firstOrDefault != null)
-                    firstOrDefault.VehicleModel = context.VehicleModels.FirstOrDefault(e => e.Id == ((next % 10) + 1));
+                var vehicle = context.Vehicles.Find(i);
+                if (vehicle != null)
+                    vehicle.VehicleModel = context.VehicleModels.Find((next % 10) + 1);
             }
         }
 
         private static void GeneratePackageEmployeeRelations(InstantDeliveryContext context)
         {
-            for (var i = 1; i < 30; i++)
+            for (int i = 0; i < 80; i++)
             {
-                var i1 = i;
-                var firstOrDefault = context.Employees.FirstOrDefault(e => e.Id == i1);
-                if (firstOrDefault != null)
-                    firstOrDefault.Packages = new List<Package>() { context.Packages.FirstOrDefault(e => e.Id == i1) };
+                var package = context.Packages.Find(i);
+                if (package != null)
+                {
+                    int employeeId = random.Next() % 40;
+                    var employee = context.Employees.Find(employeeId);
+                    if (employee != null)
+                    {
+                        employee.Packages.Add(package);
+                        package.Status = PackageStatus.InDelivery;
+                    }
+                }
             }
-            var orDefault = context.Employees.FirstOrDefault(e => e.Id == 30);
-            if (orDefault != null)
-                orDefault.Packages = new List<Package>()
-                {
-                    context.Packages.FirstOrDefault(e => e.Id ==31),
-                    context.Packages.FirstOrDefault(e => e.Id ==32),
-                };
-            var employee = context.Employees.FirstOrDefault(e => e.Id == 31);
-            if (employee != null)
-                employee.Packages = new List<Package>()
-                {
-                    context.Packages.FirstOrDefault(e => e.Id ==33),
-                    context.Packages.FirstOrDefault(e => e.Id ==34),
-                    context.Packages.FirstOrDefault(e => e.Id ==35),
-                };
         }
 
         private static void GenerateTestPackages(InstantDeliveryContext context)
         {
-            var randomNumber = new Random();
             var testPackages = new List<Package>();
-            for (var i = 0; i < 40; i++)
+            for (var i = 0; i < 150; i++)
             {
+                var city = cities[random.Next() % cities.Length];
                 var tmp = new Package
                 {
-                    Height = randomNumber.Next() % 100,
+                    Height = random.Next() % 90 + 1,
                     Id = i + 1,
                     ShippingAddress =
-                    new Address()
-                    {
-                        City = "Warsaw",
-                        Country = "Poland",
-                        Number = (randomNumber.Next() % 500).ToString(),
-                        PostalCode = ((randomNumber.Next() % 99 + 1).ToString() + "-" + (randomNumber.Next() % 999 + 1)),
-                        State = randomNumber.Next().ToString(),
-                        Street = randomNumber.Next().ToString(),
-                    },
-                    Weight = randomNumber.Next() % 100,
-                    Width = randomNumber.Next() % 100,
-                    Length = randomNumber.Next() % 100,
-                    Cost = randomNumber.Next() % 10000
+                        new Address()
+                        {
+                            City = city[0],
+                            Country = city[1],
+                            Number = (random.Next() % 500).ToString(),
+                            PostalCode = ((random.Next() % 99 + 1) + "-" + (random.Next() % 999 + 1)),
+                            State = random.Next().ToString(),
+                            Street = random.Next().ToString(),
+                        },
+                    Weight = random.Next() % 90 + 1,
+                    Width = random.Next() % 90 + 1,
+                    Length = random.Next() % 90 + 1,
+                    Cost = random.Next() % 1000,
+                    Status = PackageStatus.New
                 };
                 testPackages.Add(tmp);
             }
@@ -118,9 +157,10 @@ namespace InstantDelivery.Core.Migrations
 
         private static void GenerateTestVehicleModels(InstantDeliveryContext context)
         {
-            var randomNumber = new Random();
-            var brands = new[] { "Opel", "Fiat", "Audi", "Toyota", "Mercedez", "Opel", "Fiat", "Audi", "Toyota", "Mercedez" };
-            var models = new[] { "Astra", "Jakiś", "A4", "Yaris", "Benz", "Vectra", "Punto", "A6", "Corolla", "Classic" };
+            var brands = new[]
+            {"Opel", "Ford", "Audi", "Toyota", "Mercedez", "Opel", "Fiat", "Audi", "Toyota", "Mercedes"};
+            var models = new[]
+            {"Astra", "Transit", "A4", "Yaris", "Benz", "Vectra", "Punto", "A6", "Corolla", "Classic"};
 
             var testVehicleModels = new List<VehicleModel>();
             for (var i = 0; i < 10; i++)
@@ -129,11 +169,11 @@ namespace InstantDelivery.Core.Migrations
                 {
                     Brand = brands[i],
                     Model = models[i],
-                    Payload = (double)(randomNumber.Next() % 1000),
+                    Payload = random.Next() % 1000,
                     Id = i + 1,
-                    AvailableSpaceX = (double)(randomNumber.Next() % 1000),
-                    AvailableSpaceY = (double)(randomNumber.Next() % 1000),
-                    AvailableSpaceZ = (double)(randomNumber.Next() % 1000),
+                    AvailableSpaceX = random.Next() % 1000,
+                    AvailableSpaceY = random.Next() % 1000,
+                    AvailableSpaceZ = random.Next() % 1000,
                 });
             }
             context.VehicleModels.AddOrUpdate(testVehicleModels.ToArray());
@@ -141,13 +181,12 @@ namespace InstantDelivery.Core.Migrations
 
         private static void GenerateTestVehicles(InstantDeliveryContext context)
         {
-            var randomNumber = new Random();
             var testVehicle = new List<Vehicle>();
             for (var i = 0; i < 30; i++)
             {
                 testVehicle.Add(new Vehicle()
                 {
-                    RegistrationNumber = "WWW" + (randomNumber.Next() % 100 + 4000).ToString() + "PL",
+                    RegistrationNumber = "WWW" + (random.Next() % 100 + 4000).ToString() + "PL",
                     Id = i + 1,
                 });
             }
@@ -158,38 +197,51 @@ namespace InstantDelivery.Core.Migrations
         {
             var firstName = new[]
             {
-                "Jessie", "Jessie", "Justin", "Britney", "Ariana", "David", "Adam", "Enrique", "Ashton", "Lisa", "Bruno", "Jan",
-                "Denis", "Richard", "Witold", "Cezary", "Bartłomiej", "Anastazja", "Mariusz", "Janusz", "Helena", "Dorota",
+                "Jessie", "Jessie", "Justin", "Britney", "Ariana", "David", "Adam", "Enrique", "Ashton", "Lisa", "Bruno",
+                "Jan",
+                "Denis", "Richard", "Witold", "Cezary", "Bartłomiej", "Anastazja", "Mariusz", "Janusz", "Helena",
+                "Dorota",
                 "Anna", "Henryk", "Markus", "Łukasz", "Mateusz", "Adrian", "Michał", "Ted", "Robin", "Marshall", "Lily",
                 "Barney", "Brad", "Elliot", "John", "Jan", "Norbert", "Damian"
             };
 
             var lastName = new[]
             {
-                "James", "Rogers", "Timberlake", "Spears", "Grande", "Beckham", "Levine", "Iglesias", "Kutcher", "Row", "Mars",
-                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "Żak", "Dąbrowski", "Bąk", "Kolonko", "Swojski", "Romański",
-                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "Jakóbiak", "Piasecki", "Dudek", "Nachtman", "Mosby", "Scherbatsky",
+                "James", "Rogers", "Timberlake", "Spears", "Grande", "Beckham", "Levine", "Iglesias", "Kutcher", "Row",
+                "Mars",
+                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "Żak", "Dąbrowski", "Bąk", "Kolonko", "Swojski",
+                "Romański",
+                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "Jakubiak", "Piasecki", "Dudek", "Nachtman", "Mosby",
+                "Scherbatsky",
                 "Erickson", "Aldrin", "Stinson", "Pitt", "Reid", "Dorian", "Andrzejewski", "Gierczak", "Damil"
             };
-            var randomNumber = new Random();
             var testEmployees = new List<Employee>();
             DateTime startDate = new DateTime(1950, 1, 1);
             int daysUntilNow = (DateTime.Now - startDate).Days;
             for (var i = 0; i < 100; i++)
             {
+                var city = cities[random.Next() % cities.Length];
                 testEmployees.Add(new Employee
                 {
                     Id = i + 1,
-                    FirstName = firstName[randomNumber.Next() % firstName.Length],
-                    LastName = lastName[randomNumber.Next() % lastName.Length],
-                    Gender = (Gender)(randomNumber.Next() % 2),
-                    PlaceOfResidence = new Address { City = "Warsaw", Country = "Poland", Number = "2", PostalCode = "23-456", State = "Virdżinia", Street = "alalal" },
-                    DateOfBirth = startDate.AddDays(randomNumber.Next() % daysUntilNow),
+                    FirstName = firstName[random.Next() % firstName.Length],
+                    LastName = lastName[random.Next() % lastName.Length],
+                    Gender = (Gender)(random.Next() % 2),
+                    PlaceOfResidence = new Address
+                    {
+                        City = city[0],
+                        Country = city[1],
+                        Number = (random.Next() % 10).ToString(),
+                        PostalCode = "00-34" + (random.Next() % 9).ToString(),
+                        State = states[random.Next() % states.Length],
+                        Street = streets[random.Next() % streets.Length]
+                    },
+                    DateOfBirth = startDate.AddDays(random.Next() % daysUntilNow),
                     PhoneNumber =
-                        (randomNumber.Next() % 300) + 700 + (randomNumber.Next() % 300 + 700).ToString() +
-                        (randomNumber.Next() % 300 + 700),
-                    Salary = randomNumber.Next() % 1000 + 5000,
-                    HireDate = startDate.AddDays(randomNumber.Next() % daysUntilNow)
+                        (random.Next() % 300) + 700 + (random.Next() % 300 + 700).ToString() +
+                        (random.Next() % 300 + 700),
+                    Salary = random.Next() % 1000 + 5000,
+                    HireDate = startDate.AddDays(random.Next() % daysUntilNow)
                 });
             }
 
