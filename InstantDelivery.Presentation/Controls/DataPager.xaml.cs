@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace InstantDelivery.Controls
 {
@@ -103,21 +102,28 @@ namespace InstantDelivery.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void MoveToPreviousPage(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (CurrentPage - 1 < 1)
+            {
+                CurrentPage = 1;
+            }
+            else
+            {
+                CurrentPage--;
+            }
+        }
+
         private void MoveToNextPage(object sender, RoutedEventArgs routedEventArgs)
         {
             if (CurrentPage + 1 > PagesCount)
             {
-                CurrentPage = PagesCount == 0 ? 1 : PagesCount;
+                CurrentPage = PagesCount;
             }
             else
             {
                 CurrentPage++;
             }
-        }
-
-        private void MoveToPreviousPage(object sender, RoutedEventArgs routedEventArgs)
-        {
-            CurrentPage--;
         }
 
         private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -129,22 +135,19 @@ namespace InstantDelivery.Controls
         private async void LoadPage()
         {
             if (ItemsSource == null) return;
-            await Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(async () =>
-            {
-                PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
-                ObservableCollection<object> collection = null;
-                var itemsSource = ItemsSource;
-                var currentPage = CurrentPage;
-                var pageSize = PageSize;
-                await Task.Run(
-                        () =>
-                        {
-                            collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
-                        });
-                PagedSource = collection;
-                OnPropertyChanged(nameof(IsEnabledNextPage));
-                OnPropertyChanged(nameof(IsEnabledPreviousPage));
-            }));
+            var itemsSource = ItemsSource;
+            var currentPage = CurrentPage;
+            var pageSize = PageSize;
+            PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
+            OnPropertyChanged(nameof(IsEnabledNextPage));
+            OnPropertyChanged(nameof(IsEnabledPreviousPage));
+            ObservableCollection<object> collection = null;
+            await Task.Run(
+                    () =>
+                    {
+                        collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
+                    });
+            PagedSource = collection;
         }
     }
 }
