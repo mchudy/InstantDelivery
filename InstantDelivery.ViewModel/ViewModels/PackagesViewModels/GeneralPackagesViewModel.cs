@@ -60,6 +60,8 @@ namespace InstantDelivery.ViewModel
             if (result == true)
             {
                 repository.RemovePackage(SelectedPackage);
+                UpdatePackages();
+
             }
         }
     }
