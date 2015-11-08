@@ -14,8 +14,9 @@
     </Window.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition  />
+            <ColumnDefinition  />
+            <ColumnDefinition />
             <ColumnDefinition  />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -39,42 +40,42 @@
         <Label Content="Waga:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
         <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="0" x:Name="Package_Weight" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Wysokość:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="1" x:Name="Package_Height" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Wysokość:" Grid.Column="2" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="3" Grid.Row="0" x:Name="Package_Height" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Szerokość:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="2" x:Name="Package_Width" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Szerokość:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="1" x:Name="Package_Width" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Długość:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="3" x:Name="Package_Length" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Długość:" Grid.Column="2" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="3" Grid.Row="1" x:Name="Package_Length" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Status:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
-        <ComboBox Grid.Column="1" Grid.Row="4" SelectedValue="{Binding Package.Status}" Style="{StaticResource EditComboBoxLabel}"
-                  ItemsSource="{helpers:EnumSource {x:Type entities:PackageStatus}}" x:Name="Package_Status" DisplayMemberPath="Name" SelectedValuePath="Value" />
+        <Label Content="Status:" Grid.Column="0" Grid.Row="2" Style="{StaticResource EditDialogLabel}"  />
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Package.Status, Converter={StaticResource EnumToDescription}}" Style="{StaticResource EditComboBoxLabel}" 
+                 x:Name="Package_Status" />
 
-        <Label Content="Koszt:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="Package_Cost" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Koszt:" Grid.Column="0" Grid.Row="3" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="3" x:Name="Package_Cost" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Kraj:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="6" x:Name="Package_ShippingAddress_Country" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Kraj:" Grid.Column="0" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="Package_ShippingAddress_Country" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Miasto:" Grid.Column="0" Grid.Row="7" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="7" x:Name="Package_ShippingAddress_City" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Miasto:" Grid.Column="2" Grid.Row="4" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="3" Grid.Row="4" x:Name="Package_ShippingAddress_City" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Ulica:" Grid.Column="0" Grid.Row="8" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="8" x:Name="Package_ShippingAddress_Street" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Ulica:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="5" x:Name="Package_ShippingAddress_Street" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Numer domu:" Grid.Column="0" Grid.Row="9" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="9" x:Name="Package_ShippingAddress__Number" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Numer domu:" Grid.Column="2" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="3" Grid.Row="5" x:Name="Package_ShippingAddress__Number" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Kod pocztowy:" Grid.Column="0" Grid.Row="10" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox  Grid.Column="1" Grid.Row="10" x:Name="Package_ShippingAddress_PostalCode" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Kod pocztowy:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox  Grid.Column="1" Grid.Row="6" x:Name="Package_ShippingAddress_PostalCode" Style="{StaticResource EditDialogTextBox}" />
 
-        <Label Content="Województwo:" Grid.Column="0" Grid.Row="11" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="11" x:Name="Package_ShippingAddress_State" Style="{StaticResource EditDialogTextBox}" />
+        <Label Content="Województwo:" Grid.Column="2" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="3" Grid.Row="6" x:Name="Package_ShippingAddress_State" Style="{StaticResource EditDialogTextBox}" />
 
         <DataGrid Margin="0 5 0 0" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, IsAsync=True}" 
-                  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"
+                  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="4"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -85,10 +86,10 @@
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="220" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="3" Grid.Column="0" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
+        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
                              PageSize="10" Visibility="{Binding Package.Status, Converter={StaticResource StatusToVisibility}}" />
 
-        <StackPanel Grid.Row="14" Grid.ColumnSpan="3" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+        <StackPanel Grid.Row="14" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
             <Button x:Name="Save"  Style="{StaticResource EditDialogSaveButtonPackages}" Content="Zapisz" />
         </StackPanel>
