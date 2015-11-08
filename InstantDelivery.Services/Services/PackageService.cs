@@ -26,10 +26,32 @@ namespace InstantDelivery.Services
         //TODO sprawdzanie czy paczka mieści się w samochodzie / transakcja(?)
         public bool AssignPackage(Package package, Employee employee)
         {
+
             package.Status = PackageStatus.InDelivery;
             employee.Packages.Add(package);
             context.SaveChanges();
             return true;
+        }
+
+        public Employee GetAssignedEmployee(Package package)
+        {
+            if (package == null) return null;
+            return context.Employees.FirstOrDefault(e => e.Packages.Count(p => p.Id == package.Id) > 0);
+        }
+
+        public IQueryable<Employee> GetAvailableEmployees(Package package)
+        {
+            return context.Employees
+                .Where(e => (double)(e.Packages.Where(p => p.Id != package.Id).Sum(p => p.Weight) + package.Weight) <
+                            e.Vehicle.VehicleModel.Payload);
+        }
+
+        public void MarkAsDelivered(Package package)
+        {
+            package.Status = PackageStatus.Delivered;
+            var owner = context.Employees.FirstOrDefault(e => e.Packages.Contains(package));
+            owner?.Packages.Remove(package);
+            context.SaveChanges();
         }
 
         public IQueryable<Package> GetAll()
