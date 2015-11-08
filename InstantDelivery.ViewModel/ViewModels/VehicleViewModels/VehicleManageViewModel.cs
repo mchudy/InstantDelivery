@@ -3,10 +3,11 @@ using System.Linq;
 using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehicleManageViewModel : Screen
+    public class VehicleManageViewModel : EmployeesViewModelBase
     {
         private readonly IEmployeeService employeesService;
         private readonly IVehiclesService vehiclesService;
@@ -23,14 +24,9 @@ namespace InstantDelivery.ViewModel
             Employees = employeesService.GetAll();
         }
 
-        public int CurrentPage
+        protected override IQueryable<Employee> GetEmployees()
         {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
+            return employeesService.GetAll();
         }
 
         public Employee SelectedEmployee
@@ -60,17 +56,7 @@ namespace InstantDelivery.ViewModel
                 employeesService.Save();
             }
         }
-        
-
-        public IQueryable<Employee> Employees
-        {
-            get { return employees; }
-            set
-            {
-                employees = value;
-                NotifyOfPropertyChange();
-            }
-        }
+       
 
     }
 }
