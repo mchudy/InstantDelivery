@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 
@@ -33,7 +34,7 @@ namespace InstantDelivery.Services
             return true;
         }
 
-        public IEnumerable<Package> GetAll()
+        public IQueryable<Package> GetAll()
         {
             return context.Packages;
         }

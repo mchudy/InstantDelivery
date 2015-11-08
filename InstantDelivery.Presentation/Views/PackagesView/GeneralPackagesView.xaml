@@ -12,16 +12,20 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, Mode=TwoWay}" Grid.Row="0"
+        <ContentControl x:Name="PackagesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:PackagesFilterPanel>
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="1"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditPackage()]; [Event Sorting] = [Action Sort()]">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Numer" Binding="{Binding Id}"  Width="150" />
                 <DataGridTextColumn Header="Waga [kg]" Binding="{Binding Weight}" Width="200"/>
                 <DataGridTextColumn Header="Wysokość [mm]" Binding="{Binding Height}" Width="200"/>
                 <DataGridTextColumn Header="Długość [mm]" Binding="{Binding Length}" Width="150" />
@@ -29,8 +33,8 @@
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}"  Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-            <controls1:DataPager Grid.Row="1" x:Name="Pager" ItemsSource="{Binding Packages}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
-            <StackPanel Grid.Row="2"  HorizontalAlignment="Right" Orientation="Horizontal" Width="Auto"  Margin="0 5 0 5">
+            <controls1:DataPager Grid.Row="2" x:Name="Pager" ItemsSource="{Binding Packages}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+            <StackPanel Grid.Row="3"  HorizontalAlignment="Right" Orientation="Horizontal" Width="Auto"  Margin="0 5 0 5">
                 <Button x:Name="RemovePackage" IsEnabled="{Binding IsSelectedAnyRow}" Margin="5 0 5 0" Width="150">Usuń</Button>
                 <Button x:Name="EditPackage" IsEnabled="{Binding IsSelectedAnyRow}" Margin="5 0 5 0" Width="150">Edytuj</Button>
             </StackPanel>

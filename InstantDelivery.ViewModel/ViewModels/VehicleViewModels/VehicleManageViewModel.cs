@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
@@ -24,6 +25,11 @@ namespace InstantDelivery.ViewModel
             Employees = employeesService.GetAll();
         }
 
+        public bool IsSelectedAnyRow
+        {
+            get { return SelectedEmployee != null; }
+        }
+
         protected override IQueryable<Employee> GetEmployees()
         {
             return employeesService.GetAll();
@@ -36,6 +42,7 @@ namespace InstantDelivery.ViewModel
             {
                 selectedEmployee = value;
                 NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
 

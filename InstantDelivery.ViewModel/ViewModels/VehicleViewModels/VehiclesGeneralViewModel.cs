@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using System.Linq;
@@ -38,7 +39,13 @@ namespace InstantDelivery.ViewModel
             {
                 selectedVehicle = value;
                 NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
+        }
+
+        public bool IsSelectedAnyRow
+        {
+            get { return SelectedVehicle != null; }
         }
 
         public void EditVehicle()
