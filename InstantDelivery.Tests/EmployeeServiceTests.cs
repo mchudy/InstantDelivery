@@ -5,7 +5,6 @@ using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace InstantDelivery.Tests
 {
@@ -111,19 +110,24 @@ namespace InstantDelivery.Tests
         [Fact]
         public void ReloadEmployee_ShouldReloadEmployeeData()
         {
-            var employees = new List<Employee>() {new Employee() {FirstName="Ted", LastName="Mosby"} }.AsQueryable();
-            var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
-            var service = new EmployeeService(mockContext.Object);
-            var selected = employeesMockSet.Object.FirstOrDefault();
-            if (selected == null) return;
-            employeesMockSet.Object.Attach(selected);
-            selected.FirstName = "Robin";
-            selected.LastName = "Scherbatsky";
-            service.Reload(selected);
-            Assert.Equal(selected.FirstName, "Ted");
-            Assert.Equal(selected.LastName, "Mosby");
+
+            using (var context = new InstantDeliveryContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    var selected = new Employee() { FirstName = "Ted", LastName = "Mosby" };
+                    var service = new EmployeeService(context);
+                    context.Employees.Add(selected);
+                    context.SaveChanges();
+
+                    selected.FirstName = "Robin";
+                    selected.LastName = "Scherbatsky";
+                    service.Reload(selected);
+
+                    Assert.Equal(selected.FirstName, "Ted");
+                    Assert.Equal(selected.LastName, "Mosby");
+                }
+            }
         }
 
         [Fact]

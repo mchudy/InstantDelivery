@@ -1,5 +1,4 @@
-﻿using System;
-using InstantDelivery.Core;
+﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using Moq;
@@ -133,8 +132,8 @@ namespace InstantDelivery.Tests
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
-
-            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var pricingStrategy = new Mock<IPricingStrategy>().Object;
+            var service = new PackageService(mockContext.Object, pricingStrategy);
 
             service.RegisterPackage(package);
 
@@ -156,7 +155,8 @@ namespace InstantDelivery.Tests
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
-            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var pricingStrategy = new Mock<IPricingStrategy>().Object;
+            var service = new PackageService(mockContext.Object, pricingStrategy);
 
             var result = service.GetAll();
             var count = result.Count();
@@ -167,17 +167,22 @@ namespace InstantDelivery.Tests
         [Fact]
         public void ReloadPackage_ShouldReloadPackageData()
         {
-            var packages = new List<Package>() {new Package() {Height=5} }.AsQueryable();
-            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
-            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
-            var selected = packagesMockSet.Object.FirstOrDefault();
-            if (selected == null) return;
-            packagesMockSet.Object.Attach(selected);
-            selected.Height = 10;
-            service.Reload(selected);
-            Assert.Equal(selected.Height, 5);
+            using (var context = new InstantDeliveryContext())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    var package = new Package() { Height = 5, Width = 10, Length = 10, Weight = 10, Status = PackageStatus.New };
+                    var pricingStrategy = new Mock<IPricingStrategy>().Object;
+                    var service = new PackageService(context, pricingStrategy);
+                    context.Packages.Add(package);
+                    context.SaveChanges();
+
+                    package.Height = 10;
+                    service.Reload(package);
+
+                    Assert.Equal(package.Height, 5);
+                }
+            }
         }
 
         [Fact]
@@ -187,7 +192,8 @@ namespace InstantDelivery.Tests
             var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
-            var service = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var pricingStrategy = new Mock<IPricingStrategy>().Object;
+            var service = new PackageService(mockContext.Object, pricingStrategy);
             var selected = packagesMockSet.Object.FirstOrDefault();
             if (selected == null) return;
             packagesMockSet.Object.Attach(selected);
@@ -216,15 +222,15 @@ namespace InstantDelivery.Tests
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
             mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
-            var employeesService = new EmployeeService(mockContext.Object);
-            var packagesService = new PackageService(mockContext.Object, new RegularPricingStrategy());
+            var pricingStrategy = new Mock<IPricingStrategy>().Object;
+            var packagesService = new PackageService(mockContext.Object, pricingStrategy);
             mockContext.Object.Employees.Attach(employee);
             employeesMockSet.Object.Attach(employee);
 
             packagesService.RemovePackage(package);
 
-            employeesService.Reload(employee);
-            Assert.Equal(employee.Packages.Count(), 0);
+            packagesMockSet.Verify(m => m.Remove(package), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
         [Fact]
@@ -233,20 +239,22 @@ namespace InstantDelivery.Tests
             var package = new Package
             {
                 Id = 1,
-                Width=10,
-                Height=10,
-                Length=10,
-                Weight=10
+                Width = 10,
+                Height = 10,
+                Length = 10,
+                Weight = 10
             };
             var packages = new List<Package> { package }.AsQueryable();
             var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            var pricingStrategyMock = new Mock<IPricingStrategy>();
+            pricingStrategyMock.Setup(m => m.GetCost(It.IsAny<Package>())).Returns(0.750M);
             var packagesService = new PackageService(mockContext.Object, new RegularPricingStrategy());
 
             var result = packagesService.CalculatePackageCost(package);
-            Assert.Equal(result, (decimal)0.750);
+            Assert.Equal(result, 0.750M);
         }
     }
 }

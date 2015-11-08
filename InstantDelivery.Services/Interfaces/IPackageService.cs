@@ -45,5 +45,8 @@ namespace InstantDelivery.Services
         /// <param name="package"></param>
         /// <returns></returns>
         decimal CalculatePackageCost(Package package);
+        Employee GetAssignedEmployee(Package package);
+        IQueryable<Employee> GetAvailableEmployees(Package package);
+        void MarkAsDelivered(Package package);
     }
 }

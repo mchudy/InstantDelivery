@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Forms;
-using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using PropertyChanged;
+using System.Linq;
+using System.Threading.Tasks;
 using Screen = Caliburn.Micro.Screen;
 
 namespace InstantDelivery.ViewModel
@@ -9,27 +10,37 @@ namespace InstantDelivery.ViewModel
     /// <summary>
     /// Model widoku edycji paczki.
     /// </summary>
+    [ImplementPropertyChanged]
     public class PackageEditViewModel : Screen
     {
-        /// <summary>
-        /// Serwis paczek
-        /// </summary>
-        public IPackageService service;
-        /// <summary>
-        /// Edytowana paczka
-        /// </summary>
+        private readonly IPackageService service;
+
+        public PackageEditViewModel(IPackageService service)
+        {
+            this.service = service;
+        }
+
+        public bool IsPackageDataReadOnly => Package.Status != PackageStatus.New;
+
         public Package Package { get; set; }
+        public IQueryable<Employee> Employees { get; set; }
+        public Employee SelectedEmployee { get; set; }
+        public bool IsDelivered { get; set; }
+
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
-        public async void Save()
+        public void Save()
         {
-            var PackageToSave = Package;
             TryClose(true);
-            await Task.Run(() =>
+            if (Package.Status == PackageStatus.New && SelectedEmployee != null)
             {
-                service.CalculatePackageCost(Package);
-            });
+                service.AssignPackage(Package, SelectedEmployee);
+            }
+            else if (Package.Status == PackageStatus.InDelivery && IsDelivered)
+            {
+                service.MarkAsDelivered(Package);
+            }
         }
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.

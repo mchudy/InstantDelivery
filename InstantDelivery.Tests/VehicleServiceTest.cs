@@ -1,10 +1,8 @@
-﻿using System;
-using InstantDelivery.Core;
+﻿using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using Moq;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Xunit;
 
@@ -58,21 +56,27 @@ namespace InstantDelivery.Tests
         [Fact]
         public void ReloadVehicle_ShouldReloadVehicleData()
         {
-            var vehicles = new List<Vehicle>() { new Vehicle()
+
+
+            using (var context = new InstantDeliveryContext())
             {
-                Id=1,
-                RegistrationNumber="1"
-            } }.AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
-            var service = new VehiclesService(mockContext.Object);
-            var selected = vehiclesMockSet.Object.FirstOrDefault();
-            if (selected == null) return;
-            vehiclesMockSet.Object.Attach(selected);
-            selected.RegistrationNumber = "2";
-            service.Reload(selected);;
-            Assert.Equal(selected.RegistrationNumber, "1");
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    var vehicle = new Vehicle
+                    {
+                        Id = 1,
+                        RegistrationNumber = "1"
+                    };
+                    var service = new VehiclesService(context);
+                    context.Vehicles.Add(vehicle);
+                    context.SaveChanges();
+
+                    vehicle.RegistrationNumber = "2";
+                    service.Reload(vehicle);
+
+                    Assert.Equal(vehicle.RegistrationNumber, "1");
+                }
+            }
         }
 
         [Fact]
@@ -92,7 +96,8 @@ namespace InstantDelivery.Tests
 
             service.Remove(vehicles.First());
 
-            Assert.Equal(mockContext.Object.Vehicles.Count(), 0);
+            vehiclesMockSet.Verify(m => m.Remove(vehicles.First()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
         [Fact]
@@ -100,7 +105,7 @@ namespace InstantDelivery.Tests
         {
             var vehicles = new List<Vehicle>().AsQueryable();
             var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
-            var vehicleToAdd = new Vehicle() { Id=1 };
+            var vehicleToAdd = new Vehicle() { Id = 1 };
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
@@ -162,7 +167,7 @@ namespace InstantDelivery.Tests
             mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
 
             var result = service.GetAllAvailableAndCurrent(vehicles.First()).Count();
-                Assert.Equal(result, 3);
+            Assert.Equal(result, 3);
         }
     }
 }

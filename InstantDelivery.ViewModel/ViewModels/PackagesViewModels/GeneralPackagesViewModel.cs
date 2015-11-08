@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -25,7 +24,6 @@ namespace InstantDelivery.ViewModel
             this.repository = repository;
             this.windowManager = windowManager;
             Packages = repository.GetAll();
-
         }
         /// <summary>
         /// Aktualnie zaznaczony wiersz tabeli danych.
@@ -50,10 +48,11 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new PackageEditViewModel
+            var result = windowManager.ShowDialog(new PackageEditViewModel(repository)
             {
-                service = repository,
-                Package = SelectedPackage
+                Package = SelectedPackage,
+                Employees = repository.GetAvailableEmployees(SelectedPackage),
+                SelectedEmployee = repository.GetAssignedEmployee(SelectedPackage)
             });
             await Task.Run(() =>
             {
@@ -84,7 +83,6 @@ namespace InstantDelivery.ViewModel
                 {
                     repository.RemovePackage(SelectedPackage);
                     UpdatePackages();
-
                 }
             });
         }
