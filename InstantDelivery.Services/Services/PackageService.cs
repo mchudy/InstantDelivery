@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
 using InstantDelivery.Core;
 using InstantDelivery.Core.Entities;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace InstantDelivery.Services
             this.pricingStrategy = pricingStrategy;
         }
 
-        public void AddPackage(Package package)
+        public void RegisterPackage(Package package)
         {
             package.Status = PackageStatus.New;
             package.Cost = pricingStrategy.GetCost(package);
@@ -33,7 +35,7 @@ namespace InstantDelivery.Services
             return true;
         }
 
-        public IEnumerable<Package> GetAll()
+        public IQueryable<Package> GetAll()
         {
             return context.Packages;
         }

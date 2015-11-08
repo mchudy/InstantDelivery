@@ -15,17 +15,28 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Content="Imię:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="SelectedEmployee_FirstName" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" x:Name="SelectedEmployee_FirstName" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Nazwisko:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="SelectedEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" x:Name="SelectedEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
-        <DataGrid Margin="0 5 0 0" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <Label Content="Marka:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" x:Name="SelectedVehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}" />
+        
+        <Label Content="Model:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="3" IsReadOnly="True" x:Name="SelectedVehicle_VehicleModel_Model" Style="{StaticResource EditDialogTextBox}" />
+        
+        <Label Content="Numer rejestracyjny:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="4" IsReadOnly="True" x:Name="SelectedVehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
+
+        <DataGrid Margin="0 5 0 0" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -37,8 +48,9 @@
                 <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
-        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
             <Button x:Name="Save" Style="{StaticResource EditDialogSaveButton3}" Content="Zapisz" />
         </StackPanel>

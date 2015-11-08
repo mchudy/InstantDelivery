@@ -9,12 +9,17 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="0"
+        <ContentControl x:Name="VehiclesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <controls:VehiclesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls:VehiclesFilterPanel>
+        <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
+        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
@@ -29,10 +34,10 @@
                 <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:DataPager Grid.Row="2" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
-        <StackPanel Grid.Row="3" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="EditVehicle" Width="150">Edytuj</Button>
-            <Button x:Name="DeleteVehicle" Width="150">Usuń</Button>
+        <controls:DataPager Grid.Row="3" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <StackPanel Grid.Row="4" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button x:Name="EditVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
+            <Button x:Name="DeleteVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
         </StackPanel>
     </Grid>
 </UserControl>

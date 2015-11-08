@@ -105,6 +105,12 @@
     <Compile Include="Controls\EmployeesFilterPanel.xaml.cs">
       <DependentUpon>EmployeesFilterPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PackagesFilterPanel.xaml.cs">
+      <DependentUpon>PackagesFilterPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VehiclesFilterPanel.xaml.cs">
+      <DependentUpon>VehiclesFilterPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\EnumToDescriptionConverter.cs" />
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
@@ -215,6 +221,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\EmployeesFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PackagesFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VehiclesFilterPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

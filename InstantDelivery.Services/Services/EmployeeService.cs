@@ -32,6 +32,7 @@ namespace InstantDelivery.Services
 
         public void Reload(Employee employee)
         {
+            // jest bug, że jak sie zaznaczy i anuluje to wywala jakiś syf, help me POMOCY W BAZIE
             context.Entry(employee).Reload();
         }
 

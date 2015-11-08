@@ -1,11 +1,14 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
-using System.Linq;
+using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehicleManageViewModel : Screen
+    public class VehicleManageViewModel : EmployeesViewModelBase
     {
         private readonly IEmployeeService employeesService;
         private readonly IVehiclesService vehiclesService;
@@ -22,15 +25,15 @@ namespace InstantDelivery.ViewModel
             Employees = employeesService.GetAll();
         }
 
-        public int CurrentPage
+        public bool IsSelectedAnyRow
         {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
+            get { return SelectedEmployee != null; }
         }
+
+        protected override IQueryable<Employee> GetEmployees()
+            {
+            return employeesService.GetAll();
+            }
 
         public Employee SelectedEmployee
         {
@@ -39,6 +42,7 @@ namespace InstantDelivery.ViewModel
             {
                 selectedEmployee = value;
                 NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
 
@@ -57,13 +61,14 @@ namespace InstantDelivery.ViewModel
             if (result != true)
             {
                 employeesService.Reload(SelectedEmployee);
+                //TryClose(false);
             }
             else
             {
                 employeesService.Save();
             }
         }
-
+        
         public IQueryable<Employee> Employees
         {
             get { return employees; }

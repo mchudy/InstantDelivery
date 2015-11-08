@@ -27,7 +27,7 @@ namespace InstantDelivery.Tests
                 Weight = 100
             };
 
-            service.AddPackage(package);
+            service.RegisterPackage(package);
 
             mockSet.Verify(m => m.Add(package), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
@@ -41,7 +41,7 @@ namespace InstantDelivery.Tests
             var service = new PackageService(mockContext.Object, mockPricingStrategy.Object);
             var package = new Package();
 
-            service.AddPackage(package);
+            service.RegisterPackage(package);
 
             Assert.Equal(PackageStatus.New, package.Status);
         }
@@ -55,7 +55,7 @@ namespace InstantDelivery.Tests
             var service = new PackageService(mockContext.Object, mockPricingStrategy.Object);
             var package = new Package();
 
-            service.AddPackage(package);
+            service.RegisterPackage(package);
 
             Assert.Equal(10M, package.Cost);
         }

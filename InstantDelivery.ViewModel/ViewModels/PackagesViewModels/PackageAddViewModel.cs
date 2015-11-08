@@ -38,7 +38,7 @@ namespace InstantDelivery.ViewModel
 
         public void Save()
         {
-            service.AddPackage(NewPackage);
+            service.RegisterPackage(NewPackage);
             TryClose(true);
         }
 

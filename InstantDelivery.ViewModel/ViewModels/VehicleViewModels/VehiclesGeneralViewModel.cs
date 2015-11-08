@@ -1,11 +1,12 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
-    public class VehiclesGeneralViewModel : Screen
+    public class VehiclesGeneralViewModel : VehiclesViewModelBase
     {
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
@@ -25,15 +26,11 @@ namespace InstantDelivery.ViewModel
             Vehicles = vehiclesService.GetAll();
         }
 
-        public int CurrentPage
+        protected override IQueryable<Vehicle> GetVehicles()
         {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
+            return vehiclesService.GetAll();
         }
+
 
         public Vehicle SelectedVehicle
         {
@@ -42,17 +39,13 @@ namespace InstantDelivery.ViewModel
             {
                 selectedVehicle = value;
                 NotifyOfPropertyChange();
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
 
-        public IQueryable<Vehicle> Vehicles
+        public bool IsSelectedAnyRow
         {
-            get { return vehicles; }
-            set
-            {
-                vehicles = value;
-                NotifyOfPropertyChange();
-            }
+            get { return SelectedVehicle != null; }
         }
 
         public void EditVehicle()
