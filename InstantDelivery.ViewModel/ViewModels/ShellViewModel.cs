@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
 {
@@ -7,6 +8,7 @@ namespace InstantDelivery.ViewModel
         public ShellViewModel()
         {
             DisplayName = "Instant Delivery";
+            ActivateItem(IoC.Get<StartViewModel>());
         }
 
         public void Employees()

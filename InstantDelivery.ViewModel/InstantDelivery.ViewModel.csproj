@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\PackagesViewModels\PackageAddViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageEditViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackagesViewModelBase.cs" />
+    <Compile Include="ViewModels\StartViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\SelectVehicleForEmployeeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehicleManageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
