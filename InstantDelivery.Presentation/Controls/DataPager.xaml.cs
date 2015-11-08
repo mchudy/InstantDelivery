@@ -104,7 +104,14 @@ namespace InstantDelivery.Controls
 
         private void MoveToNextPage(object sender, RoutedEventArgs routedEventArgs)
         {
-            CurrentPage++;
+            if (CurrentPage + 1 > PagesCount)
+            {
+                CurrentPage = PagesCount == 0 ? 1 : PagesCount;
+            }
+            else
+            {
+                CurrentPage++;
+            }
         }
 
         private void MoveToPreviousPage(object sender, RoutedEventArgs routedEventArgs)
@@ -122,10 +129,6 @@ namespace InstantDelivery.Controls
         {
             if (ItemsSource == null) return;
             PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
-            if (CurrentPage > PagesCount)
-            {
-                CurrentPage = PagesCount == 0 ? 1 : PagesCount;
-            }
             ObservableCollection<object> collection = null;
             var itemsSource = ItemsSource;
             var currentPage = CurrentPage;
