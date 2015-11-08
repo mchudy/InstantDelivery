@@ -4,6 +4,9 @@ using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Bazowy model widoku dlda paczek.
+    /// </summary>
     public abstract class PackagesViewModelBase : Screen
     {
         private IQueryable<Package> packages;
@@ -11,6 +14,9 @@ namespace InstantDelivery.ViewModel
         private int currentPage = 1;
         private string idFilter = string.Empty;
 
+        /// <summary>
+        /// Kolekcja skojarzona z tabelą danych.
+        /// </summary>
         public IQueryable<Package> Packages
         {
             get { return packages; }
@@ -20,7 +26,9 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
-
+        /// <summary>
+        /// Filtr po ID wybrany przez użytkownika
+        /// </summary>
         public string IdFilter
         {
             get { return idFilter; }
@@ -39,7 +47,9 @@ namespace InstantDelivery.ViewModel
             newPackages = FilterPackages(newPackages);
             Packages = newPackages;
         }
-
+        /// <summary>
+        /// Bieżąca strona
+        /// </summary>
         public int CurrentPage
         {
             get { return currentPage; }

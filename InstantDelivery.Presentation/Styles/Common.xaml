@@ -13,7 +13,6 @@
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
         <Style.Triggers>
-            <!-- TODO: trzeba by to zrobić jakoś inaczej, bo jak dla każdego widoku mamy to pisać to trochę słabo-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ElementName=NewPackage_Weight, Path=(Validation.HasError)}" Value="false" />
@@ -53,7 +52,6 @@
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>
         <Style.Triggers>
-            <!-- TODO: trzeba by to zrobić jakoś inaczej, bo jak dla każdego widoku mamy to pisać to trochę słabo-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding ElementName=Employee_FirstName, Path=(Validation.HasError)}" Value="false" />
@@ -157,8 +155,6 @@
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
-    <!-- kolejne doraźne rozwiązanie. nie wiem jak to do końca rozwiązać. to właściwie dotyczy stylu trochę.. Moje rozwiązanie było krótsze, ale były klasy do walidacji zamiast atrybutów które są fajne :p -->
-    <!-- może ten feature musi byc taki, tu jest dużo zależności -->
     <Style TargetType="{x:Type Button}" x:Key="EditDialogSaveButton5" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="3"></Setter>
         <Setter Property="MinWidth" Value="60"></Setter>

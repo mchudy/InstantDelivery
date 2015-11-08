@@ -6,6 +6,9 @@ using System.Linq.Expressions;
 
 namespace InstantDelivery.Core.Extensions
 {
+    /// <summary>
+    /// Metody rozszerzające klasy IQuerable
+    /// </summary>
     public static class IQueryableExtensions
     {
         public static IList<T> Page<T>(this IQueryable<T> source, int pageNumber, int pageSize)

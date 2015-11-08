@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace InstantDelivery.Core.Migrations
 {
+    /// <summary>
+    /// Klasa konfigurująca bazę.
+    /// Posiada metody generujące testowe dane.
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<InstantDeliveryContext>
     {
         public Configuration()

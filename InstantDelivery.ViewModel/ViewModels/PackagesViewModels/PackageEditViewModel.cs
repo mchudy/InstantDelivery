@@ -7,6 +7,9 @@ using Screen = Caliburn.Micro.Screen;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku edycji paczki.
+    /// </summary>
     [ImplementPropertyChanged]
     public class PackageEditViewModel : Screen
     {
@@ -24,6 +27,9 @@ namespace InstantDelivery.ViewModel
         public Employee SelectedEmployee { get; set; }
         public bool IsDelivered { get; set; }
 
+        /// <summary>
+        /// Zapisuje zmiany dokonane w widoku.
+        /// </summary>
         public void Save()
         {
             TryClose(true);
@@ -36,12 +42,16 @@ namespace InstantDelivery.ViewModel
                 service.MarkAsDelivered(Package);
             }
         }
-
+        /// <summary>
+        /// Anuluje zmiany dokonane w widoku.
+        /// </summary>
         public void Cancel()
         {
             TryClose(false);
         }
-
+        /// <summary>
+        /// Wylicza na nowo koszt paczki na podstawie jej szczegółów.
+        /// </summary>
         public async void RefreshCost()
         {
             await Task.Run(() =>

@@ -4,16 +4,24 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    ///  Model widoku statystyk budżetowych.
+    /// </summary>
     public class StatisticsDeliveredPackagesViewModel : Screen
     {
         private IStatisticsService service;
-
+        /// <summary>
+        /// Konstruktor modelu widoku.
+        /// </summary>
+        /// <param name="service"></param>
         public StatisticsDeliveredPackagesViewModel(IStatisticsService service)
         {
             this.service = service;
             GenerateChart();
         }
-
+        /// <summary>
+        /// Kolekcja skojarzona ze źródłem danych na wykresie.
+        /// </summary>
         public BindableCollection<Population> Budget { get; } = new BindableCollection<Population>();
 
         private async void GenerateChart()

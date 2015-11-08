@@ -6,6 +6,9 @@ using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Bazowy modeul widoku dla widoków pracowników.
+    /// </summary>
     public abstract class VehiclesViewModelBase : Screen
     {
         private IQueryable<Vehicle> vehicles;
@@ -16,6 +19,9 @@ namespace InstantDelivery.ViewModel
         private string registrationNumberFilter = string.Empty;
         private VehicleSortingProperty? sortingProperty;
 
+        /// <summary>
+        /// Kolekcja skojarzona z taelą danych.
+        /// </summary>
         public IQueryable<Vehicle> Vehicles
         {
             get { return vehicles; }
@@ -25,7 +31,9 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
-
+        /// <summary>
+        /// Filtr po marce wpisany przez użytkownika.
+        /// </summary>
         public string BrandFilter
         {
             get { return brandFilter; }
@@ -35,7 +43,9 @@ namespace InstantDelivery.ViewModel
                 UpdateVehicles();
             }
         }
-
+        /// <summary>
+        /// Filtr po modelu wpisany przez użytkownika.
+        /// </summary>
         public string ModelFilter
         {
             get { return modelFilter; }
@@ -62,6 +72,9 @@ namespace InstantDelivery.ViewModel
             });
         }
 
+        /// <summary>
+        /// Bieżąca strona
+        /// </summary>
         public int CurrentPage
         {
             get { return currentPage; }
@@ -72,6 +85,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Filtr numeru rejestracyjnego wprowadzony przez użytkownika.
+        /// </summary>
         public string RegistrationNumberFilter
         {
             get { return registrationNumberFilter; }
@@ -81,7 +97,9 @@ namespace InstantDelivery.ViewModel
                 UpdateVehicles();
             }
         }
-
+        /// <summary>
+        /// Kryterium sortowania wybrane przez użytkownika.
+        /// </summary>
         public VehicleSortingProperty? SortingProperty
         {
             get { return sortingProperty; }
@@ -126,7 +144,9 @@ namespace InstantDelivery.ViewModel
                 .Where(e => RegistrationNumberFilter == "" || e.RegistrationNumber.StartsWith(RegistrationNumberFilter));
         }
     }
-
+    /// <summary>
+    /// Definicja kryterium sortowania.
+    /// </summary>
     public enum VehicleSortingProperty
     {
         [Description("Po marce")]

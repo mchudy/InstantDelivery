@@ -3,6 +3,9 @@ using System.Data.Entity;
 
 namespace InstantDelivery.Core
 {
+    /// <summary>
+    /// Kontekst danych
+    /// </summary>
     public class InstantDeliveryContext : DbContext
     {
         public virtual IDbSet<Employee> Employees { get; set; }
