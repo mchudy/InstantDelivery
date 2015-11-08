@@ -11,6 +11,9 @@
     <StackPanel Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
         <Label Content="Numer paczki:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
         <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding IdFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <Label Content="Status:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
+        <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding PackageStatusFilter}" Style="{StaticResource EditComboBoxLabel}"
+                  ItemsSource="{helpers:EnumSource {x:Type viewModel:PackageStatusFilter}}" Height="15" Margin="5 0 5 0" />
     </StackPanel>
 </UserControl>
 

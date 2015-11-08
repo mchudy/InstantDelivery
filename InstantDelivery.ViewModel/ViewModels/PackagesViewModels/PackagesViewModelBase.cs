@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel;
+using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using System.Linq;
 
@@ -70,8 +71,46 @@ namespace InstantDelivery.ViewModel
         private IQueryable<Package> FilterPackages(IQueryable<Package> newVehicles)
         {
             CurrentPage = 1;
-            return newVehicles
+            var tmp = newVehicles
                 .Where(e => idFilter == "" || e.Id.ToString().StartsWith(idFilter));
+            switch (PackageStatusFilter)
+            {
+                case PackageStatusFilter.Delivered:
+                    return tmp.Where(e => e.Status == PackageStatus.Delivered);
+                case PackageStatusFilter.InProgress:
+                    return tmp.Where(e => e.Status == PackageStatus.InDelivery);
+                case PackageStatusFilter.New:
+                    return tmp.Where(e => e.Status == PackageStatus.New);
+                default:
+                    return tmp;
+            }
         }
+
+        private PackageStatusFilter packageStatusFilter = PackageStatusFilter.All;
+
+        /// <summary>
+        /// Filtr statusu paczki wybrany przez użytkownika
+        /// </summary>
+        public PackageStatusFilter PackageStatusFilter
+        {
+            get { return packageStatusFilter; }
+            set
+            {
+                packageStatusFilter = value;
+                UpdatePackages();
+            }
+        }
+    }
+
+    public enum PackageStatusFilter
+    {
+        [Description("Dostarczone")]
+        Delivered,
+        [Description("Nowe")]
+        New,
+        [Description("W toku")]
+        InProgress,
+        [Description("Wszystkie")]
+        All
     }
 }
