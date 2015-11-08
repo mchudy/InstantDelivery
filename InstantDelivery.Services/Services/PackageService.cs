@@ -23,7 +23,6 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        //TODO sprawdzanie czy paczka mieści się w samochodzie / transakcja(?)
         public bool AssignPackage(Package package, Employee employee)
         {
             package.Status = PackageStatus.InDelivery;
@@ -47,10 +46,14 @@ namespace InstantDelivery.Services
 
         public void MarkAsDelivered(Package package)
         {
+            //using (var transaction = context.Database.BeginTransaction())
+            //{
             package.Status = PackageStatus.Delivered;
-            var owner = context.Employees.FirstOrDefault(e => e.Packages.Contains(package));
+            var owner = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
             owner?.Packages.Remove(package);
             context.SaveChanges();
+            //  transaction.Commit();
+            //}
         }
 
         public IQueryable<Package> GetAll()

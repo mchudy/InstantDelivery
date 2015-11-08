@@ -22,18 +22,19 @@ namespace InstantDelivery.ViewModel
         public Package Package { get; set; }
         public IQueryable<Employee> Employees { get; set; }
         public Employee SelectedEmployee { get; set; }
+        public bool IsDelivered { get; set; }
 
-        public async void Save()
+        public void Save()
         {
             TryClose(true);
-            if (Package.Status != PackageStatus.Delivered && SelectedEmployee != null)
+            if (Package.Status == PackageStatus.New && SelectedEmployee != null)
             {
                 service.AssignPackage(Package, SelectedEmployee);
             }
-            await Task.Run(() =>
+            else if (Package.Status == PackageStatus.InDelivery && IsDelivered)
             {
-                service.CalculatePackageCost(Package);
-            });
+                service.MarkAsDelivered(Package);
+            }
         }
 
         public void Cancel()

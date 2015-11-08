@@ -56,7 +56,6 @@
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="GeneralPackages" Content="Ogólne"></Button>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="PackageAdd" Content="Dodaj przesyłkę"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManagePackages" Content="Zarządzaj przesyłkami"></Button>
                 </StackPanel>
             </Expander>
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Zestawienia" Name="Zestawienia" IsExpanded="True">
