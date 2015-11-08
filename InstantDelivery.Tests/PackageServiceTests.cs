@@ -5,6 +5,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using InstantDelivery.Core.Pricing;
 using Xunit;
 
 namespace InstantDelivery.Tests

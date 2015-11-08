@@ -1,6 +1,6 @@
 ﻿using InstantDelivery.Core.Entities;
 
-namespace InstantDelivery.Services
+namespace InstantDelivery.Core.Pricing
 {
     public class RegularPricingStrategy : IPricingStrategy
     {
