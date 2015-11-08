@@ -1,11 +1,13 @@
 ﻿using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using PropertyChanged;
 using System.Linq;
 using System.Threading.Tasks;
 using Screen = Caliburn.Micro.Screen;
 
 namespace InstantDelivery.ViewModel
 {
+    [ImplementPropertyChanged]
     public class PackageEditViewModel : Screen
     {
         private readonly IPackageService service;
@@ -15,29 +17,11 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
-        private IQueryable<Employee> employees;
-        private Employee selectedEmployee;
+        public bool IsPackageDataReadOnly => Package.Status != PackageStatus.New;
+
         public Package Package { get; set; }
-
-        public IQueryable<Employee> Employees
-        {
-            get { return employees; }
-            set
-            {
-                employees = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public Employee SelectedEmployee
-        {
-            get { return selectedEmployee; }
-            set
-            {
-                selectedEmployee = value;
-                NotifyOfPropertyChange();
-            }
-        }
+        public IQueryable<Employee> Employees { get; set; }
+        public Employee SelectedEmployee { get; set; }
 
         public async void Save()
         {
