@@ -5,7 +5,7 @@ using PropertyChanged;
 namespace InstantDelivery.Core.Entities
 {
     [ImplementPropertyChanged]
-    public class Package : Entity
+    public class Package : ValidationBase
     {
         public Package()
         {
@@ -15,19 +15,19 @@ namespace InstantDelivery.Core.Entities
         public Address ShippingAddress { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Range(0, 150, ErrorMessage = "Paczka przekracza maksymalną dopuszczalną wagę")]
+        [Range(1, 150, ErrorMessage = "Paczka posiada niedopuszczalną wagę")]
         public decimal Weight { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Range(0, 100, ErrorMessage = "Paczka przekracza maksymalną dopuszczalną wysokość")]
+        [Range(1, 100, ErrorMessage = "Paczka posiada niedopuszczalną wysokość")]
         public double Height { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Range(0, 100, ErrorMessage = "Paczka przekracza maksymalną dopuszczalną szerokość")]
+        [Range(1, 100, ErrorMessage = "Paczka posiada niedopuszczalną szerokość")]
         public double Width { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Range(0, 250, ErrorMessage = "Paczka przekracza maksymalną dopuszczalną długość")]
+        [Range(1, 250, ErrorMessage = "Paczka posiada niedopuszczalną długość")]
         public double Length { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]

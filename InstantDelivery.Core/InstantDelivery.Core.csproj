@@ -77,6 +77,14 @@
     <Compile Include="Migrations\201511071854184_VehicleModelValidation.Designer.cs">
       <DependentUpon>201511071854184_VehicleModelValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511081054317_RequiredInPackage.cs" />
+    <Compile Include="Migrations\201511081054317_RequiredInPackage.Designer.cs">
+      <DependentUpon>201511081054317_RequiredInPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511081058095_RequiredInPackageOff.cs" />
+    <Compile Include="Migrations\201511081058095_RequiredInPackageOff.Designer.cs">
+      <DependentUpon>201511081058095_RequiredInPackageOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
@@ -99,6 +107,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511071854184_VehicleModelValidation.resx">
       <DependentUpon>201511071854184_VehicleModelValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511081054317_RequiredInPackage.resx">
+      <DependentUpon>201511081054317_RequiredInPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511081058095_RequiredInPackageOff.resx">
+      <DependentUpon>201511081058095_RequiredInPackageOff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

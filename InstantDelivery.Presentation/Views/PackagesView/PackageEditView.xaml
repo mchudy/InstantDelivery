@@ -6,7 +6,7 @@
         xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
         xmlns:cal="http://www.caliburnproject.org"
         Background="White"
-        Height="500" Width="450" WindowStartupLocation="CenterOwner"
+        Height="700" Width="450" WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" ShowTitleBar="False" ShowIconOnTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False" ShowCloseButton="False" >
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
         <Grid.ColumnDefinitions>
@@ -21,7 +21,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Content="Waga:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
@@ -42,8 +47,26 @@
 
         <Label Content="Koszt:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
         <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="Package_Cost" Style="{StaticResource EditDialogTextBox}" />
-        
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
+
+        <Label Content="Kraj:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="6" x:Name="Package_ShippingAddress_Country" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Miasto:" Grid.Column="0" Grid.Row="7" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="7" x:Name="Package_ShippingAddress_City" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Ulica:" Grid.Column="0" Grid.Row="8" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="8" x:Name="Package_ShippingAddress_Street" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Numer domu:" Grid.Column="0" Grid.Row="9" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="9" x:Name="Package_ShippingAddress__Number" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Kod pocztowy:" Grid.Column="0" Grid.Row="10" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox  Grid.Column="1" Grid.Row="10" x:Name="Package_ShippingAddress_PostalCode" Style="{StaticResource EditDialogTextBox}" />
+
+        <Label Content="Województwo:" Grid.Column="0" Grid.Row="11" Style="{StaticResource EditDialogLabel}"  />
+        <TextBox Grid.Column="1" Grid.Row="11" x:Name="Package_ShippingAddress_State" Style="{StaticResource EditDialogTextBox}" />
+
+        <StackPanel Grid.Row="12" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
             <Button x:Name="Save"  Style="{StaticResource EditDialogSaveButtonPackages}" Content="Zapisz" />
         </StackPanel>
