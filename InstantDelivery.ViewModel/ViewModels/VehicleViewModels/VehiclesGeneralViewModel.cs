@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.ViewModel
@@ -11,8 +11,6 @@ namespace InstantDelivery.ViewModel
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Vehicle selectedVehicle;
-        private IQueryable<Vehicle> vehicles;
-        private int currentPage = 1;
         private VehicleEditViewModel vehiclesEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
 
@@ -43,10 +41,7 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        public bool IsSelectedAnyRow
-        {
-            get { return SelectedVehicle != null; }
-        }
+        public bool IsSelectedAnyRow => SelectedVehicle != null;
 
         public void EditVehicle()
         {

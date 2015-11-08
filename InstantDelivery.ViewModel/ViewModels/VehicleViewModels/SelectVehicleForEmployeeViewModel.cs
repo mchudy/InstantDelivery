@@ -1,80 +1,43 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
+using PropertyChanged;
 using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
+    [ImplementPropertyChanged]
     public class SelectVehicleForEmployeeViewModel : Screen
     {
         public IEmployeeService employeeService;
         public IVehiclesService vehicleService;
 
-        private Employee selectedEmployee;
-
-        public Employee SelectedEmployee
-        {
-            get
-            {
-                return selectedEmployee;
-            }
-            set
-            {
-                selectedEmployee = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        private Vehicle selectedVehicle;
-
-        public Vehicle SelectedVehicle
-        {
-            get
-            {
-                return selectedVehicle;
-            }
-            set
-            {
-                selectedVehicle = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        private IQueryable<Vehicle> vehicles;
-
-        public IQueryable<Vehicle> Vehicles
-        {
-            get { return vehicles; }
-            set
-            {
-                vehicles = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        // chce tu wstrzyknąć SelectedEmployee (z poprzedniego widoku czyli z VehicleManageViewModel z zaznaczonego na gridzie elementu)
-        // to vehicles sie nie binduje, help :<
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService, IVehiclesService vehicleService)
         {
             this.employeeService = employeeService;
             this.vehicleService = vehicleService;
-            Vehicles = vehicleService.GetAllAvailableAndCurrent(SelectedVehicle);
         }
 
-        public void ChangeVehicleForEmployee()
-        {
-            SelectedEmployee.Vehicle = SelectedVehicle;
-        }
+        public bool HasVehicle { get; set; }
+
+        public Employee SelectedEmployee { get; set; }
+
+        public Vehicle SelectedVehicle { get; set; }
+
+        public IQueryable<Vehicle> Vehicles { get; set; }
 
         public void Save()
         {
-            employeeService.ChangeEmployeesVehicle(SelectedEmployee, selectedVehicle);
+            if (!HasVehicle)
+            {
+                SelectedVehicle = null;
+            }
+            employeeService.ChangeEmployeesVehicle(SelectedEmployee, SelectedVehicle);
             TryClose(true);
         }
 
         public void Cancel()
         {
-            //employeeService.Reload(SelectedEmployee);
             TryClose(false);
         }
     }

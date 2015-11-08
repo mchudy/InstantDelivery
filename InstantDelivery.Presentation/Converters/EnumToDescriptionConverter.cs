@@ -17,7 +17,7 @@ namespace InstantDelivery.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return Enum.ToObject(targetType, value);
         }
     }
 

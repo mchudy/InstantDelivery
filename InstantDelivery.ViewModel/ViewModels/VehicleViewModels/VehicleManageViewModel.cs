@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using System.ComponentModel;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,8 +13,6 @@ namespace InstantDelivery.ViewModel
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
-        private IQueryable<Employee> employees;
-        private int currentPage = 1;
 
         public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager, IVehiclesService vehiclesService)
         {
@@ -31,9 +28,9 @@ namespace InstantDelivery.ViewModel
         }
 
         protected override IQueryable<Employee> GetEmployees()
-            {
+        {
             return employeesService.GetAll();
-            }
+        }
 
         public Employee SelectedEmployee
         {
@@ -56,26 +53,16 @@ namespace InstantDelivery.ViewModel
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,
-                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle)
+                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle),
+                HasVehicle = SelectedEmployee.Vehicle != null
             });
             if (result != true)
             {
                 employeesService.Reload(SelectedEmployee);
-                //TryClose(false);
             }
             else
             {
                 employeesService.Save();
-            }
-        }
-        
-        public IQueryable<Employee> Employees
-        {
-            get { return employees; }
-            set
-            {
-                employees = value;
-                NotifyOfPropertyChange();
             }
         }
 
