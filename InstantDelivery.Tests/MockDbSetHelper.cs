@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace InstantDelivery.Tests
 {
+    /// <summary>
+    /// Zapewnia pomocnicze metody do mockowania obiektów <see cref="DbSet"/>
+    /// </summary>
     public static class MockDbSetHelper
     {
         public static Mock<DbSet<T>> GetMockSet<T>(IQueryable<T> data) where T : class

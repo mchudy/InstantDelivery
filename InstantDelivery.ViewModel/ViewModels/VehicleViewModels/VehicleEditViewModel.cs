@@ -20,6 +20,7 @@ namespace InstantDelivery.ViewModel
         {
             TryClose(true);
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>

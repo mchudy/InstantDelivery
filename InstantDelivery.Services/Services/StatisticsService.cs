@@ -11,6 +11,7 @@ namespace InstantDelivery.Services
     public class StatisticsService : IStatisticsService
     {
         private readonly InstantDeliveryContext context;
+
         /// <summary>
         /// Konstruktor wasrty serwisu
         /// </summary>
@@ -19,6 +20,7 @@ namespace InstantDelivery.Services
         {
             this.context = context;
         }
+
         /// <summary>
         /// Zwraca sumę wartości cen wszystkich paczek
         /// </summary>
@@ -27,6 +29,7 @@ namespace InstantDelivery.Services
         {
             return (int)context.Employees.Where(e => e.Packages.Any()).Sum(e => e.Packages.Sum(p => p.Cost));
         }
+
         /// <summary>
         /// Zwraca sumę wartości pensji wszystkich pracowników
         /// </summary>
@@ -35,6 +38,7 @@ namespace InstantDelivery.Services
         {
             return (int)context.Employees.Sum(e => e.Salary);
         }
+
         /// <summary>
         /// Zwraca wartość podatków
         /// </summary>
@@ -45,6 +49,7 @@ namespace InstantDelivery.Services
         {
             return (int)((valueOfPackages * 0.25) + (employeesSalaries * 0.40));
         }
+
         /// <summary>
         /// Zwraca liczbę aktualnych pracowników
         /// </summary>
@@ -53,6 +58,7 @@ namespace InstantDelivery.Services
         {
             return context.Employees.Count();
         }
+
         /// <summary>
         /// Zwraca liczbę aktualnych pojazdów
         /// </summary>
@@ -61,6 +67,7 @@ namespace InstantDelivery.Services
         {
             return context.Vehicles.Count();
         }
+
         /// <summary>
         /// Zwraca liczbę dostarczanych paczek
         /// </summary>
@@ -69,6 +76,7 @@ namespace InstantDelivery.Services
         {
             return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.Id == p.Id)) == 1);
         }
+
         /// <summary>
         /// Zwraca liczbbę niedostarczanych paczek
         /// </summary>
@@ -77,6 +85,7 @@ namespace InstantDelivery.Services
         {
             return context.Packages.Count(p => context.Employees.Count(e => e.Packages.Any(x => x.Id == p.Id)) == 0);
         }
+
         /// <summary>
         /// Zwraca liczbę wszystkich paczek
         /// </summary>
@@ -85,6 +94,7 @@ namespace InstantDelivery.Services
         {
             return context.Packages.Count();
         }
+
         /// <summary>
         /// Zwraca liczbę używanych pojazdów przez pracowników
         /// </summary>
@@ -93,6 +103,7 @@ namespace InstantDelivery.Services
         {
             return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.Id == p.Id) == 1);
         }
+
         /// <summary>
         /// Zwraca liczbę nieuzywanych pojazdów przez pracowników
         /// </summary>
@@ -101,6 +112,7 @@ namespace InstantDelivery.Services
         {
             return context.Vehicles.Count(p => context.Employees.Count(e => e.Vehicle.Id == p.Id) == 0);
         }
+
         /// <summary>
         /// Generuje wykres statystyk ogólnych
         /// </summary>
@@ -125,6 +137,7 @@ namespace InstantDelivery.Services
             Values.Add(new Population() { Name = "Wolne paczki", Count = numberOfPackagesWithoutEmployee });
         }
     }
+
     /// <summary>
     /// Pomocnicza klasa do konstrukcji wykresu
     /// </summary>

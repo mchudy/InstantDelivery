@@ -17,6 +17,7 @@ namespace InstantDelivery.ViewModel
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
@@ -38,6 +39,7 @@ namespace InstantDelivery.ViewModel
         {
             get { return SelectedEmployee != null; }
         }
+
         /// <summary>
         /// Metoda zwraca kolekcję wszystkich pracowników.
         /// </summary>
@@ -46,6 +48,7 @@ namespace InstantDelivery.ViewModel
         {
             return employeesService.GetAll();
         }
+
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
@@ -59,6 +62,7 @@ namespace InstantDelivery.ViewModel
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
+
         /// <summary>
         /// Delegat zdarzenia kliknięcia w przycisk przechodzący do widoku edycji pojazdu.
         /// </summary>
@@ -68,7 +72,7 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService)
+            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService)
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,

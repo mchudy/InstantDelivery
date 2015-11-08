@@ -10,6 +10,7 @@ namespace InstantDelivery.Services
     public class VehiclesService : IVehiclesService
     {
         private InstantDeliveryContext context;
+
         /// <summary>
         /// Konstruktor warstwy serwisu
         /// </summary>
@@ -18,6 +19,7 @@ namespace InstantDelivery.Services
         {
             this.context = context;
         }
+
         /// <summary>
         /// Zwraca wszystkie pojazdy
         /// </summary>
@@ -26,6 +28,7 @@ namespace InstantDelivery.Services
         {
             return context.Vehicles;
         }
+
         /// <summary>
         /// Zwraca wszystkie modele pojazdów
         /// </summary>
@@ -34,6 +37,7 @@ namespace InstantDelivery.Services
         {
             return context.VehicleModels;
         }
+
         /// <summary>
         /// Aktualizuje dane pojqzdu
         /// </summary>
@@ -42,6 +46,7 @@ namespace InstantDelivery.Services
         {
             context.Entry(vehicle).Reload();
         }
+
         /// <summary>
         /// Usuwa pojazd do bazy danych
         /// </summary>
@@ -51,6 +56,7 @@ namespace InstantDelivery.Services
             context.Vehicles.Remove(vehicle);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Dodaje pojazd do bazy danych
         /// </summary>
@@ -60,6 +66,7 @@ namespace InstantDelivery.Services
             context.Vehicles.Add(vehicle);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Zapisuje aktualny stan
         /// </summary>
@@ -67,6 +74,7 @@ namespace InstantDelivery.Services
         {
             context.SaveChanges();
         }
+
         /// <summary>
         /// Zwraca kolekcję wszystkich wolnych pojzdów i pojazdu wyspecyfikowanego
         /// </summary>

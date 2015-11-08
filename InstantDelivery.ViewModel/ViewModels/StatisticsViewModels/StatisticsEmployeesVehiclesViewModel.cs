@@ -10,6 +10,7 @@ namespace InstantDelivery.ViewModel
     public class StatisticsEmployeesVehiclesViewModel : Screen
     {
         private IStatisticsService service;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
@@ -19,6 +20,7 @@ namespace InstantDelivery.ViewModel
             this.service = service;
             GenerateChart();
         }
+
         /// <summary>
         /// Kolekcja wartości skojarzona ze źródłem danych wykresu.
         /// </summary>

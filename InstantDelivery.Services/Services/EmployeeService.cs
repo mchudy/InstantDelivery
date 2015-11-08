@@ -18,6 +18,7 @@ namespace InstantDelivery.Services
         {
             this.context = context;
         }
+
         /// <summary>
         /// Zmienia pojazd przypisany do pracownika
         /// </summary>
@@ -43,14 +44,16 @@ namespace InstantDelivery.Services
         {
             return context.Employees;
         }
+
         /// <summary>
-        /// Aktualizuje dane pracownika
+        /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany
         /// </summary>
         /// <param name="employee"></param>
         public void Reload(Employee employee)
         {
             context.Entry(employee).Reload();
         }
+
         /// <summary>
         /// Usuwa pracownika z bazy danych
         /// </summary>
@@ -65,6 +68,7 @@ namespace InstantDelivery.Services
             context.Employees.Remove(employee);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Dodaje pracownika do bazy danych
         /// </summary>
@@ -74,6 +78,7 @@ namespace InstantDelivery.Services
             context.Employees.Add(employee);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Zapisuje aktualne zmiany
         /// </summary>

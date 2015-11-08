@@ -11,6 +11,7 @@ namespace InstantDelivery.Services
     {
         private InstantDeliveryContext context;
         private IPricingStrategy pricingStrategy;
+
         /// <summary>
         /// Konstruktor warstwy serwisu
         /// </summary>
@@ -21,6 +22,17 @@ namespace InstantDelivery.Services
             this.context = context;
             this.pricingStrategy = pricingStrategy;
         }
+
+
+        /// <summary>
+        /// Zwraca wszystkie paczki w bazie danych
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<Package> GetAll()
+        {
+            return context.Packages;
+        }
+
         /// <summary>
         /// Rejestruje daną paczkę w bazie danych
         /// </summary>
@@ -32,6 +44,7 @@ namespace InstantDelivery.Services
             context.Packages.Add(package);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Przypisuje paczkę do pracownika i zmienia jej status
         /// </summary>
@@ -46,12 +59,23 @@ namespace InstantDelivery.Services
             return true;
         }
 
+        /// <summary>
+        /// Zwraca pracownika do którego przypisana jest dana paczka
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         public Employee GetAssignedEmployee(Package package)
         {
             if (package == null) return null;
             return context.Employees.FirstOrDefault(e => e.Packages.Count(p => p.Id == package.Id) > 0);
         }
 
+        /// <summary>
+        /// Zwraca wszytskich pracowników, dla których przypisanie danej paczki
+        /// nie przekroczy maksymalnej ładowności samochodu
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         public IQueryable<Employee> GetAvailableEmployees(Package package)
         {
             return context.Employees
@@ -59,30 +83,28 @@ namespace InstantDelivery.Services
                             e.Vehicle.VehicleModel.Payload);
         }
 
+        /// <summary>
+        /// Oznacza paczkę jako dostarczoną i usuwa ją ze zbioru paczek 
+        /// dostarczającego pracownika
+        /// </summary>
+        /// <param name="package"></param>
         public void MarkAsDelivered(Package package)
         {
-            //using (var transaction = context.Database.BeginTransaction())
-            //{
             package.Status = PackageStatus.Delivered;
             var owner = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
             owner?.Packages.Remove(package);
             context.SaveChanges();
-            //  transaction.Commit();
-            //}
         }
 
-        public IQueryable<Package> GetAll()
-        {
-            return context.Packages;
-        }
         /// <summary>
-        /// Aktualizuje dane danej paczki
+        /// Wczytuje obiekt danej paczki z bazy danych, ignorując wprowadzone zmiany
         /// </summary>
         /// <param name="selectedPackage"></param>
         public void Reload(Package selectedPackage)
         {
             context.Entry(selectedPackage).Reload();
         }
+
         /// <summary>
         /// Zapisuje aktualne zmiany
         /// </summary>
@@ -90,6 +112,7 @@ namespace InstantDelivery.Services
         {
             context.SaveChanges();
         }
+
         /// <summary>
         /// Usuwa paczkę z bazy danych
         /// </summary>
@@ -99,6 +122,7 @@ namespace InstantDelivery.Services
             context.Packages.Remove(selectedPackage);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Oblicza koszt paczki na podstawie jej szczegółów.
         /// </summary>

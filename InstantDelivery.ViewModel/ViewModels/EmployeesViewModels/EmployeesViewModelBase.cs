@@ -18,6 +18,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
         private EmployeeSortingProperty? sortingProperty;
+
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
@@ -30,6 +31,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Filtr nazwiska wybrany przez użytkownika.
         /// </summary>
@@ -42,6 +44,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 UpdateEmployees();
             }
         }
+
         /// <summary>
         /// Filtr imienia wybrany przez użytkownika.
         /// </summary>
@@ -51,6 +54,45 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             set
             {
                 firstNameFilter = value;
+                UpdateEmployees();
+            }
+        }
+
+        /// <summary>
+        /// Aktualna strona.
+        /// </summary>
+        public int CurrentPage
+        {
+            get { return currentPage; }
+            set
+            {
+                currentPage = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+        /// <summary>
+        /// Filtr adresu email wybrany przez użytkownika.
+        /// </summary>
+        public string EmailFilter
+        {
+            get { return emailFilter; }
+            set
+            {
+                emailFilter = value;
+                UpdateEmployees();
+            }
+        }
+
+        /// <summary>
+        /// Kryterium sortowania wybrane przez użytkownika.
+        /// </summary>
+        public EmployeeSortingProperty? SortingProperty
+        {
+            get { return sortingProperty; }
+            set
+            {
+                sortingProperty = value;
                 UpdateEmployees();
             }
         }
@@ -69,42 +111,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 newEmployees = FilterEmployees(newEmployees);
                 Employees = newEmployees;
             });
-        }
-        /// <summary>
-        /// Aktualna strona.
-        /// </summary>
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
-        }
-        /// <summary>
-        /// Filtr adresu email wybrany przez użytkownika.
-        /// </summary>
-        public string EmailFilter
-        {
-            get { return emailFilter; }
-            set
-            {
-                emailFilter = value;
-                UpdateEmployees();
-            }
-        }
-        /// <summary>
-        /// Kryterium sortowania wybrane przez użytkownika.
-        /// </summary>
-        public EmployeeSortingProperty? SortingProperty
-        {
-            get { return sortingProperty; }
-            set
-            {
-                sortingProperty = value;
-                UpdateEmployees();
-            }
         }
 
         protected override void OnActivate()

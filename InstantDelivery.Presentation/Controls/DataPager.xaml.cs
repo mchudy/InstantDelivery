@@ -81,6 +81,9 @@ namespace InstantDelivery.Controls
             DependencyProperty.Register("PageSize", typeof(int),
                 typeof(DataPager), new UIPropertyMetadata(initiallPageSize, OnPropertyChanged));
 
+        /// <summary>
+        /// Liczba stron
+        /// </summary>
         public int PagesCount
         {
             get { return pagesCount; }
@@ -91,8 +94,14 @@ namespace InstantDelivery.Controls
             }
         }
 
+        /// <summary>
+        /// Zwraca wartość wskazującą czy możliwe jest przejście na następną stronę
+        /// </summary>
         public bool IsEnabledNextPage => CurrentPage * PageSize < ItemsSource?.Count();
 
+        /// <summary>
+        /// Zwraca wartość wskazującą czy możliwe jest przejście na poprzednią stronę
+        /// </summary>
         public bool IsEnabledPreviousPage => CurrentPage > 1;
 
         public event PropertyChangedEventHandler PropertyChanged;

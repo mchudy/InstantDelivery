@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Core.Entities;
+using System.Linq;
 
 namespace InstantDelivery.ViewModel
 {
@@ -39,14 +39,6 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        protected abstract IQueryable<Package> GetPackages();
-
-        protected void UpdatePackages()
-        {
-            var newPackages = GetPackages();
-            newPackages = FilterPackages(newPackages);
-            Packages = newPackages;
-        }
         /// <summary>
         /// Bieżąca strona
         /// </summary>
@@ -58,6 +50,15 @@ namespace InstantDelivery.ViewModel
                 currentPage = value;
                 NotifyOfPropertyChange();
             }
+        }
+
+        protected abstract IQueryable<Package> GetPackages();
+
+        protected void UpdatePackages()
+        {
+            var newPackages = GetPackages();
+            newPackages = FilterPackages(newPackages);
+            Packages = newPackages;
         }
 
         protected override void OnActivate()

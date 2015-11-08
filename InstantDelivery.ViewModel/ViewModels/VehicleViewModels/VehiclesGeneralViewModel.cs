@@ -53,6 +53,7 @@ namespace InstantDelivery.ViewModel
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsSelectedAnyRow)));
             }
         }
+
         /// <summary>
         /// Flaga informująca o tym czy jest zaznaczony aktualnie jakiś wiersz w tabeli danych.
         /// </summary>
@@ -82,6 +83,7 @@ namespace InstantDelivery.ViewModel
                 }
             });
         }
+
         /// <summary>
         /// Delegat zdarzenia usuwania pojazdu.
         /// </summary>

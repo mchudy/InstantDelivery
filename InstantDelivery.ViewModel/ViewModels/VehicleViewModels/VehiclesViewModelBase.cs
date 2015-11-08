@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
+﻿using Caliburn.Micro;
+using InstantDelivery.Core.Entities;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Caliburn.Micro;
-using InstantDelivery.Core.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -31,6 +31,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Filtr po marce wpisany przez użytkownika.
         /// </summary>
@@ -43,6 +44,7 @@ namespace InstantDelivery.ViewModel
                 UpdateVehicles();
             }
         }
+
         /// <summary>
         /// Filtr po modelu wpisany przez użytkownika.
         /// </summary>
@@ -54,22 +56,6 @@ namespace InstantDelivery.ViewModel
                 modelFilter = value;
                 UpdateVehicles();
             }
-        }
-
-        protected abstract IQueryable<Vehicle> GetVehicles();
-
-        protected async void UpdateVehicles()
-        {
-            await Task.Run(() =>
-            {
-                var newVehicles = GetVehicles();
-                if (SortingProperty != null)
-                {
-                    newVehicles = SortVehicles(newVehicles);
-                }
-                newVehicles = FilterVehicles(newVehicles);
-                Vehicles = newVehicles;
-            });
         }
 
         /// <summary>
@@ -97,6 +83,7 @@ namespace InstantDelivery.ViewModel
                 UpdateVehicles();
             }
         }
+
         /// <summary>
         /// Kryterium sortowania wybrane przez użytkownika.
         /// </summary>
@@ -108,6 +95,22 @@ namespace InstantDelivery.ViewModel
                 sortingProperty = value;
                 UpdateVehicles();
             }
+        }
+
+        protected abstract IQueryable<Vehicle> GetVehicles();
+
+        protected async void UpdateVehicles()
+        {
+            await Task.Run(() =>
+            {
+                var newVehicles = GetVehicles();
+                if (SortingProperty != null)
+                {
+                    newVehicles = SortVehicles(newVehicles);
+                }
+                newVehicles = FilterVehicles(newVehicles);
+                Vehicles = newVehicles;
+            });
         }
 
         protected override void OnActivate()

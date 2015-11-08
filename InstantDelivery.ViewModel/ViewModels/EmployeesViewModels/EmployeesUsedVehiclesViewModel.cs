@@ -16,6 +16,7 @@ namespace InstantDelivery.ViewModel
         private readonly IWindowManager windowManager;
         private Employee selectedRow;
         private EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
@@ -30,6 +31,7 @@ namespace InstantDelivery.ViewModel
             this.usedVehiclesDetailsViewModel = usedVehiclesDetailsViewModel;
             Employees = employeeService.GetAll();
         }
+
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
@@ -43,10 +45,12 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange(() => IsEnabledViewDetails);
             }
         }
+
         /// <summary>
         /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz w tabeli danych.
         /// </summary>
         public bool IsEnabledViewDetails => SelectedRow != null;
+
         /// <summary>
         /// Delegat zdarzenia przejścia do widoku szczegółów pojazdu używanego przez zaznaczonego pracownika.
         /// </summary>

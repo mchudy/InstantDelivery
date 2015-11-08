@@ -14,6 +14,7 @@ namespace InstantDelivery.ViewModel
         {
             TryClose(true);
         }
+
         /// <summary>
         /// Anuluje bieżący proces dokonywania zmian.
         /// </summary>

@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.ViewModel.ViewModels;
 
 namespace InstantDelivery.ViewModel
 {
@@ -10,6 +9,7 @@ namespace InstantDelivery.ViewModel
             DisplayName = "Instant Delivery";
             ActivateItem(IoC.Get<StartViewModel>());
         }
+
         /// <summary>
         /// Widok pracowników
         /// </summary>
@@ -18,6 +18,7 @@ namespace InstantDelivery.ViewModel
             //TODO
             ActivateItem(IoC.Get<EmployeesViewModel>());
         }
+
         /// <summary>
         /// Widok dodawania pracownika
         /// </summary>
@@ -25,6 +26,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeeAddViewModel>());
         }
+
         /// <summary>
         /// Widok przeglądania paczek pracowników
         /// </summary>
@@ -32,6 +34,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeesManagedPackagesViewModel>());
         }
+
         /// <summary>
         /// Widok przeglądania samochodów pracowników
         /// </summary>
@@ -39,6 +42,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<EmployeesUsedVehiclesViewModel>());
         }
+
         /// <summary>
         /// Ogólny widok pojazdów
         /// </summary>
@@ -46,6 +50,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<VehiclesGeneralViewModel>());
         }
+
         /// <summary>
         /// Widok dodawania pojazdu
         /// </summary>
@@ -53,6 +58,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<VehiclesAddViewModel>());
         }
+
         /// <summary>
         /// Widok statystyk dostarczonych paczek
         /// </summary>
@@ -60,6 +66,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<StatisticsDeliveredPackagesViewModel>());
         }
+
         /// <summary>
         /// Widok statystyk pojazdów
         /// </summary>
@@ -67,6 +74,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<StatisticsEmployeesVehiclesViewModel>());
         }
+
         /// <summary>
         /// Ogólny widok paczek
         /// </summary>
@@ -74,6 +82,7 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<GeneralPackagesViewModel>());
         }
+
         /// <summary>
         /// Widok dodawania paczki
         /// </summary>
@@ -81,13 +90,13 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<PackageAddViewModel>());
         }
+
         /// <summary>
         /// Widok zarządzania pojazdami
         /// </summary>
         public void VehicleManage()
         {
             ActivateItem(IoC.Get<VehicleManageViewModel>());
-
         }
     }
 }

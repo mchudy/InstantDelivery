@@ -6,6 +6,11 @@ namespace InstantDelivery.Helpers
 {
     public static class EnumExtensions
     {
+        /// <summary>
+        /// Zwraca opis wartości obiektu typu wyliczeniowego korzystając z <see cref="DescriptionAttribute"/>
+        /// </summary>
+        /// <param name="@enum"></param>
+        /// <returns>Opis enuma</returns>
         public static string GetDescription(this Enum @enum)
         {
             Type type = @enum.GetType();

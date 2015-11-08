@@ -12,6 +12,7 @@ namespace InstantDelivery.ViewModel
         /// Aktualnie edytowany pracownik.
         /// </summary>
         public Employee Employee { get; set; }
+
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
@@ -19,6 +20,7 @@ namespace InstantDelivery.ViewModel
         {
             TryClose(true);
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>

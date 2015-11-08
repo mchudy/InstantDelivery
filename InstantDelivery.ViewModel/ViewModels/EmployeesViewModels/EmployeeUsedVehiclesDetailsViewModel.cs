@@ -12,6 +12,7 @@ namespace InstantDelivery.ViewModel
         /// Pracownik którego szczegóły są wyświetlane na widoku.
         /// </summary>
         public Employee Employee { get; set; }
+
         /// <summary>
         /// Delegat zdarzenia zamykania okna. Widok jest tylko do odczytu więc jest to tylko zamknięcie okna.
         /// </summary>

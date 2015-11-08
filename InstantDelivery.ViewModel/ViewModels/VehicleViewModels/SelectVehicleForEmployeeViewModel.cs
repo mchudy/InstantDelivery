@@ -4,7 +4,6 @@ using InstantDelivery.Services;
 using PropertyChanged;
 using System.Linq;
 using System.Threading.Tasks;
-using Action = System.Action;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,33 +13,28 @@ namespace InstantDelivery.ViewModel
     [ImplementPropertyChanged]
     public class SelectVehicleForEmployeeViewModel : Screen
     {
-        /// <summary>
-        /// Serwis pracowników
-        /// </summary>
-        public IEmployeeService employeeService;
-        /// <summary>
-        /// Serwis pojazdów
-        /// </summary>
-        public IVehiclesService vehicleService;
+        private IEmployeeService employeeService;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="employeeService"></param>
         /// <param name="vehicleService"></param>
-        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService, IVehiclesService vehicleService)
+        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
-            this.vehicleService = vehicleService;
         }
 
         /// <summary>
         /// Flaga informująca o tym czy pracownik ma przypisany samochód.
         /// </summary>
         public bool HasVehicle { get; set; }
+
         /// <summary>
         /// Zaznaczony pracownik w poprzednim widoku.
         /// </summary>
         public Employee SelectedEmployee { get; set; }
+
         /// <summary>
         /// Zaznaczony wiersz w widoku.
         /// </summary>
@@ -66,7 +60,6 @@ namespace InstantDelivery.ViewModel
             await Task.Run(() =>
             {
                 employeeService.ChangeEmployeesVehicle(EmployeeToUpdate, VehicleToSave);
-                
             });
         }
 

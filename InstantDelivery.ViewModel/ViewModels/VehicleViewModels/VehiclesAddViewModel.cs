@@ -16,6 +16,7 @@ namespace InstantDelivery.ViewModel
         private IVehiclesService vehiclesService;
         private bool addNewVehicleModel;
         private VehicleModel selectedVehicleModel;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
@@ -26,14 +27,17 @@ namespace InstantDelivery.ViewModel
             NewVehicle = new Vehicle();
             VehicleModels = vehiclesService.GetAllModels().ToList();
         }
+
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych w widoku.
         /// </summary>
         public IEnumerable<VehicleModel> VehicleModels { get; set; }
+
         /// <summary>
         /// Aktualnie tworzony pojazd.
         /// </summary>
         public Vehicle NewVehicle { get; set; }
+
         /// <summary>
         /// Aktualnie wybrany pojazd z tabeli danych.
         /// </summary>
@@ -46,10 +50,12 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Aktualnie tworzony model pojazdu.
         /// </summary>
         public VehicleModel NewVehicleModel { get; set; } = new VehicleModel();
+
         /// <summary>
         /// Flaga informująca o tym czy użytkownik tworzy nowy model pojazdu.
         /// </summary>
@@ -66,6 +72,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
@@ -76,6 +83,7 @@ namespace InstantDelivery.ViewModel
             await Task.Run(() => vehiclesService.AddVehicle(NewVehicle));
             TryClose(true);
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>

@@ -11,6 +11,7 @@ namespace InstantDelivery.ViewModel
     public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
         private readonly IEmployeeService employeesService;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>

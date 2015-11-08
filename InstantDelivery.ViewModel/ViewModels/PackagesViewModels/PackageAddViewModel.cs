@@ -9,22 +9,18 @@ namespace InstantDelivery.ViewModel
     /// <summary>
     /// Model widoku dodawania paczki.
     /// </summary>
-    class PackageAddViewModel : Screen
+    public class PackageAddViewModel : Screen
     {
-        /// <summary>
-        /// Serwis paczek
-        /// </summary>
-        public IPackageService service;
+        private readonly IPackageService service;
+        private Package newPackage;
+
         public PackageAddViewModel(IPackageService service)
         {
             NewPackage = new Package();
             this.service = service;
+            this.service = service;
         }
 
-        public override void CanClose(Action<bool> callback)
-        {
-            callback(true);
-        }
         /// <summary>
         /// Odświeża koszt dostarczenia paczki
         /// </summary>
@@ -33,7 +29,6 @@ namespace InstantDelivery.ViewModel
             NewPackage.Cost = await Task.Run(() => service.CalculatePackageCost(NewPackage));
         }
 
-        private Package newPackage;
         /// <summary>
         /// Aktualnie tworzona paczka.
         /// </summary>
@@ -46,6 +41,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
@@ -58,12 +54,18 @@ namespace InstantDelivery.ViewModel
                 service.RegisterPackage(packageToSave);
             });
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>
         public void Cancel()
         {
             TryClose(false);
+        }
+
+        public override void CanClose(Action<bool> callback)
+        {
+            callback(true);
         }
     }
 }

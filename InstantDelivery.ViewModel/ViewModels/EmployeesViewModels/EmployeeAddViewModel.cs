@@ -11,32 +11,19 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeeAddViewModel : Screen
     {
-        /// <summary>
-        /// Serwis pracowników.
-        /// </summary>
-        public IEmployeeService service;
+        private IEmployeeService service;
+        private Employee newEmployee;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
         public EmployeeAddViewModel(IEmployeeService service)
         {
-            NewEmployee = new Employee();
             this.service = service;
+            NewEmployee = new Employee();
         }
 
-        protected override void OnDeactivate(bool close)
-        {
-            if (close)
-                NewEmployee = null;
-        }
-
-        public override void CanClose(Action<bool> callback)
-        {
-            callback(true);
-        }
-
-        private Employee newEmployee;
         /// <summary>
         /// Aktualnie tworzony pracownik.
         /// </summary>
@@ -49,6 +36,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
@@ -61,12 +49,24 @@ namespace InstantDelivery.ViewModel
                 service.AddEmployee(EmployeeToAdd);
             });
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>
         public void Cancel()
         {
             TryClose(false);
+        }
+
+        public override void CanClose(Action<bool> callback)
+        {
+            callback(true);
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            if (close)
+                NewEmployee = null;
         }
     }
 }

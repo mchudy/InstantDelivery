@@ -15,16 +15,38 @@ namespace InstantDelivery.ViewModel
     {
         private readonly IPackageService service;
 
+        /// <summary>
+        /// Tworzy nowy model widoku edycji paczki
+        /// </summary>
+        /// <param name="service"></param>
         public PackageEditViewModel(IPackageService service)
         {
             this.service = service;
         }
 
+        /// <summary>
+        /// Flaga informująca, czy jest możliwa edycja danych przesyłki
+        /// </summary>
         public bool IsPackageDataReadOnly => Package.Status != PackageStatus.New;
 
+        /// <summary>
+        /// Aktualnie edytowana przesyłka
+        /// </summary>
         public Package Package { get; set; }
+
+        /// <summary>
+        /// Zbiór pracowników, którym można przypisać aktualną przesyłkę
+        /// </summary>
         public IQueryable<Employee> Employees { get; set; }
+
+        /// <summary>
+        /// Pracownik przypisany do przesyłki
+        /// </summary>
         public Employee SelectedEmployee { get; set; }
+
+        /// <summary>
+        /// Zwraca wartość informującą, czy przesyłka jest dostarczone
+        /// </summary>
         public bool IsDelivered { get; set; }
 
         /// <summary>
@@ -42,6 +64,7 @@ namespace InstantDelivery.ViewModel
                 service.MarkAsDelivered(Package);
             }
         }
+
         /// <summary>
         /// Anuluje zmiany dokonane w widoku.
         /// </summary>
@@ -49,6 +72,7 @@ namespace InstantDelivery.ViewModel
         {
             TryClose(false);
         }
+
         /// <summary>
         /// Wylicza na nowo koszt paczki na podstawie jej szczegółów.
         /// </summary>

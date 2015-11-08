@@ -16,6 +16,7 @@ namespace InstantDelivery.ViewModel
         private Employee selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
+
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
@@ -32,6 +33,7 @@ namespace InstantDelivery.ViewModel
             this.confirmDeleteViewModel = confirmDeleteViewModel;
             Employees = employeeService.GetAll();
         }
+
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
@@ -45,10 +47,12 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange(() => IsSelectedAnyRow);
             }
         }
+
         /// <summary>
         /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz w tabeli danych.
         /// </summary>
         public bool IsSelectedAnyRow => SelectedEmployee != null;
+
         /// <summary>
         /// Delegat zdarzenia przejścia do widoku edycji pracownika.
         /// </summary>
@@ -69,6 +73,7 @@ namespace InstantDelivery.ViewModel
                 employeeService.Save();
             }
         }
+
         /// <summary>
         /// Delegat zdarzenia usuwania pracownika.
         /// </summary>

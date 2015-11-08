@@ -6,6 +6,9 @@ using System.Windows.Data;
 
 namespace InstantDelivery.Converters
 {
+    /// <summary>
+    /// Konwerter statusu paczki na widoczność tabeli z wyborem pracownika
+    /// </summary>
     public class StatusToEmployeesGridVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -21,6 +24,9 @@ namespace InstantDelivery.Converters
         }
     }
 
+    /// <summary>
+    /// Konwerter statusu paczki na widoczność pola wyboru czy przesyłka została dostarczona
+    /// </summary>
     public class StatusToInDeliveryVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

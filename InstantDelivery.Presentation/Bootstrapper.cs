@@ -15,7 +15,7 @@ using IContainer = Autofac.IContainer;
 namespace InstantDelivery
 {
     /// <summary>
-    /// Klasa tworząca podstawy działania aplikacji. Kojarzy widoki z viewmodelami.
+    /// Klasa tworząca podstawy działania aplikacji
     /// </summary>
     public class Bootstrapper : BootstrapperBase
     {
