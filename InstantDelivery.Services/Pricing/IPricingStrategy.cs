@@ -1,6 +1,6 @@
 ﻿using InstantDelivery.Domain.Entities;
 
-namespace InstantDelivery.Core.Pricing
+namespace InstantDelivery.Services.Pricing
 {
     public interface IPricingStrategy
     {

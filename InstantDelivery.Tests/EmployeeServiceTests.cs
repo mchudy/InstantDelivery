@@ -1,5 +1,4 @@
-﻿using InstantDelivery.Core;
-using InstantDelivery.Services;
+﻿using InstantDelivery.Services;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;

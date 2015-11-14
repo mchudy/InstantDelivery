@@ -1,12 +1,11 @@
-﻿using InstantDelivery.Core;
-using InstantDelivery.Services;
+﻿using InstantDelivery.Services;
 using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using InstantDelivery.Core.Pricing;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Pricing;
 using Xunit;
 
 namespace InstantDelivery.Tests

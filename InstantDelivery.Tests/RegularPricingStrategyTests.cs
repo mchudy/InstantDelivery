@@ -1,6 +1,6 @@
-﻿using InstantDelivery.Core.Pricing;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
+using InstantDelivery.Services.Pricing;
 using Xunit;
 
 namespace InstantDelivery.Tests

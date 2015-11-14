@@ -1,5 +1,4 @@
-﻿using InstantDelivery.Core;
-using PropertyChanged;
+﻿using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Linq;
 using InstantDelivery.Domain;

@@ -1,8 +1,7 @@
-﻿using InstantDelivery.Core;
-using System.Linq;
-using InstantDelivery.Core.Pricing;
+﻿using System.Linq;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Pricing;
 
 namespace InstantDelivery.Services
 {

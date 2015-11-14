@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using Autofac;
-using InstantDelivery.Core.Pricing;
+﻿using Autofac;
 using InstantDelivery.Domain.Entities;
+using System.Linq;
 
 namespace InstantDelivery.Domain
 {
@@ -18,10 +17,6 @@ namespace InstantDelivery.Domain
             {
                 context.Set<Employee>().Any();
             }
-
-            builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
-                .AsSelf()
-                .InstancePerLifetimeScope();
 
             builder.Register(type => new InstantDeliveryContext())
                 .AsSelf()
