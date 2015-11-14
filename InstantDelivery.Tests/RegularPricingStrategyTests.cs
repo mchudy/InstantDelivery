@@ -1,5 +1,5 @@
-﻿using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Pricing;
+﻿using InstantDelivery.Core.Pricing;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using Xunit;
 

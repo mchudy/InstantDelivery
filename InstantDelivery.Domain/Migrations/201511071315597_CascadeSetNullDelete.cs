@@ -1,7 +1,7 @@
-namespace InstantDelivery.Core.Migrations
-{
-    using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations;
 
+namespace InstantDelivery.Domain.Migrations
+{
     public partial class CascadeSetNullDelete : DbMigration
     {
         public override void Up()

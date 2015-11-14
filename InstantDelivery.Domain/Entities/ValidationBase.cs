@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace InstantDelivery.Core.Entities
+namespace InstantDelivery.Domain.Entities
 {
     /// <summary>
     /// Pomocnicza klasa do walidacji danych.

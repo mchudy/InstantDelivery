@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Presentatio
 		{676E3204-0671-4AAB-ADF5-C413FB1BFE75} = {676E3204-0671-4AAB-ADF5-C413FB1BFE75}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Core", "InstantDelivery.Core\InstantDelivery.Core.csproj", "{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Domain", "InstantDelivery.Domain\InstantDelivery.Domain.csproj", "{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.ViewModel", "InstantDelivery.ViewModel\InstantDelivery.ViewModel.csproj", "{03199773-6AE0-4DDC-985F-BF4BC69111FD}"
 	ProjectSection(ProjectDependencies) = postProject

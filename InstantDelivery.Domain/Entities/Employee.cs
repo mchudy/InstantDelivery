@@ -1,10 +1,10 @@
-﻿using PropertyChanged;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using PropertyChanged;
 
-namespace InstantDelivery.Core.Entities
+namespace InstantDelivery.Domain.Entities
 {
     /// <summary>
     /// Klasa reprezentująca pracownika.

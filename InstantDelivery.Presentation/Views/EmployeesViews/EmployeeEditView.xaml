@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-        xmlns:entities="clr-namespace:InstantDelivery.Core.Entities;assembly=InstantDelivery.Core"
+        xmlns:entities="clr-namespace:InstantDelivery.Domain.Entities;assembly=InstantDelivery.Domain"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         Style="{StaticResource DialogWindow}">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">

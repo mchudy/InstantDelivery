@@ -1,10 +1,10 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Core.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {

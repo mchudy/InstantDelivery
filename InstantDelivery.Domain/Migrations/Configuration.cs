@@ -1,4 +1,4 @@
-﻿using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -6,7 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 
-namespace InstantDelivery.Core.Migrations
+namespace InstantDelivery.Domain.Migrations
 {
     /// <summary>
     /// Klasa konfigurująca bazę.
@@ -17,7 +17,7 @@ namespace InstantDelivery.Core.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "InstantDelivery.Core.InstantDeliveryContext";
+            ContextKey = "InstantDelivery.Domain.InstantDeliveryContext";
         }
 
         protected override void Seed(InstantDeliveryContext context)

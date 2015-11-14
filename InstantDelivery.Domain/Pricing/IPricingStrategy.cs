@@ -1,4 +1,4 @@
-﻿using InstantDelivery.Core.Entities;
+﻿using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Core.Pricing
 {

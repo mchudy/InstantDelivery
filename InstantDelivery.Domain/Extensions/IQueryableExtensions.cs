@@ -1,10 +1,10 @@
-﻿using InstantDelivery.Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using InstantDelivery.Domain.Entities;
 
-namespace InstantDelivery.Core.Extensions
+namespace InstantDelivery.Domain.Extensions
 {
     /// <summary>
     /// Metody rozszerzające klasy IQuerable

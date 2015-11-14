@@ -1,7 +1,7 @@
-﻿using InstantDelivery.Core.Entities;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using InstantDelivery.Domain.Entities;
 
-namespace InstantDelivery.Core
+namespace InstantDelivery.Domain
 {
     /// <summary>
     /// Kontekst danych

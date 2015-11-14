@@ -1,8 +1,7 @@
-namespace InstantDelivery.Core.Migrations
+using System.Data.Entity.Migrations;
+
+namespace InstantDelivery.Domain.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class RequiredInPackage : DbMigration
     {
         public override void Up()

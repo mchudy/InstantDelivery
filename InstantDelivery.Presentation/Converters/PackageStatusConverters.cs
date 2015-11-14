@@ -1,8 +1,8 @@
-﻿using InstantDelivery.Core.Entities;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Converters
 {

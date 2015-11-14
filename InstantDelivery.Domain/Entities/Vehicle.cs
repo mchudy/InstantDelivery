@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InstantDelivery.Core.Entities
+namespace InstantDelivery.Domain.Entities
 {
     /// <summary>
     /// Klasa reprezentująca pojazd

@@ -60,7 +60,7 @@
     <Compile Include="Services\VehiclesService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InstantDelivery.Core\InstantDelivery.Core.csproj">
+    <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
       <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
       <Name>InstantDelivery.Core</Name>
     </ProjectReference>

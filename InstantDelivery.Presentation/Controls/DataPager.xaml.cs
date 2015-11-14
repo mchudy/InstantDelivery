@@ -1,6 +1,4 @@
 ﻿using InstantDelivery.Annotations;
-using InstantDelivery.Core.Entities;
-using InstantDelivery.Core.Extensions;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using InstantDelivery.Domain.Entities;
+using InstantDelivery.Domain.Extensions;
 
 namespace InstantDelivery.Controls
 {

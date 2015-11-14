@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Caliburn.Micro;
-using InstantDelivery.Core.Entities;
 using System.Linq;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {

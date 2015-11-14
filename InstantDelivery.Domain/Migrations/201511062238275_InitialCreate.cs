@@ -1,7 +1,7 @@
-namespace InstantDelivery.Core.Migrations
-{
-    using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations;
 
+namespace InstantDelivery.Domain.Migrations
+{
     public partial class Initial_Create : DbMigration
     {
         public override void Up()

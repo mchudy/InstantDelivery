@@ -1,6 +1,7 @@
 ﻿using InstantDelivery.Core;
-using InstantDelivery.Core.Entities;
 using System.Linq;
+using InstantDelivery.Domain;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Services
 {

@@ -1,7 +1,7 @@
-﻿using InstantDelivery.Core.Entities;
-using InstantDelivery.Services;
+﻿using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.Linq;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {

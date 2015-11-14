@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using InstantDelivery.Domain;
 using IContainer = Autofac.IContainer;
 
 namespace InstantDelivery
@@ -98,7 +99,7 @@ namespace InstantDelivery
             builder.Register<IEventAggregator>(c => new EventAggregator())
                 .InstancePerLifetimeScope();
 
-            builder.RegisterModule<CoreModule>();
+            builder.RegisterModule<DomainModule>();
 
             builder.RegisterAssemblyTypes(typeof(EmployeeService).Assembly)
                 .AsImplementedInterfaces()

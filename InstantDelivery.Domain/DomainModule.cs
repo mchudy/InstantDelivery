@@ -1,14 +1,14 @@
-﻿using Autofac;
-using InstantDelivery.Core.Entities;
+﻿using System.Linq;
+using Autofac;
 using InstantDelivery.Core.Pricing;
-using System.Linq;
+using InstantDelivery.Domain.Entities;
 
-namespace InstantDelivery.Core
+namespace InstantDelivery.Domain
 {
     /// <summary>
     /// Rejestruje klasy z assembly InstantDelivery.Core w kontenerze Autofac
     /// </summary>
-    public class CoreModule : Module
+    public class DomainModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using PropertyChanged;
 
-namespace InstantDelivery.Core.Entities
+namespace InstantDelivery.Domain.Entities
 {
     /// <summary>
     /// Klasa reprezentująca paczkę
