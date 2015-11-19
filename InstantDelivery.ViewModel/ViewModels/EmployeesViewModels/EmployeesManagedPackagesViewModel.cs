@@ -1,7 +1,8 @@
-﻿using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System.Linq;
+﻿using System;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
@@ -19,12 +20,13 @@ namespace InstantDelivery.ViewModel
         public EmployeesManagedPackagesViewModel(IEmployeeService employeesService)
         {
             this.employeesService = employeesService;
-            Employees = employeesService.GetAll();
+            //Employees = employeesService.GetAll();
         }
 
-        protected override IQueryable<Employee> GetEmployees()
+        protected override IList<Employee> GetEmployees()
         {
-            return employeesService.GetAll();
+            PageCount = (int)Math.Ceiling((double)(employeesService.Count() / PageSize));
+            return employeesService.GetPage(CurrentPage, PageSize);
         }
     }
 }

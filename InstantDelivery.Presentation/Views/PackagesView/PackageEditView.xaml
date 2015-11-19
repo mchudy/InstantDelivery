@@ -107,7 +107,7 @@
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="220" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
+        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" x:Name="Pager" CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
                              PageSize="10" Visibility="{Binding Package.Status, Converter={StaticResource StatusToGridVisibility}}" />
 
         <StackPanel Grid.Row="14" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">

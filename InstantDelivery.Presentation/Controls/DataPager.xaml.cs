@@ -2,14 +2,9 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Domain.Extensions;
 
 namespace InstantDelivery.Controls
 {
@@ -18,8 +13,7 @@ namespace InstantDelivery.Controls
     /// </summary>
     public partial class DataPager : UserControl, INotifyPropertyChanged
     {
-        private const int initiallPageSize = 30;
-        private int pagesCount = 1;
+        private const int initialPageSize = 30;
 
         /// <summary>
         /// Tworzy nową kontrolkę
@@ -28,19 +22,6 @@ namespace InstantDelivery.Controls
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// Źródło danych wykorzystywane do paginacji
-        /// </summary>
-        public IQueryable<Entity> ItemsSource
-        {
-            get { return (IQueryable<Entity>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
-        }
-
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IQueryable<Entity>),
-                typeof(DataPager), new UIPropertyMetadata(null, OnPropertyChanged));
 
         /// <summary>
         /// Kolekcja zawierająca aktualną stronę danych ze źródłówej kolekcji
@@ -66,7 +47,7 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty CurrentPageProperty =
             DependencyProperty.Register("CurrentPage", typeof(int),
-                typeof(DataPager), new UIPropertyMetadata(1, OnPropertyChanged));
+                typeof(DataPager), new UIPropertyMetadata(1, OnPageChanged));
 
         /// <summary>
         /// Aktualny rozmiar strony
@@ -79,30 +60,33 @@ namespace InstantDelivery.Controls
 
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int),
-                typeof(DataPager), new UIPropertyMetadata(initiallPageSize, OnPropertyChanged));
+                typeof(DataPager), new UIPropertyMetadata(initialPageSize, OnPageChanged));
 
         /// <summary>
         /// Liczba stron
         /// </summary>
-        public int PagesCount
+        public int PageCount
         {
-            get { return pagesCount; }
-            set
-            {
-                pagesCount = value;
-                OnPropertyChanged();
-            }
+            get { return (int)GetValue(PageCountProperty); }
+            set { SetValue(PageCountProperty, value); }
         }
+
+        public static readonly DependencyProperty PageCountProperty =
+            DependencyProperty.Register("PageCount", typeof(int),
+                typeof(DataPager), new UIPropertyMetadata(1, OnPageCountChanged));
+
 
         /// <summary>
         /// Zwraca wartość wskazującą czy możliwe jest przejście na następną stronę
         /// </summary>
-        public bool IsEnabledNextPage => CurrentPage * PageSize < ItemsSource?.Count();
+        public bool IsEnabledNextPage => CurrentPage < PageCount;
 
         /// <summary>
         /// Zwraca wartość wskazującą czy możliwe jest przejście na poprzednią stronę
         /// </summary>
         public bool IsEnabledPreviousPage => CurrentPage > 1;
+
+        public event EventHandler PageChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -126,9 +110,9 @@ namespace InstantDelivery.Controls
 
         private void MoveToNextPage(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (CurrentPage + 1 > PagesCount)
+            if (CurrentPage + 1 > PageCount)
             {
-                CurrentPage = PagesCount;
+                CurrentPage = PageCount;
             }
             else
             {
@@ -136,32 +120,22 @@ namespace InstantDelivery.Controls
             }
         }
 
-        private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DataPager control = (DataPager)d;
-            control.LoadPage();
+            control.PageChanged?.Invoke(control, EventArgs.Empty);
+            control.OnPropertyChanged(nameof(IsEnabledPreviousPage));
+            control.OnPropertyChanged(nameof(IsEnabledNextPage));
+            if (control.CurrentPage > control.PageCount)
+            {
+                control.CurrentPage = control.PageCount;
+            }
         }
 
-        private void LoadPage()
+        private static void OnPageCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (ItemsSource == null) return;
-            var itemsSource = ItemsSource;
-            var currentPage = CurrentPage;
-            var pageSize = PageSize;
-            PagesCount = (int)Math.Ceiling((double)ItemsSource.Count() / PageSize);
-            OnPropertyChanged(nameof(IsEnabledNextPage));
-            OnPropertyChanged(nameof(IsEnabledPreviousPage));
-
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)(async () =>
-            {
-                ObservableCollection<object> collection = null;
-                await Task.Run(
-                    () =>
-                    {
-                        collection = new ObservableCollection<object>(itemsSource.Page(currentPage, pageSize));
-                    });
-                PagedSource = collection;
-            }));
+            DataPager control = (DataPager)d;
+            control.OnPropertyChanged(nameof(IsEnabledNextPage));
         }
     }
 }

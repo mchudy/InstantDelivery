@@ -59,7 +59,7 @@
                     <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="150" />
                 </DataGrid.Columns>
             </DataGrid>
-            <controls1:DataPager Grid.Row="4" Grid.ColumnSpan="2" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+            <controls1:DataPager Grid.Row="4" Grid.ColumnSpan="2" x:Name="Pager" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
         </Grid>
         <StackPanel Grid.Row="4"  Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="Save" Style="{StaticResource VehicleAddSaveButton}" Content="Zapisz" />

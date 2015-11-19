@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -20,6 +21,12 @@ namespace InstantDelivery.Services
         /// <returns></returns>
         IQueryable<Employee> GetAll();
 
+        IList<Employee> GetPage(int pageIndex, int pageSize);
+
+        //TODO: encapsulate the paramaters in a seperate class or make it generic
+        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter,
+            string lastNameFilter, string emailFilter);
+
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany
         /// </summary>
@@ -36,6 +43,8 @@ namespace InstantDelivery.Services
         /// Zapisuje aktualny stan kontekstu
         /// </summary>
         void Save();
+
+        int Count();
 
         /// <summary>
         /// Zmienia pojazd przypisany do pracownika

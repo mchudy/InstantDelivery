@@ -1,8 +1,8 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
@@ -11,18 +11,21 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
     /// </summary>
     public abstract class EmployeesViewModelBase : Screen
     {
-        private IQueryable<Employee> employees;
+        private IList<Employee> employees;
 
         private int currentPage = 1;
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
-        private EmployeeSortingProperty? sortingProperty;
+        public EmployeeSortingProperty? sortingProperty;
+        private int pageSize;
+        private int pageCount;
+
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IQueryable<Employee> Employees
+        public IList<Employee> Employees
         {
             get { return employees; }
             set
@@ -71,6 +74,16 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
+        public int PageSize
+        {
+            get { return pageSize; }
+            set
+            {
+                pageSize = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
         /// <summary>
         /// Filtr adresu email wybrany przez użytkownika.
         /// </summary>
@@ -81,6 +94,21 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             {
                 emailFilter = value;
                 UpdateEmployees();
+            }
+        }
+
+        public async void PageChanged()
+        {
+            Employees = GetEmployees();
+        }
+
+        public int PageCount
+        {
+            get { return pageCount; }
+            set
+            {
+                pageCount = value;
+                NotifyOfPropertyChange();
             }
         }
 
@@ -97,20 +125,21 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        protected abstract IQueryable<Employee> GetEmployees();
+        protected abstract IList<Employee> GetEmployees();
 
         protected async void UpdateEmployees()
         {
-            await Task.Run(() =>
-            {
-                var newEmployees = GetEmployees();
-                if (SortingProperty != null)
-                {
-                    newEmployees = SortEmployees(newEmployees);
-                }
-                newEmployees = FilterEmployees(newEmployees);
-                Employees = newEmployees;
-            });
+            Employees = GetEmployees();
+            //await Task.Run(() =>
+            //{
+            //    var newEmployees = GetEmployees();
+            //    if (SortingProperty != null)
+            //    {
+            //        newEmployees = SortEmployees(newEmployees);
+            //    }
+            //    newEmployees = FilterEmployees(newEmployees);
+            //    Employees = newEmployees;
+            //});
         }
 
         protected override void OnActivate()
@@ -121,25 +150,27 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         private IQueryable<Employee> SortEmployees(IQueryable<Employee> newEmployees)
         {
-            if (SortingProperty == EmployeeSortingProperty.ByFirstName)
-            {
-                newEmployees = newEmployees.OrderBy(e => e.FirstName);
-                CurrentPage = 1;
-            }
-            else if (SortingProperty == EmployeeSortingProperty.ByLastName)
-            {
-                newEmployees = newEmployees.OrderBy(e => e.LastName);
-                CurrentPage = 1;
-            }
-            return newEmployees;
+            return null;
+            //if (SortingProperty == EmployeeSortingProperty.ByFirstName)
+            //{
+            //    newEmployees = newEmployees.OrderBy(e => e.FirstName);
+            //    CurrentPage = 1;
+            //}
+            //else if (SortingProperty == EmployeeSortingProperty.ByLastName)
+            //{
+            //    newEmployees = newEmployees.OrderBy(e => e.LastName);
+            //    CurrentPage = 1;
+            //}
+            //return newEmployees;
         }
 
         private IQueryable<Employee> FilterEmployees(IQueryable<Employee> newEmployees)
         {
-            return newEmployees
-               .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
-               .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
-               .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
+            return null;
+            //return newEmployees
+            //   .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
+            //   .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
+            //   .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
     /// <summary>

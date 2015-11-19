@@ -1,9 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -29,7 +30,7 @@ namespace InstantDelivery.ViewModel
             this.employeeService = employeeService;
             this.windowManager = windowManager;
             this.usedVehiclesDetailsViewModel = usedVehiclesDetailsViewModel;
-            Employees = employeeService.GetAll();
+            //Employees = employeeService.GetAll();
         }
 
         /// <summary>
@@ -75,9 +76,10 @@ namespace InstantDelivery.ViewModel
             });
         }
 
-        protected override IQueryable<Employee> GetEmployees()
+        protected override IList<Employee> GetEmployees()
         {
-            return employeeService.GetAll();
+            PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
+            return employeeService.GetPage(CurrentPage, PageSize);
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Linq;
-using InstantDelivery.Domain;
+﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -17,6 +18,11 @@ namespace InstantDelivery.Services
         public EmployeeService(InstantDeliveryContext context)
         {
             this.context = context;
+        }
+
+        public int Count()
+        {
+            return context.Employees.Count();
         }
 
         /// <summary>
@@ -43,6 +49,27 @@ namespace InstantDelivery.Services
         public IQueryable<Employee> GetAll()
         {
             return context.Employees;
+        }
+
+        public IList<Employee> GetPage(int pageIndex, int pageSize)
+        {
+            return context.Employees
+                .OrderBy(e => e.Id)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter)
+        {
+            return context.Employees
+                    .OrderBy(e => e.Id)
+                    .Where(e => firstNameFilter == "" || e.FirstName.StartsWith(firstNameFilter))
+                    .Where(e => lastNameFilter == "" || e.LastName.StartsWith(lastNameFilter))
+                    .Where(e => emailFilter == "" || e.Email.StartsWith(emailFilter))
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         /// <summary>

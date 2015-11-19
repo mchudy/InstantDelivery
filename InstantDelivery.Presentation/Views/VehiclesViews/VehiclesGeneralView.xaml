@@ -33,7 +33,7 @@
                 <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:DataPager Grid.Row="3" x:Name="Pager" ItemsSource="{Binding Vehicles}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <controls:DataPager Grid.Row="3" x:Name="Pager" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
         <StackPanel Grid.Row="4" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
             <Button x:Name="DeleteVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>

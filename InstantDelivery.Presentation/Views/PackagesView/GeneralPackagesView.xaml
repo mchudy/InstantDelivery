@@ -31,7 +31,7 @@
                 <DataGridTextColumn Header="Status" Binding="{Binding Status, Converter={StaticResource EnumToDescription}}"  Width="150" />
             </DataGrid.Columns>
         </DataGrid>
-            <controls1:DataPager Grid.Row="2" x:Name="Pager" ItemsSource="{Binding Packages}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+            <controls1:DataPager Grid.Row="2" x:Name="Pager" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
             <StackPanel Grid.Row="3"  HorizontalAlignment="Right" Orientation="Horizontal" Width="Auto"  Margin="0 5 0 5">
                 <Button x:Name="RemovePackage" IsEnabled="{Binding IsSelectedAnyRow}" Margin="5 0 5 0" Width="150">Usuń</Button>
                 <Button x:Name="EditPackage" IsEnabled="{Binding IsSelectedAnyRow}" Margin="5 0 5 0" Width="150">Edytuj</Button>

@@ -1,10 +1,10 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -29,7 +29,7 @@ namespace InstantDelivery.ViewModel
             this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.vehiclesService = vehiclesService;
-            Employees = employeesService.GetAll();
+            //Employees = employeesService.GetAll();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace InstantDelivery.ViewModel
         /// Metoda zwraca kolekcję wszystkich pracowników.
         /// </summary>
         /// <returns></returns>
-        protected override IQueryable<Employee> GetEmployees()
+        protected override IList<Employee> GetEmployees()
         {
-            return employeesService.GetAll();
+            return employeesService.GetPage(CurrentPage, PageSize);
         }
 
         /// <summary>
