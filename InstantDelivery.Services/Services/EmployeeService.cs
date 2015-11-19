@@ -1,5 +1,6 @@
 ﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Domain.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,10 +61,19 @@ namespace InstantDelivery.Services
                 .ToList();
         }
 
-        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter)
+        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter,
+            string sortProperty)
         {
-            return context.Employees
-                    .OrderBy(e => e.Id)
+            var result = context.Employees.AsQueryable();
+            if (string.IsNullOrEmpty(sortProperty))
+            {
+                result = result.OrderBy(e => e.Id);
+            }
+            else
+            {
+                result = result.OrderByProperty(sortProperty);
+            }
+            return result
                     .Where(e => firstNameFilter == "" || e.FirstName.StartsWith(firstNameFilter))
                     .Where(e => lastNameFilter == "" || e.LastName.StartsWith(lastNameFilter))
                     .Where(e => emailFilter == "" || e.Email.StartsWith(emailFilter))

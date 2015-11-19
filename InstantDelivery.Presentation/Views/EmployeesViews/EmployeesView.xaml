@@ -25,7 +25,7 @@
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()];[Event Sorting] = [Action Sort()];">
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()];[Event Sorting] = [Action Sort($eventArgs)];">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>

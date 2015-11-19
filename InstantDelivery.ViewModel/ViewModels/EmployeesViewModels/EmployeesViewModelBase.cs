@@ -1,8 +1,8 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Domain.Entities;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
@@ -17,7 +17,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
-        public EmployeeSortingProperty? sortingProperty;
         private int pageSize;
         private int pageCount;
 
@@ -112,22 +111,18 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        /// <summary>
-        /// Kryterium sortowania wybrane przez użytkownika.
-        /// </summary>
-        public EmployeeSortingProperty? SortingProperty
+        public string SortProperty { get; private set; }
+
+        //TODO: unnecessary dependency on PresentationFramework, pass only SortMemberPath
+        public void Sort(DataGridSortingEventArgs e)
         {
-            get { return sortingProperty; }
-            set
-            {
-                sortingProperty = value;
-                UpdateEmployees();
-            }
+            SortProperty = e.Column.SortMemberPath;
+            UpdateEmployees();
         }
 
         protected abstract IList<Employee> GetEmployees();
 
-        protected async void UpdateEmployees()
+        protected void UpdateEmployees()
         {
             Employees = GetEmployees();
             //await Task.Run(() =>
@@ -172,15 +167,5 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             //   .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
             //   .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
-    }
-    /// <summary>
-    /// Definicja kryterium sortowania.
-    /// </summary>
-    public enum EmployeeSortingProperty
-    {
-        [Description("Po nazwisku")]
-        ByLastName,
-        [Description("Po imieniu")]
-        ByFirstName,
     }
 }
