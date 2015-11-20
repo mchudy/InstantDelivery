@@ -32,7 +32,7 @@ namespace InstantDelivery.ViewModel
             this.windowManager = windowManager;
             this.employeeEditViewModel = employeeEditViewModel;
             this.confirmDeleteViewModel = confirmDeleteViewModel;
-            PageSize = 10;
+            PageSize = 30;
             PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
             Employees = employeeService.GetPage(1, PageSize);
         }
@@ -97,7 +97,7 @@ namespace InstantDelivery.ViewModel
         protected override IList<Employee> GetEmployees()
         {
             PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
-            return employeeService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter, SortProperty);
+            return employeeService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter, SortProperty, SortDirection);
         }
     }
 }

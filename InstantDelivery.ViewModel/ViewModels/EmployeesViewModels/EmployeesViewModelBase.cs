@@ -1,7 +1,8 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
@@ -98,7 +99,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         public async void PageChanged()
         {
-            Employees = GetEmployees();
+            Employees = await Task.Run(() => GetEmployees());
         }
 
         public int PageCount
@@ -111,61 +112,42 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        public string SortProperty { get; private set; }
+
+        public string SortProperty
+        { get; private set; }
 
         //TODO: unnecessary dependency on PresentationFramework, pass only SortMemberPath
         public void Sort(DataGridSortingEventArgs e)
         {
+            //TODO: fix arrows
+            // has to be done manually, property of the column does not get updated
+            if (SortDirection == ListSortDirection.Descending || e.Column.SortMemberPath != SortProperty)
+            {
+                SortDirection = ListSortDirection.Ascending;
+            }
+            else
+            {
+                SortDirection = ListSortDirection.Descending;
+            }
             SortProperty = e.Column.SortMemberPath;
+            CurrentPage = 1;
             UpdateEmployees();
+            e.Handled = true;
         }
+
+        public ListSortDirection? SortDirection { get; private set; }
 
         protected abstract IList<Employee> GetEmployees();
 
         protected void UpdateEmployees()
         {
             Employees = GetEmployees();
-            //await Task.Run(() =>
-            //{
-            //    var newEmployees = GetEmployees();
-            //    if (SortingProperty != null)
-            //    {
-            //        newEmployees = SortEmployees(newEmployees);
-            //    }
-            //    newEmployees = FilterEmployees(newEmployees);
-            //    Employees = newEmployees;
-            //});
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
             UpdateEmployees();
-        }
-
-        private IQueryable<Employee> SortEmployees(IQueryable<Employee> newEmployees)
-        {
-            return null;
-            //if (SortingProperty == EmployeeSortingProperty.ByFirstName)
-            //{
-            //    newEmployees = newEmployees.OrderBy(e => e.FirstName);
-            //    CurrentPage = 1;
-            //}
-            //else if (SortingProperty == EmployeeSortingProperty.ByLastName)
-            //{
-            //    newEmployees = newEmployees.OrderBy(e => e.LastName);
-            //    CurrentPage = 1;
-            //}
-            //return newEmployees;
-        }
-
-        private IQueryable<Employee> FilterEmployees(IQueryable<Employee> newEmployees)
-        {
-            return null;
-            //return newEmployees
-            //   .Where(e => FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter))
-            //   .Where(e => LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter))
-            //   .Where(e => EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
 }

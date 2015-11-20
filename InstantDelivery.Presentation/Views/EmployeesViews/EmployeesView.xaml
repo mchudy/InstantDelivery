@@ -22,12 +22,12 @@
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
         <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
-                  CanUserResizeRows="False" CanUserSortColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="True" 
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()];[Event Sorting] = [Action Sort($eventArgs)];">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200" />
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
                 <DataGridTextColumn Header="Data urodzenia" Width="150" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"/>
                 <controls:DataGridNumericUpDownColumn Header="Pensja" 

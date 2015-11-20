@@ -1,5 +1,6 @@
 ﻿using InstantDelivery.Domain.Entities;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.Services
@@ -24,8 +25,7 @@ namespace InstantDelivery.Services
         IList<Employee> GetPage(int pageIndex, int pageSize);
 
         //TODO: encapsulate the paramaters in a seperate class or make it generic
-        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter,
-            string lastNameFilter, string emailFilter, string sortProperty);
+        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty, ListSortDirection? sortDirection);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

@@ -2,6 +2,7 @@
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Domain.Extensions;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.Services
@@ -61,13 +62,17 @@ namespace InstantDelivery.Services
                 .ToList();
         }
 
-        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter,
-            string sortProperty)
+        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty,
+            ListSortDirection? sortDirection)
         {
             var result = context.Employees.AsQueryable();
             if (string.IsNullOrEmpty(sortProperty))
             {
                 result = result.OrderBy(e => e.Id);
+            }
+            else if (sortDirection == ListSortDirection.Descending)
+            {
+                result = result.OrderByDescendingProperty(sortProperty);
             }
             else
             {
