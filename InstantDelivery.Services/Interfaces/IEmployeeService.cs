@@ -25,7 +25,8 @@ namespace InstantDelivery.Services
         IList<Employee> GetPage(int pageIndex, int pageSize);
 
         //TODO: encapsulate the paramaters in a seperate class or make it generic
-        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty, ListSortDirection? sortDirection);
+        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter,
+            string sortProperty, ListSortDirection? sortDirection, out int pageCount);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

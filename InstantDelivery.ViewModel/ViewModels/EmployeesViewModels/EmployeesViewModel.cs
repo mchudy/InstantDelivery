@@ -96,8 +96,11 @@ namespace InstantDelivery.ViewModel
 
         protected override IList<Employee> GetEmployees()
         {
-            PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
-            return employeeService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter, SortProperty, SortDirection);
+            int pageCount;
+            var page = employeeService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter,
+                SortProperty, SortDirection, out pageCount);
+            PageCount = pageCount;
+            return page;
         }
     }
 }

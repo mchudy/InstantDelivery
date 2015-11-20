@@ -1,6 +1,7 @@
 ﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Domain.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -57,13 +58,11 @@ namespace InstantDelivery.Services
         {
             return context.Employees
                 .OrderBy(e => e.Id)
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+                .Page(pageIndex, pageSize);
         }
 
         public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty,
-            ListSortDirection? sortDirection)
+            ListSortDirection? sortDirection, out int pageCount)
         {
             var result = context.Employees.AsQueryable();
             if (string.IsNullOrEmpty(sortProperty))
@@ -78,13 +77,12 @@ namespace InstantDelivery.Services
             {
                 result = result.OrderByProperty(sortProperty);
             }
-            return result
-                    .Where(e => firstNameFilter == "" || e.FirstName.StartsWith(firstNameFilter))
-                    .Where(e => lastNameFilter == "" || e.LastName.StartsWith(lastNameFilter))
-                    .Where(e => emailFilter == "" || e.Email.StartsWith(emailFilter))
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
+            result = result
+                .Where(e => firstNameFilter == "" || e.FirstName.StartsWith(firstNameFilter))
+                .Where(e => lastNameFilter == "" || e.LastName.StartsWith(lastNameFilter))
+                .Where(e => emailFilter == "" || e.Email.StartsWith(emailFilter));
+            pageCount = (int)Math.Ceiling(result.Count() / (double)pageSize);
+            return result.Page(pageIndex, pageSize);
         }
 
         /// <summary>

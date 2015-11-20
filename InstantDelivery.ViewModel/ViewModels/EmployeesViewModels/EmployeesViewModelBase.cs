@@ -44,6 +44,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             set
             {
                 lastNameFilter = value;
+                CurrentPage = 1;
                 UpdateEmployees();
             }
         }
@@ -57,6 +58,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             set
             {
                 firstNameFilter = value;
+                CurrentPage = 1;
                 UpdateEmployees();
             }
         }
@@ -93,6 +95,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             set
             {
                 emailFilter = value;
+                CurrentPage = 1;
                 UpdateEmployees();
             }
         }
@@ -113,8 +116,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         }
 
 
-        public string SortProperty
-        { get; private set; }
+        public string SortProperty { get; private set; }
 
         //TODO: unnecessary dependency on PresentationFramework, pass only SortMemberPath
         public void Sort(DataGridSortingEventArgs e)
