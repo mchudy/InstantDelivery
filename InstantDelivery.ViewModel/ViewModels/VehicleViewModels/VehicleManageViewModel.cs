@@ -2,7 +2,6 @@
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class VehicleManageViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesService;
+        private readonly IEmployeeService employeesesEmployeesService;
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
@@ -21,15 +20,16 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="employeesService"></param>
+        /// <param name="employeesesEmployeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="vehiclesService"></param>
-        public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager, IVehiclesService vehiclesService)
+        public VehicleManageViewModel(IEmployeeService employeesesEmployeesService, IWindowManager windowManager,
+            IVehiclesService vehiclesService)
+            : base(employeesesEmployeesService)
         {
-            this.employeesService = employeesService;
+            this.employeesesEmployeesService = employeesesEmployeesService;
             this.windowManager = windowManager;
             this.vehiclesService = vehiclesService;
-            //Employees = employeesService.GetAll();
         }
 
         /// <summary>
@@ -38,15 +38,6 @@ namespace InstantDelivery.ViewModel
         public bool IsSelectedAnyRow
         {
             get { return SelectedEmployee != null; }
-        }
-
-        /// <summary>
-        /// Metoda zwraca kolekcję wszystkich pracowników.
-        /// </summary>
-        /// <returns></returns>
-        protected override IList<Employee> GetEmployees()
-        {
-            return employeesService.GetPage(CurrentPage, PageSize);
         }
 
         /// <summary>
@@ -72,7 +63,7 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService)
+            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesesEmployeesService)
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,
@@ -83,11 +74,11 @@ namespace InstantDelivery.ViewModel
             {
                 if (result != true)
                 {
-                    employeesService.Reload(SelectedEmployee);
+                    employeesesEmployeesService.Reload(SelectedEmployee);
                 }
                 else
                 {
-                    employeesService.Save();
+                    employeesesEmployeesService.Save();
                 }
             });
         }

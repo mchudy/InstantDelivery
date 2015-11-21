@@ -1,8 +1,5 @@
-﻿using System;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
+﻿using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,22 +8,14 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesService;
-
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="employeesService"></param>
-        public EmployeesManagedPackagesViewModel(IEmployeeService employeesService)
+        /// <param name="employeesesEmployeesService"></param>
+        public EmployeesManagedPackagesViewModel(IEmployeeService employeesesEmployeesService)
+            : base(employeesesEmployeesService)
         {
-            this.employeesService = employeesService;
-            //Employees = employeesService.GetAll();
         }
 
-        protected override IList<Employee> GetEmployees()
-        {
-            PageCount = (int)Math.Ceiling((double)(employeesService.Count() / PageSize));
-            return employeesService.GetPage(CurrentPage, PageSize);
-        }
     }
 }

@@ -61,6 +61,7 @@ namespace InstantDelivery.Services
                 .Page(pageIndex, pageSize);
         }
 
+        //TODO: services should return some generic PagedDTO and not use an out parameter (out doesn't work with async!)
         public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty,
             ListSortDirection? sortDirection, out int pageCount)
         {

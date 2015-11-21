@@ -2,8 +2,6 @@
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System;
-using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
@@ -12,7 +10,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeeService;
+        private readonly IEmployeeService employeesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
@@ -21,20 +19,18 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="employeeService"></param>
+        /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="employeeEditViewModel"></param>
         /// <param name="confirmDeleteViewModel"></param>
-        public EmployeesViewModel(IEmployeeService employeeService, IWindowManager windowManager,
+        public EmployeesViewModel(IEmployeeService employeesService, IWindowManager windowManager,
             EmployeeEditViewModel employeeEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
+            : base(employeesService)
         {
-            this.employeeService = employeeService;
+            this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.employeeEditViewModel = employeeEditViewModel;
             this.confirmDeleteViewModel = confirmDeleteViewModel;
-            PageSize = 30;
-            PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
-            Employees = employeeService.GetPage(1, PageSize);
         }
 
         /// <summary>
@@ -69,11 +65,11 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(employeeEditViewModel);
             if (result != true)
             {
-                employeeService.Reload(SelectedEmployee);
+                employeesService.Reload(SelectedEmployee);
             }
             else
             {
-                employeeService.Save();
+                employeesService.Save();
             }
         }
 
@@ -89,18 +85,9 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
-                employeeService.RemoveEmployee(SelectedEmployee);
-                UpdateEmployees();
+                employeesService.RemoveEmployee(SelectedEmployee);
+                UpdateData();
             }
-        }
-
-        protected override IList<Employee> GetEmployees()
-        {
-            int pageCount;
-            var page = employeeService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter,
-                SortProperty, SortDirection, out pageCount);
-            PageCount = pageCount;
-            return page;
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
@@ -13,7 +11,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeesUsedVehiclesViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeeService;
+        private readonly IEmployeeService employeesService;
         private readonly IWindowManager windowManager;
         private Employee selectedRow;
         private EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel;
@@ -21,16 +19,16 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="employeeService"></param>
+        /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="usedVehiclesDetailsViewModel"></param>
-        public EmployeesUsedVehiclesViewModel(IEmployeeService employeeService, IWindowManager windowManager,
+        public EmployeesUsedVehiclesViewModel(IEmployeeService employeesService, IWindowManager windowManager,
             EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel)
+            : base(employeesService)
         {
-            this.employeeService = employeeService;
+            this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.usedVehiclesDetailsViewModel = usedVehiclesDetailsViewModel;
-            //Employees = employeeService.GetAll();
         }
 
         /// <summary>
@@ -67,19 +65,13 @@ namespace InstantDelivery.ViewModel
             {
                 if (result != true)
                 {
-                    employeeService.Reload(SelectedRow);
+                    employeesService.Reload(SelectedRow);
                 }
                 else
                 {
-                    employeeService.Save();
+                    employeesService.Save();
                 }
             });
-        }
-
-        protected override IList<Employee> GetEmployees()
-        {
-            PageCount = (int)Math.Ceiling((double)(employeeService.Count() / PageSize));
-            return employeeService.GetPage(CurrentPage, PageSize);
         }
     }
 }

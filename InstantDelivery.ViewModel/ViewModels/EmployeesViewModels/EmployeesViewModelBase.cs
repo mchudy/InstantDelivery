@@ -1,26 +1,29 @@
-﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
     /// <summary>
     /// Bazowy model widoku dla innych widoków pracowników.
     /// </summary>
-    public abstract class EmployeesViewModelBase : Screen
+    public abstract class EmployeesViewModelBase : PagingViewModel
     {
         private IList<Employee> employees;
+        private readonly IEmployeeService employeesService;
 
-        private int currentPage = 1;
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
-        private int pageSize;
-        private int pageCount;
 
+        protected EmployeesViewModelBase(IEmployeeService employeesService)
+        {
+            this.employeesService = employeesService;
+            PageSize = 30;
+            PageCount = (int)Math.Ceiling(employeesService.Count() / (double)PageSize);
+            Employees = employeesService.GetPage(1, PageSize);
+        }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
@@ -45,7 +48,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             {
                 lastNameFilter = value;
                 CurrentPage = 1;
-                UpdateEmployees();
+                UpdateData();
             }
         }
 
@@ -59,30 +62,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             {
                 firstNameFilter = value;
                 CurrentPage = 1;
-                UpdateEmployees();
-            }
-        }
-
-        /// <summary>
-        /// Aktualna strona.
-        /// </summary>
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public int PageSize
-        {
-            get { return pageSize; }
-            set
-            {
-                pageSize = value;
-                NotifyOfPropertyChange();
+                UpdateData();
             }
         }
 
@@ -96,60 +76,28 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             {
                 emailFilter = value;
                 CurrentPage = 1;
-                UpdateEmployees();
+                UpdateData();
             }
         }
 
-        public async void PageChanged()
+        public void PageChanged()
         {
-            Employees = await Task.Run(() => GetEmployees());
+            UpdateData();
         }
 
-        public int PageCount
+        public override void UpdateData()
         {
-            get { return pageCount; }
-            set
-            {
-                pageCount = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-
-        public string SortProperty { get; private set; }
-
-        //TODO: unnecessary dependency on PresentationFramework, pass only SortMemberPath
-        public void Sort(DataGridSortingEventArgs e)
-        {
-            //TODO: fix arrows
-            // has to be done manually, property of the column does not get updated
-            if (SortDirection == ListSortDirection.Descending || e.Column.SortMemberPath != SortProperty)
-            {
-                SortDirection = ListSortDirection.Ascending;
-            }
-            else
-            {
-                SortDirection = ListSortDirection.Descending;
-            }
-            SortProperty = e.Column.SortMemberPath;
-            CurrentPage = 1;
-            UpdateEmployees();
-            e.Handled = true;
-        }
-
-        public ListSortDirection? SortDirection { get; private set; }
-
-        protected abstract IList<Employee> GetEmployees();
-
-        protected void UpdateEmployees()
-        {
-            Employees = GetEmployees();
+            int pageCount;
+            var page = employeesService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter,
+                SortProperty, SortDirection, out pageCount);
+            PageCount = pageCount;
+            Employees = page;
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
-            UpdateEmployees();
+            UpdateData();
         }
     }
 }
