@@ -44,12 +44,12 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new PackageEditViewModel(service)
+            var viewModel = new PackageEditViewModel(service)
             {
                 Package = SelectedPackage,
-                Employees = service.GetAvailableEmployees(SelectedPackage),
                 SelectedEmployee = service.GetAssignedEmployee(SelectedPackage)
-            });
+            };
+            var result = windowManager.ShowDialog(viewModel);
             await Task.Run(() =>
             {
                 if (result != true)

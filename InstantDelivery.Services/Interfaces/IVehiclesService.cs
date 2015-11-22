@@ -49,7 +49,8 @@ namespace InstantDelivery.Services
         /// Zwraca wszystkie wolne pojazdy i wyspecyfikowany
         /// </summary>
         /// <param name="vehicle"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
+        PagedResult<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle, PageQuery<Vehicle> query);
     }
 }

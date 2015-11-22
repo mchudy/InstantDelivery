@@ -1,6 +1,5 @@
 ﻿using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services.Paging;
-using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -66,8 +65,9 @@ namespace InstantDelivery.Services
         /// nie przekroczy maksymalnej ładowności samochodu
         /// </summary>
         /// <param name="package"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Employee> GetAvailableEmployees(Package package);
+        PagedResult<Employee> GetAvailableEmployees(Package package, PageQuery<Employee> query);
 
         /// <summary>
         /// Oznacza paczkę jako dostarczoną i usuwa ją ze zbioru paczek 

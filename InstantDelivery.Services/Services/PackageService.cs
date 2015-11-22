@@ -72,12 +72,14 @@ namespace InstantDelivery.Services
         /// nie przekroczy maksymalnej ładowności samochodu
         /// </summary>
         /// <param name="package"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        public IQueryable<Employee> GetAvailableEmployees(Package package)
+        public PagedResult<Employee> GetAvailableEmployees(Package package, PageQuery<Employee> query)
         {
-            return context.Employees
-                .Where(e => (double)(e.Packages.Where(p => p.Id != package.Id).Sum(p => p.Weight) + package.Weight) <
+            query.Filters.Add(
+                e => (double)(e.Packages.Where(p => p.Id != package.Id).Sum(p => p.Weight) + package.Weight) <
                             e.Vehicle.VehicleModel.Payload);
+            return PagingHelper.GetPagedResult(context.Employees, query);
         }
 
         /// <summary>

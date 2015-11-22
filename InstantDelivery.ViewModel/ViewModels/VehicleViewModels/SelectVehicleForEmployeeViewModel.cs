@@ -1,6 +1,6 @@
-﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
+using InstantDelivery.Services.Paging;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,17 +11,20 @@ namespace InstantDelivery.ViewModel
     ///  Model widoku wyboru pojazdu dla pracownika.
     /// </summary>
     [ImplementPropertyChanged]
-    public class SelectVehicleForEmployeeViewModel : Screen
+    public class SelectVehicleForEmployeeViewModel : PagingViewModel
     {
-        private IEmployeeService employeeService;
+        private readonly IEmployeeService employeeService;
+        private readonly IVehiclesService vehiclesService;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="employeeService"></param>
-        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService)
+        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,
+            IVehiclesService vehiclesService)
         {
             this.employeeService = employeeService;
+            this.vehiclesService = vehiclesService;
         }
 
         /// <summary>
@@ -68,6 +71,20 @@ namespace InstantDelivery.ViewModel
         public void Cancel()
         {
             TryClose(false);
+        }
+
+        public override void UpdateData()
+        {
+            var query = new PageQuery<Vehicle>
+            {
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortDirection = SortDirection,
+                SortProperty = SortProperty
+            };
+            var pageDto = vehiclesService.GetAllAvailableAndCurrent(SelectedVehicle, query);
+            PageCount = pageDto.PageCount;
+            Vehicles = pageDto.PageCollection;
         }
     }
 }

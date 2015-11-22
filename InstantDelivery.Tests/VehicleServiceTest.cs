@@ -120,33 +120,33 @@ namespace InstantDelivery.Tests
             }
         }
 
-        [Fact]
-        public void GetAllAvailableAndCurrentVehicle_ForSpecifiedVehicle()
-        {
-            var vehicles = new List<Vehicle>
-            {
-                new Vehicle() {Id=1, RegistrationNumber="1"},
-                new Vehicle() {Id=1, RegistrationNumber="2"},
-                new Vehicle() {Id=1, RegistrationNumber="3"},
-            }.AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
-            var service = new VehiclesService(mockContext.Object);
+        //[Fact]
+        //public void GetAllAvailableAndCurrentVehicle_ForSpecifiedVehicle()
+        //{
+        //    var vehicles = new List<Vehicle>
+        //    {
+        //        new Vehicle() {Id=1, RegistrationNumber="1"},
+        //        new Vehicle() {Id=1, RegistrationNumber="2"},
+        //        new Vehicle() {Id=1, RegistrationNumber="3"},
+        //    }.AsQueryable();
+        //    var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
+        //    var mockContext = new Mock<InstantDeliveryContext>();
+        //    mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
+        //    var service = new VehiclesService(mockContext.Object);
 
-            var employees = new List<Employee>
-            {
-                new Employee() { FirstName = "J.D", LastName = "Kyle", Vehicle=vehicles.Last() } ,
-                new Employee() { FirstName = "Ted", LastName = "Mosby"},
-                new Employee() { FirstName = "Robin", LastName = "Scherbatsky"}
-            }
-            .AsQueryable();
-            var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
+        //    var employees = new List<Employee>
+        //    {
+        //        new Employee() { FirstName = "J.D", LastName = "Kyle", Vehicle=vehicles.Last() } ,
+        //        new Employee() { FirstName = "Ted", LastName = "Mosby"},
+        //        new Employee() { FirstName = "Robin", LastName = "Scherbatsky"}
+        //    }
+        //    .AsQueryable();
+        //    var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
 
-            mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
+        //    mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
 
-            var result = service.GetAllAvailableAndCurrent(vehicles.First()).Count();
-            Assert.Equal(result, 3);
-        }
+        //    var result = service.GetAllAvailableAndCurrent(vehicles.First()).Count();
+        //    Assert.Equal(result, 3);
+        //}
     }
 }

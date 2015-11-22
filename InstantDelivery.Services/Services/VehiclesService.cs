@@ -76,12 +76,13 @@ namespace InstantDelivery.Services
         /// Zwraca kolekcję wszystkich wolnych pojzdów i pojazdu wyspecyfikowanego
         /// </summary>
         /// <param name="vehicle"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        public IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
+        public PagedResult<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle, PageQuery<Vehicle> query)
         {
             var vehicleId = vehicle?.Id;
-            return context.Vehicles
-                .Where(e => (e.Id == vehicleId || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0));
+            query.Filters.Add(e => e.Id == vehicleId || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0);
+            return PagingHelper.GetPagedResult(context.Vehicles, query);
         }
     }
 }

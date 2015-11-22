@@ -3,7 +3,6 @@ using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
@@ -61,13 +60,13 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService)
+            var viewModel = new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService)
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,
-                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle).ToList(),
                 HasVehicle = SelectedEmployee.Vehicle != null
-            });
+            };
+            var result = windowManager.ShowDialog(viewModel);
             await Task.Run(() =>
             {
                 if (result != true)
