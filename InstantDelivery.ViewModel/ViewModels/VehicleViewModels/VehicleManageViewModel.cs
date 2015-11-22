@@ -3,6 +3,7 @@ using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
@@ -12,7 +13,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class VehicleManageViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesesEmployeesService;
+        private readonly IEmployeeService employeesService;
         private readonly IVehiclesService vehiclesService;
         private readonly IWindowManager windowManager;
         private Employee selectedEmployee;
@@ -20,14 +21,14 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="employeesesEmployeesService"></param>
+        /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="vehiclesService"></param>
-        public VehicleManageViewModel(IEmployeeService employeesesEmployeesService, IWindowManager windowManager,
+        public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager,
             IVehiclesService vehiclesService)
-            : base(employeesesEmployeesService)
+            : base(employeesService)
         {
-            this.employeesesEmployeesService = employeesesEmployeesService;
+            this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.vehiclesService = vehiclesService;
         }
@@ -35,10 +36,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Flaga informująca o tym czy zaznaczony jest jakiś wiersz.
         /// </summary>
-        public bool IsSelectedAnyRow
-        {
-            get { return SelectedEmployee != null; }
-        }
+        public bool IsSelectedAnyRow => SelectedEmployee != null;
 
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
@@ -63,22 +61,22 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesesEmployeesService)
+            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService)
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,
-                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle),
+                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle).ToList(),
                 HasVehicle = SelectedEmployee.Vehicle != null
             });
             await Task.Run(() =>
             {
                 if (result != true)
                 {
-                    employeesesEmployeesService.Reload(SelectedEmployee);
+                    employeesService.Reload(SelectedEmployee);
                 }
                 else
                 {
-                    employeesesEmployeesService.Save();
+                    employeesService.Save();
                 }
             });
         }

@@ -1,9 +1,9 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using PropertyChanged;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -19,7 +19,6 @@ namespace InstantDelivery.ViewModel
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="employeeService"></param>
-        /// <param name="vehicleService"></param>
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
@@ -43,7 +42,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych w widoku.
         /// </summary>
-        public IQueryable<Vehicle> Vehicles { get; set; }
+        public IList<Vehicle> Vehicles { get; set; }
 
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.

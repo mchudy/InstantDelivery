@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -19,6 +20,8 @@ namespace InstantDelivery.Services
         /// </summary>
         /// <returns></returns>
         IQueryable<VehicleModel> GetAllModels();
+
+        PagedResult<Vehicle> GetPage(PageQuery<Vehicle> query);
 
         /// <summary>
         /// Aktualizuje dane pojazdu

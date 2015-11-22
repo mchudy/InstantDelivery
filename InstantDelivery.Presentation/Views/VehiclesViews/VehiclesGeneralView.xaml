@@ -18,7 +18,7 @@
         <ContentControl x:Name="VehiclesFilterPanel" />
         <controls:VehiclesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls:VehiclesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, IsAsync=True}" Grid.Row="2"
+        <DataGrid ItemsSource="{Binding Vehicles, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
@@ -33,7 +33,8 @@
                 <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:DataPager Grid.Row="3" x:Name="Pager" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <controls:DataPager Grid.Row="3" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
+                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" />
         <StackPanel Grid.Row="4" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="EditVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
             <Button x:Name="DeleteVehicle" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>

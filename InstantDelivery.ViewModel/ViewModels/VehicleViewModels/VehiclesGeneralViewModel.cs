@@ -1,9 +1,8 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -27,17 +26,12 @@ namespace InstantDelivery.ViewModel
         /// <param name="confirmDeleteViewModel"></param>
         public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager,
            VehicleEditViewModel vehiclesEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
+            : base(vehiclesService)
         {
             this.vehiclesService = vehiclesService;
             this.windowManager = windowManager;
             this.vehiclesEditViewModel = vehiclesEditViewModel;
             this.confirmDeleteViewModel = confirmDeleteViewModel;
-            Vehicles = vehiclesService.GetAll();
-        }
-
-        protected override IQueryable<Vehicle> GetVehicles()
-        {
-            return vehiclesService.GetAll();
         }
 
         /// <summary>
@@ -100,7 +94,7 @@ namespace InstantDelivery.ViewModel
                 {
                     vehiclesService.Remove(SelectedVehicle);
                     Vehicles = null;
-                    Vehicles = vehiclesService.GetAll();
+                    UpdateData();
                 }
             });
         }
