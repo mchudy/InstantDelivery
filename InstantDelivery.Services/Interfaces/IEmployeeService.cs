@@ -14,6 +14,11 @@ namespace InstantDelivery.Services
         /// <param name="employee"></param>
         void AddEmployee(Employee employee);
 
+        /// <summary>
+        /// Zwraca stronę z pracownikami
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         PagedResult<Employee> GetPage(PageQuery<Employee> query);
 
         /// <summary>
@@ -32,8 +37,6 @@ namespace InstantDelivery.Services
         /// Zapisuje aktualny stan kontekstu
         /// </summary>
         void Save();
-
-        int Count();
 
         /// <summary>
         /// Zmienia pojazd przypisany do pracownika

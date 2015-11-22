@@ -15,6 +15,11 @@ namespace InstantDelivery.Services
         /// <returns></returns>
         IQueryable<VehicleModel> GetAllModels();
 
+        /// <summary>
+        /// Zwraca stronę z pojazdami
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         PagedResult<Vehicle> GetPage(PageQuery<Vehicle> query);
 
         /// <summary>

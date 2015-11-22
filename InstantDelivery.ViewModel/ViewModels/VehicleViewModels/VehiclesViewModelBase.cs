@@ -82,6 +82,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Uaktualnia dane w tabeli
+        /// </summary>
         public override void UpdateData()
         {
             var query = new PageQuery<Vehicle>

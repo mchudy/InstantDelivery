@@ -22,11 +22,6 @@ namespace InstantDelivery.Services
             this.context = context;
         }
 
-        public int Count()
-        {
-            return context.Employees.Count();
-        }
-
         /// <summary>
         /// Zmienia pojazd przypisany do pracownika
         /// </summary>

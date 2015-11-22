@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Bazowy model widoku dla ekranów wspierających paginację
+    /// </summary>
     public class PagingViewModel : Screen
     {
         private int pageSize = 30;
@@ -23,6 +26,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Aktualny rozmiar strony
+        /// </summary>
         public int PageSize
         {
             get { return pageSize; }
@@ -33,6 +39,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Aktualna liczba stron (po zastosowaniu filtrów)
+        /// </summary>
         public int PageCount
         {
             get { return pageCount; }
@@ -43,10 +52,20 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Nazwa właściwości, po której przeprowadzane jest sortowanie
+        /// </summary>
         public string SortProperty { get; private set; }
 
+        /// <summary>
+        /// Kierunek sortowania
+        /// </summary>
         public ListSortDirection? SortDirection { get; private set; }
 
+        /// <summary>
+        /// Sortuje dane i przechodzi do pierwszej strony
+        /// </summary>
+        /// <param name="e"></param>
         public void Sort(DataGridSortingEventArgs e)
         {
             // has to be done manually, SortDirection is set to null every time ItemsSource changes
@@ -64,11 +83,17 @@ namespace InstantDelivery.ViewModel
             UpdateData();
         }
 
+        /// <summary>
+        /// Uaktualnia dane po zmianie strony
+        /// </summary>
         public void PageChanged()
         {
             UpdateData();
         }
 
+        /// <summary>
+        /// Uaktualnia dane w tabeli
+        /// </summary>
         public virtual void UpdateData() { }
 
         protected override void OnActivate()
