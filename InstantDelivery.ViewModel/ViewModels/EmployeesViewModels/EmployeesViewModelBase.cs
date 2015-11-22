@@ -2,6 +2,7 @@
 using InstantDelivery.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 {
@@ -21,8 +22,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         {
             this.employeesService = employeesService;
             PageSize = 30;
-            PageCount = (int)Math.Ceiling(employeesService.Count() / (double)PageSize);
-            Employees = employeesService.GetPage(1, PageSize);
+            CurrentPage = 1;
         }
 
         /// <summary>
@@ -87,17 +87,23 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         public override void UpdateData()
         {
-            int pageCount;
-            var page = employeesService.GetPage(CurrentPage, PageSize, FirstNameFilter, LastNameFilter, EmailFilter,
-                SortProperty, SortDirection, out pageCount);
-            PageCount = pageCount;
-            Employees = page;
+            var pageDto = employeesService.GetPage(CurrentPage, PageSize, GetFilter(),
+                SortProperty, SortDirection);
+            PageCount = pageDto.PageCount;
+            Employees = pageDto.PageCollection;
         }
 
         protected override void OnActivate()
         {
             base.OnActivate();
             UpdateData();
+        }
+
+        private Expression<Func<Employee, bool>> GetFilter()
+        {
+            return e => (FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter)) &&
+                        (LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter)) &&
+                        (EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using InstantDelivery.Domain.Entities;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
-using System.Linq;
+using System.Linq.Expressions;
 
 namespace InstantDelivery.Services
 {
@@ -16,17 +16,8 @@ namespace InstantDelivery.Services
         /// <param name="employee"></param>
         void AddEmployee(Employee employee);
 
-        /// <summary>
-        /// Zwraca wszystkich pracowników z bazy danych
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<Employee> GetAll();
-
-        IList<Employee> GetPage(int pageIndex, int pageSize);
-
-        //TODO: encapsulate the paramaters in a seperate class or make it generic
-        IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter,
-            string sortProperty, ListSortDirection? sortDirection, out int pageCount);
+        PageDTO<Employee> GetPage(int pageIndex, int pageSize, Expression<Func<Employee, bool>> filter,
+            string sortProperty, ListSortDirection? sortDirection);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

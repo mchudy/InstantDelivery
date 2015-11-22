@@ -49,8 +49,7 @@ namespace InstantDelivery.ViewModel
 
         public void Sort(DataGridSortingEventArgs e)
         {
-            //TODO: fix arrows
-            // has to be done manually, property of the column does not get updated
+            // has to be done manually, SortDirection is set to null every time ItemsSource changes
             if (SortDirection == ListSortDirection.Descending || e.Column.SortMemberPath != SortProperty)
             {
                 SortDirection = ListSortDirection.Ascending;

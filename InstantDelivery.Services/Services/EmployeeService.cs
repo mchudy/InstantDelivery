@@ -2,9 +2,9 @@
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Domain.Extensions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace InstantDelivery.Services
 {
@@ -18,6 +18,7 @@ namespace InstantDelivery.Services
         /// Konstruktor warstwy serwisu
         /// </summary>
         /// <param name="context"></param>
+        //TODO: [IMPORTANT] Context factory injection, necessary for async support
         public EmployeeService(InstantDeliveryContext context)
         {
             this.context = context;
@@ -45,25 +46,9 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        /// <summary>
-        /// Zwraca wszystkich pracowników z bazy danych
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Employee> GetAll()
-        {
-            return context.Employees;
-        }
-
-        public IList<Employee> GetPage(int pageIndex, int pageSize)
-        {
-            return context.Employees
-                .OrderBy(e => e.Id)
-                .Page(pageIndex, pageSize);
-        }
-
-        //TODO: services should return some generic PagedDTO and not use an out parameter (out doesn't work with async!)
-        public IList<Employee> GetPage(int pageIndex, int pageSize, string firstNameFilter, string lastNameFilter, string emailFilter, string sortProperty,
-            ListSortDirection? sortDirection, out int pageCount)
+        //TODO: consider introducing an abstraction over filters and sorting criteria
+        public PageDTO<Employee> GetPage(int pageIndex, int pageSize, Expression<Func<Employee, bool>> filter,
+            string sortProperty, ListSortDirection? sortDirection)
         {
             var result = context.Employees.AsQueryable();
             if (string.IsNullOrEmpty(sortProperty))
@@ -78,12 +63,12 @@ namespace InstantDelivery.Services
             {
                 result = result.OrderByProperty(sortProperty);
             }
-            result = result
-                .Where(e => firstNameFilter == "" || e.FirstName.StartsWith(firstNameFilter))
-                .Where(e => lastNameFilter == "" || e.LastName.StartsWith(lastNameFilter))
-                .Where(e => emailFilter == "" || e.Email.StartsWith(emailFilter));
-            pageCount = (int)Math.Ceiling(result.Count() / (double)pageSize);
-            return result.Page(pageIndex, pageSize);
+            result = result.Where(filter);
+            return new PageDTO<Employee>
+            {
+                PageCount = (int)Math.Ceiling(result.Count() / (double)pageSize),
+                PageCollection = result.Page(pageIndex, pageSize)
+            };
         }
 
         /// <summary>

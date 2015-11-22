@@ -1,9 +1,9 @@
-﻿using InstantDelivery.Services;
+﻿using InstantDelivery.Domain;
+using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
-using InstantDelivery.Domain;
-using InstantDelivery.Domain.Entities;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -84,27 +84,6 @@ namespace InstantDelivery.Tests
 
             employeesMockSet.Verify(m => m.Add(It.IsAny<Employee>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
-        }
-
-        [Fact]
-        public void GetAllEmployees_ShouldReturnAllEmployees()
-        {
-            var employees = new List<Employee>
-            {
-                new Employee() { FirstName = "J.D", LastName = "Kyle" } ,
-                new Employee() { FirstName = "Ted", LastName = "Mosby"},
-                new Employee() { FirstName = "Robin", LastName = "Scherbatsky"}
-            }
-            .AsQueryable();
-            var employeesMockSet = MockDbSetHelper.GetMockSet(employees);
-
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Employees).Returns(employeesMockSet.Object);
-            var service = new EmployeeService(mockContext.Object);
-
-            var result = service.GetAll();
-            var count = result.Count();
-            Assert.Equal(count, 3);
         }
 
         [Fact]
