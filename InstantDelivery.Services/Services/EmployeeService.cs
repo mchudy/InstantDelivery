@@ -1,9 +1,6 @@
 ﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Domain.Extensions;
 using InstantDelivery.Services.Paging;
-using System;
-using System.ComponentModel;
 using System.Linq;
 
 namespace InstantDelivery.Services
@@ -47,32 +44,9 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        //TODO: make it generic
         public PagedResult<Employee> GetPage(PageQuery<Employee> query)
         {
-            var result = context.Employees.AsQueryable();
-            if (string.IsNullOrEmpty(query.SortProperty))
-            {
-                result = result.OrderBy(e => e.Id);
-            }
-            else if (query.SortDirection == ListSortDirection.Descending)
-            {
-                result = result.OrderByDescendingProperty(query.SortProperty);
-            }
-            else
-            {
-                result = result.OrderByProperty(query.SortProperty);
-            }
-            foreach (var filter in query.Filters)
-            {
-                result = result.Where(filter);
-            }
-            var pageCount = (int)Math.Ceiling(result.Count() / (double)query.PageSize);
-            return new PagedResult<Employee>
-            {
-                PageCount = pageCount,
-                PageCollection = result.Page(query.PageIndex, query.PageSize)
-            };
+            return PagingHelper.GetPagedResult(context.Employees.AsQueryable(), query);
         }
 
         /// <summary>

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Paging\PagedResult.cs" />
+    <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
