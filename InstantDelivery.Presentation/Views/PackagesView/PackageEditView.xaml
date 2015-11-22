@@ -95,7 +95,7 @@
             Dostarczona
         </CheckBox>
 
-        <DataGrid Margin="0 5 0 0" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding PagedSource, ElementName=Pager, IsAsync=True}" 
+        <DataGrid Margin="0 5 0 0" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding Employees, IsAsync=True}" 
                   Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="4"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
@@ -107,8 +107,9 @@
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="220" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}"
-                             PageSize="10" Visibility="{Binding Package.Status, Converter={StaticResource StatusToGridVisibility}}" />
+        <controls1:DataPager Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="0" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
+                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" 
+                              Visibility="{Binding Package.Status, Converter={StaticResource StatusToGridVisibility}}"/>
 
         <StackPanel Grid.Row="14" Grid.ColumnSpan="4" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />

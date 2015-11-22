@@ -1,10 +1,9 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -24,30 +23,19 @@ namespace InstantDelivery.ViewModel
         /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="vehiclesService"></param>
-        public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager, IVehiclesService vehiclesService)
+        public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager,
+            IVehiclesService vehiclesService)
+            : base(employeesService)
         {
             this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.vehiclesService = vehiclesService;
-            Employees = employeesService.GetAll();
         }
 
         /// <summary>
         /// Flaga informująca o tym czy zaznaczony jest jakiś wiersz.
         /// </summary>
-        public bool IsSelectedAnyRow
-        {
-            get { return SelectedEmployee != null; }
-        }
-
-        /// <summary>
-        /// Metoda zwraca kolekcję wszystkich pracowników.
-        /// </summary>
-        /// <returns></returns>
-        protected override IQueryable<Employee> GetEmployees()
-        {
-            return employeesService.GetAll();
-        }
+        public bool IsSelectedAnyRow => SelectedEmployee != null;
 
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
@@ -72,13 +60,13 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new SelectVehicleForEmployeeViewModel(employeesService)
+            var viewModel = new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService)
             {
                 SelectedEmployee = SelectedEmployee,
                 SelectedVehicle = SelectedEmployee.Vehicle,
-                Vehicles = vehiclesService.GetAllAvailableAndCurrent(SelectedEmployee.Vehicle),
                 HasVehicle = SelectedEmployee.Vehicle != null
-            });
+            };
+            var result = windowManager.ShowDialog(viewModel);
             await Task.Run(() =>
             {
                 if (result != true)

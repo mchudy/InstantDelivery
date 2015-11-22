@@ -1,6 +1,7 @@
-﻿using System.Linq;
-using InstantDelivery.Domain;
+﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -20,13 +21,9 @@ namespace InstantDelivery.Services
             this.context = context;
         }
 
-        /// <summary>
-        /// Zwraca wszystkie pojazdy
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Vehicle> GetAll()
+        public PagedResult<Vehicle> GetPage(PageQuery<Vehicle> query)
         {
-            return context.Vehicles;
+            return PagingHelper.GetPagedResult(context.Vehicles.AsQueryable(), query);
         }
 
         /// <summary>
@@ -79,12 +76,13 @@ namespace InstantDelivery.Services
         /// Zwraca kolekcję wszystkich wolnych pojzdów i pojazdu wyspecyfikowanego
         /// </summary>
         /// <param name="vehicle"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        public IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle)
+        public PagedResult<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle, PageQuery<Vehicle> query)
         {
             var vehicleId = vehicle?.Id;
-            return context.Vehicles
-                .Where(e => (e.Id == vehicleId || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0));
+            query.Filters.Add(e => e.Id == vehicleId || context.Employees.Count(em => em.Vehicle.Id == e.Id) == 0);
+            return PagingHelper.GetPagedResult(context.Vehicles, query);
         }
     }
 }

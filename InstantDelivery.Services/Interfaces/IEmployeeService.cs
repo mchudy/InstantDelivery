@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
 
 namespace InstantDelivery.Services
 {
@@ -15,10 +15,11 @@ namespace InstantDelivery.Services
         void AddEmployee(Employee employee);
 
         /// <summary>
-        /// Zwraca wszystkich pracowników z bazy danych
+        /// Zwraca stronę z pracownikami
         /// </summary>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Employee> GetAll();
+        PagedResult<Employee> GetPage(PageQuery<Employee> query);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

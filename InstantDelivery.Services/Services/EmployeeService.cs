@@ -1,6 +1,7 @@
-﻿using System.Linq;
-using InstantDelivery.Domain;
+﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -10,10 +11,12 @@ namespace InstantDelivery.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly InstantDeliveryContext context;
+
         /// <summary>
         /// Konstruktor warstwy serwisu
         /// </summary>
         /// <param name="context"></param>
+        //TODO: [IMPORTANT] Context factory injection, necessary for async support
         public EmployeeService(InstantDeliveryContext context)
         {
             this.context = context;
@@ -36,13 +39,9 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        /// <summary>
-        /// Zwraca wszystkich pracowników z bazy danych
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Employee> GetAll()
+        public PagedResult<Employee> GetPage(PageQuery<Employee> query)
         {
-            return context.Employees;
+            return PagingHelper.GetPagedResult(context.Employees.AsQueryable(), query);
         }
 
         /// <summary>

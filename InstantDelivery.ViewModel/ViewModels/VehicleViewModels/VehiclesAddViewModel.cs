@@ -1,10 +1,10 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -23,7 +23,7 @@ namespace InstantDelivery.ViewModel
         /// <param name="service"></param>
         public VehiclesAddViewModel(IVehiclesService service)
         {
-            this.vehiclesService = service;
+            vehiclesService = service;
             NewVehicle = new Vehicle();
             VehicleModels = vehiclesService.GetAllModels().ToList();
         }

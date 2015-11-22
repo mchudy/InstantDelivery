@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paging\PagedResult.cs" />
+    <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Interfaces\IStatisticsService.cs" />
     <Compile Include="Interfaces\IVehiclesService.cs" />
     <Compile Include="Services\PackageService.cs" />
+    <Compile Include="Paging\PageQuery.cs" />
     <Compile Include="Services\StatisticsService.cs" />
     <Compile Include="Services\VehiclesService.cs" />
   </ItemGroup>

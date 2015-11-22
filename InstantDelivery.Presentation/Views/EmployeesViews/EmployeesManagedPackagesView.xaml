@@ -18,7 +18,7 @@
         <ContentControl x:Name="EmployeesFilterPanel" />
         <controls:EmployeesFilterPanel Grid.Row="0" />
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay, IsAsync=True}" Grid.Row="2"
+        <DataGrid ItemsSource="{Binding Employees, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
@@ -45,6 +45,7 @@
                 <DataGridTextColumn Header="Liczba paczek" Binding="{Binding Packages.Count}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
-        <controls:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <controls:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
+                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" />
     </Grid>
 </UserControl>

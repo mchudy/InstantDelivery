@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -9,16 +10,17 @@ namespace InstantDelivery.Services
     public interface IVehiclesService
     {
         /// <summary>
-        /// Zwraca wszystkie pojazdy z bazy danych
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<Vehicle> GetAll();
-
-        /// <summary>
         /// Zwraca wszystkie modele pojazdów z bazy danych
         /// </summary>
         /// <returns></returns>
         IQueryable<VehicleModel> GetAllModels();
+
+        /// <summary>
+        /// Zwraca stronę z pojazdami
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        PagedResult<Vehicle> GetPage(PageQuery<Vehicle> query);
 
         /// <summary>
         /// Aktualizuje dane pojazdu
@@ -47,7 +49,8 @@ namespace InstantDelivery.Services
         /// Zwraca wszystkie wolne pojazdy i wyspecyfikowany
         /// </summary>
         /// <param name="vehicle"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle);
+        PagedResult<Vehicle> GetAllAvailableAndCurrent(Vehicle vehicle, PageQuery<Vehicle> query);
     }
 }

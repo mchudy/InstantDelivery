@@ -1,28 +1,39 @@
-﻿using Caliburn.Micro;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using InstantDelivery.Services.Paging;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Bazowy modeul widoku dla widoków pracowników.
     /// </summary>
-    public abstract class VehiclesViewModelBase : Screen
+    public abstract class VehiclesViewModelBase : PagingViewModel
     {
-        private IQueryable<Vehicle> vehicles;
+        private IVehiclesService service;
+        private IList<Vehicle> vehicles;
 
-        private int currentPage = 1;
         private string brandFilter = string.Empty;
         private string modelFilter = string.Empty;
         private string registrationNumberFilter = string.Empty;
-        private VehicleSortingProperty? sortingProperty;
+
+        private Expression<Func<Vehicle, bool>> filter =>
+            e => (string.IsNullOrEmpty(BrandFilter) || e.VehicleModel.Brand.StartsWith(BrandFilter)) &&
+                (string.IsNullOrEmpty(ModelFilter) || e.VehicleModel.Model.StartsWith(ModelFilter)) &&
+                (string.IsNullOrEmpty(RegistrationNumberFilter) || e.RegistrationNumber.StartsWith(RegistrationNumberFilter));
+
+
+        protected VehiclesViewModelBase(IVehiclesService service)
+        {
+            this.service = service;
+        }
 
         /// <summary>
         /// Kolekcja skojarzona z taelą danych.
         /// </summary>
-        public IQueryable<Vehicle> Vehicles
+        public IList<Vehicle> Vehicles
         {
             get { return vehicles; }
             set
@@ -41,7 +52,7 @@ namespace InstantDelivery.ViewModel
             set
             {
                 brandFilter = value;
-                UpdateVehicles();
+                UpdateData();
             }
         }
 
@@ -54,20 +65,7 @@ namespace InstantDelivery.ViewModel
             set
             {
                 modelFilter = value;
-                UpdateVehicles();
-            }
-        }
-
-        /// <summary>
-        /// Bieżąca strona
-        /// </summary>
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                NotifyOfPropertyChange();
+                UpdateData();
             }
         }
 
@@ -80,83 +78,26 @@ namespace InstantDelivery.ViewModel
             set
             {
                 registrationNumberFilter = value;
-                UpdateVehicles();
+                UpdateData();
             }
         }
 
         /// <summary>
-        /// Kryterium sortowania wybrane przez użytkownika.
+        /// Uaktualnia dane w tabeli
         /// </summary>
-        public VehicleSortingProperty? SortingProperty
+        public override void UpdateData()
         {
-            get { return sortingProperty; }
-            set
+            var query = new PageQuery<Vehicle>
             {
-                sortingProperty = value;
-                UpdateVehicles();
-            }
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortProperty = SortProperty,
+                SortDirection = SortDirection,
+            };
+            query.Filters.Add(filter);
+            var pageDto = service.GetPage(query);
+            PageCount = pageDto.PageCount;
+            Vehicles = pageDto.PageCollection;
         }
-
-        protected abstract IQueryable<Vehicle> GetVehicles();
-
-        protected async void UpdateVehicles()
-        {
-            await Task.Run(() =>
-            {
-                var newVehicles = GetVehicles();
-                if (SortingProperty != null)
-                {
-                    newVehicles = SortVehicles(newVehicles);
-                }
-                newVehicles = FilterVehicles(newVehicles);
-                Vehicles = newVehicles;
-            });
-        }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            UpdateVehicles();
-        }
-
-        private IQueryable<Vehicle> SortVehicles(IQueryable<Vehicle> newVehicles)
-        {
-            if (SortingProperty == VehicleSortingProperty.ByMark)
-            {
-                newVehicles = newVehicles.OrderBy(e => e.VehicleModel.Brand);
-                CurrentPage = 1;
-            }
-            else if (SortingProperty == VehicleSortingProperty.ByRegistrationNumber)
-            {
-                newVehicles = newVehicles.OrderBy(e => e.RegistrationNumber);
-                CurrentPage = 1;
-            }
-            else if (SortingProperty == VehicleSortingProperty.ByModel)
-            {
-                newVehicles = newVehicles.OrderBy(e => e.VehicleModel.Model);
-                CurrentPage = 1;
-            }
-            return newVehicles;
-        }
-
-        private IQueryable<Vehicle> FilterVehicles(IQueryable<Vehicle> newVehicles)
-        {
-            return newVehicles
-                .Where(e => BrandFilter == "" || e.VehicleModel.Brand.StartsWith(BrandFilter))
-                .Where(e => ModelFilter == "" || e.VehicleModel.Model.StartsWith(ModelFilter))
-                .Where(e => RegistrationNumberFilter == "" || e.RegistrationNumber.StartsWith(RegistrationNumberFilter));
-        }
-    }
-    /// <summary>
-    /// Definicja kryterium sortowania.
-    /// </summary>
-    public enum VehicleSortingProperty
-    {
-        [Description("Po marce")]
-        ByMark,
-        [Description("Po modelu")]
-        ByModel,
-        [Description("Po numerze rejestracyjnym")]
-        ByRegistrationNumber
     }
 }

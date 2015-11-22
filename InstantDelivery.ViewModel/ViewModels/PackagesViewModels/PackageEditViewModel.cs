@@ -1,9 +1,9 @@
-﻿using InstantDelivery.Services;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using InstantDelivery.Services.Paging;
 using PropertyChanged;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
-using Screen = Caliburn.Micro.Screen;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,17 +11,17 @@ namespace InstantDelivery.ViewModel
     /// Model widoku edycji paczki.
     /// </summary>
     [ImplementPropertyChanged]
-    public class PackageEditViewModel : Screen
+    public class PackageEditViewModel : PagingViewModel
     {
-        private readonly IPackageService service;
+        private readonly IPackageService packagesService;
 
         /// <summary>
         /// Tworzy nowy model widoku edycji paczki
         /// </summary>
-        /// <param name="service"></param>
-        public PackageEditViewModel(IPackageService service)
+        /// <param name="packagesService"></param>
+        public PackageEditViewModel(IPackageService packagesService)
         {
-            this.service = service;
+            this.packagesService = packagesService;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Zbiór pracowników, którym można przypisać aktualną przesyłkę
         /// </summary>
-        public IQueryable<Employee> Employees { get; set; }
+        public IList<Employee> Employees { get; set; }
 
         /// <summary>
         /// Pracownik przypisany do przesyłki
@@ -57,11 +57,11 @@ namespace InstantDelivery.ViewModel
             TryClose(true);
             if (Package.Status == PackageStatus.New && SelectedEmployee != null)
             {
-                service.AssignPackage(Package, SelectedEmployee);
+                packagesService.AssignPackage(Package, SelectedEmployee);
             }
             else if (Package.Status == PackageStatus.InDelivery && IsDelivered)
             {
-                service.MarkAsDelivered(Package);
+                packagesService.MarkAsDelivered(Package);
             }
         }
 
@@ -80,8 +80,22 @@ namespace InstantDelivery.ViewModel
         {
             await Task.Run(() =>
             {
-                service.CalculatePackageCost(Package);
+                packagesService.CalculatePackageCost(Package);
             });
+        }
+
+        public override void UpdateData()
+        {
+            var query = new PageQuery<Employee>
+            {
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortProperty = SortProperty,
+                SortDirection = SortDirection,
+            };
+            var pageDto = packagesService.GetAvailableEmployees(Package, query);
+            PageCount = pageDto.PageCount;
+            Employees = pageDto.PageCollection;
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using InstantDelivery.Services;
+﻿using InstantDelivery.Domain;
+using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using InstantDelivery.Services.Pricing;
 using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using InstantDelivery.Domain;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services.Pricing;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -141,29 +141,6 @@ namespace InstantDelivery.Tests
             packagesMockSet.Verify(m => m.Add(It.IsAny<Package>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
-
-        [Fact]
-        public void GetAllPackages_ShouldReturnAllPackages()
-        {
-            var packages = new List<Package>
-            {
-                new Package() {Id=1},
-                new Package() {Id=2},
-                new Package() {Id=3 }
-            }
-            .AsQueryable();
-            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
-
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
-            var pricingStrategy = new Mock<IPricingStrategy>().Object;
-            var service = new PackageService(mockContext.Object, pricingStrategy);
-
-            var result = service.GetAll();
-            var count = result.Count();
-            Assert.Equal(count, 3);
-        }
-
 
         [Fact]
         public void ReloadPackage_ShouldReloadPackageData()

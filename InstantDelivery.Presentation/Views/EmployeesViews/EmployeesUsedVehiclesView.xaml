@@ -20,7 +20,7 @@
         <ContentControl x:Name="EmployeesFilterPanel" />
         <controls1:EmployeesFilterPanel Grid.Row="0" />
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid ItemsSource="{Binding PagedSource, ElementName=Pager, Mode=TwoWay, IsAsync=True}" Grid.Row="2"
+        <DataGrid ItemsSource="{Binding Employees, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
@@ -33,7 +33,8 @@
                 <DataGridTextColumn Header="Model" Width="200" Binding="{Binding Vehicle.VehicleModel.Model}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <controls1:DataPager Grid.Row="4" x:Name="Pager" ItemsSource="{Binding Employees}" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" />
+        <controls1:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
+                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" />
         <StackPanel Grid.Row="5" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft">
             <Button x:Name="ShowVehicleDetails" IsEnabled="{Binding IsEnabledViewDetails}" Width="150" Content="Pokaż szczegóły"></Button>
         </StackPanel>

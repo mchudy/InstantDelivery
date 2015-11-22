@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
 
 namespace InstantDelivery.Services
 {
@@ -23,10 +23,11 @@ namespace InstantDelivery.Services
         void RegisterPackage(Package package);
 
         /// <summary>
-        /// Zwraca wszystkie paczki w bazie danych
+        /// Zwraca stronę z paczkami
         /// </summary>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Package> GetAll();
+        PagedResult<Package> GetPage(PageQuery<Package> query);
 
         /// <summary>
         /// Wczytuje obiekt danej paczki z bazy danych, ignorując wprowadzone zmiany
@@ -64,8 +65,9 @@ namespace InstantDelivery.Services
         /// nie przekroczy maksymalnej ładowności samochodu
         /// </summary>
         /// <param name="package"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        IQueryable<Employee> GetAvailableEmployees(Package package);
+        PagedResult<Employee> GetAvailableEmployees(Package package, PageQuery<Employee> query);
 
         /// <summary>
         /// Oznacza paczkę jako dostarczoną i usuwa ją ze zbioru paczek 
