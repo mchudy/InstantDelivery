@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace InstantDelivery.Services
+namespace InstantDelivery.Services.Paging
 {
     public class PageDTO<TEntity>
     {

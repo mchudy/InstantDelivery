@@ -1,10 +1,10 @@
 ﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Domain.Extensions;
+using InstantDelivery.Services.Paging;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace InstantDelivery.Services
 {
@@ -14,6 +14,7 @@ namespace InstantDelivery.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly InstantDeliveryContext context;
+
         /// <summary>
         /// Konstruktor warstwy serwisu
         /// </summary>
@@ -46,28 +47,30 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        //TODO: consider introducing an abstraction over filters and sorting criteria
-        public PageDTO<Employee> GetPage(int pageIndex, int pageSize, Expression<Func<Employee, bool>> filter,
-            string sortProperty, ListSortDirection? sortDirection)
+        public PageDTO<Employee> GetPage(PageQuery<Employee> query)
         {
             var result = context.Employees.AsQueryable();
-            if (string.IsNullOrEmpty(sortProperty))
+            if (string.IsNullOrEmpty(query.SortProperty))
             {
                 result = result.OrderBy(e => e.Id);
             }
-            else if (sortDirection == ListSortDirection.Descending)
+            else if (query.SortDirection == ListSortDirection.Descending)
             {
-                result = result.OrderByDescendingProperty(sortProperty);
+                result = result.OrderByDescendingProperty(query.SortProperty);
             }
             else
             {
-                result = result.OrderByProperty(sortProperty);
+                result = result.OrderByProperty(query.SortProperty);
             }
-            result = result.Where(filter);
+            foreach (var filter in query.Filters)
+            {
+                result = result.Where(filter);
+            }
+            var pageCount = (int)Math.Ceiling(result.Count() / (double)query.PageSize);
             return new PageDTO<Employee>
             {
-                PageCount = (int)Math.Ceiling(result.Count() / (double)pageSize),
-                PageCollection = result.Page(pageIndex, pageSize)
+                PageCount = pageCount,
+                PageCollection = result.Page(query.PageIndex, query.PageSize)
             };
         }
 

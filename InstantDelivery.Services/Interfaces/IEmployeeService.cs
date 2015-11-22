@@ -1,7 +1,5 @@
 ﻿using InstantDelivery.Domain.Entities;
-using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
+using InstantDelivery.Services.Paging;
 
 namespace InstantDelivery.Services
 {
@@ -16,8 +14,7 @@ namespace InstantDelivery.Services
         /// <param name="employee"></param>
         void AddEmployee(Employee employee);
 
-        PageDTO<Employee> GetPage(int pageIndex, int pageSize, Expression<Func<Employee, bool>> filter,
-            string sortProperty, ListSortDirection? sortDirection);
+        PageDTO<Employee> GetPage(PageQuery<Employee> query);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

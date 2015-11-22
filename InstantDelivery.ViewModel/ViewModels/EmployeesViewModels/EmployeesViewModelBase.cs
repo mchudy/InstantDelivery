@@ -1,5 +1,6 @@
 ﻿using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
+using InstantDelivery.Services.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -17,6 +18,11 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
+
+        private Expression<Func<Employee, bool>> filter =>
+            e => (string.IsNullOrEmpty(FirstNameFilter) || e.FirstName.StartsWith(firstNameFilter)) &&
+                 (string.IsNullOrEmpty(LastNameFilter) || e.LastName.StartsWith(LastNameFilter)) &&
+                 (string.IsNullOrEmpty(EmailFilter) || e.Email.StartsWith(EmailFilter));
 
         protected EmployeesViewModelBase(IEmployeeService employeesService)
         {
@@ -87,8 +93,15 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
 
         public override void UpdateData()
         {
-            var pageDto = employeesService.GetPage(CurrentPage, PageSize, GetFilter(),
-                SortProperty, SortDirection);
+            var query = new PageQuery<Employee>
+            {
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortProperty = SortProperty,
+                SortDirection = SortDirection,
+            };
+            query.Filters.Add(filter);
+            var pageDto = employeesService.GetPage(query);
             PageCount = pageDto.PageCount;
             Employees = pageDto.PageCollection;
         }
@@ -97,13 +110,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         {
             base.OnActivate();
             UpdateData();
-        }
-
-        private Expression<Func<Employee, bool>> GetFilter()
-        {
-            return e => (FirstNameFilter == "" || e.FirstName.StartsWith(FirstNameFilter)) &&
-                        (LastNameFilter == "" || e.LastName.StartsWith(LastNameFilter)) &&
-                        (EmailFilter == "" || e.Email.StartsWith(EmailFilter));
         }
     }
 }
