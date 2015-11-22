@@ -1,24 +1,31 @@
-﻿using System.ComponentModel;
-using Caliburn.Micro;
-using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using InstantDelivery.Services.Paging;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Bazowy model widoku dlda paczek.
     /// </summary>
-    public abstract class PackagesViewModelBase : Screen
+    public abstract class PackagesViewModelBase : PagingViewModel
     {
-        private IQueryable<Package> packages;
-
-        private int currentPage = 1;
+        private IList<Package> packages;
         private string idFilter = string.Empty;
+        private PackageStatusFilter packageStatusFilter = PackageStatusFilter.All;
+
+        private IPackageService service;
+
+        protected PackagesViewModelBase(IPackageService service)
+        {
+            this.service = service;
+        }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IQueryable<Package> Packages
+        public IList<Package> Packages
         {
             get { return packages; }
             set
@@ -27,6 +34,7 @@ namespace InstantDelivery.ViewModel
                 NotifyOfPropertyChange();
             }
         }
+
         /// <summary>
         /// Filtr po ID wybrany przez użytkownika
         /// </summary>
@@ -36,57 +44,24 @@ namespace InstantDelivery.ViewModel
             set
             {
                 idFilter = value;
-                UpdatePackages();
+                UpdateData();
             }
         }
 
-        /// <summary>
-        /// Bieżąca strona
-        /// </summary>
-        public int CurrentPage
+        public override void UpdateData()
         {
-            get { return currentPage; }
-            set
+            var query = new PageQuery<Package>
             {
-                currentPage = value;
-                NotifyOfPropertyChange();
-            }
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortProperty = SortProperty,
+                SortDirection = SortDirection,
+            };
+            AddFilters(query);
+            var pageDto = service.GetPage(query);
+            PageCount = pageDto.PageCount;
+            Packages = pageDto.PageCollection;
         }
-
-        protected abstract IQueryable<Package> GetPackages();
-
-        protected void UpdatePackages()
-        {
-            var newPackages = GetPackages();
-            newPackages = FilterPackages(newPackages);
-            Packages = newPackages;
-        }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            UpdatePackages();
-        }
-
-        private IQueryable<Package> FilterPackages(IQueryable<Package> newVehicles)
-        {
-            CurrentPage = 1;
-            var tmp = newVehicles
-                .Where(e => idFilter == "" || e.Id.ToString().StartsWith(idFilter));
-            switch (PackageStatusFilter)
-            {
-                case PackageStatusFilter.Delivered:
-                    return tmp.Where(e => e.Status == PackageStatus.Delivered);
-                case PackageStatusFilter.InProgress:
-                    return tmp.Where(e => e.Status == PackageStatus.InDelivery);
-                case PackageStatusFilter.New:
-                    return tmp.Where(e => e.Status == PackageStatus.New);
-                default:
-                    return tmp;
-            }
-        }
-
-        private PackageStatusFilter packageStatusFilter = PackageStatusFilter.All;
 
         /// <summary>
         /// Filtr statusu paczki wybrany przez użytkownika
@@ -97,7 +72,24 @@ namespace InstantDelivery.ViewModel
             set
             {
                 packageStatusFilter = value;
-                UpdatePackages();
+                UpdateData();
+            }
+        }
+
+        private void AddFilters(PageQuery<Package> query)
+        {
+            query.Filters.Add(e => string.IsNullOrEmpty(idFilter) || e.Id.ToString().StartsWith(idFilter));
+            switch (PackageStatusFilter)
+            {
+                case PackageStatusFilter.Delivered:
+                    query.Filters.Add(e => e.Status == PackageStatus.Delivered);
+                    break;
+                case PackageStatusFilter.InProgress:
+                    query.Filters.Add(e => e.Status == PackageStatus.InDelivery);
+                    break;
+                case PackageStatusFilter.New:
+                    query.Filters.Add(e => e.Status == PackageStatus.New);
+                    break;
             }
         }
     }
@@ -108,7 +100,7 @@ namespace InstantDelivery.ViewModel
         Delivered,
         [Description("Nowe")]
         New,
-        [Description("W toku")]
+        [Description("W dostawie")]
         InProgress,
         [Description("Wszystkie")]
         All

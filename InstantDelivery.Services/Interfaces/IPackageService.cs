@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services.Paging;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -27,6 +28,8 @@ namespace InstantDelivery.Services
         /// </summary>
         /// <returns></returns>
         IQueryable<Package> GetAll();
+
+        PagedResult<Package> GetPage(PageQuery<Package> query);
 
         /// <summary>
         /// Wczytuje obiekt danej paczki z bazy danych, ignorując wprowadzone zmiany

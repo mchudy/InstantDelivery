@@ -27,8 +27,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         protected EmployeesViewModelBase(IEmployeeService employeesService)
         {
             this.employeesService = employeesService;
-            PageSize = 30;
-            CurrentPage = 1;
         }
 
         /// <summary>
@@ -86,11 +84,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        public void PageChanged()
-        {
-            UpdateData();
-        }
-
         public override void UpdateData()
         {
             var query = new PageQuery<Employee>
@@ -104,12 +97,6 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             var pageDto = employeesService.GetPage(query);
             PageCount = pageDto.PageCount;
             Employees = pageDto.PageCollection;
-        }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            UpdateData();
         }
     }
 }

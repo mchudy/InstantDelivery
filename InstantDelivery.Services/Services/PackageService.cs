@@ -1,7 +1,11 @@
-﻿using System.Linq;
-using InstantDelivery.Domain;
+﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Domain.Extensions;
+using InstantDelivery.Services.Paging;
 using InstantDelivery.Services.Pricing;
+using System;
+using System.ComponentModel;
+using System.Linq;
 
 namespace InstantDelivery.Services
 {
@@ -32,6 +36,33 @@ namespace InstantDelivery.Services
         public IQueryable<Package> GetAll()
         {
             return context.Packages;
+        }
+
+        public PagedResult<Package> GetPage(PageQuery<Package> query)
+        {
+            var result = context.Packages.AsQueryable();
+            if (string.IsNullOrEmpty(query.SortProperty))
+            {
+                result = result.OrderBy(e => e.Id);
+            }
+            else if (query.SortDirection == ListSortDirection.Descending)
+            {
+                result = result.OrderByDescendingProperty(query.SortProperty);
+            }
+            else
+            {
+                result = result.OrderByProperty(query.SortProperty);
+            }
+            foreach (var filter in query.Filters)
+            {
+                result = result.Where(filter);
+            }
+            var pageCount = (int)Math.Ceiling(result.Count() / (double)query.PageSize);
+            return new PagedResult<Package>
+            {
+                PageCount = pageCount,
+                PageCollection = result.Page(query.PageIndex, query.PageSize)
+            };
         }
 
         /// <summary>

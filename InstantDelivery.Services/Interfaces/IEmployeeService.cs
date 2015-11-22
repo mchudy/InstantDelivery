@@ -14,7 +14,7 @@ namespace InstantDelivery.Services
         /// <param name="employee"></param>
         void AddEmployee(Employee employee);
 
-        PageDTO<Employee> GetPage(PageQuery<Employee> query);
+        PagedResult<Employee> GetPage(PageQuery<Employee> query);
 
         /// <summary>
         /// Wczytuje dane pracownika z bazy danych, ignorując wprowadzone zmiany

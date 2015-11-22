@@ -1,8 +1,7 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Services;
-using System.Linq;
-using System.Threading.Tasks;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Services;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,19 +10,19 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class GeneralPackagesViewModel : PackagesViewModelBase
     {
-        private readonly IPackageService repository;
+        private readonly IPackageService service;
         private readonly IWindowManager windowManager;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
-        /// <param name="repository"></param>
+        /// <param name="service"></param>
         /// <param name="windowManager"></param>
-        public GeneralPackagesViewModel(IPackageService repository, IWindowManager windowManager)
+        public GeneralPackagesViewModel(IPackageService service, IWindowManager windowManager)
+            : base(service)
         {
-            this.repository = repository;
+            this.service = service;
             this.windowManager = windowManager;
-            Packages = repository.GetAll();
         }
 
         /// <summary>
@@ -45,21 +44,21 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var result = windowManager.ShowDialog(new PackageEditViewModel(repository)
+            var result = windowManager.ShowDialog(new PackageEditViewModel(service)
             {
                 Package = SelectedPackage,
-                Employees = repository.GetAvailableEmployees(SelectedPackage),
-                SelectedEmployee = repository.GetAssignedEmployee(SelectedPackage)
+                Employees = service.GetAvailableEmployees(SelectedPackage),
+                SelectedEmployee = service.GetAssignedEmployee(SelectedPackage)
             });
             await Task.Run(() =>
             {
                 if (result != true)
                 {
-                    repository.Reload(SelectedPackage);
+                    service.Reload(SelectedPackage);
                 }
                 else
                 {
-                    repository.Save();
+                    service.Save();
                 }
             });
         }
@@ -79,15 +78,10 @@ namespace InstantDelivery.ViewModel
             {
                 if (result == true)
                 {
-                    repository.RemovePackage(SelectedPackage);
-                    UpdatePackages();
+                    service.RemovePackage(SelectedPackage);
+                    UpdateData();
                 }
             });
-        }
-
-        protected override IQueryable<Package> GetPackages()
-        {
-            return repository.GetAll();
         }
     }
 }

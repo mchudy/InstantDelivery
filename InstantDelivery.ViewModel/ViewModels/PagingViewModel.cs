@@ -6,8 +6,8 @@ namespace InstantDelivery.ViewModel
 {
     public class PagingViewModel : Screen
     {
-        private int pageSize;
-        private int pageCount;
+        private int pageSize = 30;
+        private int pageCount = 1;
         private int currentPage = 1;
 
         /// <summary>
@@ -64,9 +64,17 @@ namespace InstantDelivery.ViewModel
             UpdateData();
         }
 
-        public virtual void UpdateData()
+        public void PageChanged()
         {
+            UpdateData();
         }
 
+        public virtual void UpdateData() { }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            UpdateData();
+        }
     }
 }

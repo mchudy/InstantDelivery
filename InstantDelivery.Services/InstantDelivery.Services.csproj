@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Paging\PageDTO.cs" />
+    <Compile Include="Paging\PagedResult.cs" />
     <Compile Include="Pricing\IPricingStrategy.cs" />
     <Compile Include="Pricing\RegularPricingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

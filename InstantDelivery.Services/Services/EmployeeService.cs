@@ -47,7 +47,8 @@ namespace InstantDelivery.Services
             context.SaveChanges();
         }
 
-        public PageDTO<Employee> GetPage(PageQuery<Employee> query)
+        //TODO: make it generic
+        public PagedResult<Employee> GetPage(PageQuery<Employee> query)
         {
             var result = context.Employees.AsQueryable();
             if (string.IsNullOrEmpty(query.SortProperty))
@@ -67,7 +68,7 @@ namespace InstantDelivery.Services
                 result = result.Where(filter);
             }
             var pageCount = (int)Math.Ceiling(result.Count() / (double)query.PageSize);
-            return new PageDTO<Employee>
+            return new PagedResult<Employee>
             {
                 PageCount = pageCount,
                 PageCollection = result.Page(query.PageIndex, query.PageSize)
