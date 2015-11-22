@@ -10,12 +10,6 @@ namespace InstantDelivery.Services
     public interface IVehiclesService
     {
         /// <summary>
-        /// Zwraca wszystkie pojazdy z bazy danych
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<Vehicle> GetAll();
-
-        /// <summary>
         /// Zwraca wszystkie modele pojazdów z bazy danych
         /// </summary>
         /// <returns></returns>

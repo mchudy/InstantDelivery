@@ -12,27 +12,6 @@ namespace InstantDelivery.Tests
     public class VehicleServiceTest
     {
         [Fact]
-        public void GetAllVehicles_ShouldReturnAllVehicles()
-        {
-            var vehicles = new List<Vehicle>
-            {
-                new Vehicle() { Id=1},
-                new Vehicle() { Id=2},
-                new Vehicle() { Id=3}
-            }
-            .AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
-
-            var mockContext = new Mock<InstantDeliveryContext>();
-            mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
-            var service = new VehiclesService(mockContext.Object);
-
-            var result = service.GetAll();
-            var count = result.Count();
-            Assert.Equal(count, 3);
-        }
-
-        [Fact]
         public void GetAllVehiclesModels_ShouldReturnAllVehiclesModels()
         {
             var vehiclesModels = new List<VehicleModel>

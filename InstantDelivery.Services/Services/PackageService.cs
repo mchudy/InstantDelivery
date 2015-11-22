@@ -25,16 +25,6 @@ namespace InstantDelivery.Services
             this.pricingStrategy = pricingStrategy;
         }
 
-
-        /// <summary>
-        /// Zwraca wszystkie paczki w bazie danych
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Package> GetAll()
-        {
-            return context.Packages;
-        }
-
         public PagedResult<Package> GetPage(PageQuery<Package> query)
         {
             return PagingHelper.GetPagedResult(context.Packages.AsQueryable(), query);

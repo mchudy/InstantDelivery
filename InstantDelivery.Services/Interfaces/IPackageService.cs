@@ -23,12 +23,6 @@ namespace InstantDelivery.Services
         /// <param name="package"></param>
         void RegisterPackage(Package package);
 
-        /// <summary>
-        /// Zwraca wszystkie paczki w bazie danych
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<Package> GetAll();
-
         PagedResult<Package> GetPage(PageQuery<Package> query);
 
         /// <summary>

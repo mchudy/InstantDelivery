@@ -21,15 +21,6 @@ namespace InstantDelivery.Services
             this.context = context;
         }
 
-        /// <summary>
-        /// Zwraca wszystkie pojazdy
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Vehicle> GetAll()
-        {
-            return context.Vehicles;
-        }
-
         public PagedResult<Vehicle> GetPage(PageQuery<Vehicle> query)
         {
             return PagingHelper.GetPagedResult(context.Vehicles.AsQueryable(), query);
