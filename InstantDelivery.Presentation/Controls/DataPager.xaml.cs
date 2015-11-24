@@ -1,5 +1,4 @@
 ﻿using InstantDelivery.Annotations;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -86,8 +85,6 @@ namespace InstantDelivery.Controls
         /// </summary>
         public bool IsEnabledPreviousPage => CurrentPage > 1;
 
-        public event EventHandler PageChanged;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -123,7 +120,6 @@ namespace InstantDelivery.Controls
         private static void OnPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DataPager control = (DataPager)d;
-            control.PageChanged?.Invoke(control, EventArgs.Empty);
             control.OnPropertyChanged(nameof(IsEnabledPreviousPage));
             control.OnPropertyChanged(nameof(IsEnabledNextPage));
             if (control.CurrentPage > control.PageCount)

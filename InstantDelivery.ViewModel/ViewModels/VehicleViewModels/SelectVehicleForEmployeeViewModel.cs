@@ -20,6 +20,7 @@ namespace InstantDelivery.ViewModel
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="employeeService"></param>
+        /// <param name="vehiclesService"></param>
         public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,
             IVehiclesService vehiclesService)
         {
@@ -73,7 +74,7 @@ namespace InstantDelivery.ViewModel
             TryClose(false);
         }
 
-        public override void UpdateData()
+        protected override void UpdateData()
         {
             var query = new PageQuery<Vehicle>
             {

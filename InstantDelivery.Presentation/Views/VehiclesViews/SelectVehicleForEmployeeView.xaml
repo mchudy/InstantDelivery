@@ -61,7 +61,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <controls1:DataPager Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
-                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" />
+                             PageSize="{Binding PageSize, Mode=TwoWay}" />
         </Grid>
         <StackPanel Grid.Row="4"  Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="Save" Style="{StaticResource VehicleAddSaveButton}" Content="Zapisz" />

@@ -23,6 +23,7 @@ namespace InstantDelivery.ViewModel
             {
                 currentPage = value;
                 NotifyOfPropertyChange();
+                UpdateData();
             }
         }
 
@@ -36,6 +37,7 @@ namespace InstantDelivery.ViewModel
             {
                 pageSize = value;
                 NotifyOfPropertyChange();
+                UpdateData();
             }
         }
 
@@ -84,17 +86,9 @@ namespace InstantDelivery.ViewModel
         }
 
         /// <summary>
-        /// Uaktualnia dane po zmianie strony
-        /// </summary>
-        public void PageChanged()
-        {
-            UpdateData();
-        }
-
-        /// <summary>
         /// Uaktualnia dane w tabeli
         /// </summary>
-        public virtual void UpdateData() { }
+        protected virtual void UpdateData() { }
 
         protected override void OnActivate()
         {

@@ -84,7 +84,7 @@ namespace InstantDelivery.ViewModel
             });
         }
 
-        public override void UpdateData()
+        protected override void UpdateData()
         {
             var query = new PageQuery<Employee>
             {

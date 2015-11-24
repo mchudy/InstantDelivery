@@ -41,7 +41,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <controls1:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
-                             PageSize="{Binding PageSize, Mode=TwoWay}" cal:Message.Attach="[Event PageChanged] = [Action PageChanged()]" />
+                             PageSize="{Binding PageSize, Mode=TwoWay}" />
         <StackPanel Grid.Row="5" Margin="0 5 0 5" Orientation="Horizontal" FlowDirection="RightToLeft" Height="30">
             <Button x:Name="EditEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Edytuj</Button>
             <Button x:Name="RemoveEmployee" IsEnabled="{Binding IsSelectedAnyRow}" Width="150">Usuń</Button>
