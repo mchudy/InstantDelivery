@@ -1,6 +1,7 @@
 ﻿using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services.Paging;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace InstantDelivery.Services
@@ -30,9 +31,9 @@ namespace InstantDelivery.Services
         /// Zwraca wszystkie modele pojazdów
         /// </summary>
         /// <returns></returns>
-        public IQueryable<VehicleModel> GetAllModels()
+        public IList<VehicleModel> GetAllModels()
         {
-            return context.VehicleModels;
+            return context.VehicleModels.ToList();
         }
 
         /// <summary>

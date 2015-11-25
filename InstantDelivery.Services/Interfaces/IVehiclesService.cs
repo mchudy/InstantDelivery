@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Domain.Entities;
+﻿using System.Collections.Generic;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services.Paging;
 using System.Linq;
 
@@ -13,7 +14,7 @@ namespace InstantDelivery.Services
         /// Zwraca wszystkie modele pojazdów z bazy danych
         /// </summary>
         /// <returns></returns>
-        IQueryable<VehicleModel> GetAllModels();
+        IList<VehicleModel> GetAllModels();
 
         /// <summary>
         /// Zwraca stronę z pojazdami

@@ -3,7 +3,6 @@ using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
@@ -25,7 +24,7 @@ namespace InstantDelivery.ViewModel
         {
             vehiclesService = service;
             NewVehicle = new Vehicle();
-            VehicleModels = vehiclesService.GetAllModels().ToList();
+            VehicleModels = vehiclesService.GetAllModels();
         }
 
         /// <summary>
