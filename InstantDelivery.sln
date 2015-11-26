@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Services", 
 		{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66} = {35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Service", "InstantDelivery.Service\InstantDelivery.Service.csproj", "{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{676E3204-0671-4AAB-ADF5-C413FB1BFE75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676E3204-0671-4AAB-ADF5-C413FB1BFE75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{676E3204-0671-4AAB-ADF5-C413FB1BFE75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
