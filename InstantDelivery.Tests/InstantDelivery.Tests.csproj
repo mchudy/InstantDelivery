@@ -86,6 +86,7 @@
     <Compile Include="RegularPricingStrategyTests.cs" />
     <Compile Include="StatisticsServiceTests.cs" />
     <Compile Include="VehicleServiceTest.cs" />
+    <Compile Include="WebApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

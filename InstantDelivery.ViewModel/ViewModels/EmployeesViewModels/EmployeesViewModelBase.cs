@@ -1,6 +1,7 @@
-﻿using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Model;
 using InstantDelivery.Services;
 using InstantDelivery.Services.Paging;
+using InstantDelivery.ViewModel.Proxies;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -12,14 +13,14 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
     /// </summary>
     public abstract class EmployeesViewModelBase : PagingViewModel
     {
-        private IList<Employee> employees;
+        private IList<EmployeeDto> employees;
         private readonly IEmployeeService employeesService;
 
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
 
-        private Expression<Func<Employee, bool>> filter =>
+        private Expression<Func<EmployeeDto, bool>> filter =>
             e => (string.IsNullOrEmpty(FirstNameFilter) || e.FirstName.StartsWith(firstNameFilter)) &&
                  (string.IsNullOrEmpty(LastNameFilter) || e.LastName.StartsWith(LastNameFilter)) &&
                  (string.IsNullOrEmpty(EmailFilter) || e.Email.StartsWith(EmailFilter));
@@ -32,7 +33,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IList<Employee> Employees
+        public IList<EmployeeDto> Employees
         {
             get { return employees; }
             set
@@ -84,9 +85,9 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        protected override void UpdateData()
+        protected override async void UpdateData()
         {
-            var query = new PageQuery<Employee>
+            var query = new PageQuery<EmployeeDto>
             {
                 PageSize = PageSize,
                 PageIndex = CurrentPage,
@@ -94,7 +95,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                 SortDirection = SortDirection,
             };
             query.Filters.Add(filter);
-            var pageDto = employeesService.GetPage(query);
+            var pageDto = await new EmployeesServiceProxy().Page(query);
             PageCount = pageDto.PageCount;
             Employees = pageDto.PageCollection;
         }

@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
+using InstantDelivery.Model;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,7 +11,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Aktualnie edytowany pracownik.
         /// </summary>
-        public Employee Employee { get; set; }
+        public EmployeeDto Employee { get; set; }
 
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.

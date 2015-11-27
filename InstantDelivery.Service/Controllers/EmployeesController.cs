@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Domain;
+﻿using AutoMapper.QueryableExtensions;
+using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
 using InstantDelivery.Service.Paging;
@@ -7,7 +8,7 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
-    //TODO: DTOs! seperate project
+    [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
         private InstantDeliveryContext context = new InstantDeliveryContext();
@@ -20,12 +21,8 @@ namespace InstantDelivery.Service.Controllers
         [Route("Page"), HttpPost]
         public IHttpActionResult Page(PageQuery<EmployeeDto> query)
         {
-            return Ok(PagingHelper.GetPagedResult(context.Employees.AsQueryable().Select(e => new EmployeeDto
-            {
-                Id = e.Id,
-                FirstName = e.FirstName,
-                LastName = e.LastName
-            }), query));
+            var dtos = context.Employees.ProjectTo<EmployeeDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
         /// <summary>

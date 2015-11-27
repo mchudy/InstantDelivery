@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
+using InstantDelivery.Model;
 using InstantDelivery.Services;
 using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 
@@ -12,7 +12,7 @@ namespace InstantDelivery.ViewModel
     {
         private readonly IEmployeeService employeesService;
         private readonly IWindowManager windowManager;
-        private Employee selectedEmployee;
+        private EmployeeDto selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
 
@@ -36,7 +36,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
-        public Employee SelectedEmployee
+        public EmployeeDto SelectedEmployee
         {
             get { return selectedEmployee; }
             set
@@ -65,7 +65,7 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(employeeEditViewModel);
             if (result != true)
             {
-                employeesService.Reload(SelectedEmployee);
+                //employeesService.Reload(SelectedEmployee);
             }
             else
             {
@@ -85,7 +85,7 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
-                employeesService.RemoveEmployee(SelectedEmployee);
+                //employeesService.RemoveEmployee(SelectedEmployee);
                 UpdateData();
             }
         }

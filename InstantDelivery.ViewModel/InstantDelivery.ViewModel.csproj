@@ -41,6 +41,10 @@
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged, Version=1.50.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
@@ -49,10 +53,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Proxies\EmployeesServiceProxy.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
@@ -85,6 +95,10 @@
     <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
       <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
       <Name>InstantDelivery.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstantDelivery.Model\InstantDelivery.Model.csproj">
+      <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>
+      <Name>InstantDelivery.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
       <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
