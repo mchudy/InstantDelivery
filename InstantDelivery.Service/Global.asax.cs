@@ -1,4 +1,8 @@
-﻿using System.Web.Http;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using InstantDelivery.Domain;
+using System.Reflection;
+using System.Web.Http;
 
 namespace InstantDelivery.Service
 {
@@ -6,8 +10,22 @@ namespace InstantDelivery.Service
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             AutoMapperConfig.RegisterMappings();
+
+            var builder = new ContainerBuilder();
+            var config = GlobalConfiguration.Configuration;
+
+            builder.Register(c => new InstantDeliveryContext())
+                .AsSelf()
+                .InstancePerRequest();
+
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterWebApiFilterProvider(config);
+
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

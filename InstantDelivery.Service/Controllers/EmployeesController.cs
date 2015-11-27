@@ -11,7 +11,12 @@ namespace InstantDelivery.Service.Controllers
     [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
-        private InstantDeliveryContext context = new InstantDeliveryContext();
+        private readonly InstantDeliveryContext context;
+
+        public EmployeesController(InstantDeliveryContext context)
+        {
+            this.context = context;
+        }
 
         /// <summary>
         /// Zwraca stronę pracowników
