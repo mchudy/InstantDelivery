@@ -1,8 +1,10 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
 using InstantDelivery.Service.Paging;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -19,14 +21,36 @@ namespace InstantDelivery.Service.Controllers
         }
 
         /// <summary>
+        /// Zwraca dane pracownika o podanym identyfikatorze
+        /// </summary>
+        /// <param name="id">Id pracownika</param>
+        /// <returns>Dane pracownika</returns>
+        public IHttpActionResult Get(int id)
+        {
+            var employee = context.Employees.Find(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(Mapper.Map<EmployeeDto>(employee));
+        }
+
+        /// <summary>
         /// Zwraca stronę pracowników
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
         [Route("Page"), HttpPost]
-        public IHttpActionResult Page(PageQuery<EmployeeDto> query)
+        public IHttpActionResult Page([FromBody] PageQuery<EmployeeDto> query)
         {
             var dtos = context.Employees.ProjectTo<EmployeeDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
+        }
+
+        [Route("Packages/Page"), HttpPost]
+        public IHttpActionResult PackagesPage([FromBody] PageQuery<EmployeePackagesDto> query)
+        {
+            var dtos = context.Employees.Include(e => e.Packages).ProjectTo<EmployeePackagesDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
@@ -34,20 +58,37 @@ namespace InstantDelivery.Service.Controllers
         /// Dodaje pracownika do bazy danych
         /// </summary>
         /// <param name="newEmployee">Nowy pracownik</param>
-        public IHttpActionResult Post(Employee newEmployee)
+        public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
-            context.Employees.Add(newEmployee);
+            context.Employees.Add(Mapper.Map<Employee>(newEmployee));
             context.SaveChanges();
             return Ok(newEmployee.Id);
         }
 
         /// <summary>
+        /// Zmienia dane pracownika
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        public IHttpActionResult Put(EmployeeDto employee)
+        {
+            var oldEmployee = context.Employees.Find(employee.Id);
+            if (oldEmployee == null)
+            {
+                return NotFound();
+            }
+            Mapper.Map(employee, oldEmployee);
+            context.SaveChanges();
+            return Ok();
+        }
+
+        /// <summary>
         /// Usuwa pracownika z bazy danych
         /// </summary>
-        /// <param name="employeeId">Id pracownika</param>
-        public IHttpActionResult Delete(int employeeId)
+        /// <param name="id">Id pracownika</param>
+        public IHttpActionResult Delete(int id)
         {
-            var employee = context.Employees.Find(employeeId);
+            var employee = context.Employees.Find(id);
             foreach (var package in employee.Packages
                         .Where(p => p.Status == PackageStatus.InDelivery))
             {

@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
@@ -24,7 +23,6 @@ namespace InstantDelivery.ViewModel
         /// <param name="usedVehiclesDetailsViewModel"></param>
         public EmployeesUsedVehiclesViewModel(IEmployeeService employeesService, IWindowManager windowManager,
             EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel)
-            : base(employeesService)
         {
             this.employeesService = employeesService;
             this.windowManager = windowManager;

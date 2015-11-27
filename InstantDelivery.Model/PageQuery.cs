@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace InstantDelivery.Service.Paging
+namespace InstantDelivery.Model
 {
     /// <summary>
     /// Obiekt reprezentuj¹cy zapytanie o stronê danych

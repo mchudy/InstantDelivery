@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using InstantDelivery.Domain;
 using InstantDelivery.Services;
+using InstantDelivery.Services.Pricing;
 using InstantDelivery.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
-using InstantDelivery.Services.Pricing;
 using IContainer = Autofac.IContainer;
 
 namespace InstantDelivery
@@ -102,6 +102,11 @@ namespace InstantDelivery
             builder.RegisterModule<DomainModule>();
 
             builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(ShellViewModel).Assembly)
+                .Where(type => type.Name.EndsWith("Proxy"))
                 .AsSelf()
                 .InstancePerLifetimeScope();
 

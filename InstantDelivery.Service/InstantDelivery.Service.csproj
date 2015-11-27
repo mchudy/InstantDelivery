@@ -107,8 +107,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Paging\PagedResult.cs" />
-    <Compile Include="Paging\PageQuery.cs" />
     <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

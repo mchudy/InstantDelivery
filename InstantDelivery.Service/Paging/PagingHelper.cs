@@ -1,4 +1,5 @@
 ﻿using InstantDelivery.Domain.Extensions;
+using InstantDelivery.Model;
 using System;
 using System.ComponentModel;
 using System.Linq;

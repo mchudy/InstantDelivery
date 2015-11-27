@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace InstantDelivery.Service.Paging
+namespace InstantDelivery.Model
 {
     /// <summary>
     /// Obiekt reprezentujący wynik zapytania o stronę danych

@@ -1,20 +1,17 @@
-﻿using InstantDelivery.Model;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
+﻿using Caliburn.Micro;
+using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
+namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Bazowy model widoku dla innych widoków pracowników.
     /// </summary>
     public abstract class EmployeesViewModelBase : PagingViewModel
     {
-        private IList<EmployeeDto> employees;
-        private readonly IEmployeeService employeesService;
+        protected BindableCollection<EmployeeDto> employees;
 
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
@@ -25,15 +22,10 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
                  (string.IsNullOrEmpty(LastNameFilter) || e.LastName.StartsWith(LastNameFilter)) &&
                  (string.IsNullOrEmpty(EmailFilter) || e.Email.StartsWith(EmailFilter));
 
-        protected EmployeesViewModelBase(IEmployeeService employeesService)
-        {
-            this.employeesService = employeesService;
-        }
-
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IList<EmployeeDto> Employees
+        public BindableCollection<EmployeeDto> Employees
         {
             get { return employees; }
             set
@@ -97,7 +89,7 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             query.Filters.Add(filter);
             var pageDto = await new EmployeesServiceProxy().Page(query);
             PageCount = pageDto.PageCount;
-            Employees = pageDto.PageCollection;
+            Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
         }
     }
 }

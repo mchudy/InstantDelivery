@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Model;
 
 namespace InstantDelivery.ViewModel
 {

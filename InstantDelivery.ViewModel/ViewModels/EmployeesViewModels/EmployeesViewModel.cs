@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Model;
-using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -10,7 +9,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesService;
+        private EmployeesServiceProxy proxy;
         private readonly IWindowManager windowManager;
         private EmployeeDto selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
@@ -23,14 +22,13 @@ namespace InstantDelivery.ViewModel
         /// <param name="windowManager"></param>
         /// <param name="employeeEditViewModel"></param>
         /// <param name="confirmDeleteViewModel"></param>
-        public EmployeesViewModel(IEmployeeService employeesService, IWindowManager windowManager,
-            EmployeeEditViewModel employeeEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
-            : base(employeesService)
+        public EmployeesViewModel(IWindowManager windowManager, EmployeeEditViewModel employeeEditViewModel,
+            ConfirmDeleteViewModel confirmDeleteViewModel, EmployeesServiceProxy proxy)
         {
-            this.employeesService = employeesService;
             this.windowManager = windowManager;
             this.employeeEditViewModel = employeeEditViewModel;
             this.confirmDeleteViewModel = confirmDeleteViewModel;
+            this.proxy = proxy;
         }
 
         /// <summary>
@@ -55,7 +53,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Delegat zdarzenia przejścia do widoku edycji pracownika.
         /// </summary>
-        public void EditEmployee()
+        public async void EditEmployee()
         {
             if (SelectedEmployee == null)
             {
@@ -65,18 +63,27 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(employeeEditViewModel);
             if (result != true)
             {
-                //employeesService.Reload(SelectedEmployee);
+                var oldEmployee = await proxy.GetById(selectedEmployee.Id);
+                ResetRow(oldEmployee);
             }
             else
             {
-                employeesService.Save();
+                await proxy.UpdateEmployee(SelectedEmployee);
             }
+        }
+
+        private void ResetRow(EmployeeDto oldEmployee)
+        {
+            int index = Employees.IndexOf(SelectedEmployee);
+            Employees.Remove(SelectedEmployee);
+            Employees.Insert(index, oldEmployee);
+            SelectedEmployee = oldEmployee;
         }
 
         /// <summary>
         /// Delegat zdarzenia usuwania pracownika.
         /// </summary>
-        public void RemoveEmployee()
+        public async void RemoveEmployee()
         {
             if (SelectedEmployee == null)
             {
@@ -85,7 +92,7 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
-                //employeesService.RemoveEmployee(SelectedEmployee);
+                await proxy.DeleteEmployee(SelectedEmployee.Id);
                 UpdateData();
             }
         }
