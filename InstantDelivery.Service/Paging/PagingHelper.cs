@@ -8,7 +8,7 @@ namespace InstantDelivery.Service.Paging
 {
     public static class PagingHelper
     {
-        public static PagedResult<T> GetPagedResult<T>(IQueryable<T> source, PageQuery<T> query)
+        public static PagedResult<T> GetPagedResult<T>(IQueryable<T> source, PageQuery query)
         {
             if (string.IsNullOrEmpty(query.SortProperty))
             {
@@ -21,10 +21,6 @@ namespace InstantDelivery.Service.Paging
             else
             {
                 source = source.OrderByProperty(query.SortProperty);
-            }
-            foreach (var filter in query.Filters)
-            {
-                source = source.Where(filter);
             }
             var pageCount = (int)Math.Ceiling(source.Count() / (double)query.PageSize);
             return new PagedResult<T>

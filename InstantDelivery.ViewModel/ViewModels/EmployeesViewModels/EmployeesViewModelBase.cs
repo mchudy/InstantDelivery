@@ -1,8 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
-using System;
-using System.Linq.Expressions;
 
 namespace InstantDelivery.ViewModel
 {
@@ -16,11 +14,6 @@ namespace InstantDelivery.ViewModel
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
-
-        private Expression<Func<EmployeeDto, bool>> filter =>
-            e => (string.IsNullOrEmpty(FirstNameFilter) || e.FirstName.StartsWith(firstNameFilter)) &&
-                 (string.IsNullOrEmpty(LastNameFilter) || e.LastName.StartsWith(LastNameFilter)) &&
-                 (string.IsNullOrEmpty(EmailFilter) || e.Email.StartsWith(EmailFilter));
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
@@ -79,17 +72,33 @@ namespace InstantDelivery.ViewModel
 
         protected override async void UpdateData()
         {
-            var query = new PageQuery<EmployeeDto>
+            var query = new PageQuery
             {
                 PageSize = PageSize,
                 PageIndex = CurrentPage,
                 SortProperty = SortProperty,
                 SortDirection = SortDirection,
             };
-            query.Filters.Add(filter);
+            AddFilters(query);
             var pageDto = await new EmployeesServiceProxy().Page(query);
             PageCount = pageDto.PageCount;
             Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
+        }
+
+        protected void AddFilters(PageQuery query)
+        {
+            if (!string.IsNullOrEmpty(FirstNameFilter))
+            {
+                query.Filters[nameof(EmployeeDto.FirstName)] = FirstNameFilter;
+            }
+            if (!string.IsNullOrEmpty(LastNameFilter))
+            {
+                query.Filters[nameof(EmployeeDto.LastName)] = LastNameFilter;
+            }
+            if (!string.IsNullOrEmpty(EmailFilter))
+            {
+                query.Filters[nameof(EmployeeDto.Email)] = EmailFilter;
+            }
         }
     }
 }

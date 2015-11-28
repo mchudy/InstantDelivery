@@ -35,22 +35,24 @@ namespace InstantDelivery.Service.Controllers
             return Ok(Mapper.Map<EmployeeDto>(employee));
         }
 
-        /// <summary>
-        /// Zwraca stronę pracowników
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        [Route("Page"), HttpPost]
-        public IHttpActionResult Page([FromBody] PageQuery<EmployeeDto> query)
+        [Route("Page"), HttpGet]
+        public IHttpActionResult GetPage([FromUri] PageQuery query, string firstName = "",
+            string lastName = "", string email = "")
         {
-            var dtos = context.Employees.ProjectTo<EmployeeDto>();
+            var employees = context.Employees.AsQueryable();
+            employees = ApplyFilters(employees, firstName, lastName, email);
+            var dtos = employees.ProjectTo<EmployeeDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
-        [Route("Packages/Page"), HttpPost]
-        public IHttpActionResult PackagesPage([FromBody] PageQuery<EmployeePackagesDto> query)
+        [Route("Packages/Page"), HttpGet]
+        public IHttpActionResult PackagesPage([FromUri] PageQuery query, string firstName = "",
+            string lastName = "", string email = "")
         {
-            var dtos = context.Employees.Include(e => e.Packages).ProjectTo<EmployeePackagesDto>();
+            var employees = context.Employees.AsQueryable();
+            employees = ApplyFilters(employees, firstName, lastName, email);
+            var dtos = employees.Include(e => e.Packages)
+                                .ProjectTo<EmployeePackagesDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
@@ -119,6 +121,25 @@ namespace InstantDelivery.Service.Controllers
                 context.SaveChanges();
                 return Ok();
             }
+        }
+
+        private IQueryable<Employee> ApplyFilters(IQueryable<Employee> source, string firstName,
+            string lastName, string email)
+        {
+            var result = source;
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                result = result.Where(e => e.FirstName.StartsWith(firstName));
+            }
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                result = result.Where(e => e.LastName.StartsWith(lastName));
+            }
+            if (!string.IsNullOrEmpty(email))
+            {
+                result = result.Where(e => e.Email.StartsWith(email));
+            }
+            return result;
         }
     }
 }

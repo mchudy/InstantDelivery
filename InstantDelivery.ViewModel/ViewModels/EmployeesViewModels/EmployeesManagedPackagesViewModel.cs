@@ -22,13 +22,14 @@ namespace InstantDelivery.ViewModel
 
         protected override async void UpdateData()
         {
-            var query = new PageQuery<EmployeePackagesDto>
+            var query = new PageQuery
             {
                 PageSize = PageSize,
                 PageIndex = CurrentPage,
                 SortProperty = SortProperty,
                 SortDirection = SortDirection,
             };
+            AddFilters(query);
             service = new EmployeesServiceProxy();
             var pageDto = await service.PackagesPage(query);
             PageCount = pageDto.PageCount;

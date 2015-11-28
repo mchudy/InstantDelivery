@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq.Expressions;
 
 namespace InstantDelivery.Model
 {
     /// <summary>
     /// Obiekt reprezentuj¹cy zapytanie o stronê danych
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public class PageQuery<TEntity>
+    public class PageQuery
     {
         /// <summary>
         /// Rozmiar strony
@@ -24,8 +21,8 @@ namespace InstantDelivery.Model
         /// <summary>
         /// Filtry danych
         /// </summary>
-        public IList<Expression<Func<TEntity, bool>>> Filters { get; } =
-            new List<Expression<Func<TEntity, bool>>>();
+        public IDictionary<string, string> Filters { get; set; } =
+            new Dictionary<string, string>();
 
         /// <summary>
         /// W³aœciwoœæ, po której dane maj¹ byæ sortowane
