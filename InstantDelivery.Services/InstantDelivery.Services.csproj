@@ -57,11 +57,9 @@
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
     <Compile Include="Interfaces\IPackageService.cs" />
-    <Compile Include="Interfaces\IStatisticsService.cs" />
     <Compile Include="Interfaces\IVehiclesService.cs" />
     <Compile Include="Services\PackageService.cs" />
     <Compile Include="Paging\PageQuery.cs" />
-    <Compile Include="Services\StatisticsService.cs" />
     <Compile Include="Services\VehiclesService.cs" />
   </ItemGroup>
   <ItemGroup>

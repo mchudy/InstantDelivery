@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Services;
-using System.Threading.Tasks;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -9,13 +8,13 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class StatisticsDeliveredPackagesViewModel : Screen
     {
-        private IStatisticsService service;
+        private readonly StatisticsServiceProxy service;
 
         /// <summary>
         /// Konstruktor modelu widoku.
         /// </summary>
         /// <param name="service"></param>
-        public StatisticsDeliveredPackagesViewModel(IStatisticsService service)
+        public StatisticsDeliveredPackagesViewModel(StatisticsServiceProxy service)
         {
             this.service = service;
             GenerateChart();
@@ -28,15 +27,10 @@ namespace InstantDelivery.ViewModel
 
         private async void GenerateChart()
         {
-            await Task.Run(() =>
-            {
-                var valueOfPackages = service.ValueOfAllPackages();
-                var employeesSalaries = service.EmployeesSalaries();
-                var taxes = service.Taxes(valueOfPackages, employeesSalaries);
-                Budget.Add(new Population() { Name = "Wartość dostarczanych paczek", Count = valueOfPackages });
-                Budget.Add(new Population() { Name = "Pensje pracowników", Count = employeesSalaries });
-                Budget.Add(new Population() { Name = "Podatki", Count = taxes });
-            });
+            var statistics = await service.FinancialStatistics();
+            Budget.Add(new Population { Name = "Wartość dostarczanych paczek", Count = (int)statistics.TotalPackagesValue });
+            Budget.Add(new Population { Name = "Pensje pracowników", Count = (int)statistics.TotalEmployeesSalaries });
+            Budget.Add(new Population { Name = "Podatki", Count = (int)statistics.TotalTaxes });
         }
     }
 }

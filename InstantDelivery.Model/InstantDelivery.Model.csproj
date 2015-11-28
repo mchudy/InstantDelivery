@@ -47,6 +47,8 @@
     <Compile Include="PagedResult.cs" />
     <Compile Include="PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistics\FinancialStatisticsDto.cs" />
+    <Compile Include="Statistics\GeneralStatisticsDto.cs" />
     <Compile Include="VehicleDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

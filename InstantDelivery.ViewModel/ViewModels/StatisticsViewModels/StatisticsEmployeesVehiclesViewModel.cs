@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Services;
-using System.Threading.Tasks;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -9,13 +9,13 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class StatisticsEmployeesVehiclesViewModel : Screen
     {
-        private IStatisticsService service;
+        private StatisticsServiceProxy service;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
-        public StatisticsEmployeesVehiclesViewModel(IStatisticsService service)
+        public StatisticsEmployeesVehiclesViewModel(StatisticsServiceProxy service)
         {
             this.service = service;
             GenerateChart();
@@ -28,25 +28,16 @@ namespace InstantDelivery.ViewModel
 
         private async void GenerateChart()
         {
-            await Task.Run(() =>
-            {
-                var numberOfEmployees = service.NumberOfEmployees();
-                var numberOfVehicles = service.NumberOfVehicles();
-                var numberOfAllPackages = service.NumberOfAllPackages();
-                var numberOfPackagesWithEmployee = service.NumberOfPackagesWithEmployee();
-                var numberOfPackagesWithoutEmployee = service.NumberOfPackagesWithoutEmployee();
-                var numberOfUsedVehicles = service.NumberOfUsedVehicles();
-                var numberOfUnusedVehicles = service.NumberOfUnusedVehicles();
-                Values.Add(new Population() { Name = "Liczba pracowników", Count = numberOfEmployees });
+            var statistics = await service.GeneralStatistics();
+            Values.Add(new Population { Name = "Liczba pracowników", Count = statistics.EmployeesCount });
 
-                Values.Add(new Population() { Name = "Liczba pojazdów", Count = numberOfVehicles });
-                Values.Add(new Population() { Name = "Używane pojazdy", Count = numberOfUsedVehicles });
-                Values.Add(new Population() { Name = "Nieużywane pojazdy", Count = numberOfUnusedVehicles });
+            Values.Add(new Population { Name = "Liczba pojazdów", Count = statistics.AllVehiclesCount });
+            Values.Add(new Population { Name = "Używane pojazdy", Count = statistics.UsedVehicles });
+            Values.Add(new Population { Name = "Nieużywane pojazdy", Count = statistics.UnusedVehicles });
 
-                Values.Add(new Population() { Name = "Wszystkie paczki", Count = numberOfAllPackages });
-                Values.Add(new Population() { Name = "Dostarczane paczki", Count = numberOfPackagesWithEmployee });
-                Values.Add(new Population() { Name = "Niedostarczane paczki", Count = numberOfPackagesWithoutEmployee });
-            });
+            Values.Add(new Population { Name = "Wszystkie paczki", Count = statistics.AllPackagesCount });
+            Values.Add(new Population { Name = "Dostarczane paczki", Count = statistics.AssignedPackages });
+            Values.Add(new Population { Name = "Niedostarczane paczki", Count = statistics.UnassignedPackages });
         }
     }
 }
