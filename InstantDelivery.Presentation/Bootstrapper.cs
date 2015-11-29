@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using Caliburn.Micro;
-using InstantDelivery.Domain;
-using InstantDelivery.Services.Pricing;
 using InstantDelivery.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -96,12 +94,6 @@ namespace InstantDelivery
             builder.Register<IWindowManager>(c => new WindowManager())
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
-                .InstancePerLifetimeScope();
-
-            builder.RegisterModule<DomainModule>();
-
-            builder.Register<IPricingStrategy>(c => new RegularPricingStrategy())
-                .AsSelf()
                 .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(ShellViewModel).Assembly)

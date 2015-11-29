@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Services;
 using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel

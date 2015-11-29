@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-             xmlns:entities="clr-namespace:InstantDelivery.Domain.Entities;assembly=InstantDelivery.Domain"
              xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
              Background="White">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">

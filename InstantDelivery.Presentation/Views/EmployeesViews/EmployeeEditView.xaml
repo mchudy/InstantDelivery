@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-        xmlns:entities="clr-namespace:InstantDelivery.Domain.Entities;assembly=InstantDelivery.Domain"
         xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         Style="{StaticResource DialogWindow}">
