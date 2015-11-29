@@ -4,6 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
         xmlns:entities="clr-namespace:InstantDelivery.Domain.Entities;assembly=InstantDelivery.Domain"
+        xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
         Height="500" Width="450" WindowStartupLocation="CenterOwner"
         Style="{StaticResource DialogWindow}">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
@@ -31,7 +32,7 @@
 
         <Label Content="Płeć:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
         <ComboBox Grid.Column="1" Grid.Row="2" SelectedValue="{Binding Employee.Gender}" Style="{StaticResource EditDialogComboBox}"
-                  ItemsSource="{helpers:EnumSource {x:Type entities:Gender}}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
+                  ItemsSource="{helpers:EnumSource {x:Type enums:Gender}}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
 
         <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}" />
         <DatePicker Grid.Column="1" Grid.Row="3" Height="25"  Margin="10" x:Name="Employee_DateOfBirth" HorizontalAlignment="Right"

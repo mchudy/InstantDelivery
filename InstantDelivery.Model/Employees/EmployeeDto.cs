@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InstantDelivery.Common.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 
 namespace InstantDelivery.Model
 {
@@ -16,6 +19,12 @@ namespace InstantDelivery.Model
         /// Imię
         /// </summary>
         public string FirstName { get; set; }
+
+        /// <summary>
+        /// Płeć
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// Nazwisko

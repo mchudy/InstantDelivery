@@ -112,6 +112,12 @@
       <DependentUpon>201511081058095_RequiredInPackageOff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
+      <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
+      <Name>InstantDelivery.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using InstantDelivery.Common.Enums;
 using PropertyChanged;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Domain.Entities
 {
@@ -54,19 +54,5 @@ namespace InstantDelivery.Domain.Entities
         /// Status paczki
         /// </summary>
         public PackageStatus Status { get; set; }
-    }
-    /// <summary>
-    /// Definicja statusu paczki
-    /// </summary>
-    public enum PackageStatus
-    {
-        [Description("Nowa")]
-        New,
-
-        [Description("W dostawie")]
-        InDelivery,
-
-        [Description("Dostarczona")]
-        Delivered
     }
 }

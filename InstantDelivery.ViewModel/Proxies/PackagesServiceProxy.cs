@@ -2,7 +2,7 @@
 {
     public class PackagesServiceProxy : ServiceProxyBase
     {
-        public PackagesServiceProxy() : base("Packages")
+        public PackagesServiceProxy() : base("Packages/")
         {
         }
 

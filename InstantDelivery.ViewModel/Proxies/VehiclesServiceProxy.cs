@@ -9,7 +9,7 @@ namespace InstantDelivery.ViewModel.Proxies
 {
     public class VehiclesServiceProxy : ServiceProxyBase
     {
-        public VehiclesServiceProxy() : base("Vehicles")
+        public VehiclesServiceProxy() : base("Vehicles/")
         {
         }
 

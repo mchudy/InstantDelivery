@@ -7,7 +7,7 @@ namespace InstantDelivery.ViewModel.Proxies
 {
     public class EmployeesServiceProxy : ServiceProxyBase
     {
-        public EmployeesServiceProxy() : base("Employees")
+        public EmployeesServiceProxy() : base("Employees/")
         { }
 
         public async Task<PagedResult<EmployeeDto>> Page(PageQuery query)

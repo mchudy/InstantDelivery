@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;

@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Services;
 using InstantDelivery.Services.Paging;
 using PropertyChanged;

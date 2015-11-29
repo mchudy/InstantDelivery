@@ -6,7 +6,7 @@ namespace InstantDelivery.ViewModel.Proxies
 {
     public class StatisticsServiceProxy : ServiceProxyBase
     {
-        public StatisticsServiceProxy() : base("Statistics")
+        public StatisticsServiceProxy() : base("Statistics/")
         {
         }
 

@@ -3,6 +3,7 @@ using InstantDelivery.Services;
 using InstantDelivery.Services.Paging;
 using System.Collections.Generic;
 using System.ComponentModel;
+using InstantDelivery.Common.Enums;
 
 namespace InstantDelivery.ViewModel
 {
@@ -92,17 +93,5 @@ namespace InstantDelivery.ViewModel
                     break;
             }
         }
-    }
-
-    public enum PackageStatusFilter
-    {
-        [Description("Dostarczone")]
-        Delivered,
-        [Description("Nowe")]
-        New,
-        [Description("W dostawie")]
-        InDelivery,
-        [Description("Wszystkie")]
-        All
     }
 }

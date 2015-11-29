@@ -110,6 +110,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="PackageStatusFilter.cs" />
     <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +128,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
+      <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
+      <Name>InstantDelivery.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
       <Project>{35820c01-cd0a-42f3-9e39-3b6d7f0c8d66}</Project>
       <Name>InstantDelivery.Domain</Name>
