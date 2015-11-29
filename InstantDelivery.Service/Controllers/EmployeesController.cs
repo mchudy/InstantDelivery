@@ -56,6 +56,18 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        [Route("Vehicles/Page"), HttpGet]
+        public IHttpActionResult VehiclesPage([FromUri] PageQuery query, string firstName = "",
+                string lastName = "", string email = "")
+        {
+            var employees = context.Employees.AsQueryable();
+            employees = ApplyFilters(employees, firstName, lastName, email);
+            var dtos = employees.Include(e => e.Vehicle)
+                                .Include(e => e.Vehicle.VehicleModel)
+                                .ProjectTo<EmployeeVehicleDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
+        }
+
         /// <summary>
         /// Dodaje pracownika do bazy danych
         /// </summary>

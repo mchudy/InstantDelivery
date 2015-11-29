@@ -30,10 +30,16 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public async Task<PagedResult<EmployeePackagesDto>> PackagesPage(PageQuery query)
         {
-            query.Filters = null;
             HttpResponseMessage response = await client.GetAsync("Packages/Page?" + PageQueryString(query));
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<PagedResult<EmployeePackagesDto>>();
+        }
+
+        public async Task<PagedResult<EmployeeVehicleDto>> VehiclesPage(PageQuery query)
+        {
+            HttpResponseMessage response = await client.GetAsync("Vehicles/Page?" + PageQueryString(query));
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<PagedResult<EmployeeVehicleDto>>();
         }
 
         public async Task DeleteEmployee(int employeeId)
@@ -69,7 +75,7 @@ namespace InstantDelivery.ViewModel.Proxies
             queryString[nameof(PageQuery.SortDirection)] = query.SortDirection.ToString();
             queryString[nameof(PageQuery.SortProperty)] = query.SortProperty;
 
-            foreach (var entry in query.Filters)
+            foreach (var entry in query?.Filters)
             {
                 if (!string.IsNullOrEmpty(entry.Value))
                 {

@@ -20,19 +20,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Content="Numer rejestracyjny:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="0" IsEnabled="False" x:Name="Employee_Vehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="0" IsEnabled="False" x:Name="Vehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Marka:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="1" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="1" IsEnabled="False" x:Name="Vehicle_Brand" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Model:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="2" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_Model" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="2" IsEnabled="False" x:Name="Vehicle_Model" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Ładowność:" Grid.Column="0" Grid.Row="3"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="3" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_Payload" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="3" IsEnabled="False" x:Name="Vehicle_Payload" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Wymiar X:" Grid.Column="0" Grid.Row="4"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="4" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_AvailableSpaceX" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="4" IsEnabled="False" x:Name="Vehicle_AvailableSpaceX" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Wymiar Y:" Grid.Column="0" Grid.Row="5"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="5" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_AvailableSpaceY" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="5" IsEnabled="False" x:Name="Vehicle_AvailableSpaceY" Style="{StaticResource EditDialogTextBox}" />
         <Label Content="Wymiar Z:" Grid.Column="0" Grid.Row="6"  Style="{StaticResource EditDialogLabel}" />
-        <TextBox Grid.Column="1" Grid.Row="6" IsEnabled="False" x:Name="Employee_Vehicle_VehicleModel_AvailableSpaceZ" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox Grid.Column="1" Grid.Row="6" IsEnabled="False" x:Name="Vehicle_AvailableSpaceZ" Style="{StaticResource EditDialogTextBox}" />
         <Button Grid.Row="7" Grid.ColumnSpan="2" Height="20" Width="60" Grid.Column="0" x:Name="CloseWindow" Style="{StaticResource EditDialogButton}" Content="Zamknij" />
     </Grid>
 </controls:MetroWindow>

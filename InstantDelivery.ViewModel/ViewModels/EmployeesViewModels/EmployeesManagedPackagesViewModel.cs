@@ -11,7 +11,7 @@ namespace InstantDelivery.ViewModel
     [ImplementPropertyChanged]
     public class EmployeesManagedPackagesViewModel : EmployeesViewModelBase
     {
-        private EmployeesServiceProxy service;
+        private readonly EmployeesServiceProxy service;
 
         public EmployeesManagedPackagesViewModel(EmployeesServiceProxy service)
         {
@@ -22,15 +22,8 @@ namespace InstantDelivery.ViewModel
 
         protected override async void UpdateData()
         {
-            var query = new PageQuery
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
+            var query = GetPageQuery();
             AddFilters(query);
-            service = new EmployeesServiceProxy();
             var pageDto = await service.PackagesPage(query);
             PageCount = pageDto.PageCount;
             Employees = pageDto.PageCollection;

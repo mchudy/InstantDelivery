@@ -72,13 +72,7 @@ namespace InstantDelivery.ViewModel
 
         protected override async void UpdateData()
         {
-            var query = new PageQuery
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
+            var query = GetPageQuery();
             AddFilters(query);
             var pageDto = await new EmployeesServiceProxy().Page(query);
             PageCount = pageDto.PageCount;

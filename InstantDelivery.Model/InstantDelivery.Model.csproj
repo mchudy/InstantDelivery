@@ -43,6 +43,7 @@
     <Compile Include="EmployeeAddDto.cs" />
     <Compile Include="EmployeeDto.cs" />
     <Compile Include="EmployeePackagesDto.cs" />
+    <Compile Include="EmployeeVehicleDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="PagedResult.cs" />
     <Compile Include="PageQuery.cs" />

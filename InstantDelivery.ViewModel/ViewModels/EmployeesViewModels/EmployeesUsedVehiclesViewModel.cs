@@ -1,18 +1,19 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using System.Threading.Tasks;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
+using PropertyChanged;
+using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Model widoku pojazdów używanych przez pracowników
     /// </summary>
+    [ImplementPropertyChanged]
     public class EmployeesUsedVehiclesViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesService;
+        private readonly EmployeesServiceProxy employeesService;
         private readonly IWindowManager windowManager;
-        private Employee selectedRow;
         private EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel;
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace InstantDelivery.ViewModel
         /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="usedVehiclesDetailsViewModel"></param>
-        public EmployeesUsedVehiclesViewModel(IEmployeeService employeesService, IWindowManager windowManager,
+        public EmployeesUsedVehiclesViewModel(EmployeesServiceProxy employeesService, IWindowManager windowManager,
             EmployeeUsedVehiclesDetailsViewModel usedVehiclesDetailsViewModel)
         {
             this.employeesService = employeesService;
@@ -29,19 +30,12 @@ namespace InstantDelivery.ViewModel
             this.usedVehiclesDetailsViewModel = usedVehiclesDetailsViewModel;
         }
 
+        public new IList<EmployeeVehicleDto> Employees { get; set; }
+
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
-        public Employee SelectedRow
-        {
-            get { return selectedRow; }
-            set
-            {
-                selectedRow = value;
-                NotifyOfPropertyChange();
-                NotifyOfPropertyChange(() => IsEnabledViewDetails);
-            }
-        }
+        public EmployeeVehicleDto SelectedRow { get; set; }
 
         /// <summary>
         /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz w tabeli danych.
@@ -51,25 +45,23 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Delegat zdarzenia przejścia do widoku szczegółów pojazdu używanego przez zaznaczonego pracownika.
         /// </summary>
-        public async void ShowVehicleDetails()
+        public void ShowVehicleDetails()
         {
             if (SelectedRow == null)
             {
                 return;
             }
-            usedVehiclesDetailsViewModel.Employee = SelectedRow;
-            var result = windowManager.ShowDialog(usedVehiclesDetailsViewModel);
-            await Task.Run(() =>
-            {
-                if (result != true)
-                {
-                    employeesService.Reload(SelectedRow);
-                }
-                else
-                {
-                    employeesService.Save();
-                }
-            });
+            usedVehiclesDetailsViewModel.Vehicle = SelectedRow.Vehicle;
+            windowManager.ShowDialog(usedVehiclesDetailsViewModel);
+        }
+
+        protected override async void UpdateData()
+        {
+            var query = GetPageQuery();
+            AddFilters(query);
+            var pageDto = await employeesService.VehiclesPage(query);
+            PageCount = pageDto.PageCount;
+            Employees = pageDto.PageCollection;
         }
     }
 }

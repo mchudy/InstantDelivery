@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Model;
 using System.ComponentModel;
 using System.Windows.Controls;
 
@@ -89,6 +90,17 @@ namespace InstantDelivery.ViewModel
         /// Uaktualnia dane w tabeli
         /// </summary>
         protected virtual void UpdateData() { }
+
+        protected PageQuery GetPageQuery()
+        {
+            return new PageQuery
+            {
+                PageSize = PageSize,
+                PageIndex = CurrentPage,
+                SortProperty = SortProperty,
+                SortDirection = SortDirection,
+            };
+        }
 
         protected override void OnActivate()
         {

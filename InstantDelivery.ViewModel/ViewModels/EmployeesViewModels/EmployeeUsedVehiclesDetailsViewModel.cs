@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
 
 namespace InstantDelivery.ViewModel
@@ -12,7 +11,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Pracownik którego szczegóły są wyświetlane na widoku.
         /// </summary>
-        public Employee Employee { get; set; }
+        public VehicleDto Vehicle { get; set; }
 
         /// <summary>
         /// Delegat zdarzenia zamykania okna. Widok jest tylko do odczytu więc jest to tylko zamknięcie okna.

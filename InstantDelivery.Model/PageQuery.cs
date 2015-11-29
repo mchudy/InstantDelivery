@@ -21,7 +21,7 @@ namespace InstantDelivery.Model
         /// <summary>
         /// Filtry danych
         /// </summary>
-        public IDictionary<string, string> Filters { get; set; } =
+        public IDictionary<string, string> Filters { get; } =
             new Dictionary<string, string>();
 
         /// <summary>
