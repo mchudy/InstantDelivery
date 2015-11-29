@@ -18,7 +18,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public BindableCollection<EmployeeDto> Employees
+        public virtual BindableCollection<EmployeeDto> Employees
         {
             get { return employees; }
             set

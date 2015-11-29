@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:controls1="clr-namespace:InstantDelivery.Controls"
-        xmlns:cal="http://www.caliburnproject.org"
         Height="600" Width="700" WindowStartupLocation="CenterOwner"
         Style="{StaticResource DialogWindow}" >
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
@@ -40,10 +39,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Label Content="Marka:" Grid.Column="0" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
-            <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" x:Name="SelectedVehicle_VehicleModel_Brand" Style="{StaticResource EditDialogTextBox}" />
+            <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" x:Name="SelectedVehicle_Brand" Style="{StaticResource EditDialogTextBox}" />
 
             <Label Content="Model:" Grid.Column="0" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
-            <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" x:Name="SelectedVehicle_VehicleModel_Model" Style="{StaticResource EditDialogTextBox}" />
+            <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" x:Name="SelectedVehicle_Model" Style="{StaticResource EditDialogTextBox}" />
 
             <Label Content="Numer rejestracyjny:" Grid.Column="0" Grid.Row="2"  Style="{StaticResource EditDialogLabel}"  />
             <TextBox Grid.Column="1" Grid.Row="2" IsReadOnly="True" x:Name="SelectedVehicle_RegistrationNumber" Style="{StaticResource EditDialogTextBox}" />
@@ -55,9 +54,9 @@
                   VerticalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Numer rejestracyjny pojazdu" Binding="{Binding RegistrationNumber}" Width="220" />
-                    <DataGridTextColumn Header="Marka" Binding="{Binding VehicleModel.Brand}" Width="150" />
-                    <DataGridTextColumn Header="Model" Binding="{Binding VehicleModel.Model}" Width="150" />
-                    <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="150" />
+                    <DataGridTextColumn Header="Marka" Binding="{Binding Brand}" Width="150" />
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="150" />
+                    <DataGridTextColumn Header="Ładowność" Binding="{Binding Payload}" Width="150" />
                 </DataGrid.Columns>
             </DataGrid>
             <controls1:DataPager Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"

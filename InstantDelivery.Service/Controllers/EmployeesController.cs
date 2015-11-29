@@ -120,16 +120,17 @@ namespace InstantDelivery.Service.Controllers
         /// <param name="employeeId">Id pracownika</param>
         /// <param name="vehicleId">Id pojazdu</param>
         [Route("ChangeVehicle"), HttpPost]
-        public IHttpActionResult ChangeVehicle(int employeeId, int vehicleId)
+        public IHttpActionResult ChangeVehicle(int employeeId, int? vehicleId = null)
         {
-            var owner = context.Employees.Find(employeeId);
-            var vehicle = context.Vehicles.Find(vehicleId);
-            if (owner == null || vehicle == null)
+            var owner = context.Employees.Include(e => e.Vehicle)
+                                         .FirstOrDefault(e => e.Id == employeeId);
+            if (owner == null)
             {
                 return NotFound();
             }
             else
             {
+                var vehicle = context.Vehicles.Find(vehicleId);
                 owner.Vehicle = vehicle;
                 context.SaveChanges();
                 return Ok();

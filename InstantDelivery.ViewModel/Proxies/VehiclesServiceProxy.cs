@@ -27,6 +27,13 @@ namespace InstantDelivery.ViewModel.Proxies
             return await response.Content.ReadAsAsync<PagedResult<VehicleDto>>();
         }
 
+        public async Task<PagedResult<VehicleDto>> AvailableVehiclesPage(PageQuery query)
+        {
+            HttpResponseMessage response = await client.GetAsync("Available/Page?" + query.ToQueryString());
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<PagedResult<VehicleDto>>();
+        }
+
         public async Task DeleteVehicle(int vehicleId)
         {
             HttpResponseMessage response = await client.DeleteAsync(vehicleId.ToString());
@@ -59,7 +66,7 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public async Task<int> AddVehicleModel(AddVehicleModelDto model)
         {
-            HttpResponseMessage response = await client.PostAsJsonAsync("Model", model);
+            HttpResponseMessage response = await client.PostAsJsonAsync("Models", model);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<int>();
         }

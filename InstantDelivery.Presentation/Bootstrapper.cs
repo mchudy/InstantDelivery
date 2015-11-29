@@ -110,7 +110,7 @@ namespace InstantDelivery
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(EmployeeService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(PackageService).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 

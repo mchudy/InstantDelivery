@@ -62,7 +62,7 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
-        [Route("Model"), HttpPost]
+        [Route("Models"), HttpPost]
         public IHttpActionResult PostVehicleModel(AddVehicleModelDto newVehicleModel)
         {
             var vehicleModel = Mapper.Map<VehicleModel>(newVehicleModel);
@@ -112,6 +112,17 @@ namespace InstantDelivery.Service.Controllers
                 result = result.Where(e => e.VehicleModel.Model.StartsWith(model));
             }
             return result;
+        }
+
+        [Route("Available/Page"), HttpGet]
+        public IHttpActionResult GetAllAvailable([FromUri] PageQuery query)
+        {
+            var vehicles = context.Vehicles
+                .Include(v => v.VehicleModel)
+                .Where(v => context.Employees.Count(e => e.Vehicle.Id == v.Id) == 0)
+                .AsQueryable();
+            var dtos = vehicles.ProjectTo<VehicleDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
     }
 }

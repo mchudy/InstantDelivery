@@ -1,9 +1,9 @@
 ﻿using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Extensions;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using InstantDelivery.ViewModel.Extensions;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
@@ -56,6 +56,13 @@ namespace InstantDelivery.ViewModel.Proxies
         public async Task UpdateEmployee(EmployeeDto employee)
         {
             var response = await client.PutAsJsonAsync("", employee);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task ChangeVehicle(int employeeId, int? vehicleId)
+        {
+            var response = await client.PostAsync(
+                $"ChangeVehicle?employeeid={employeeId}&vehicleId={vehicleId}", null);
             response.EnsureSuccessStatusCode();
         }
 
