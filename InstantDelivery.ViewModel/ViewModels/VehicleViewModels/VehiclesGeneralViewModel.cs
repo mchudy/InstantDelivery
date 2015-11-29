@@ -1,8 +1,7 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,9 +10,9 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class VehiclesGeneralViewModel : VehiclesViewModelBase
     {
-        private readonly IVehiclesService vehiclesService;
+        private readonly VehiclesServiceProxy vehiclesService;
         private readonly IWindowManager windowManager;
-        private Vehicle selectedVehicle;
+        private VehicleDto selectedVehicle;
         private VehicleEditViewModel vehiclesEditViewModel;
         private ConfirmDeleteViewModel confirmDeleteViewModel;
 
@@ -24,7 +23,7 @@ namespace InstantDelivery.ViewModel
         /// <param name="windowManager"></param>
         /// <param name="vehiclesEditViewModel"></param>
         /// <param name="confirmDeleteViewModel"></param>
-        public VehiclesGeneralViewModel(IVehiclesService vehiclesService, IWindowManager windowManager,
+        public VehiclesGeneralViewModel(VehiclesServiceProxy vehiclesService, IWindowManager windowManager,
            VehicleEditViewModel vehiclesEditViewModel, ConfirmDeleteViewModel confirmDeleteViewModel)
             : base(vehiclesService)
         {
@@ -37,7 +36,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Aktualnie zaznaczony wiersz tabeli danych.
         /// </summary>
-        public Vehicle SelectedVehicle
+        public VehicleDto SelectedVehicle
         {
             get { return selectedVehicle; }
             set
@@ -65,17 +64,24 @@ namespace InstantDelivery.ViewModel
             vehiclesEditViewModel.Vehicle = SelectedVehicle;
 
             var result = windowManager.ShowDialog(vehiclesEditViewModel);
-            await Task.Run(() =>
+            if (result != true)
             {
-                if (result != true)
-                {
-                    vehiclesService.Reload(SelectedVehicle);
-                }
-                else
-                {
-                    vehiclesService.Save();
-                }
-            });
+                var oldVehicle = await vehiclesService.GetById(selectedVehicle.Id);
+                RefreshRow(oldVehicle);
+            }
+            else
+            {
+                await vehiclesService.UpdateVehicle(SelectedVehicle);
+                UpdateData();
+            }
+        }
+
+        private void RefreshRow(VehicleDto oldEmployee)
+        {
+            int index = Vehicles.IndexOf(SelectedVehicle);
+            Vehicles.Remove(SelectedVehicle);
+            Vehicles.Insert(index, oldEmployee);
+            SelectedVehicle = oldEmployee;
         }
 
         /// <summary>
@@ -88,15 +94,11 @@ namespace InstantDelivery.ViewModel
                 return;
             }
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
-            await Task.Run(() =>
+            if (result == true)
             {
-                if (result == true)
-                {
-                    vehiclesService.Remove(SelectedVehicle);
-                    Vehicles = null;
-                    UpdateData();
-                }
-            });
+                await vehiclesService.DeleteVehicle(SelectedVehicle.Id);
+                UpdateData();
+            }
         }
     }
 }

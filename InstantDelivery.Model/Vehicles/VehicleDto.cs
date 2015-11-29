@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string RegistrationNumber { get; set; }
+        public int VehicleModelId { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public double Payload { get; set; }

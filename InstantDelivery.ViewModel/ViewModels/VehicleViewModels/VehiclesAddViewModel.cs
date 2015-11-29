@@ -1,9 +1,9 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
+using InstantDelivery.Model;
+using InstantDelivery.Model.Vehicles;
+using InstantDelivery.ViewModel.Proxies;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -12,35 +12,40 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class VehiclesAddViewModel : Screen
     {
-        private IVehiclesService vehiclesService;
+        private readonly VehiclesServiceProxy vehiclesService;
         private bool addNewVehicleModel;
-        private VehicleModel selectedVehicleModel;
+        private VehicleModelDto selectedVehicleModel;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
-        public VehiclesAddViewModel(IVehiclesService service)
+        public VehiclesAddViewModel(VehiclesServiceProxy service)
         {
             vehiclesService = service;
-            NewVehicle = new Vehicle();
-            VehicleModels = vehiclesService.GetAllModels();
+            NewVehicle = new AddVehicleDto();
+            LoadModels();
+        }
+
+        private async void LoadModels()
+        {
+            VehicleModels = await vehiclesService.GetAllModels();
         }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych w widoku.
         /// </summary>
-        public IEnumerable<VehicleModel> VehicleModels { get; set; }
+        public IList<VehicleModelDto> VehicleModels { get; set; }
 
         /// <summary>
         /// Aktualnie tworzony pojazd.
         /// </summary>
-        public Vehicle NewVehicle { get; set; }
+        public AddVehicleDto NewVehicle { get; set; }
 
         /// <summary>
         /// Aktualnie wybrany pojazd z tabeli danych.
         /// </summary>
-        public VehicleModel SelectedVehicleModel
+        public VehicleModelDto SelectedVehicleModel
         {
             get { return selectedVehicleModel; }
             set
@@ -53,7 +58,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Aktualnie tworzony model pojazdu.
         /// </summary>
-        public VehicleModel NewVehicleModel { get; set; } = new VehicleModel();
+        public AddVehicleModelDto NewVehicleModel { get; set; } = new AddVehicleModelDto();
 
         /// <summary>
         /// Flaga informująca o tym czy użytkownik tworzy nowy model pojazdu.
@@ -77,9 +82,17 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public async void Save()
         {
-            var vehicleModel = AddNewVehicleModel ? NewVehicleModel : SelectedVehicleModel;
-            NewVehicle.VehicleModel = vehicleModel;
-            await Task.Run(() => vehiclesService.AddVehicle(NewVehicle));
+            if (AddNewVehicleModel)
+            {
+                var modelId = await vehiclesService.AddVehicleModel(NewVehicleModel);
+                NewVehicle.VehicleModelId = modelId;
+                await vehiclesService.AddVehicle(NewVehicle);
+            }
+            else
+            {
+                NewVehicle.VehicleModelId = SelectedVehicleModel.Id;
+                await vehiclesService.AddVehicle(NewVehicle);
+            }
             TryClose(true);
         }
 

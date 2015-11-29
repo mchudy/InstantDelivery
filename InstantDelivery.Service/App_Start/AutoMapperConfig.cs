@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.Service
 {
@@ -25,8 +26,15 @@ namespace InstantDelivery.Service
                 .ForMember(s => s.Payload, c => c.MapFrom(m => m.VehicleModel.Payload))
                 .ForMember(s => s.AvailableSpaceX, c => c.MapFrom(m => m.VehicleModel.AvailableSpaceX))
                 .ForMember(s => s.AvailableSpaceY, c => c.MapFrom(m => m.VehicleModel.AvailableSpaceY))
-                .ForMember(s => s.AvailableSpaceZ, c => c.MapFrom(m => m.VehicleModel.AvailableSpaceZ));
-            Mapper.CreateMap<Vehicle, VehicleDto>();
+                .ForMember(s => s.AvailableSpaceZ, c => c.MapFrom(m => m.VehicleModel.AvailableSpaceZ))
+                .ForMember(s => s.VehicleModelId, c => c.MapFrom(m => m.VehicleModel.Id))
+                .ReverseMap()
+                    .ForMember(s => s.VehicleModel, c => c.MapFrom(m => m))
+                    .ForMember(s => s.Id, c => c.Ignore());
+            Mapper.CreateMap<VehicleDto, VehicleModel>()
+                .ForMember(s => s.Id, c => c.Ignore());
+            Mapper.CreateMap<AddVehicleDto, Vehicle>();
+            Mapper.CreateMap<AddVehicleModelDto, VehicleModel>();
         }
     }
 }

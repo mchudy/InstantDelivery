@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Population.cs" />
     <Compile Include="Proxies\EmployeesServiceProxy.cs" />
+    <Compile Include="Extensions\PageQueryExtensions.cs" />
     <Compile Include="Proxies\StatisticsServiceProxy.cs" />
+    <Compile Include="Proxies\VehiclesServiceProxy.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />

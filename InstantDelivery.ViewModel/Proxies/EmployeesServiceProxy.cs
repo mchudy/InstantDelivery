@@ -1,10 +1,9 @@
 ﻿using InstantDelivery.Model;
 using System;
-using System.Collections.Specialized;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
+using InstantDelivery.ViewModel.Extensions;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
@@ -23,21 +22,21 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public async Task<PagedResult<EmployeeDto>> Page(PageQuery query)
         {
-            HttpResponseMessage response = await client.GetAsync("Page?" + PageQueryString(query));
+            HttpResponseMessage response = await client.GetAsync("Page?" + query.ToQueryString());
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<PagedResult<EmployeeDto>>();
         }
 
         public async Task<PagedResult<EmployeePackagesDto>> PackagesPage(PageQuery query)
         {
-            HttpResponseMessage response = await client.GetAsync("Packages/Page?" + PageQueryString(query));
+            HttpResponseMessage response = await client.GetAsync("Packages/Page?" + query.ToQueryString());
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<PagedResult<EmployeePackagesDto>>();
         }
 
         public async Task<PagedResult<EmployeeVehicleDto>> VehiclesPage(PageQuery query)
         {
-            HttpResponseMessage response = await client.GetAsync("Vehicles/Page?" + PageQueryString(query));
+            HttpResponseMessage response = await client.GetAsync("Vehicles/Page?" + query.ToQueryString());
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<PagedResult<EmployeeVehicleDto>>();
         }
@@ -64,26 +63,6 @@ namespace InstantDelivery.ViewModel.Proxies
         {
             HttpResponseMessage response = await client.PostAsJsonAsync("", employee);
             response.EnsureSuccessStatusCode();
-        }
-
-        private static string PageQueryString(PageQuery query)
-        {
-            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
-
-            queryString[nameof(PageQuery.PageSize)] = query.PageSize.ToString();
-            queryString[nameof(PageQuery.PageIndex)] = query.PageIndex.ToString();
-            queryString[nameof(PageQuery.SortDirection)] = query.SortDirection.ToString();
-            queryString[nameof(PageQuery.SortProperty)] = query.SortProperty;
-
-            foreach (var entry in query?.Filters)
-            {
-                if (!string.IsNullOrEmpty(entry.Value))
-                {
-                    queryString[entry.Key] = entry.Value;
-                }
-            }
-
-            return queryString.ToString();
         }
     }
 }

@@ -40,17 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeAddDto.cs" />
-    <Compile Include="EmployeeDto.cs" />
-    <Compile Include="EmployeePackagesDto.cs" />
-    <Compile Include="EmployeeVehicleDto.cs" />
-    <Compile Include="PackageDto.cs" />
-    <Compile Include="PagedResult.cs" />
-    <Compile Include="PageQuery.cs" />
+    <Compile Include="Employees\EmployeeAddDto.cs" />
+    <Compile Include="Employees\EmployeeDto.cs" />
+    <Compile Include="Employees\EmployeePackagesDto.cs" />
+    <Compile Include="Employees\EmployeeVehicleDto.cs" />
+    <Compile Include="Packages\PackageDto.cs" />
+    <Compile Include="Paging\PagedResult.cs" />
+    <Compile Include="Paging\PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statistics\FinancialStatisticsDto.cs" />
     <Compile Include="Statistics\GeneralStatisticsDto.cs" />
-    <Compile Include="VehicleDto.cs" />
+    <Compile Include="Vehicles\AddVehicleDto.cs" />
+    <Compile Include="Vehicles\AddVehicleModelDto.cs" />
+    <Compile Include="Vehicles\VehicleDto.cs" />
+    <Compile Include="Vehicles\VehicleModelDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

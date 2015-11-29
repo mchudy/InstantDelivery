@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
+using InstantDelivery.Model;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,7 +11,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Edytowany pojazd w widoku.
         /// </summary>
-        public Vehicle Vehicle { get; set; }
+        public VehicleDto Vehicle { get; set; }
 
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
