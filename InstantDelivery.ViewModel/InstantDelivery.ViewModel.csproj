@@ -41,6 +41,10 @@
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged, Version=1.50.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
@@ -49,10 +53,23 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Population.cs" />
+    <Compile Include="Proxies\EmployeesServiceProxy.cs" />
+    <Compile Include="Extensions\PageQueryExtensions.cs" />
+    <Compile Include="Proxies\PackagesServiceProxy.cs" />
+    <Compile Include="Proxies\ServiceProxyBase.cs" />
+    <Compile Include="Proxies\StatisticsServiceProxy.cs" />
+    <Compile Include="Proxies\VehiclesServiceProxy.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
@@ -79,16 +96,17 @@
     <Compile Include="ViewModels\VehicleViewModels\VehiclesViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
-      <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
-      <Name>InstantDelivery.Core</Name>
+    <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
+      <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
+      <Name>InstantDelivery.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
-      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
-      <Name>InstantDelivery.Services</Name>
+    <ProjectReference Include="..\InstantDelivery.Model\InstantDelivery.Model.csproj">
+      <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>
+      <Name>InstantDelivery.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
@@ -96,15 +114,15 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.2\build\dotnet\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\PropertyChanged.Fody.1.50.3\build\dotnet\PropertyChanged.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.1.50.3\build\dotnet\PropertyChanged.Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.29.3\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.3\build\dotnet\Fody.targets'))" />
   </Target>
   <Import Project="..\packages\PropertyChanged.Fody.1.50.3\build\dotnet\PropertyChanged.Fody.targets" Condition="Exists('..\packages\PropertyChanged.Fody.1.50.3\build\dotnet\PropertyChanged.Fody.targets')" />
+  <Import Project="..\packages\Fody.1.29.3\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.3\build\dotnet\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

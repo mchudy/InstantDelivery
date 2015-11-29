@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Domain.Entities;
+﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -232,7 +233,7 @@ namespace InstantDelivery.Domain.Migrations
                         City = city[0],
                         Country = city[1],
                         Number = (random.Next() % 10).ToString(),
-                        PostalCode = "00-34" + (random.Next() % 9).ToString(),
+                        PostalCode = "00-34" + (random.Next() % 9),
                         State = states[random.Next() % states.Length],
                         Street = streets[random.Next() % streets.Length]
                     },

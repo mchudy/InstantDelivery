@@ -25,12 +25,12 @@
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditVehicle()]">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer rejestracyjny" Width="200" Binding="{Binding RegistrationNumber}"/>
-                <DataGridTextColumn Header="Marka" Binding="{Binding VehicleModel.Brand}" Width="200" />
-                <DataGridTextColumn Header="Model" Binding="{Binding VehicleModel.Model}" Width="200" />
-                <DataGridTextColumn Header="Ładowność" Binding="{Binding VehicleModel.Payload}" Width="200" />
-                <DataGridTextColumn Header="Wymiar X" Binding="{Binding VehicleModel.AvailableSpaceX}" Width="200" />
-                <DataGridTextColumn Header="Wymiar Y" Binding="{Binding VehicleModel.AvailableSpaceY}" Width="200" />
-                <DataGridTextColumn Header="Wymiar Z" Binding="{Binding VehicleModel.AvailableSpaceZ}" Width="200" />
+                <DataGridTextColumn Header="Marka" Binding="{Binding Brand}" Width="200" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="200" />
+                <DataGridTextColumn Header="Ładowność" Binding="{Binding Payload}" Width="200" />
+                <DataGridTextColumn Header="Wymiar X" Binding="{Binding AvailableSpaceX}" Width="200" />
+                <DataGridTextColumn Header="Wymiar Y" Binding="{Binding AvailableSpaceY}" Width="200" />
+                <DataGridTextColumn Header="Wymiar Z" Binding="{Binding AvailableSpaceZ}" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
         <controls:DataPager Grid.Row="3" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"

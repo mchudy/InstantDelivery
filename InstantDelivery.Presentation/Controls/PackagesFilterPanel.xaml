@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
-             xmlns:employeesViewModels="clr-namespace:InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;assembly=InstantDelivery.ViewModel"
-             xmlns:viewModel="clr-namespace:InstantDelivery.ViewModel;assembly=InstantDelivery.ViewModel"
+             xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
     <StackPanel Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
@@ -13,7 +12,7 @@
         <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding IdFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Label Content="Status:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
         <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding PackageStatusFilter}" Style="{StaticResource EditComboBoxLabel}"
-                  ItemsSource="{helpers:EnumSource {x:Type viewModel:PackageStatusFilter}}" Height="15" Margin="5 0 5 0" />
+                  ItemsSource="{helpers:EnumSource {x:Type enums:PackageStatusFilter}}" Height="15" Margin="5 0 5 0" />
     </StackPanel>
 </UserControl>
 

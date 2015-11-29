@@ -1,9 +1,7 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.ViewModel.ViewModels.EmployeesViewModels;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -12,10 +10,10 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class VehicleManageViewModel : EmployeesViewModelBase
     {
-        private readonly IEmployeeService employeesService;
-        private readonly IVehiclesService vehiclesService;
+        private readonly EmployeesServiceProxy employeesService;
+        private readonly SelectVehicleForEmployeeViewModel selectVehicleViewModel;
         private readonly IWindowManager windowManager;
-        private Employee selectedEmployee;
+        private EmployeeVehicleDto selectedEmployee;
 
         /// <summary>
         /// Konstruktor modelu widoku
@@ -23,13 +21,14 @@ namespace InstantDelivery.ViewModel
         /// <param name="employeesService"></param>
         /// <param name="windowManager"></param>
         /// <param name="vehiclesService"></param>
-        public VehicleManageViewModel(IEmployeeService employeesService, IWindowManager windowManager,
-            IVehiclesService vehiclesService)
+        /// <param name="selectVehicleViewModel"></param>
+        public VehicleManageViewModel(EmployeesServiceProxy employeesService, IWindowManager windowManager,
+            SelectVehicleForEmployeeViewModel selectVehicleViewModel)
             : base(employeesService)
         {
             this.employeesService = employeesService;
             this.windowManager = windowManager;
-            this.vehiclesService = vehiclesService;
+            this.selectVehicleViewModel = selectVehicleViewModel;
         }
 
         /// <summary>
@@ -37,10 +36,12 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public bool IsSelectedAnyRow => SelectedEmployee != null;
 
+        public new BindableCollection<EmployeeVehicleDto> Employees { get; set; }
+
         /// <summary>
         /// Aktualnie zaznaczony wiersz w tabeli danych.
         /// </summary>
-        public Employee SelectedEmployee
+        public EmployeeVehicleDto SelectedEmployee
         {
             get { return selectedEmployee; }
             set
@@ -54,31 +55,29 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Delegat zdarzenia kliknięcia w przycisk przechodzący do widoku edycji pojazdu.
         /// </summary>
-        public async void EditVehicleForEmployee()
+        public void EditVehicleForEmployee()
         {
             if (SelectedEmployee == null)
             {
                 return;
             }
-            var viewModel = new SelectVehicleForEmployeeViewModel(employeesService, vehiclesService)
+            selectVehicleViewModel.SelectedEmployee = SelectedEmployee;
+            selectVehicleViewModel.SelectedVehicle = SelectedEmployee.Vehicle;
+            selectVehicleViewModel.HasVehicle = SelectedEmployee.Vehicle != null;
+            var result = windowManager.ShowDialog(selectVehicleViewModel);
+            if (result == true)
             {
-                SelectedEmployee = SelectedEmployee,
-                SelectedVehicle = SelectedEmployee.Vehicle,
-                HasVehicle = SelectedEmployee.Vehicle != null
-            };
-            var result = windowManager.ShowDialog(viewModel);
-            await Task.Run(() =>
-            {
-                if (result != true)
-                {
-                    employeesService.Reload(SelectedEmployee);
-                }
-                else
-                {
-                    employeesService.Save();
-                }
-            });
+                UpdateData();
+            }
         }
 
+        protected override async void UpdateData()
+        {
+            var query = GetPageQuery();
+            AddFilters(query);
+            var pageDto = await employeesService.VehiclesPage(query);
+            PageCount = pageDto.PageCount;
+            Employees = new BindableCollection<EmployeeVehicleDto>(pageDto.PageCollection);
+        }
     }
 }

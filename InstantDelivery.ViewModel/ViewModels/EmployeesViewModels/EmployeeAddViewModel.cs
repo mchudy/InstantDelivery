@@ -1,8 +1,7 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Services;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using System;
-using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,23 +10,18 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeeAddViewModel : Screen
     {
-        private IEmployeeService service;
-        private Employee newEmployee;
+        private EmployeesServiceProxy proxy;
+        private EmployeeAddDto newEmployee = new EmployeeAddDto();
 
-        /// <summary>
-        /// Konstruktor modelu widoku
-        /// </summary>
-        /// <param name="service"></param>
-        public EmployeeAddViewModel(IEmployeeService service)
+        public EmployeeAddViewModel(EmployeesServiceProxy proxy)
         {
-            this.service = service;
-            NewEmployee = new Employee();
+            this.proxy = proxy;
         }
 
         /// <summary>
         /// Aktualnie tworzony pracownik.
         /// </summary>
-        public Employee NewEmployee
+        public EmployeeAddDto NewEmployee
         {
             get { return newEmployee; }
             set
@@ -44,10 +38,7 @@ namespace InstantDelivery.ViewModel
         {
             var EmployeeToAdd = NewEmployee;
             TryClose(true);
-            await Task.Run(() =>
-            {
-                service.AddEmployee(EmployeeToAdd);
-            });
+            await proxy.AddEmployee(EmployeeToAdd);
         }
 
         /// <summary>

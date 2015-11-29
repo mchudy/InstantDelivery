@@ -1,6 +1,6 @@
 ﻿using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Pricing;
+using InstantDelivery.Model;
+using InstantDelivery.Service.Pricing;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -11,7 +11,7 @@ namespace InstantDelivery.Tests
         public void GetCost_SmallPackage()
         {
             var strategy = new RegularPricingStrategy();
-            var package = new Package
+            var package = new PackageDto
             {
                 Width = 50,
                 Length = 50,
@@ -28,7 +28,7 @@ namespace InstantDelivery.Tests
         public void GetCost_LargePackage()
         {
             var strategy = new RegularPricingStrategy();
-            var package = new Package
+            var package = new PackageDto
             {
                 Width = 50,
                 Length = 100,

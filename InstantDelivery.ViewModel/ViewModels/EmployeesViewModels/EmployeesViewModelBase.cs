@@ -1,38 +1,30 @@
-﻿using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Caliburn.Micro;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 
-namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
+namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Bazowy model widoku dla innych widoków pracowników.
     /// </summary>
     public abstract class EmployeesViewModelBase : PagingViewModel
     {
-        private IList<Employee> employees;
-        private readonly IEmployeeService employeesService;
+        protected BindableCollection<EmployeeDto> employees;
 
+        private EmployeesServiceProxy service;
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
 
-        private Expression<Func<Employee, bool>> filter =>
-            e => (string.IsNullOrEmpty(FirstNameFilter) || e.FirstName.StartsWith(firstNameFilter)) &&
-                 (string.IsNullOrEmpty(LastNameFilter) || e.LastName.StartsWith(LastNameFilter)) &&
-                 (string.IsNullOrEmpty(EmailFilter) || e.Email.StartsWith(EmailFilter));
-
-        protected EmployeesViewModelBase(IEmployeeService employeesService)
+        protected EmployeesViewModelBase(EmployeesServiceProxy service)
         {
-            this.employeesService = employeesService;
+            this.service = service;
         }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IList<Employee> Employees
+        public virtual BindableCollection<EmployeeDto> Employees
         {
             get { return employees; }
             set
@@ -84,19 +76,29 @@ namespace InstantDelivery.ViewModel.ViewModels.EmployeesViewModels
             }
         }
 
-        protected override void UpdateData()
+        protected override async void UpdateData()
         {
-            var query = new PageQuery<Employee>
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
-            query.Filters.Add(filter);
-            var pageDto = employeesService.GetPage(query);
+            var query = GetPageQuery();
+            AddFilters(query);
+            var pageDto = await service.Page(query);
             PageCount = pageDto.PageCount;
-            Employees = pageDto.PageCollection;
+            Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
+        }
+
+        protected void AddFilters(PageQuery query)
+        {
+            if (!string.IsNullOrEmpty(FirstNameFilter))
+            {
+                query.Filters[nameof(EmployeeDto.FirstName)] = FirstNameFilter;
+            }
+            if (!string.IsNullOrEmpty(LastNameFilter))
+            {
+                query.Filters[nameof(EmployeeDto.LastName)] = LastNameFilter;
+            }
+            if (!string.IsNullOrEmpty(EmailFilter))
+            {
+                query.Filters[nameof(EmployeeDto.Email)] = EmailFilter;
+            }
         }
     }
 }

@@ -12,10 +12,7 @@ namespace InstantDelivery.Domain.Entities
     public abstract class ValidationBase : Entity, IDataErrorInfo
     {
 
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Error => null;
 
         string IDataErrorInfo.this[string propertyName] => OnValidate(propertyName);
 

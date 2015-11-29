@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using InstantDelivery.Common.Enums;
 using PropertyChanged;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Domain.Entities
 {
@@ -85,14 +85,5 @@ namespace InstantDelivery.Domain.Entities
         /// </summary>
         public virtual Vehicle Vehicle { get; set; }
     }
-    /// <summary>
-    /// Definicja reprezentacji płci
-    /// </summary>
-    public enum Gender
-    {
-        [Description("Mężczyczna")]
-        Male,
-        [Description("Kobieta")]
-        Female
-    };
+
 }

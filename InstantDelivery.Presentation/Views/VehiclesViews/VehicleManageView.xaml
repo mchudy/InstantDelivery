@@ -20,7 +20,7 @@
         <ContentControl x:Name="EmployeesFilterPanel" />
         <controls1:EmployeesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:EmployeesFilterPanel>
         <Separator Background="DodgerBlue" Grid.Row="1"></Separator>
-        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees, IsAsync=True}" Grid.Row="2"
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Employees}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -30,8 +30,8 @@
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
                 <DataGridTextColumn Header="Numer rejestracyjny pojazdu" Binding="{Binding Vehicle.RegistrationNumber}" Width="200" />
-                <DataGridTextColumn Header="Marka" Binding="{Binding Vehicle.VehicleModel.Brand}" Width="150" />
-                <DataGridTextColumn Header="Model" Binding="{Binding Vehicle.VehicleModel.Model}" Width="150" />
+                <DataGridTextColumn Header="Marka" Binding="{Binding Vehicle.Brand}" Width="150" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Vehicle.Model}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
         <controls1:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"

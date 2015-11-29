@@ -55,21 +55,11 @@
       <HintPath>..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -196,13 +186,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
-      <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
-      <Name>InstantDelivery.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
-      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
-      <Name>InstantDelivery.Services</Name>
+    <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
+      <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
+      <Name>InstantDelivery.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.ViewModel\InstantDelivery.ViewModel.csproj">
       <Project>{03199773-6AE0-4DDC-985F-BF4BC69111FD}</Project>

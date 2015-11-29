@@ -21,7 +21,8 @@
         <DataGrid ItemsSource="{Binding Employees, IsAsync=True}" Grid.Row="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
                   CanUserResizeRows="False" CanUserSortColumns="True"
-                  VerticalScrollBarVisibility="Auto" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">
+                  VerticalScrollBarVisibility="Auto" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False"
+                  cal:Message.Attach="[Event Sorting] = [Action Sort($eventArgs)];">
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" RowBackground="LightSkyBlue" IsReadOnly="True" EnableColumnVirtualization="False" EnableRowVirtualization="False">

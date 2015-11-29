@@ -1,9 +1,7 @@
-﻿using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
+﻿using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -13,16 +11,16 @@ namespace InstantDelivery.ViewModel
     [ImplementPropertyChanged]
     public class SelectVehicleForEmployeeViewModel : PagingViewModel
     {
-        private readonly IEmployeeService employeeService;
-        private readonly IVehiclesService vehiclesService;
+        private readonly EmployeesServiceProxy employeeService;
+        private readonly VehiclesServiceProxy vehiclesService;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="employeeService"></param>
         /// <param name="vehiclesService"></param>
-        public SelectVehicleForEmployeeViewModel(IEmployeeService employeeService,
-            IVehiclesService vehiclesService)
+        public SelectVehicleForEmployeeViewModel(EmployeesServiceProxy employeeService,
+            VehiclesServiceProxy vehiclesService)
         {
             this.employeeService = employeeService;
             this.vehiclesService = vehiclesService;
@@ -36,17 +34,17 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Zaznaczony pracownik w poprzednim widoku.
         /// </summary>
-        public Employee SelectedEmployee { get; set; }
+        public EmployeeVehicleDto SelectedEmployee { get; set; }
 
         /// <summary>
         /// Zaznaczony wiersz w widoku.
         /// </summary>
-        public Vehicle SelectedVehicle { get; set; }
+        public VehicleDto SelectedVehicle { get; set; }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych w widoku.
         /// </summary>
-        public IList<Vehicle> Vehicles { get; set; }
+        public IList<VehicleDto> Vehicles { get; set; }
 
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
@@ -59,11 +57,8 @@ namespace InstantDelivery.ViewModel
             }
             var VehicleToSave = SelectedVehicle;
             var EmployeeToUpdate = SelectedEmployee;
+            await employeeService.ChangeVehicle(EmployeeToUpdate.Id, VehicleToSave?.Id);
             TryClose(true);
-            await Task.Run(() =>
-            {
-                employeeService.ChangeEmployeesVehicle(EmployeeToUpdate, VehicleToSave);
-            });
         }
 
         /// <summary>
@@ -74,18 +69,17 @@ namespace InstantDelivery.ViewModel
             TryClose(false);
         }
 
-        protected override void UpdateData()
+        protected override async void UpdateData()
         {
-            var query = new PageQuery<Vehicle>
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortDirection = SortDirection,
-                SortProperty = SortProperty
-            };
-            var pageDto = vehiclesService.GetAllAvailableAndCurrent(SelectedVehicle, query);
+            var query = GetPageQuery();
+            var pageDto = await vehiclesService.AvailableVehiclesPage(query);
             PageCount = pageDto.PageCount;
             Vehicles = pageDto.PageCollection;
+            if (SelectedEmployee.Vehicle != null)
+            {
+                Vehicles.Add(SelectedEmployee.Vehicle);
+                SelectedVehicle = SelectedEmployee?.Vehicle;
+            }
         }
     }
 }

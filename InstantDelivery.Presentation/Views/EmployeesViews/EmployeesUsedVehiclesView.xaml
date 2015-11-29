@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:controls1="clr-namespace:InstantDelivery.Controls"
              mc:Ignorable="d" 
@@ -29,8 +28,8 @@
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
                 <DataGridTextColumn Header="Numer rejestracyjny" Width="200" Binding="{Binding Vehicle.RegistrationNumber}"  />
-                <DataGridTextColumn Header="Marka" Width="200" Binding="{Binding Vehicle.VehicleModel.Brand}"/>
-                <DataGridTextColumn Header="Model" Width="200" Binding="{Binding Vehicle.VehicleModel.Model}"/>
+                <DataGridTextColumn Header="Marka" Width="200" Binding="{Binding Vehicle.Brand}"/>
+                <DataGridTextColumn Header="Model" Width="200" Binding="{Binding Vehicle.Model}"/>
             </DataGrid.Columns>
         </DataGrid>
         <controls1:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"

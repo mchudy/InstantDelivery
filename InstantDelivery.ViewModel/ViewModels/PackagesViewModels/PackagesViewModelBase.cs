@@ -1,8 +1,7 @@
-﻿using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
+﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace InstantDelivery.ViewModel
 {
@@ -11,13 +10,13 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public abstract class PackagesViewModelBase : PagingViewModel
     {
-        private IList<Package> packages;
+        private IList<PackageDto> packages;
         private string idFilter = string.Empty;
         private PackageStatusFilter packageStatusFilter = PackageStatusFilter.All;
 
-        private IPackageService service;
+        private readonly PackagesServiceProxy service;
 
-        protected PackagesViewModelBase(IPackageService service)
+        protected PackagesViewModelBase(PackagesServiceProxy service)
         {
             this.service = service;
         }
@@ -25,7 +24,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
         /// </summary>
-        public IList<Package> Packages
+        public IList<PackageDto> Packages
         {
             get { return packages; }
             set
@@ -48,21 +47,6 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        protected override void UpdateData()
-        {
-            var query = new PageQuery<Package>
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
-            AddFilters(query);
-            var pageDto = service.GetPage(query);
-            PageCount = pageDto.PageCount;
-            Packages = pageDto.PageCollection;
-        }
-
         /// <summary>
         /// Filtr statusu paczki wybrany przez użytkownika
         /// </summary>
@@ -76,33 +60,30 @@ namespace InstantDelivery.ViewModel
             }
         }
 
-        private void AddFilters(PageQuery<Package> query)
+        protected override async void UpdateData()
         {
-            query.Filters.Add(e => string.IsNullOrEmpty(idFilter) || e.Id.ToString().StartsWith(idFilter));
+            var query = GetPageQuery();
+            AddFilters(query);
+            var pageDto = await service.Page(query);
+            PageCount = pageDto.PageCount;
+            Packages = pageDto.PageCollection;
+        }
+
+        private void AddFilters(PageQuery query)
+        {
+            query.Filters[nameof(PackageDto.Id)] = IdFilter;
             switch (PackageStatusFilter)
             {
                 case PackageStatusFilter.Delivered:
-                    query.Filters.Add(e => e.Status == PackageStatus.Delivered);
+                    query.Filters[nameof(PackageDto.Status)] = PackageStatus.Delivered.ToString();
                     break;
-                case PackageStatusFilter.InProgress:
-                    query.Filters.Add(e => e.Status == PackageStatus.InDelivery);
+                case PackageStatusFilter.InDelivery:
+                    query.Filters[nameof(PackageDto.Status)] = PackageStatus.InDelivery.ToString();
                     break;
                 case PackageStatusFilter.New:
-                    query.Filters.Add(e => e.Status == PackageStatus.New);
+                    query.Filters[nameof(PackageDto.Status)] = PackageStatus.New.ToString();
                     break;
             }
         }
-    }
-
-    public enum PackageStatusFilter
-    {
-        [Description("Dostarczone")]
-        Delivered,
-        [Description("Nowe")]
-        New,
-        [Description("W dostawie")]
-        InProgress,
-        [Description("Wszystkie")]
-        All
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using InstantDelivery.Common.Enums;
 using PropertyChanged;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Domain.Entities
 {
@@ -11,16 +11,9 @@ namespace InstantDelivery.Domain.Entities
     public class Package : ValidationBase
     {
         /// <summary>
-        /// Konstruktor paczki
-        /// </summary>
-        public Package()
-        {
-            ShippingAddress = new Address();
-        }
-        /// <summary>
         /// Adres dostawy paczki
         /// </summary>
-        public Address ShippingAddress { get; set; }
+        public Address ShippingAddress { get; set; } = new Address();
         /// <summary>
         /// Waga paczki
         /// </summary>
@@ -54,19 +47,5 @@ namespace InstantDelivery.Domain.Entities
         /// Status paczki
         /// </summary>
         public PackageStatus Status { get; set; }
-    }
-    /// <summary>
-    /// Definicja statusu paczki
-    /// </summary>
-    public enum PackageStatus
-    {
-        [Description("Nowa")]
-        New,
-
-        [Description("W dostawie")]
-        InDelivery,
-
-        [Description("Dostarczona")]
-        Delivered
     }
 }

@@ -1,9 +1,6 @@
-﻿using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Caliburn.Micro;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -12,20 +9,14 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public abstract class VehiclesViewModelBase : PagingViewModel
     {
-        private IVehiclesService service;
-        private IList<Vehicle> vehicles;
+        private readonly VehiclesServiceProxy service;
+        private BindableCollection<VehicleDto> vehicles;
 
         private string brandFilter = string.Empty;
         private string modelFilter = string.Empty;
         private string registrationNumberFilter = string.Empty;
 
-        private Expression<Func<Vehicle, bool>> filter =>
-            e => (string.IsNullOrEmpty(BrandFilter) || e.VehicleModel.Brand.StartsWith(BrandFilter)) &&
-                (string.IsNullOrEmpty(ModelFilter) || e.VehicleModel.Model.StartsWith(ModelFilter)) &&
-                (string.IsNullOrEmpty(RegistrationNumberFilter) || e.RegistrationNumber.StartsWith(RegistrationNumberFilter));
-
-
-        protected VehiclesViewModelBase(IVehiclesService service)
+        protected VehiclesViewModelBase(VehiclesServiceProxy service)
         {
             this.service = service;
         }
@@ -33,7 +24,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Kolekcja skojarzona z taelą danych.
         /// </summary>
-        public IList<Vehicle> Vehicles
+        public BindableCollection<VehicleDto> Vehicles
         {
             get { return vehicles; }
             set
@@ -85,19 +76,29 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Uaktualnia dane w tabeli
         /// </summary>
-        protected override void UpdateData()
+        protected override async void UpdateData()
         {
-            var query = new PageQuery<Vehicle>
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
-            query.Filters.Add(filter);
-            var pageDto = service.GetPage(query);
+            var query = GetPageQuery();
+            AddFilters(query);
+            var pageDto = await service.Page(query);
             PageCount = pageDto.PageCount;
-            Vehicles = pageDto.PageCollection;
+            Vehicles = new BindableCollection<VehicleDto>(pageDto.PageCollection);
+        }
+
+        protected void AddFilters(PageQuery query)
+        {
+            if (!string.IsNullOrEmpty(RegistrationNumberFilter))
+            {
+                query.Filters[nameof(VehicleDto.RegistrationNumber)] = RegistrationNumberFilter;
+            }
+            if (!string.IsNullOrEmpty(ModelFilter))
+            {
+                query.Filters[nameof(VehicleDto.Model)] = ModelFilter;
+            }
+            if (!string.IsNullOrEmpty(BrandFilter))
+            {
+                query.Filters[nameof(VehicleDto.Brand)] = BrandFilter;
+            }
         }
     }
 }

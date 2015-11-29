@@ -45,9 +45,22 @@
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -81,13 +94,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
+      <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
+      <Name>InstantDelivery.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
       <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
       <Name>InstantDelivery.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
-      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
-      <Name>InstantDelivery.Services</Name>
+    <ProjectReference Include="..\InstantDelivery.Model\InstantDelivery.Model.csproj">
+      <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>
+      <Name>InstantDelivery.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstantDelivery.Service\InstantDelivery.Service.csproj">
+      <Project>{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}</Project>
+      <Name>InstantDelivery.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
