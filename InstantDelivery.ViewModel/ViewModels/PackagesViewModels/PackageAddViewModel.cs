@@ -1,22 +1,22 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Services;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
+using PropertyChanged;
 using System;
-using System.Threading.Tasks;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.ViewModel
 {
     /// <summary>
     /// Model widoku dodawania paczki.
     /// </summary>
+    [ImplementPropertyChanged]
     public class PackageAddViewModel : Screen
     {
-        private readonly IPackageService service;
-        private Package newPackage;
+        private readonly PackagesServiceProxy service;
 
-        public PackageAddViewModel(IPackageService service)
+        public PackageAddViewModel(PackagesServiceProxy service)
         {
-            NewPackage = new Package();
+            NewPackage = new PackageDto();
             this.service = service;
             this.service = service;
         }
@@ -26,21 +26,15 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public async void RefreshCost()
         {
-            NewPackage.Cost = await Task.Run(() => service.CalculatePackageCost(NewPackage));
+            Cost = await service.CalculatePackageCost(NewPackage);
         }
+
+        public decimal Cost { get; set; }
 
         /// <summary>
         /// Aktualnie tworzona paczka.
         /// </summary>
-        public Package NewPackage
-        {
-            get { return newPackage; }
-            set
-            {
-                newPackage = value;
-                NotifyOfPropertyChange();
-            }
-        }
+        public PackageDto NewPackage { get; set; }
 
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
@@ -49,10 +43,7 @@ namespace InstantDelivery.ViewModel
         {
             var packageToSave = NewPackage;
             TryClose(true);
-            await Task.Run(() =>
-            {
-                service.RegisterPackage(packageToSave);
-            });
+            await service.RegisterPackage(packageToSave);
         }
 
         /// <summary>

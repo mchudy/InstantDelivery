@@ -14,6 +14,7 @@ namespace InstantDelivery.ViewModel
         private readonly EmployeesServiceProxy service;
 
         public EmployeesManagedPackagesViewModel(EmployeesServiceProxy service)
+            : base(service)
         {
             this.service = service;
         }

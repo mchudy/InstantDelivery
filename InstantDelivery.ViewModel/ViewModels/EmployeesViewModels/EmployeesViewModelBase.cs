@@ -11,9 +11,15 @@ namespace InstantDelivery.ViewModel
     {
         protected BindableCollection<EmployeeDto> employees;
 
+        private EmployeesServiceProxy service;
         private string emailFilter = string.Empty;
         private string firstNameFilter = string.Empty;
         private string lastNameFilter = string.Empty;
+
+        protected EmployeesViewModelBase(EmployeesServiceProxy service)
+        {
+            this.service = service;
+        }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
@@ -74,7 +80,7 @@ namespace InstantDelivery.ViewModel
         {
             var query = GetPageQuery();
             AddFilters(query);
-            var pageDto = await new EmployeesServiceProxy().Page(query);
+            var pageDto = await service.Page(query);
             PageCount = pageDto.PageCount;
             Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
         }

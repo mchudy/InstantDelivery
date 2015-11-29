@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Caliburn.Micro;
 using InstantDelivery.Domain;
-using InstantDelivery.Services;
 using InstantDelivery.Services.Pricing;
 using InstantDelivery.ViewModel;
 using System;
@@ -109,10 +108,6 @@ namespace InstantDelivery
                 .Where(type => type.Name.EndsWith("Proxy"))
                 .AsSelf()
                 .InstancePerLifetimeScope();
-
-            builder.RegisterAssemblyTypes(typeof(PackageService).Assembly)
-                .AsImplementedInterfaces()
-                .InstancePerDependency();
 
             container = builder.Build();
         }

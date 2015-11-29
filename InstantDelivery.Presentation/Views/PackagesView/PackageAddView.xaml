@@ -37,7 +37,7 @@
         <TextBox cal:Message.Attach="[Event TextChanged] = [Action RefreshCost()]" Grid.Column="1" Grid.Row="3" x:Name="NewPackage_Length" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Koszt:" Grid.Column="0" Grid.Row="5" Style="{StaticResource EditDialogLabel}"  />
-        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="NewPackage_Cost" Style="{StaticResource EditDialogTextBox}" />
+        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="5" x:Name="Cost" Style="{StaticResource EditDialogTextBox}" />
 
         <Label Content="Kraj:" Grid.Column="0" Grid.Row="6" Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="6" x:Name="NewPackage_ShippingAddress_Country" Style="{StaticResource EditDialogTextBox}" />

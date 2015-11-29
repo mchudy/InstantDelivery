@@ -110,8 +110,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="PackageStatusFilter.cs" />
     <Compile Include="Paging\PagingHelper.cs" />
+    <Compile Include="Pricing\IPricingStrategy.cs" />
+    <Compile Include="Pricing\RegularPricingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

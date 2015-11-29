@@ -11,16 +11,9 @@ namespace InstantDelivery.Domain.Entities
     public class Package : ValidationBase
     {
         /// <summary>
-        /// Konstruktor paczki
-        /// </summary>
-        public Package()
-        {
-            ShippingAddress = new Address();
-        }
-        /// <summary>
         /// Adres dostawy paczki
         /// </summary>
-        public Address ShippingAddress { get; set; }
+        public Address ShippingAddress { get; set; } = new Address();
         /// <summary>
         /// Waga paczki
         /// </summary>

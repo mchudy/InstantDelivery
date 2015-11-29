@@ -9,7 +9,7 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class EmployeesViewModel : EmployeesViewModelBase
     {
-        private EmployeesServiceProxy proxy;
+        private EmployeesServiceProxy service;
         private readonly IWindowManager windowManager;
         private EmployeeDto selectedEmployee;
         private EmployeeEditViewModel employeeEditViewModel;
@@ -23,12 +23,13 @@ namespace InstantDelivery.ViewModel
         /// <param name="employeeEditViewModel"></param>
         /// <param name="confirmDeleteViewModel"></param>
         public EmployeesViewModel(IWindowManager windowManager, EmployeeEditViewModel employeeEditViewModel,
-            ConfirmDeleteViewModel confirmDeleteViewModel, EmployeesServiceProxy proxy)
+            ConfirmDeleteViewModel confirmDeleteViewModel, EmployeesServiceProxy service)
+            : base(service)
         {
             this.windowManager = windowManager;
             this.employeeEditViewModel = employeeEditViewModel;
             this.confirmDeleteViewModel = confirmDeleteViewModel;
-            this.proxy = proxy;
+            this.service = service;
         }
 
         /// <summary>
@@ -63,12 +64,12 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(employeeEditViewModel);
             if (result != true)
             {
-                var oldEmployee = await proxy.GetById(selectedEmployee.Id);
+                var oldEmployee = await service.GetById(selectedEmployee.Id);
                 ResetRow(oldEmployee);
             }
             else
             {
-                await proxy.UpdateEmployee(SelectedEmployee);
+                await service.UpdateEmployee(SelectedEmployee);
             }
         }
 
@@ -92,7 +93,7 @@ namespace InstantDelivery.ViewModel
             var result = windowManager.ShowDialog(confirmDeleteViewModel);
             if (result == true)
             {
-                await proxy.DeleteEmployee(SelectedEmployee.Id);
+                await service.DeleteEmployee(SelectedEmployee.Id);
                 UpdateData();
             }
         }

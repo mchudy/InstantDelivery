@@ -23,7 +23,8 @@ namespace InstantDelivery.ViewModel
         /// <param name="vehiclesService"></param>
         /// <param name="selectVehicleViewModel"></param>
         public VehicleManageViewModel(EmployeesServiceProxy employeesService, IWindowManager windowManager,
-           SelectVehicleForEmployeeViewModel selectVehicleViewModel)
+            SelectVehicleForEmployeeViewModel selectVehicleViewModel)
+            : base(employeesService)
         {
             this.employeesService = employeesService;
             this.windowManager = windowManager;

@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using System.Threading.Tasks;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -10,25 +9,29 @@ namespace InstantDelivery.ViewModel
     /// </summary>
     public class GeneralPackagesViewModel : PackagesViewModelBase
     {
-        private readonly IPackageService service;
+        private readonly PackagesServiceProxy service;
         private readonly IWindowManager windowManager;
+        private readonly PackageEditViewModel packageEditViewModel;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
         /// <param name="windowManager"></param>
-        public GeneralPackagesViewModel(IPackageService service, IWindowManager windowManager)
+        /// <param name="packageEditViewModel"></param>
+        public GeneralPackagesViewModel(PackagesServiceProxy service, IWindowManager windowManager,
+            PackageEditViewModel packageEditViewModel)
             : base(service)
         {
             this.service = service;
             this.windowManager = windowManager;
+            this.packageEditViewModel = packageEditViewModel;
         }
 
         /// <summary>
         /// Aktualnie zaznaczony wiersz tabeli danych.
         /// </summary>
-        public Package SelectedPackage { get; set; }
+        public PackageDto SelectedPackage { get; set; }
 
         /// <summary>
         /// Flaga informująca o tym czy aktualnie zaznaczony jest jakiś wiersz.
@@ -44,23 +47,13 @@ namespace InstantDelivery.ViewModel
             {
                 return;
             }
-            var viewModel = new PackageEditViewModel(service)
+            packageEditViewModel.Package = SelectedPackage;
+            packageEditViewModel.SelectedEmployee = await service.GetAssignedEmployee(SelectedPackage.Id);
+            bool? result = windowManager.ShowDialog(packageEditViewModel);
+            if (result == true)
             {
-                Package = SelectedPackage,
-                SelectedEmployee = service.GetAssignedEmployee(SelectedPackage)
-            };
-            var result = windowManager.ShowDialog(viewModel);
-            await Task.Run(() =>
-            {
-                if (result != true)
-                {
-                    service.Reload(SelectedPackage);
-                }
-                else
-                {
-                    service.Save();
-                }
-            });
+                UpdateData();
+            }
         }
 
         /// <summary>
@@ -74,14 +67,11 @@ namespace InstantDelivery.ViewModel
             }
             var result = windowManager.ShowDialog(new ConfirmDeleteViewModel());
 
-            await Task.Run(() =>
+            if (result == true)
             {
-                if (result == true)
-                {
-                    service.RemovePackage(SelectedPackage);
-                    UpdateData();
-                }
-            });
+                await service.DeletePackage(SelectedPackage.Id);
+                UpdateData();
+            }
         }
     }
 }

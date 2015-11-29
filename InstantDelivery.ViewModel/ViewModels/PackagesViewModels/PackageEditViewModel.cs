@@ -1,10 +1,8 @@
 ﻿using InstantDelivery.Common.Enums;
-using InstantDelivery.Domain.Entities;
-using InstantDelivery.Services;
-using InstantDelivery.Services.Paging;
+using InstantDelivery.Model;
+using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
@@ -14,13 +12,13 @@ namespace InstantDelivery.ViewModel
     [ImplementPropertyChanged]
     public class PackageEditViewModel : PagingViewModel
     {
-        private readonly IPackageService packagesService;
+        private readonly PackagesServiceProxy packagesService;
 
         /// <summary>
         /// Tworzy nowy model widoku edycji paczki
         /// </summary>
         /// <param name="packagesService"></param>
-        public PackageEditViewModel(IPackageService packagesService)
+        public PackageEditViewModel(PackagesServiceProxy packagesService)
         {
             this.packagesService = packagesService;
         }
@@ -33,17 +31,17 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Aktualnie edytowana przesyłka
         /// </summary>
-        public Package Package { get; set; }
+        public PackageDto Package { get; set; }
 
         /// <summary>
         /// Zbiór pracowników, którym można przypisać aktualną przesyłkę
         /// </summary>
-        public IList<Employee> Employees { get; set; }
+        public IList<EmployeeDto> Employees { get; set; }
 
         /// <summary>
         /// Pracownik przypisany do przesyłki
         /// </summary>
-        public Employee SelectedEmployee { get; set; }
+        public EmployeeDto SelectedEmployee { get; set; }
 
         /// <summary>
         /// Zwraca wartość informującą, czy przesyłka jest dostarczone
@@ -53,17 +51,17 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Zapisuje zmiany dokonane w widoku.
         /// </summary>
-        public void Save()
+        public async void Save()
         {
-            TryClose(true);
             if (Package.Status == PackageStatus.New && SelectedEmployee != null)
             {
-                packagesService.AssignPackage(Package, SelectedEmployee);
+                await packagesService.AssignPackage(Package.Id, SelectedEmployee.Id);
             }
             else if (Package.Status == PackageStatus.InDelivery && IsDelivered)
             {
-                packagesService.MarkAsDelivered(Package);
+                await packagesService.MarkAsDelivered(Package.Id);
             }
+            TryClose(true);
         }
 
         /// <summary>
@@ -75,26 +73,17 @@ namespace InstantDelivery.ViewModel
         }
 
         /// <summary>
-        /// Wylicza na nowo koszt paczki na podstawie jej szczegółów.
+        /// Wylicza na nowo koszt paczki na podstawie jej danych
         /// </summary>
         public async void RefreshCost()
         {
-            await Task.Run(() =>
-            {
-                packagesService.CalculatePackageCost(Package);
-            });
+            await packagesService.CalculatePackageCost(Package);
         }
 
-        protected override void UpdateData()
+        protected override async void UpdateData()
         {
-            var query = new PageQuery<Employee>
-            {
-                PageSize = PageSize,
-                PageIndex = CurrentPage,
-                SortProperty = SortProperty,
-                SortDirection = SortDirection,
-            };
-            var pageDto = packagesService.GetAvailableEmployees(Package, query);
+            var query = GetPageQuery();
+            var pageDto = await packagesService.GetAvailableEmployeesPage(Package.Id, query);
             PageCount = pageDto.PageCount;
             Employees = pageDto.PageCollection;
         }

@@ -15,7 +15,21 @@ namespace InstantDelivery.Service
             Mapper.CreateMap<Employee, EmployeeAddDto>().ReverseMap();
             Mapper.CreateMap<Employee, EmployeeDto>().ReverseMap();
 
-            Mapper.CreateMap<Package, PackageDto>();
+            Mapper.CreateMap<AddressDto, Address>()
+                .ReverseMap()
+                // workaround for complex type
+                .ProjectUsing(s => new AddressDto
+                {
+                    City = s.City,
+                    Country = s.Country,
+                    Number = s.Number,
+                    PostalCode = s.PostalCode,
+                    State = s.State,
+                    Street = s.Street
+                });
+
+            Mapper.CreateMap<Package, PackageDto>()
+                .ReverseMap();
             Mapper.CreateMap<Employee, EmployeePackagesDto>()
                 .ForMember(s => s.Packages, c => c.MapFrom(m => m.Packages));
 
