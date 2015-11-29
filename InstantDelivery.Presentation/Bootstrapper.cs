@@ -67,17 +67,14 @@ namespace InstantDelivery
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            Application.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
-            if (ShowSplashScreen())
-            {
-                Application.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
-                DisplayRootViewFor<ShellViewModel>();
+            Application.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
 
-            }
-            else
-            {
-                Application.Shutdown();
-            }
+            // nie wiem jak to wyswietlic na poczatku samo i potem zeby byl ten shell :<
+            DisplayRootViewFor<LoginViewModel>();
+
+
+            //DisplayRootViewFor<ShellViewModel>();
+
         }
 
 
@@ -86,17 +83,6 @@ namespace InstantDelivery
             Thread.Sleep(1000);
         }
 
-        private bool ShowSplashScreen()
-        {
-            var splashScreenViewModel = container.Resolve<ShellViewModel>();
-            var windowManager = container.Resolve<IWindowManager>();
-            Task.Run(() => InitializeApplication())
-                .ContinueWith((r) =>
-                {
-                    //splashScreenViewModel.TryClose();
-                });
-            return windowManager.ShowDialog(splashScreenViewModel) == true;
-        }
 
         private static void ConfigureTypeMapping()
         {

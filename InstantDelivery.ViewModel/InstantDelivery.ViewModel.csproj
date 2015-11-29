@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesUsedVehiclesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\GeneralPackagesViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageAddViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageEditViewModel.cs" />
