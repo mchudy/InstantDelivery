@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using IContainer = Autofac.IContainer;
 
@@ -65,7 +67,35 @@ namespace InstantDelivery
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            Application.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
+            if (ShowSplashScreen())
+            {
+                Application.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
+                DisplayRootViewFor<ShellViewModel>();
+
+            }
+            else
+            {
+                Application.Shutdown();
+            }
+        }
+
+
+        private void InitializeApplication()
+        {
+            Thread.Sleep(1000);
+        }
+
+        private bool ShowSplashScreen()
+        {
+            var splashScreenViewModel = container.Resolve<ShellViewModel>();
+            var windowManager = container.Resolve<IWindowManager>();
+            Task.Run(() => InitializeApplication())
+                .ContinueWith((r) =>
+                {
+                    //splashScreenViewModel.TryClose();
+                });
+            return windowManager.ShowDialog(splashScreenViewModel) == true;
         }
 
         private static void ConfigureTypeMapping()
