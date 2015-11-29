@@ -1,23 +1,16 @@
 ﻿using InstantDelivery.Model;
 using InstantDelivery.Model.Vehicles;
 using InstantDelivery.ViewModel.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
-    public class VehiclesServiceProxy
+    public class VehiclesServiceProxy : ServiceProxyBase
     {
-        private HttpClient client = new HttpClient();
-
-        public VehiclesServiceProxy()
+        public VehiclesServiceProxy() : base("Vehicles")
         {
-            client.BaseAddress = new Uri("http://localhost:13600/api/Vehicles/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<PagedResult<VehicleDto>> Page(PageQuery query)

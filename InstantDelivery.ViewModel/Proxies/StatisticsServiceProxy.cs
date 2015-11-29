@@ -1,20 +1,13 @@
 ﻿using InstantDelivery.Model.Statistics;
-using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
-    public class StatisticsServiceProxy
+    public class StatisticsServiceProxy : ServiceProxyBase
     {
-        private HttpClient client = new HttpClient();
-
-        public StatisticsServiceProxy()
+        public StatisticsServiceProxy() : base("Statistics")
         {
-            client.BaseAddress = new Uri("http://localhost:13600/api/Statistics/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<GeneralStatisticsDto> GeneralStatistics()

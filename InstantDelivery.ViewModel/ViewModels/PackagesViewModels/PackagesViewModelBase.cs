@@ -84,7 +84,7 @@ namespace InstantDelivery.ViewModel
                 case PackageStatusFilter.Delivered:
                     query.Filters.Add(e => e.Status == PackageStatus.Delivered);
                     break;
-                case PackageStatusFilter.InProgress:
+                case PackageStatusFilter.InDelivery:
                     query.Filters.Add(e => e.Status == PackageStatus.InDelivery);
                     break;
                 case PackageStatusFilter.New:
@@ -101,7 +101,7 @@ namespace InstantDelivery.ViewModel
         [Description("Nowe")]
         New,
         [Description("W dostawie")]
-        InProgress,
+        InDelivery,
         [Description("Wszystkie")]
         All
     }

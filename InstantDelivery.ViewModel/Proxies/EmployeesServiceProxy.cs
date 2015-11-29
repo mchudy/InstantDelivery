@@ -1,24 +1,14 @@
 ﻿using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Extensions;
-using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
-
-    //TODO: proper error handling
-    public class EmployeesServiceProxy
+    public class EmployeesServiceProxy : ServiceProxyBase
     {
-        private HttpClient client = new HttpClient();
-
-        public EmployeesServiceProxy()
-        {
-            client.BaseAddress = new Uri("http://localhost:13600/api/Employees/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        public EmployeesServiceProxy() : base("Employees")
+        { }
 
         public async Task<PagedResult<EmployeeDto>> Page(PageQuery query)
         {
