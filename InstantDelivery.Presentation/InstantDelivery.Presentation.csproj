@@ -204,10 +204,6 @@
       <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
       <Name>InstantDelivery.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
-      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
-      <Name>InstantDelivery.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.ViewModel\InstantDelivery.ViewModel.csproj">
       <Project>{03199773-6AE0-4DDC-985F-BF4BC69111FD}</Project>
       <Name>InstantDelivery.ViewModel</Name>

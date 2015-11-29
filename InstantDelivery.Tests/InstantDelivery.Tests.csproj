@@ -106,10 +106,6 @@
       <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>
       <Name>InstantDelivery.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Services\InstantDelivery.Services.csproj">
-      <Project>{676E3204-0671-4AAB-ADF5-C413FB1BFE75}</Project>
-      <Name>InstantDelivery.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.Service\InstantDelivery.Service.csproj">
       <Project>{834DB8D4-4A7A-49EB-B90A-57591CFDDD00}</Project>
       <Name>InstantDelivery.Service</Name>
