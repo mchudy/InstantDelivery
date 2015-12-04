@@ -1,11 +1,11 @@
 ﻿namespace InstantDelivery.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class LoginView
+    public partial class EmployeeShellView
     {
-        public LoginView()
+        public EmployeeShellView()
         {
             InitializeComponent();
         }

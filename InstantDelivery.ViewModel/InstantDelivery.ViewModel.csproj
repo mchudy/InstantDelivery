@@ -70,6 +70,7 @@
     <Compile Include="Proxies\ServiceProxyBase.cs" />
     <Compile Include="Proxies\StatisticsServiceProxy.cs" />
     <Compile Include="Proxies\VehiclesServiceProxy.cs" />
+    <Compile Include="ShowEmployeesShellEvent.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
@@ -84,10 +85,11 @@
     <Compile Include="ViewModels\PackagesViewModels\PackageEditViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackagesViewModelBase.cs" />
     <Compile Include="ViewModels\PagingViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StartViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\SelectVehicleForEmployeeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehicleManageViewModel.cs" />
-    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\StatisticsViewModels\StatisticsDeliveredPackagesViewModel.cs" />
     <Compile Include="ViewModels\StatisticsViewModels\StatisticsEmployeesVehiclesViewModel.cs" />

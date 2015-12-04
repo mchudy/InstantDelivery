@@ -34,7 +34,7 @@ namespace InstantDelivery
             return new[]
             {
                    GetType().Assembly,
-                   typeof(ShellViewModel).Assembly,
+                   typeof(EmployeeShellViewModel).Assembly,
             };
         }
 
@@ -80,7 +80,7 @@ namespace InstantDelivery
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterAssemblyTypes(typeof(ShellViewModel).Assembly)
+            builder.RegisterAssemblyTypes(typeof(EmployeeShellViewModel).Assembly)
                 .Where(type => type.Name.EndsWith("ViewModel"))
                 .Where(type => type.GetInterface(typeof(INotifyPropertyChanged).Name) != null)
                 .AsSelf()
@@ -94,9 +94,9 @@ namespace InstantDelivery
             builder.Register<IWindowManager>(c => new WindowManager())
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
-                .InstancePerLifetimeScope();
+                .SingleInstance();
 
-            builder.RegisterAssemblyTypes(typeof(ShellViewModel).Assembly)
+            builder.RegisterAssemblyTypes(typeof(EmployeeShellViewModel).Assembly)
                 .Where(type => type.Name.EndsWith("Proxy"))
                 .AsSelf()
                 .InstancePerLifetimeScope();
