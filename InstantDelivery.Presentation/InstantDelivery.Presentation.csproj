@@ -95,6 +95,15 @@
     <Compile Include="Converters\PackageStatusConverters.cs" />
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Views\AdministratorShellView.xaml.cs">
+      <DependentUpon>AdministratorShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdministratorView\ManageUsersGroupsView..xaml.cs">
+      <DependentUpon>ManageUsersGroupsView..xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdministratorView\ManageUsersView.xaml.cs">
+      <DependentUpon>ManageUsersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -215,6 +224,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VehiclesFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorView\ManageUsersGroupsView..xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorView\ManageUsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
