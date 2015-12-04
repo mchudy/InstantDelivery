@@ -71,6 +71,9 @@
     <Compile Include="Proxies\StatisticsServiceProxy.cs" />
     <Compile Include="Proxies\VehiclesServiceProxy.cs" />
     <Compile Include="ShowEmployeesShellEvent.cs" />
+    <Compile Include="ViewModels\AdministratorShellViewModel.cs" />
+    <Compile Include="ViewModels\AdministratorViewModels\ExploreUsersViewModel.cs" />
+    <Compile Include="ViewModels\AdministratorViewModels\ManageUsersViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
