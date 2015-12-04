@@ -95,6 +95,9 @@
     <Compile Include="Converters\PackageStatusConverters.cs" />
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Views\EmployeesViews\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VehiclesFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
