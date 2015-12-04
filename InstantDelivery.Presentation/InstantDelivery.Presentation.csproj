@@ -104,29 +104,41 @@
     <Compile Include="Views\AdministratorView\ManageUsersView.xaml.cs">
       <DependentUpon>ManageUsersView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CourierShellView.xaml.cs">
+      <DependentUpon>CourierShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourierView\DisplayMapOfCourierPackagesView.xaml.cs">
+      <DependentUpon>DisplayMapOfCourierPackagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourierView\ShowCourierPackagesView.xaml.cs">
+      <DependentUpon>ShowCourierPackagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourierView\ShowCourierProfileView.xaml.cs">
+      <DependentUpon>ShowCourierProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Views\EmployeesViews\EmployeeAddView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeeAddView.xaml.cs">
       <DependentUpon>EmployeeAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfirmDeleteView.xaml.cs">
       <DependentUpon>ConfirmDeleteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeeEditView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeeEditView.xaml.cs">
       <DependentUpon>EmployeeEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeeUsedVehiclesDetailsView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeeUsedVehiclesDetailsView.xaml.cs">
       <DependentUpon>EmployeeUsedVehiclesDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeesManagedPackagesView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeesManagedPackagesView.xaml.cs">
       <DependentUpon>EmployeesManagedPackagesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeesUsedVehiclesView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeesUsedVehiclesView.xaml.cs">
       <DependentUpon>EmployeesUsedVehiclesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeesViews\EmployeesView.xaml.cs">
+    <Compile Include="Views\EmployeesView\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PackagesView\GeneralPackagesView.xaml.cs">
@@ -239,6 +251,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CourierShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CourierView\DisplayMapOfCourierPackagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CourierView\ShowCourierPackagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CourierView\ShowCourierProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,7 +291,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeeAddView.xaml">
+    <Page Include="Views\EmployeesView\EmployeeAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,23 +299,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeeEditView.xaml">
+    <Page Include="Views\EmployeesView\EmployeeEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeeUsedVehiclesDetailsView.xaml">
+    <Page Include="Views\EmployeesView\EmployeeUsedVehiclesDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeesManagedPackagesView.xaml">
+    <Page Include="Views\EmployeesView\EmployeesManagedPackagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeesUsedVehiclesView.xaml">
+    <Page Include="Views\EmployeesView\EmployeesUsedVehiclesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeesViews\EmployeesView.xaml">
+    <Page Include="Views\EmployeesView\EmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
