@@ -1,10 +1,19 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using InstantDelivery.Domain;
+using InstantDelivery.Domain.Entities;
 using InstantDelivery.Service.Pricing;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
+using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Web;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(InstantDelivery.Service.Startup))]
@@ -14,20 +23,21 @@ namespace InstantDelivery.Service
     {
         public void Configuration(IAppBuilder app)
         {
-            AutoMapperConfig.RegisterMappings();
-
             var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.Register(c => new InstantDeliveryContext())
+            builder.RegisterType<InstantDeliveryContext>()
                 .AsSelf()
-                .InstancePerRequest();
+                .As<DbContext>() // for UserStore
+                .InstancePerLifetimeScope();
 
             builder.Register(c => new RegularPricingStrategy())
                 .AsImplementedInterfaces()
                 .SingleInstance();
+
+            RegisterIdentity(app, builder);
 
             builder.RegisterWebApiFilterProvider(config);
 
@@ -35,9 +45,39 @@ namespace InstantDelivery.Service
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
+        }
+
+        [SuppressMessage("ReSharper", "RedundantTypeArgumentsOfMethod")]
+        private static void RegisterIdentity(IAppBuilder app, ContainerBuilder builder)
+        {
+            builder.RegisterType<UserStore<User>>()
+                .As<IUserStore<User, string>>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserManager<User, string>>()
+                .AsSelf()
+                .InstancePerRequest();
+
+            builder.RegisterType<SignInManager<User, string>>()
+                .AsSelf()
+                .InstancePerRequest();
+
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication)
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.Register(c => app.GetDataProtectionProvider())
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication)
+                .InstancePerRequest();
+            builder.Register<IDataProtectionProvider>(c => app.GetDataProtectionProvider())
+                .InstancePerRequest();
         }
     }
 }
