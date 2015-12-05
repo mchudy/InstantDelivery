@@ -1,5 +1,7 @@
 ﻿using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -33,14 +35,14 @@ namespace InstantDelivery.Domain.Migrations
                 StringBuilder sb = new StringBuilder();
                 foreach (var failure in ex.EntityValidationErrors)
                 {
-                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    sb.AppendFormat("{0} failed validation\n", failure?.Entry.Entity.GetType());
                     foreach (var error in failure.ValidationErrors)
                     {
                         sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
                         sb.AppendLine();
                     }
                 }
-                throw new DbEntityValidationException("Entity Validation Failed - errors follow:\n" + sb, ex);
+                throw new DbEntityValidationException("Could not add entity to the database:\n" + sb, ex);
             }
         }
 
@@ -75,6 +77,7 @@ namespace InstantDelivery.Domain.Migrations
         private static void GenerateTestData(InstantDeliveryContext context)
         {
             GenerateTestEmployees(context);
+            GenerateUsers(context);
             GenerateTestVehicleModels(context);
             GenerateTestVehicles(context);
             GenerateTestPackages(context);
@@ -82,6 +85,31 @@ namespace InstantDelivery.Domain.Migrations
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
+        }
+
+        private static void GenerateUsers(InstantDeliveryContext context)
+        {
+            var userStore = new UserStore<User>(context);
+            var manager = new UserManager<User>(userStore);
+
+            if (!context.Users.Any(u => u.UserName == "Test"))
+            {
+                var user = new User
+                {
+                    UserName = "Test",
+                };
+
+                var result = manager.Create(user, "test123");
+                if (!result.Succeeded)
+                {
+                    var results =
+                        result.Errors.Select(
+                            e => new DbEntityValidationResult(context.Entry(user), new[] { new DbValidationError("", e) }));
+                    throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                }
+                userStore.Context.SaveChanges();
+                context.SaveChanges();
+            }
         }
 
         private static void GenerateEmployeeVehicleRelations(InstantDeliveryContext context)
@@ -249,4 +277,6 @@ namespace InstantDelivery.Domain.Migrations
             context.Employees.AddOrUpdate(testEmployees.ToArray());
         }
     }
+
+
 }
