@@ -19,8 +19,7 @@ namespace InstantDelivery.ViewModel
 
         public void ExploreUsers()
         {
-            ActivateItem(IoC.Get<ExploreUsersViewModel>()); 
-            
+            ActivateItem(IoC.Get<ExploreUsersViewModel>());
         }
 
     }
