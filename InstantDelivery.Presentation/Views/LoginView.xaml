@@ -48,7 +48,7 @@
                 <TextBlock Foreground="White" FontWeight="Light">Hasło</TextBlock>
                 <PasswordBox x:Name="Password"></PasswordBox>
             </StackPanel>
-            <Button x:Name="Login" Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" Width="100">Zaloguj</Button>
+            <Button x:Name="Login" Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" Width="100" IsDefault="True">Zaloguj</Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -16,6 +16,11 @@ namespace InstantDelivery.ViewModel
             ActivateItem(IoC.Get<EmployeeShellViewModel>());
         }
 
+        public void Logout()
+        {
+            ActivateItem(IoC.Get<LoginViewModel>());
+        }
+
         protected override void OnInitialize()
         {
             eventAggregator.Subscribe(this);

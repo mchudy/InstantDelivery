@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InstantDelivery.Views"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="ShellView" WindowState="Maximized" >
+        Title="ShellView" x:Name="Window">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button cal:Message.Attach="Logout()" cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="17" Height="17" 
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_power}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Wyloguj" />
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     <controls:MetroWindow.IconTemplate>
         <DataTemplate>
             <Grid Width="{TemplateBinding Width}"
@@ -27,7 +43,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
-                <ResourceDictionary Source="/Styles/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
