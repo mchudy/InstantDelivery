@@ -92,14 +92,14 @@ namespace InstantDelivery.Domain.Migrations
             var userStore = new UserStore<User>(context);
             var manager = new UserManager<User>(userStore);
 
-            if (!context.Users.Any(u => u.UserName == "Test"))
+            if (!context.Users.Any(u => u.UserName == "Test1"))
             {
                 var user = new User
                 {
-                    UserName = "Test",
+                    UserName = "Test1",
                 };
 
-                var result = manager.Create(user, "test123");
+                var result = manager.Create(user, "test1234");
                 if (!result.Succeeded)
                 {
                     var results =

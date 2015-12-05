@@ -19,7 +19,7 @@ using System.Web.Http;
 [assembly: OwinStartup(typeof(InstantDelivery.Service.Startup))]
 namespace InstantDelivery.Service
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
@@ -48,6 +48,10 @@ namespace InstantDelivery.Service
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
+
+            // call before UseWebApi
+            ConfigureOAuth(app);
+
             app.UseWebApi(config);
         }
 
@@ -62,6 +66,10 @@ namespace InstantDelivery.Service
                 .AsSelf()
                 .InstancePerRequest();
 
+            builder.RegisterType<UserManager<User>>()
+                .AsSelf()
+                .InstancePerRequest();
+
             builder.RegisterType<SignInManager<User, string>>()
                 .AsSelf()
                 .InstancePerRequest();
@@ -70,9 +78,14 @@ namespace InstantDelivery.Service
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            builder.Register(c => app.GetDataProtectionProvider())
-                .AsImplementedInterfaces()
-                .InstancePerRequest();
+            //builder.Register(c => new IdentityFactoryOptions<UserManager<User>>
+            //{
+            //    DataProtectionProvider = new DpapiDataProtectionProvider("Application​")
+            //});
+
+            //builder.RegisterType<ApplicationOAuthProvider>()
+            //    .As<IOAuthAuthorizationServerProvider>()
+            //    .InstancePerRequest();
 
             builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication)
                 .InstancePerRequest();

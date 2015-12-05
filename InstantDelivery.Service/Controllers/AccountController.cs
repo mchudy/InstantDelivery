@@ -21,7 +21,14 @@ namespace InstantDelivery.Service.Controllers
         {
             var result = await signInManager.PasswordSignInAsync(dto.Username, dto.Password,
                 isPersistent: false, shouldLockout: false);
-            return Ok();
+            if (result == SignInStatus.Success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
