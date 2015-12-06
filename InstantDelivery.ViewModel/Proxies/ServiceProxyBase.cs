@@ -83,7 +83,7 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public static void Logout()
         {
-            client.Dispose();
+            client?.Dispose();
             client = null;
         }
 

@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.Common.Enums;
 using InstantDelivery.ViewModel.Proxies;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 
@@ -9,26 +11,43 @@ namespace InstantDelivery.ViewModel
     public class LoginViewModel : Screen
     {
         private readonly IEventAggregator eventAggregator;
+        private readonly AccountServiceProxy accountService;
         private string message;
 
-        public LoginViewModel(IEventAggregator eventAggregator)
+        public LoginViewModel(IEventAggregator eventAggregator, AccountServiceProxy accountService)
         {
             this.eventAggregator = eventAggregator;
+            this.accountService = accountService;
         }
 
         public string UserName { get; set; }
         public SecureString Password { private get; set; }
 
-        public void Login()
+        public async void Login()
         {
-            if (string.IsNullOrEmpty(UserName) || Password == null)
+            string password = SecureStringToString(Password);
+            if (string.IsNullOrEmpty(UserName) || password == null)
             {
                 Message = "Podaj nazwę użytkownika i hasło";
             }
-            else if (ServiceProxyBase.Login(UserName, SecureStringToString(Password)))
+            else if (ServiceProxyBase.Login(UserName, password))
             {
                 Message = "";
-                eventAggregator.PublishOnUIThread(new ShowEmployeesShellEvent());
+                Role[] roles = await accountService.GetRoles();
+                switch (roles.FirstOrDefault())
+                {
+                    case Role.Admin:
+                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(AdministratorShellViewModel)));
+                        break;
+                    case Role.AdministrativeEmployee:
+                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(EmployeeShellViewModel)));
+                        break;
+                    case Role.Courier:
+                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(CourierShellViewModel)));
+                        break;
+                    default:
+                        return;
+                }
             }
             else
             {

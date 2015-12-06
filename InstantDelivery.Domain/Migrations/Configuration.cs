@@ -76,6 +76,7 @@ namespace InstantDelivery.Domain.Migrations
 
         private static void GenerateTestData(InstantDeliveryContext context)
         {
+            GenerateRoles(context);
             GenerateTestEmployees(context);
             GenerateUsers(context);
             GenerateTestVehicleModels(context);
@@ -87,28 +88,46 @@ namespace InstantDelivery.Domain.Migrations
             GenerateEmployeeVehicleRelations(context);
         }
 
+        private static void GenerateRoles(InstantDeliveryContext context)
+        {
+            var roleStore = new RoleStore<IdentityRole>(context);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            foreach (string roleName in typeof(Role).GetEnumNames())
+            {
+                if (!context.Roles.Any(r => r.Name == roleName))
+                {
+                    var role = new IdentityRole { Name = roleName };
+                    roleManager.Create(role);
+                }
+            }
+        }
+
         private static void GenerateUsers(InstantDeliveryContext context)
         {
-            var userStore = new UserStore<User>(context);
-            var manager = new UserManager<User>(userStore);
-
-            if (!context.Users.Any(u => u.UserName == "Test1"))
+            var users = new[]
             {
-                var user = new User
-                {
-                    UserName = "Test1",
-                };
+                new {User = new User {UserName = "admin"}, Password = "admin123", Role = Role.Admin},
+                new {User = new User {UserName = "employee"}, Password = "employee123", Role = Role.AdministrativeEmployee},
+                new {User = new User {UserName = "courier"}, Password = "courier123", Role = Role.Courier}
+            };
 
-                var result = manager.Create(user, "test1234");
-                if (!result.Succeeded)
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
+
+            foreach (var userData in users)
+            {
+                if (!context.Users.Any(u => userData.User.UserName == u.UserName))
                 {
-                    var results =
-                        result.Errors.Select(
-                            e => new DbEntityValidationResult(context.Entry(user), new[] { new DbValidationError("", e) }));
-                    throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                    var result = userManager.Create(userData.User, userData.Password);
+                    if (!result.Succeeded)
+                    {
+                        var results =
+                            result.Errors.Select(
+                                e => new DbEntityValidationResult(context.Entry(userData), new[] { new DbValidationError("", e) }));
+                        throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                    }
+                    userManager.AddToRole(userData.User.Id, userData.Role.ToString());
                 }
-                userStore.Context.SaveChanges();
-                context.SaveChanges();
             }
         }
 
