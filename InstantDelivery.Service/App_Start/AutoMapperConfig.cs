@@ -14,6 +14,8 @@ namespace InstantDelivery.Service
         {
             Mapper.CreateMap<Employee, EmployeeAddDto>().ReverseMap();
             Mapper.CreateMap<Employee, EmployeeDto>().ReverseMap();
+            Mapper.CreateMap<EmployeeDto, Employee>().ReverseMap();
+
 
             Mapper.CreateMap<AddressDto, Address>()
                 .ReverseMap()
