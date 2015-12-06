@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201512051357512_AddIdentity.Designer.cs">
       <DependentUpon>201512051357512_AddIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512061708017_AddEmployeeUserRelation.cs" />
+    <Compile Include="Migrations\201512061708017_AddEmployeeUserRelation.Designer.cs">
+      <DependentUpon>201512061708017_AddEmployeeUserRelation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ValidationBase.cs" />
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512051357512_AddIdentity.resx">
       <DependentUpon>201512051357512_AddIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512061708017_AddEmployeeUserRelation.resx">
+      <DependentUpon>201512061708017_AddEmployeeUserRelation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

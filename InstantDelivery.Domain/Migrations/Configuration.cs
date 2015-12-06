@@ -79,6 +79,7 @@ namespace InstantDelivery.Domain.Migrations
             GenerateRoles(context);
             GenerateTestEmployees(context);
             GenerateUsers(context);
+            GenerateEmployeesUsersRelations(context);
             GenerateTestVehicleModels(context);
             GenerateTestVehicles(context);
             GenerateTestPackages(context);
@@ -86,6 +87,22 @@ namespace InstantDelivery.Domain.Migrations
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
+        }
+
+        private static void GenerateEmployeesUsersRelations(InstantDeliveryContext context)
+        {
+            // to repair
+            var employee = context.Employees.Find(1);
+            if (employee != null)
+                employee.User = context.Users.Find("1");
+            var employee2 = context.Employees.Find(2);
+            if (employee2 != null)
+                employee2.User = context.Users.Find("2");
+            var employee3 = context.Employees.Find(3);
+            if (employee3 != null)
+                employee3.User = context.Users.Find("3");
+
+
         }
 
         private static void GenerateRoles(InstantDeliveryContext context)
@@ -106,9 +123,9 @@ namespace InstantDelivery.Domain.Migrations
         {
             var users = new[]
             {
-                new {User = new User {UserName = "admin"}, Password = "admin123", Role = Role.Admin},
-                new {User = new User {UserName = "employee"}, Password = "employee123", Role = Role.AdministrativeEmployee},
-                new {User = new User {UserName = "courier"}, Password = "courier123", Role = Role.Courier}
+                new {User = new User {UserName = "admin", Id="1"}, Password = "admin123", Role = Role.Admin},
+                new {User = new User {UserName = "employee", Id="2"}, Password = "employee123", Role = Role.AdministrativeEmployee},
+                new {User = new User {UserName = "courier", Id="3"}, Password = "courier123", Role = Role.Courier}
             };
 
             var userStore = new UserStore<User>(context);
