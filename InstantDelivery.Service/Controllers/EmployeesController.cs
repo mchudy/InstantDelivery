@@ -35,7 +35,7 @@ namespace InstantDelivery.Service.Controllers
                 return NotFound();
             }
             var result = new EmployeeDto();
-            Mapper.Map(employee, result, typeof (Employee), typeof (EmployeeDto));
+            Mapper.Map(employee, result, typeof(Employee), typeof(EmployeeDto));
             return Ok(result);
         }
 
@@ -78,12 +78,11 @@ namespace InstantDelivery.Service.Controllers
         /// <param name="newEmployee">Nowy pracownik</param>
         public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
-            Employee destination=new Employee();
-            Mapper.DynamicMap(newEmployee, destination, typeof (EmployeeAddDto), typeof (Employee));
-            context.Employees.Add(destination);
+            Employee employee = Mapper.Map<Employee>(newEmployee);
+            context.Employees.Add(employee);
             context.SaveChanges();
             //TODO: return 201
-            return Ok(destination.Id);
+            return Ok(employee.Id);
         }
 
         /// <summary>

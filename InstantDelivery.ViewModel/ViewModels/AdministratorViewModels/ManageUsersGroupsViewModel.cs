@@ -1,8 +1,10 @@
-﻿namespace InstantDelivery.ViewModel
+﻿using Caliburn.Micro;
+
+namespace InstantDelivery.ViewModel
 {
-    public class ManageUsersGroupsViewModel
+    public class ManageUsersGroupsViewModel : Screen
     {
-         //TODO
-         // database needed to do sth
+        //TODO
+        // database needed to do sth
     }
 }
