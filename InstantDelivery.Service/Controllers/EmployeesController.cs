@@ -8,6 +8,7 @@ using InstantDelivery.Service.Paging;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -20,6 +21,23 @@ namespace InstantDelivery.Service.Controllers
         public EmployeesController(InstantDeliveryContext context)
         {
             this.context = context;
+        }
+
+
+        /// <summary>
+        /// Zwraca dane zalogowanego kuriera
+        /// </summary>
+        /// <param name="id">Id kuriera</param>
+        /// <returns>Dane kuriera</returns>
+        [Authorize]
+        [Route("LoggedCourierData"), HttpGet]
+        public IHttpActionResult GetLoggedCourierData()
+        {
+            var id= User.Identity.GetUserId();
+            var employee = context.Employees.FirstOrDefault(e=>e.User.Id==id);
+            var result = new EmployeeDto();
+            Mapper.Map(employee, result, typeof(Employee), typeof(EmployeeDto));
+            return Ok(result);
         }
 
         /// <summary>

@@ -13,6 +13,12 @@ namespace InstantDelivery.ViewModel.Proxies
         {
             return await Get<EmployeeDto>(employeeId.ToString());
         }
+        
+        public async Task<EmployeeDto> GetLoggedData()
+        {
+            const string queryString = "LoggedCourierData";
+            return await Get<EmployeeDto>(queryString);
+        }
 
         public async Task<PagedResult<EmployeeDto>> Page(PageQuery query)
         {

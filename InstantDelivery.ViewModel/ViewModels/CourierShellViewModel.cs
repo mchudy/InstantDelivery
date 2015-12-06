@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.ViewModel.CourierViewModels;
+using InstantDelivery.ViewModel;
 
 namespace InstantDelivery.ViewModel
 {
