@@ -11,21 +11,25 @@ namespace InstantDelivery.ViewModel.Proxies
 {
     public class PackagesServiceProxy : ServiceProxyBase
     {
-        public PackagesServiceProxy() : base("Packages/")
+        public PackagesServiceProxy() : base("Packages")
         {
         }
 
-        public async Task<Model.PagedResult<PackageDto>> Page(PageQuery query)
+        public async Task<PagedResult<PackageDto>> Page(PageQuery query)
         {
-            HttpResponseMessage response = await client.GetAsync("Page?" + query.ToQueryString());
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<Model.PagedResult<PackageDto>>();
+            string queryString = "Page?" + query.ToQueryString();
+            return await Get<PagedResult<PackageDto>>(queryString);
         }
 
-        public async Task RegisterPackage(PackageDto newPackage)
+        public async Task<EmployeeDto> GetAssignedEmployee(int packageId)
         {
-            HttpResponseMessage response = await client.PostAsJsonAsync("Register", newPackage);
-            response.EnsureSuccessStatusCode();
+            return await Get<EmployeeDto>($"{packageId}/Employee");
+        }
+
+        public async Task<PagedResult<EmployeeDto>> GetAvailableEmployeesPage(int packageId, PageQuery query)
+        {
+            string queryString = $"AvailableEmployees/Page?packageId={packageId}&{query.ToQueryString()}";
+            return await Get<PagedResult<EmployeeDto>>(queryString);
         }
 
         public async Task<decimal> CalculatePackageCost(PackageDto package)
@@ -37,30 +41,17 @@ namespace InstantDelivery.ViewModel.Proxies
             queryString[nameof(PackageDto.Length)] = package.Length.ToString(CultureInfo.InvariantCulture);
             queryString[nameof(PackageDto.Weight)] = package.Weight.ToString(CultureInfo.InvariantCulture);
 
-            HttpResponseMessage response = await client.GetAsync("Cost?" + queryString);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<decimal>();
-        }
-
-        public async Task<EmployeeDto> GetAssignedEmployee(int packageId)
-        {
-            HttpResponseMessage response = await client.GetAsync($"{packageId}/Employee");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<EmployeeDto>();
+            return await Get<decimal>($"Cost?{queryString}");
         }
 
         public async Task DeletePackage(int id)
         {
-            HttpResponseMessage response = await client.DeleteAsync(id.ToString());
-            response.EnsureSuccessStatusCode();
+            await Delete(id);
         }
 
-        public async Task<PagedResult<EmployeeDto>> GetAvailableEmployeesPage(int packageId, PageQuery query)
+        public async Task RegisterPackage(PackageDto newPackage)
         {
-            HttpResponseMessage response = await client.GetAsync($"AvailableEmployees/Page?packageId={packageId}&" +
-                query.ToQueryString());
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<PagedResult<EmployeeDto>>();
+            await PostAsJson("Register", newPackage);
         }
 
         public async Task AssignPackage(int packageId, int employeeId)
@@ -70,8 +61,7 @@ namespace InstantDelivery.ViewModel.Proxies
                 {
                     new KeyValuePair<string, string>("", employeeId.ToString()),
                 });
-            HttpResponseMessage response = await client.PostAsync($"Assign/{packageId}", content);
-            response.EnsureSuccessStatusCode();
+            await Post($"Assign/{packageId}", content);
         }
 
         public async Task MarkAsDelivered(int packageId)
@@ -81,8 +71,7 @@ namespace InstantDelivery.ViewModel.Proxies
                 {
                     new KeyValuePair<string, string>("", packageId.ToString()),
                 });
-            HttpResponseMessage response = await client.PostAsync("MarkAsDelivered", content);
-            response.EnsureSuccessStatusCode();
+            await Post("MarkAsDelivered", content);
         }
     }
 }

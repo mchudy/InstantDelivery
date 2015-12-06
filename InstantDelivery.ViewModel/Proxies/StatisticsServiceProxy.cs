@@ -1,25 +1,22 @@
 ﻿using InstantDelivery.Model.Statistics;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
     public class StatisticsServiceProxy : ServiceProxyBase
     {
-        public StatisticsServiceProxy() : base("Statistics/")
+        public StatisticsServiceProxy() : base("Statistics")
         {
         }
 
         public async Task<GeneralStatisticsDto> GeneralStatistics()
         {
-            var response = await client.GetAsync("General");
-            return await response.Content.ReadAsAsync<GeneralStatisticsDto>();
+            return await Get<GeneralStatisticsDto>("General");
         }
 
         public async Task<FinancialStatisticsDto> FinancialStatistics()
         {
-            var response = await client.GetAsync("Finance");
-            return await response.Content.ReadAsAsync<FinancialStatisticsDto>();
+            return await Get<FinancialStatisticsDto>("Finance");
         }
     }
 }

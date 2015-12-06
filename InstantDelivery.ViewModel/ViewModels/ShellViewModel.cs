@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -18,6 +19,7 @@ namespace InstantDelivery.ViewModel
 
         public void Logout()
         {
+            ServiceProxyBase.Logout();
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 
