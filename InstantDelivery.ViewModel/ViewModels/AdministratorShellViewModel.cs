@@ -14,12 +14,7 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public void ManageUsersGroups()
         {
-            ActivateItem(IoC.Get<ManageUsersViewModel>());
-        }
-
-        public void ExploreUsers()
-        {
-            ActivateItem(IoC.Get<ExploreUsersViewModel>());
+            ActivateItem(IoC.Get<ManageUsersGroupsViewModel>());
         }
 
     }

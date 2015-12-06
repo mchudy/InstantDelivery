@@ -4,8 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
         xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
-        Height="500" Width="450"
-        Style="{StaticResource DialogWindow}">
+        Height="500" Width="450">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -45,10 +44,5 @@
 
         <Label Content="Komentarz:" Grid.Column="0" Grid.Row="6"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="1" Grid.Row="6" Height="100" x:Name="Employee_Comments" Style="{StaticResource EditDialogTextBox}" />
-
-        <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
-            <Button x:Name="Cancel" Style="{StaticResource EditDialogButton}" Content="Anuluj" />
-            <Button x:Name="Save" Style="{StaticResource EmployeeEditSaveButton}" Content="Zapisz" />
-        </StackPanel>
     </Grid>
 </UserControl>

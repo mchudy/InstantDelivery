@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.CourierViewModels;
 
 namespace InstantDelivery.ViewModel
 {
@@ -10,17 +11,17 @@ namespace InstantDelivery.ViewModel
         }
         public void ShowCourierProfile()
         {
-            //TODO
+            ActivateItem(IoC.Get<ShowCourierProfileViewModel>());
         }
 
         public void ShowCourierPackages()
         {
-            //TODO
+            ActivateItem(IoC.Get<ShowCourierPackagesView>());
         }
 
         public void DisplayMapOfCourierPackages()
         {
-            //TODO
+            ActivateItem(IoC.Get<DisplayMapOfCourierPackagesViewModel>());
         }
     }
 }
