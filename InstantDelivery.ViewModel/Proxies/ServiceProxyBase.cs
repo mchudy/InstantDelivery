@@ -12,7 +12,6 @@ namespace InstantDelivery.ViewModel.Proxies
     public abstract class ServiceProxyBase
     {
         private readonly string controllerName;
-        //TODO: move to configuration
         private static readonly Uri baseUri = new Uri("http://localhost:13600/api/");
 
         protected static HttpClient client;

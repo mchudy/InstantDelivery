@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using InstantDelivery.Service.Filters;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -31,6 +32,9 @@ namespace InstantDelivery.Service
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+#if !DEBUG
+            config.Filters.Add(new RequireHttpsAttribute());
+#endif
         }
     }
 }
