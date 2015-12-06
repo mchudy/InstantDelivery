@@ -129,7 +129,7 @@ namespace InstantDelivery.Tests
                 Status = PackageStatus.New
             };
             var packages = new List<Package>().AsQueryable();
-            var packagesMockSet = MockDbSetHelper.GetMockSet(packages);
+            var packagesMockSet = MockDbSetHelper.CreateMockSet(packages);
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);

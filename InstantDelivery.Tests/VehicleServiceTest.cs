@@ -47,7 +47,7 @@ namespace InstantDelivery.Tests
                 Id=1,
                 RegistrationNumber="1"
             } }.AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
+            var vehiclesMockSet = MockDbSetHelper.CreateMockSet(vehicles);
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
 
@@ -63,7 +63,7 @@ namespace InstantDelivery.Tests
         {
             var vehicleModel = new VehicleModel { Id = 1 };
             var vehicles = new List<Vehicle>().AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
+            var vehiclesMockSet = MockDbSetHelper.CreateMockSet(vehicles);
             var vehicleToAdd = new AddVehicleDto { Id = 1, VehicleModelId = 1, RegistrationNumber = "" };
 
             var mockContext = new Mock<InstantDeliveryContext>();
@@ -84,7 +84,7 @@ namespace InstantDelivery.Tests
             {
                 new Vehicle {Id=1, RegistrationNumber="1"},
             }.AsQueryable();
-            var vehiclesMockSet = MockDbSetHelper.GetMockSet(vehicles);
+            var vehiclesMockSet = MockDbSetHelper.CreateMockSet(vehicles);
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Vehicles).Returns(vehiclesMockSet.Object);
 
