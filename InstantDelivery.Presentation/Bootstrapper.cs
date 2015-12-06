@@ -94,7 +94,7 @@ namespace InstantDelivery
             builder.Register<IWindowManager>(c => new WindowManager())
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(EmployeeShellViewModel).Assembly)
                 .Where(type => type.Name.EndsWith("Proxy"))

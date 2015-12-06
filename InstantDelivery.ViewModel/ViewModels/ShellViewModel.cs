@@ -2,22 +2,30 @@
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShellViewModel : Conductor<object>.Collection.OneActive
+    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowEmployeesShellEvent>
     {
         private readonly IEventAggregator eventAggregator;
 
         public ShellViewModel(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            eventAggregator.Subscribe(this);
-            DisplayName = "Instant Delivery";
+        }
 
+        public void Handle(ShowEmployeesShellEvent @event)
+        {
+            ActivateItem(IoC.Get<EmployeeShellViewModel>());
+        }
+
+        public void Logout()
+        {
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 
-        public void Handle(object @event)
+        protected override void OnInitialize()
         {
-            ActivateItem(IoC.Get<EmployeeShellViewModel>());
+            eventAggregator.Subscribe(this);
+            DisplayName = "Instant Delivery";
+            ActivateItem(IoC.Get<LoginViewModel>());
         }
     }
 }
