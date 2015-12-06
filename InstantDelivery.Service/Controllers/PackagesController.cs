@@ -8,6 +8,7 @@ using InstantDelivery.Service.Paging;
 using InstantDelivery.Service.Pricing;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -38,13 +39,12 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
         {
+            var userId = User.Identity.GetUserId();
+            var empId = context.Employees.AsQueryable().FirstOrDefault(e => e.User.Id == userId);
             var packages = context.Set<Package>().AsQueryable();
-            if (!string.IsNullOrEmpty(employeeId))
-            {
-                var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id.ToString() == employeeId);
-                if (firstOrDefault != null)
-                    packages = firstOrDefault.Packages.AsQueryable();
-            }
+            var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id == empId.Id);
+            if (firstOrDefault != null)
+                packages = firstOrDefault.Packages.AsQueryable();
             packages = ApplyFilters(packages, id, status);
             var dtos = packages.ProjectTo<PackageDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));

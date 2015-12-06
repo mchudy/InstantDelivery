@@ -11,7 +11,6 @@ namespace InstantDelivery.ViewModel
         private IList<PackageDto> packages;
         private string idFilter = string.Empty;
         private PackageStatusFilter packageStatusFilter = PackageStatusFilter.All;
-        private string employeeId = string.Empty;
         private readonly PackagesServiceProxy service;
 
         protected CourierPackagesViewModelBase(PackagesServiceProxy service)
@@ -19,15 +18,6 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
-        public string EmployeeId
-        {
-            get { return employeeId; }
-            set
-            {
-                employeeId = value;
-                UpdateData();
-            }
-        }
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.
@@ -92,10 +82,7 @@ namespace InstantDelivery.ViewModel
                     query.Filters[nameof(PackageDto.Status)] = PackageStatus.New.ToString();
                     break;
             }
-            if (!string.IsNullOrEmpty(EmployeeId))
-            {
-                query.Filters[nameof(PackageDto.EmployeeId)] = EmployeeId;
-            }
+                query.Filters[nameof(PackageDto.EmployeeId)] = "User.Id";
         }
 
     }
