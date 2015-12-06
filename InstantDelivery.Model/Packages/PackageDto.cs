@@ -42,6 +42,10 @@ namespace InstantDelivery.Model
         [JsonConverter(typeof(StringEnumConverter))]
         public PackageStatus Status { get; set; }
 
+        /// <summary>
+        /// Identyfikator pracownika który agreguje paczki
+        /// </summary>
+        public string EmployeeId { get; set; }
 
         public AddressDto ShippingAddress { get; set; } = new AddressDto();
     }

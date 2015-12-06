@@ -13,6 +13,8 @@
         <Label Content="Status:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
         <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding PackageStatusFilter}" Style="{StaticResource EditComboBoxLabel}"
                   ItemsSource="{helpers:EnumSource {x:Type enums:PackageStatusFilter}}" Height="15" Margin="5 0 5 0" />
+        <Label Content="ID pracownika:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
+        <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding EmployeeId, UpdateSourceTrigger=PropertyChanged}"></TextBox>
     </StackPanel>
 </UserControl>
 

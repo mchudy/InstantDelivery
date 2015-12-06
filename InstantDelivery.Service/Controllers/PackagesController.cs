@@ -34,6 +34,22 @@ namespace InstantDelivery.Service.Controllers
             return Ok(Mapper.Map<PackageDto>(package));
         }
 
+        [Route("PageWithSpecifiedEmployee"), HttpGet]
+        public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
+            PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
+        {
+            var packages = context.Set<Package>().AsQueryable();
+            if (!string.IsNullOrEmpty(employeeId))
+            {
+                var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id.ToString() == employeeId);
+                if (firstOrDefault != null)
+                    packages = firstOrDefault.Packages.AsQueryable();
+            }
+            packages = ApplyFilters(packages, id, status);
+            var dtos = packages.ProjectTo<PackageDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
+        }
+
         [Route("Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All)

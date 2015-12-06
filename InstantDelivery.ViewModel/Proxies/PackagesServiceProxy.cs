@@ -21,6 +21,12 @@ namespace InstantDelivery.ViewModel.Proxies
             return await Get<PagedResult<PackageDto>>(queryString);
         }
 
+        public async Task<PagedResult<PackageDto>> PageWithSpecifiedEmployee(PageQuery query)
+        {
+            string queryString = "PageWithSpecifiedEmployee?" + query.ToQueryString();
+            return await Get<PagedResult<PackageDto>>(queryString);
+        }
+
         public async Task<EmployeeDto> GetAssignedEmployee(int packageId)
         {
             return await Get<EmployeeDto>($"{packageId}/Employee");

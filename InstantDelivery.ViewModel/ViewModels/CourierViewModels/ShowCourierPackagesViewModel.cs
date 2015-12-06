@@ -3,16 +3,15 @@ using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShowCourierPackagesView : PackagesViewModelBase
+    public class ShowCourierPackagesViewModel : CourierPackagesViewModelBase
     {
-        // somehow load current employee's packages
         private readonly PackagesServiceProxy service;
 
         /// <summary>
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
-        public ShowCourierPackagesView(PackagesServiceProxy service)
+        public ShowCourierPackagesViewModel(PackagesServiceProxy service)
             : base(service)
         {
             this.service = service;

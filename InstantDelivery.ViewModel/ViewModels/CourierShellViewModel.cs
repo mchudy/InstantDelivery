@@ -16,7 +16,7 @@ namespace InstantDelivery.ViewModel
 
         public void ShowCourierPackages()
         {
-            ActivateItem(IoC.Get<ShowCourierPackagesView>());
+            ActivateItem(IoC.Get<ShowCourierPackagesViewModel>());
         }
 
         public void DisplayMapOfCourierPackages()

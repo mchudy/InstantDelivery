@@ -83,8 +83,9 @@
     <Compile Include="ViewModels\AdministratorShellViewModel.cs" />
     <Compile Include="ViewModels\AdministratorViewModels\ManageUsersGroupsViewModel.cs" />
     <Compile Include="ViewModels\CourierShellViewModel.cs" />
+    <Compile Include="ViewModels\CourierViewModels\CourierPackagesViewModelBase.cs" />
     <Compile Include="ViewModels\CourierViewModels\DisplayMapOfCourierPackagesViewModel.cs" />
-    <Compile Include="ViewModels\CourierViewModels\ShowCourierPackagesView.cs" />
+    <Compile Include="ViewModels\CourierViewModels\ShowCourierPackagesViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\ShowCourierProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
