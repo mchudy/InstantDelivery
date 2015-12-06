@@ -49,7 +49,7 @@ namespace InstantDelivery.Service
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
 
-            // call before UseWebApi
+            // has to be called before UseWebApi
             ConfigureOAuth(app);
 
             app.UseWebApi(config);

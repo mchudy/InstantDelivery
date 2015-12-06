@@ -21,7 +21,11 @@ namespace InstantDelivery.ViewModel
 
         public void Login()
         {
-            if (ServiceProxyBase.Login(UserName, SecureStringToString(Password)))
+            if (string.IsNullOrEmpty(UserName) || Password == null)
+            {
+                Message = "Podaj nazwę użytkownika i hasło";
+            }
+            else if (ServiceProxyBase.Login(UserName, SecureStringToString(Password)))
             {
                 Message = "";
                 eventAggregator.PublishOnUIThread(new ShowEmployeesShellEvent());
@@ -44,12 +48,16 @@ namespace InstantDelivery.ViewModel
 
         protected override void OnDeactivate(bool close)
         {
-            Password.Dispose();
+            Password?.Dispose();
             base.OnDeactivate(close);
         }
 
         private static string SecureStringToString(SecureString value)
         {
+            if (value == null)
+            {
+                return null;
+            }
             IntPtr bstr = Marshal.SecureStringToBSTR(value);
             try
             {

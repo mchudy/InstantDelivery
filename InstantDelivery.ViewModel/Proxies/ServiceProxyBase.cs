@@ -50,7 +50,7 @@ namespace InstantDelivery.ViewModel.Proxies
             var content = new FormUrlEncodedContent(pairs);
             using (var client = new HttpClient())
             {
-                var response = client.PostAsync("http://localhost:13600/Token", content).Result;
+                var response = client.PostAsync("http://localhost:13600/api/Token", content).Result;
                 return response.Content.ReadAsStringAsync().Result;
             }
         }
