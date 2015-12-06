@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace InstantDelivery.ViewModel.Proxies
     public abstract class ServiceProxyBase
     {
         private readonly string controllerName;
-        private static readonly Uri baseUri = new Uri("http://localhost:13600/api/");
+        private static readonly Uri baseUri = new Uri(ConfigurationManager.AppSettings["ApiAddress"]);
 
         protected static HttpClient client;
 
