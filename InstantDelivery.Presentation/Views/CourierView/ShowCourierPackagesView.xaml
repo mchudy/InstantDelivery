@@ -2,10 +2,37 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls1="clr-namespace:InstantDelivery.Controls"
+             xmlns:converters="clr-namespace:InstantDelivery.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ContentControl x:Name="PackagesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:PackagesFilterPanel>
+        <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, IsAsync=True}" Grid.Row="1"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="False"
+                  EnableRowVirtualization="True" SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditPackage()]">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Numer" Binding="{Binding Id}"  Width="150" />
+                <DataGridTextColumn Header="Waga [kg]" Binding="{Binding Weight}" Width="200"/>
+                <DataGridTextColumn Header="Wysokość [mm]" Binding="{Binding Height}" Width="200"/>
+                <DataGridTextColumn Header="Długość [mm]" Binding="{Binding Length}" Width="150" />
+                <DataGridTextColumn Header="Koszt [$]" Binding="{Binding Cost}" Width="200" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status, Converter={StaticResource EnumToDescription}}"  Width="150" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <controls1:DataPager Grid.Row="2" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
+                             PageSize="{Binding PageSize, Mode=TwoWay}"  />
     </Grid>
 </UserControl>
+

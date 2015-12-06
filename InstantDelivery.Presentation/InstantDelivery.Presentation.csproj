@@ -98,11 +98,8 @@
     <Compile Include="Views\AdministratorShellView.xaml.cs">
       <DependentUpon>AdministratorShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AdministratorView\ManageUsersGroupsView..xaml.cs">
-      <DependentUpon>ManageUsersGroupsView..xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AdministratorView\ManageUsersView.xaml.cs">
-      <DependentUpon>ManageUsersView.xaml</DependentUpon>
+    <Compile Include="Views\AdministratorView\ManageUsersGroupsView.xaml.cs">
+      <DependentUpon>ManageUsersGroupsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CourierShellView.xaml.cs">
       <DependentUpon>CourierShellView.xaml</DependentUpon>
@@ -243,11 +240,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AdministratorView\ManageUsersGroupsView..xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AdministratorView\ManageUsersView.xaml">
+    <Page Include="Views\AdministratorView\ManageUsersGroupsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

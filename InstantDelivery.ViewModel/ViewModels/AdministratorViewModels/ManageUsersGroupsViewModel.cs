@@ -1,6 +1,6 @@
 ﻿namespace InstantDelivery.ViewModel
 {
-    public class ManageUsersViewModel
+    public class ManageUsersGroupsViewModel
     {
          //TODO
          // database needed to do sth
