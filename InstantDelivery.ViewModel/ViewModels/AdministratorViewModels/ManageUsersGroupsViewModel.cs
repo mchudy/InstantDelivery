@@ -1,8 +1,16 @@
-﻿namespace InstantDelivery.ViewModel
+﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.Proxies;
+
+namespace InstantDelivery.ViewModel
 {
-    public class ManageUsersGroupsViewModel
+    public class ManageUsersGroupsViewModel : Screen
     {
-         //TODO
-         // database needed to do sth
+        private EmployeesServiceProxy service;
+
+        public ManageUsersGroupsViewModel(EmployeesServiceProxy service)
+        {
+            this.service = service;
+        }
+
     }
 }

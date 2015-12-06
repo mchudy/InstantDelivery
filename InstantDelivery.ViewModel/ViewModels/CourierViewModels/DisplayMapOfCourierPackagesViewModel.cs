@@ -1,6 +1,8 @@
-﻿namespace InstantDelivery.ViewModel
+﻿using Caliburn.Micro;
+
+namespace InstantDelivery.ViewModel
 {
-    public class DisplayMapOfCourierPackagesViewModel
+    public class DisplayMapOfCourierPackagesViewModel : Screen
     {
       // TODO   
     }
