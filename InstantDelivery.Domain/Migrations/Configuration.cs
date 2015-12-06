@@ -1,5 +1,7 @@
 ﻿using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -33,14 +35,14 @@ namespace InstantDelivery.Domain.Migrations
                 StringBuilder sb = new StringBuilder();
                 foreach (var failure in ex.EntityValidationErrors)
                 {
-                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    sb.AppendFormat("{0} failed validation\n", failure?.Entry.Entity.GetType());
                     foreach (var error in failure.ValidationErrors)
                     {
                         sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
                         sb.AppendLine();
                     }
                 }
-                throw new DbEntityValidationException("Entity Validation Failed - errors follow:\n" + sb, ex);
+                throw new DbEntityValidationException("Could not add entity to the database:\n" + sb, ex);
             }
         }
 
@@ -74,7 +76,9 @@ namespace InstantDelivery.Domain.Migrations
 
         private static void GenerateTestData(InstantDeliveryContext context)
         {
+            GenerateRoles(context);
             GenerateTestEmployees(context);
+            GenerateUsers(context);
             GenerateTestVehicleModels(context);
             GenerateTestVehicles(context);
             GenerateTestPackages(context);
@@ -82,6 +86,49 @@ namespace InstantDelivery.Domain.Migrations
             GeneratePackageEmployeeRelations(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
+        }
+
+        private static void GenerateRoles(InstantDeliveryContext context)
+        {
+            var roleStore = new RoleStore<IdentityRole>(context);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            foreach (string roleName in typeof(Role).GetEnumNames())
+            {
+                if (!context.Roles.Any(r => r.Name == roleName))
+                {
+                    var role = new IdentityRole { Name = roleName };
+                    roleManager.Create(role);
+                }
+            }
+        }
+
+        private static void GenerateUsers(InstantDeliveryContext context)
+        {
+            var users = new[]
+            {
+                new {User = new User {UserName = "admin"}, Password = "admin123", Role = Role.Admin},
+                new {User = new User {UserName = "employee"}, Password = "employee123", Role = Role.AdministrativeEmployee},
+                new {User = new User {UserName = "courier"}, Password = "courier123", Role = Role.Courier}
+            };
+
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
+
+            foreach (var userData in users)
+            {
+                if (!context.Users.Any(u => userData.User.UserName == u.UserName))
+                {
+                    var result = userManager.Create(userData.User, userData.Password);
+                    if (!result.Succeeded)
+                    {
+                        var results =
+                            result.Errors.Select(
+                                e => new DbEntityValidationResult(context.Entry(userData), new[] { new DbValidationError("", e) }));
+                        throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                    }
+                    userManager.AddToRole(userData.User.Id, userData.Role.ToString());
+                }
+            }
         }
 
         private static void GenerateEmployeeVehicleRelations(InstantDeliveryContext context)
@@ -249,4 +296,6 @@ namespace InstantDelivery.Domain.Migrations
             context.Employees.AddOrUpdate(testEmployees.ToArray());
         }
     }
+
+
 }

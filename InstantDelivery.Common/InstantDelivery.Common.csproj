@@ -41,6 +41,7 @@
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\PackageStatus.cs" />
     <Compile Include="Enums\PackageStatusFilter.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

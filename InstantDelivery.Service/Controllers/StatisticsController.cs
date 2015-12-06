@@ -5,6 +5,7 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/Statistics")]
     public class StatisticsController : ApiController
     {

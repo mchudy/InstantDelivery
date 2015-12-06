@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/Packages")]
     public class PackagesController : ApiController
     {

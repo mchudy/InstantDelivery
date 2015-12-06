@@ -31,7 +31,9 @@
         <Grid Grid.Row="2" Margin="10 20 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
+                <RowDefinition Height="5" />
                 <RowDefinition Height="40" />
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -44,11 +46,12 @@
                 <TextBlock Foreground="White" FontWeight="Light">Nazwa użytkownika</TextBlock>
                 <TextBox x:Name="UserName"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2">
                 <TextBlock Foreground="White" FontWeight="Light">Hasło</TextBlock>
-                <PasswordBox x:Name="Password"></PasswordBox>
+                <PasswordBox PasswordChanged="Password_OnPasswordChanged"></PasswordBox>
             </StackPanel>
-            <Button x:Name="Login" Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" Width="100" IsDefault="True">Zaloguj</Button>
+            <Button x:Name="Login" Grid.Row="3" Grid.Column="1" Margin="0 15 0 5" Width="100" IsDefault="True">Zaloguj</Button>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="3" x:Name="Message" Foreground="Red" FontWeight="Light"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

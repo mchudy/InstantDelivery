@@ -1,8 +1,10 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.Proxies;
+using System;
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowEmployeesShellEvent>
+    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShell>
     {
         private readonly IEventAggregator eventAggregator;
 
@@ -11,13 +13,15 @@ namespace InstantDelivery.ViewModel
             this.eventAggregator = eventAggregator;
         }
 
-        public void Handle(ShowEmployeesShellEvent @event)
+        public void Handle(ShowShell @event)
         {
-            ActivateItem(IoC.Get<EmployeeShellViewModel>());
+            Type viewModel = @event.ViewModel;
+            ActivateItem(IoC.GetInstance(viewModel, ""));
         }
 
         public void Logout()
         {
+            ServiceProxyBase.Logout();
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 
