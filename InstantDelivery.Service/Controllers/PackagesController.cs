@@ -71,7 +71,11 @@ namespace InstantDelivery.Service.Controllers
             }
             package.Status = PackageStatus.Delivered;
             var owner = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
-            owner?.Packages.Remove(package);
+            if(owner == null)
+            {
+                return BadRequest();
+            }
+            owner.Packages.Remove(package);
             context.SaveChanges();
             return Ok();
         }

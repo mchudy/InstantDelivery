@@ -18,12 +18,6 @@ namespace InstantDelivery.Tests
 
     public class PackageServiceTests
     {
-        private Employee employee = new Employee
-        {
-            Id = 1,
-            FirstName = "A",
-            LastName = "B"
-        };
 
         public PackageServiceTests()
         {
@@ -193,7 +187,6 @@ namespace InstantDelivery.Tests
                 Length = 10,
                 Weight = 10
             };
-
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
 
@@ -204,6 +197,55 @@ namespace InstantDelivery.Tests
 
             var result = controller.GetPackageCost(Mapper.Map<PackageDto>(package)) as OkNegotiatedContentResult<decimal>;
             Assert.Equal(result?.Content, 0.750M);
+        }
+
+        [Fact]
+        public void MarkAsDelivered_ShouldSetPackageStatusToDelivered()
+        {
+            var package = new Package { Id = 1, Status = PackageStatus.InDelivery };
+            var employee = new Employee { Id = 1};
+            employee.Packages.Add(package);
+            var mockContext = GetEmptyMockContext();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+
+            var controller = new PackagesController(mockContext.Object, null);
+            controller.MarkAsDelivered(package.Id);
+
+            Assert.Equal(PackageStatus.Delivered, package.Status);
+        }
+
+        [Fact]
+        public void MarkAsDelivered_ShouldRemovePackageFromEmployeeCollection()
+        {
+            var package = new Package { Id = 1, Status = PackageStatus.InDelivery };
+            var employee = new Employee { Id = 1 };
+            employee.Packages.Add(package);
+            var mockContext = GetEmptyMockContext();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+
+            var controller = new PackagesController(mockContext.Object, null);
+            controller.MarkAsDelivered(package.Id);
+
+            Assert.Equal(employee.Packages.Count, 0);
+        }
+
+        [Fact]
+        public void GetAssignedEmployee_ShouldReturnAssignedEmployee()
+        {
+            var package = new Package { Id = 1, Status = PackageStatus.InDelivery };
+            var employee = new Employee { Id = 1 };
+            employee.Packages.Add(package);
+            var mockContext = GetEmptyMockContext();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+
+            var controller = new PackagesController(mockContext.Object, null);
+            var response = controller.GetAssignedEmployee(package.Id) as OkNegotiatedContentResult<EmployeeDto>;
+
+            Assert.NotNull(response);
+            Assert.Equal(response.Content.Id, employee.Id);
         }
 
         private static Mock<InstantDeliveryContext> GetEmptyMockContext()
