@@ -6,7 +6,7 @@ namespace InstantDelivery.ViewModel
     /// <summary>
     ///  Model widoku statystyk budżetowych.
     /// </summary>
-    public class StatisticsDeliveredPackagesViewModel : Screen
+    public class FinancialStatisticsViewModel : Screen
     {
         private readonly StatisticsServiceProxy service;
 
@@ -14,7 +14,7 @@ namespace InstantDelivery.ViewModel
         /// Konstruktor modelu widoku.
         /// </summary>
         /// <param name="service"></param>
-        public StatisticsDeliveredPackagesViewModel(StatisticsServiceProxy service)
+        public FinancialStatisticsViewModel(StatisticsServiceProxy service)
         {
             this.service = service;
             GenerateChart();

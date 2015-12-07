@@ -1,26 +1,24 @@
-﻿using System.Threading.Tasks;
-using Caliburn.Micro;
-using InstantDelivery.Model;
+﻿using Caliburn.Micro;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShowCourierProfileViewModel : Screen
+    public class CourierProfileViewModel : Screen
     {
         // the logged Employee
         public EmployeeDto Employee { get; set; }
 
         public async void GetLoggedEmployeeData()
         {
-            Employee=await service.GetLoggedData();
+            Employee = await service.GetLoggedData();
 
         }
 
         private EmployeesServiceProxy service { get; set; }
 
         // somehow load the employee
-        public ShowCourierProfileViewModel(EmployeesServiceProxy service)
+        public CourierProfileViewModel(EmployeesServiceProxy service)
         {
             this.service = service;
             GetLoggedEmployeeData();

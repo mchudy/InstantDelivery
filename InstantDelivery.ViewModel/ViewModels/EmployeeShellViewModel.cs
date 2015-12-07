@@ -62,7 +62,7 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public void StatisticsDeliveredPackages()
         {
-            ActivateItem(IoC.Get<StatisticsDeliveredPackagesViewModel>());
+            ActivateItem(IoC.Get<FinancialStatisticsViewModel>());
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public void StatisticsEmployeesVehicles()
         {
-            ActivateItem(IoC.Get<StatisticsEmployeesVehiclesViewModel>());
+            ActivateItem(IoC.Get<GeneralStatisticsViewModel>());
         }
 
         /// <summary>

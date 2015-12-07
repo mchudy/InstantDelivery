@@ -6,7 +6,7 @@ namespace InstantDelivery.ViewModel
     /// <summary>
     ///  Model widoku statystyk ogólnych.
     /// </summary>
-    public class StatisticsEmployeesVehiclesViewModel : Screen
+    public class GeneralStatisticsViewModel : Screen
     {
         private StatisticsServiceProxy service;
 
@@ -14,7 +14,7 @@ namespace InstantDelivery.ViewModel
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
-        public StatisticsEmployeesVehiclesViewModel(StatisticsServiceProxy service)
+        public GeneralStatisticsViewModel(StatisticsServiceProxy service)
         {
             this.service = service;
             GenerateChart();

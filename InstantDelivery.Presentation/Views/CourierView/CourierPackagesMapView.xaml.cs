@@ -5,9 +5,9 @@ namespace InstantDelivery.Views
     /// <summary>
     /// Interaction logic for DisplayMapOfCourierPackagesView.xaml
     /// </summary>
-    public partial class DisplayMapOfCourierPackagesView : UserControl
+    public partial class CourierPackagesMapView : UserControl
     {
-        public DisplayMapOfCourierPackagesView()
+        public CourierPackagesMapView()
         {
             InitializeComponent();
         }

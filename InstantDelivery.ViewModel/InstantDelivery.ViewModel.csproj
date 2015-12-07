@@ -84,8 +84,8 @@
     <Compile Include="ViewModels\AdministratorViewModels\ManageUsersGroupsViewModel.cs" />
     <Compile Include="ViewModels\CourierShellViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\CourierPackagesViewModelBase.cs" />
-    <Compile Include="ViewModels\CourierViewModels\DisplayMapOfCourierPackagesViewModel.cs" />
-    <Compile Include="ViewModels\CourierViewModels\ShowCourierPackagesViewModel.cs" />
+    <Compile Include="ViewModels\CourierViewModels\CourierPackagesMapViewModel.cs" />
+    <Compile Include="ViewModels\CourierViewModels\CourierPackagesViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\ShowCourierProfileViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
@@ -107,8 +107,8 @@
     <Compile Include="ViewModels\VehicleViewModels\VehicleManageViewModel.cs" />
     <Compile Include="ViewModels\EmployeeShellViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\StatisticsViewModels\StatisticsDeliveredPackagesViewModel.cs" />
-    <Compile Include="ViewModels\StatisticsViewModels\StatisticsEmployeesVehiclesViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsViewModels\FinancialStatisticsViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsViewModels\GeneralStatisticsViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehicleEditViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesAddViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModels\VehiclesGeneralViewModel.cs" />

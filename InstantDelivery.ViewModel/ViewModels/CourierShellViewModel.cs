@@ -11,17 +11,17 @@ namespace InstantDelivery.ViewModel
         }
         public void ShowCourierProfile()
         {
-            ActivateItem(IoC.Get<ShowCourierProfileViewModel>());
+            ActivateItem(IoC.Get<CourierProfileViewModel>());
         }
 
         public void ShowCourierPackages()
         {
-            ActivateItem(IoC.Get<ShowCourierPackagesViewModel>());
+            ActivateItem(IoC.Get<CourierPackagesViewModel>());
         }
 
         public void DisplayMapOfCourierPackages()
         {
-            ActivateItem(IoC.Get<DisplayMapOfCourierPackagesViewModel>());
+            ActivateItem(IoC.Get<CourierPackagesMapViewModel>());
         }
     }
 }

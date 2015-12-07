@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using Caliburn.Micro;
-using InstantDelivery.Common.Enums;
-using InstantDelivery.Model;
+﻿using InstantDelivery.Common.Enums;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
 using InstantDelivery.ViewModel.Proxies;
+using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
@@ -84,7 +82,7 @@ namespace InstantDelivery.ViewModel
                     query.Filters[nameof(PackageDto.Status)] = PackageStatus.New.ToString();
                     break;
             }
-                query.Filters[nameof(PackageDto.EmployeeId)] = "User.Id";
+            query.Filters[nameof(PackageDto.EmployeeId)] = "User.Id";
         }
 
     }

@@ -105,8 +105,8 @@
     <Compile Include="Views\CourierShellView.xaml.cs">
       <DependentUpon>CourierShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CourierView\DisplayMapOfCourierPackagesView.xaml.cs">
-      <DependentUpon>DisplayMapOfCourierPackagesView.xaml</DependentUpon>
+    <Compile Include="Views\CourierView\CourierPackagesMapView.xaml.cs">
+      <DependentUpon>CourierPackagesMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CourierView\ShowCourierPackagesView.xaml.cs">
       <DependentUpon>ShowCourierPackagesView.xaml</DependentUpon>
@@ -157,11 +157,11 @@
     <Compile Include="Views\StartView.xaml.cs">
       <DependentUpon>StartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StatisticsView\StatisticsDeliveredPackagesView.xaml.cs">
-      <DependentUpon>StatisticsDeliveredPackagesView.xaml</DependentUpon>
+    <Compile Include="Views\StatisticsView\FinancialStatisticsView.xaml.cs">
+      <DependentUpon>FinancialStatisticsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StatisticsView\StatisticsEmployeesVehiclesView.xaml.cs">
-      <DependentUpon>StatisticsEmployeesVehiclesView.xaml</DependentUpon>
+    <Compile Include="Views\StatisticsView\GeneralStatisticsView.xaml.cs">
+      <DependentUpon>GeneralStatisticsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehiclesViews\SelectVehicleForEmployeeView.xaml.cs">
       <DependentUpon>SelectVehicleForEmployeeView.xaml</DependentUpon>
@@ -249,7 +249,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CourierView\DisplayMapOfCourierPackagesView.xaml">
+    <Page Include="Views\CourierView\CourierPackagesMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,11 +337,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StatisticsView\StatisticsDeliveredPackagesView.xaml">
+    <Page Include="Views\StatisticsView\FinancialStatisticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StatisticsView\StatisticsEmployeesVehiclesView.xaml">
+    <Page Include="Views\StatisticsView\GeneralStatisticsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

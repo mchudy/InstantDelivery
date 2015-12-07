@@ -2,7 +2,7 @@
 
 namespace InstantDelivery.ViewModel
 {
-    public class DisplayMapOfCourierPackagesViewModel : Screen
+    public class CourierPackagesMapViewModel : Screen
     {
       // TODO   
     }

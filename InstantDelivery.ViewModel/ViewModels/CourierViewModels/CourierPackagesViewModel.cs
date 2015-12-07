@@ -1,9 +1,8 @@
-﻿using Caliburn.Micro;
-using InstantDelivery.ViewModel.Proxies;
+﻿using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShowCourierPackagesViewModel : CourierPackagesViewModelBase
+    public class CourierPackagesViewModel : CourierPackagesViewModelBase
     {
         private readonly PackagesServiceProxy service;
 
@@ -11,7 +10,7 @@ namespace InstantDelivery.ViewModel
         /// Konstruktor modelu widoku
         /// </summary>
         /// <param name="service"></param>
-        public ShowCourierPackagesViewModel(PackagesServiceProxy service)
+        public CourierPackagesViewModel(PackagesServiceProxy service)
             : base(service)
         {
             this.service = service;

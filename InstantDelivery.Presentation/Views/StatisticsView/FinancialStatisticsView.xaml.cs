@@ -18,9 +18,9 @@ namespace InstantDelivery.Views
     /// <summary>
     /// Interaction logic for StatisticsDeliveredPackagesView.xaml
     /// </summary>
-    public partial class StatisticsDeliveredPackagesView : UserControl
+    public partial class FinancialStatisticsView : UserControl
     {
-        public StatisticsDeliveredPackagesView()
+        public FinancialStatisticsView()
         {
             InitializeComponent();
         }
