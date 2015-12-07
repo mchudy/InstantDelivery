@@ -11,6 +11,5 @@ namespace InstantDelivery.ViewModel
         {
             this.service = service;
         }
-
     }
 }
