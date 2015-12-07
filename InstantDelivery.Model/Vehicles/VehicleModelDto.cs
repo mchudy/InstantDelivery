@@ -1,14 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Domain.Entities;
-
-namespace InstantDelivery.Model
+﻿namespace InstantDelivery.Model
 {
-    public class VehicleModelDto : ValidationBase
+    public class VehicleModelDto
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "To pole jest wymagane")]
         public string Brand { get; set; }
-        [Required(ErrorMessage = "To pole jest wymagane")]
         public string Model { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
 using System.ComponentModel;
+using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.ViewModel
 {

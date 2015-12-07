@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.ViewModel
 {

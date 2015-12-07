@@ -1,5 +1,6 @@
 ﻿using InstantDelivery.Model;
 using System;
+using InstantDelivery.Model.Packages;
 
 namespace InstantDelivery.Service.Pricing
 {

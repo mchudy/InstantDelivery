@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace InstantDelivery.Model
+namespace InstantDelivery.Model.Paging
 {
     /// <summary>
     /// Obiekt reprezentuj¹cy zapytanie o stronê danych

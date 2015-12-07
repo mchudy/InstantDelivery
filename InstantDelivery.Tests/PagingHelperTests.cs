@@ -2,6 +2,8 @@
 using InstantDelivery.Service.Paging;
 using System.Collections.Generic;
 using System.Linq;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
 using Xunit;
 
 namespace InstantDelivery.Tests

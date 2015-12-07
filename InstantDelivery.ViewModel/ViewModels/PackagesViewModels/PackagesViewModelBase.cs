@@ -2,6 +2,8 @@
 using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
 using System.Collections.Generic;
+using InstantDelivery.Model.Packages;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel
 {

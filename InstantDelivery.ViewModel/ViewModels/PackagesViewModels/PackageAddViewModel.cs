@@ -3,6 +3,7 @@ using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System;
+using InstantDelivery.Model.Packages;
 
 namespace InstantDelivery.ViewModel
 {

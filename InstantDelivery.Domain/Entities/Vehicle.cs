@@ -5,13 +5,14 @@ namespace InstantDelivery.Domain.Entities
     /// <summary>
     /// Klasa reprezentująca pojazd
     /// </summary>
-    public class Vehicle : ValidationBase
+    public class Vehicle : Entity
     {
         /// <summary>
         /// Numer rejestracyjny pojazdu
         /// </summary>
-        [Required(ErrorMessage = "To pole jest wymagane")]
+        [Required]
         public string RegistrationNumber { get; set; }
+
         /// <summary>
         /// Model pojazdu
         /// </summary>

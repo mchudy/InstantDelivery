@@ -2,6 +2,7 @@
 using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
+using InstantDelivery.Model.Employees;
 
 namespace InstantDelivery.ViewModel
 {

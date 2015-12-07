@@ -8,6 +8,8 @@ using InstantDelivery.Service.Paging;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
 using Microsoft.AspNet.Identity;
 
 namespace InstantDelivery.Service.Controllers

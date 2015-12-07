@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Domain.Entities;
+using InstantDelivery.Model.Packages;
 
-namespace InstantDelivery.Model
+namespace InstantDelivery.Model.Employees
 {
     public class EmployeePackagesDto : ValidationBase
     {

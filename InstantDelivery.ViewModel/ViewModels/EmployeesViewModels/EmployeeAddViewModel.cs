@@ -2,6 +2,7 @@
 using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Proxies;
 using System;
+using InstantDelivery.Model.Employees;
 
 namespace InstantDelivery.ViewModel
 {

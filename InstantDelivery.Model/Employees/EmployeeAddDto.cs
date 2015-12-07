@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Domain.Entities;
 
-namespace InstantDelivery.Model
+namespace InstantDelivery.Model.Employees
 {
     public class EmployeeAddDto : EmployeeDto
     {

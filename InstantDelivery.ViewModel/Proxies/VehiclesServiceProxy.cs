@@ -3,6 +3,7 @@ using InstantDelivery.Model.Vehicles;
 using InstantDelivery.ViewModel.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {

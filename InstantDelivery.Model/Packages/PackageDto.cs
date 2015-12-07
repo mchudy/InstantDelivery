@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using InstantDelivery.Common.Enums;
-using InstantDelivery.Domain.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace InstantDelivery.Model
+namespace InstantDelivery.Model.Packages
 {
     public class PackageDto : ValidationBase
     {

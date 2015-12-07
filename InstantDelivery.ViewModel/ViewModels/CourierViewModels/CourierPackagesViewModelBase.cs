@@ -2,6 +2,8 @@
 using Caliburn.Micro;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Packages;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel

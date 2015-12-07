@@ -2,6 +2,8 @@
 using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.ViewModel
 {

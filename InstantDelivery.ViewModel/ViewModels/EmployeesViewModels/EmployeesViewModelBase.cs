@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel

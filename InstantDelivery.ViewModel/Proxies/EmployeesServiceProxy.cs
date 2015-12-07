@@ -1,6 +1,8 @@
 ﻿using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Extensions;
 using System.Threading.Tasks;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {

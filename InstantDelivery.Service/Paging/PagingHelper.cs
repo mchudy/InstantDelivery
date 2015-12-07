@@ -3,6 +3,7 @@ using InstantDelivery.Model;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.Service.Paging
 {

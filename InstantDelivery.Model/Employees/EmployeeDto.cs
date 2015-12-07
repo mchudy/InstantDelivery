@@ -1,10 +1,10 @@
-﻿using InstantDelivery.Common.Enums;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using InstantDelivery.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Domain.Entities;
-namespace InstantDelivery.Model
+
+namespace InstantDelivery.Model.Employees
 {
     /// <summary>
     /// Obiekt DTO zawierający dane osobowe pracownika

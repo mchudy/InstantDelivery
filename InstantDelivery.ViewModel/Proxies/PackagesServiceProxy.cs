@@ -6,6 +6,9 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Packages;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {

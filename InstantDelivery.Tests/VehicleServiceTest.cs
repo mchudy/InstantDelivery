@@ -9,6 +9,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Results;
+using InstantDelivery.Model.Paging;
 using Xunit;
 
 namespace InstantDelivery.Tests

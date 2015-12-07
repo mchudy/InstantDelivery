@@ -2,6 +2,7 @@
 using InstantDelivery.Model;
 using System.ComponentModel;
 using System.Windows.Controls;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel
 {

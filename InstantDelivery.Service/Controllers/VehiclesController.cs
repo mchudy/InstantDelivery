@@ -8,6 +8,7 @@ using InstantDelivery.Service.Paging;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.Service.Controllers
 {

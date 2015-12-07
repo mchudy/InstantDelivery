@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http.Results;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Packages;
 using Xunit;
 
 namespace InstantDelivery.Tests

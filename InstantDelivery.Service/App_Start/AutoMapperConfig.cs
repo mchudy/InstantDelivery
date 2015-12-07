@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.Service

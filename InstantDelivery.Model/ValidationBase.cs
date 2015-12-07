@@ -4,12 +4,12 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace InstantDelivery.Domain.Entities
+namespace InstantDelivery.Model
 {
     /// <summary>
     /// Pomocnicza klasa do walidacji danych.
     /// </summary>
-    public abstract class ValidationBase : Entity, IDataErrorInfo
+    public abstract class ValidationBase : IDataErrorInfo
     {
 
         public string Error => null;
