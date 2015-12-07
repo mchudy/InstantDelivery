@@ -19,17 +19,35 @@
         <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5" IsEnabledFitlerEmployeeId="False"></controls1:PackagesFilterPanel>
         <ListView Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, IsAsync=True}" Grid.Row="1"
                    SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="140" Header="Numer" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Width="200" Header="Waga [kg]" DisplayMemberBinding="{Binding Weight}" />
-                    <GridViewColumn Width="200" Header="Wysokość [mm]" DisplayMemberBinding="{Binding Height}" />
-                    <GridViewColumn Width="150" Header="Długość [mm]" DisplayMemberBinding="{Binding Length}" />
-                    <GridViewColumn Width="200" Header="Koszt [$]" DisplayMemberBinding="{Binding Cost}" />
-                    <GridViewColumn Width="150" Header="Status" DisplayMemberBinding="{Binding Status, Converter={StaticResource EnumToDescription}}" />
-                </GridView>
-            </ListView.View>
-
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Numer:"></Label>
+                        <TextBlock VerticalAlignment="Center"  Grid.Row="0" Grid.Column="1" Text="{Binding Id}"></TextBlock>
+                        <Label Grid.Row="0" Grid.Column="2" Content="Waga [kg]:"></Label>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Text="{Binding Weight}"></TextBlock>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Wysokość [mm]:"></Label>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding Height}"></TextBlock>
+                        <Label Grid.Row="1" Grid.Column="2" Content="Długość [mm]:"></Label>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding Length}"></TextBlock>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Koszt [$]:"></Label>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Cost}"></TextBlock>
+                        <Label Grid.Row="2" Grid.Column="2" Content="Status:"></Label>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding Status, Converter={StaticResource EnumToDescription}}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <controls1:DataPager Grid.Row="2" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"
                              PageSize="{Binding PageSize, Mode=TwoWay}"  />
