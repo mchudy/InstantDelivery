@@ -36,6 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
       <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
       <Name>InstantDelivery.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
+      <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
+      <Name>InstantDelivery.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,13 +2,14 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-
+using System.ComponentModel.DataAnnotations;
+using InstantDelivery.Domain.Entities;
 namespace InstantDelivery.Model
 {
     /// <summary>
     /// Obiekt DTO zawierający dane osobowe pracownika
-    /// </summary>
-    public class EmployeeDto
+    /// </summary
+    public class EmployeeDto : ValidationBase
     {
         /// <summary>
         /// Id pracownika
@@ -18,17 +19,22 @@ namespace InstantDelivery.Model
         /// <summary>
         /// Imię
         /// </summary>
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne imię")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Płeć
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public Gender Gender { get; set; }
 
         /// <summary>
         /// Nazwisko
         /// </summary>
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
 
         /// <summary>
@@ -39,11 +45,13 @@ namespace InstantDelivery.Model
         /// <summary>
         /// Numer telefonu
         /// </summary>
+        [Phone(ErrorMessage = "Proszę podać poprawny numer telefonu")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Adres email
         /// </summary>
+        [EmailAddress(ErrorMessage = "Proszę podać poprawny email")]
         public string Email { get; set; }
 
         /// <summary>

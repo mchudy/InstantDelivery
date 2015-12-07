@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Model
 {
-    public class EmployeePackagesDto
+    public class EmployeePackagesDto : ValidationBase
     {
         /// <summary>
         /// Id pracownika
@@ -12,11 +14,15 @@ namespace InstantDelivery.Model
         /// <summary>
         /// Imię
         /// </summary>
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne imię")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Nazwisko
         /// </summary>
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
 
         public List<PackageDto> Packages { get; set; }
