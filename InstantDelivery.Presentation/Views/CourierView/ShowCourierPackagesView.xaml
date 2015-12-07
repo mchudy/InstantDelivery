@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="PackagesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
-        <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:PackagesFilterPanel>
+        <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5" IsEnabledFitlerEmployeeId="False"></controls1:PackagesFilterPanel>
         <ListView Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, IsAsync=True}" Grid.Row="1"
                    SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>

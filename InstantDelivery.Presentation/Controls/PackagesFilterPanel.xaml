@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:helpers="clr-namespace:InstantDelivery.Helpers"
              xmlns:enums="clr-namespace:InstantDelivery.Common.Enums;assembly=InstantDelivery.Common"
+             xmlns:local="clr-namespace:InstantDelivery.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="600">
+             d:DesignHeight="100" d:DesignWidth="600" Name="PackagesFilterPanelName">
     <StackPanel Margin="0 5 0 5" Orientation="Horizontal" Height="30" FlowDirection="LeftToRight">
         <Label Content="Numer paczki:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
         <TextBox Width="150" Height="15" Margin="5 0 5 0" Text="{Binding IdFilter, UpdateSourceTrigger=PropertyChanged}"></TextBox>
@@ -14,7 +15,7 @@
         <ComboBox Width="150"  DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding PackageStatusFilter}" Style="{StaticResource EditComboBoxLabel}"
                   ItemsSource="{helpers:EnumSource {x:Type enums:PackageStatusFilter}}" Height="15" Margin="5 0 5 0" />
         <Label Content="ID pracownika:" Margin="5 0 5 0" VerticalAlignment="Center"  FontSize="15"/>
-        <TextBox Width="150" Height="15" Margin="5 0 5 0" IsEnabled="False" Text="{Binding EmployeeId, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:PackagesFilterPanel}}, Path=IsEnabledFitlerEmployeeId}" Name="EmployeeIdFilter" Width="150" Height="15" Margin="5 0 5 0" Text="{Binding EmployeeId, UpdateSourceTrigger=PropertyChanged}"></TextBox>
     </StackPanel>
 </UserControl>
 

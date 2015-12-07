@@ -17,13 +17,19 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public async Task<PagedResult<PackageDto>> Page(PageQuery query)
         {
-            string queryString = "Page?" + query.ToQueryString();
+            string queryString = "PageWithSpecifiedEmployee?" + query.ToQueryString();
             return await Get<PagedResult<PackageDto>>(queryString);
         }
 
         public async Task<PagedResult<PackageDto>> PageWithSpecifiedEmployee(PageQuery query)
         {
             string queryString = "PageWithSpecifiedEmployee?" + query.ToQueryString();
+            return await Get<PagedResult<PackageDto>>(queryString);
+        }
+
+        public async Task<PagedResult<PackageDto>> PageForLoggedEmployee(PageQuery query)
+        {
+            string queryString = "PageForLoggedEmployee?" + query.ToQueryString();
             return await Get<PagedResult<PackageDto>>(queryString);
         }
 

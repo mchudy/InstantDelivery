@@ -39,12 +39,32 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
         {
+            var packages = context.Set<Package>().AsQueryable();
+
+            if (!string.IsNullOrEmpty(employeeId))
+            {
+                var empId = employeeId;
+                var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id.ToString() == empId);
+                if (firstOrDefault != null)
+                    packages = firstOrDefault.Packages.AsQueryable();
+            }
+            packages = ApplyFilters(packages, id, status);
+            var dtos = packages.ProjectTo<PackageDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
+        }
+
+        [Route("PageForLoggedEmployee"), HttpGet]
+        public IHttpActionResult GetPageForLoggedEmployee([FromUri] PageQuery query, string id = "",
+            PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
+        {
+            var packages = context.Set<Package>().AsQueryable();
+
             var userId = User.Identity.GetUserId();
             var empId = context.Employees.AsQueryable().FirstOrDefault(e => e.User.Id == userId);
-            var packages = context.Set<Package>().AsQueryable();
             var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id == empId.Id);
             if (firstOrDefault != null)
                 packages = firstOrDefault.Packages.AsQueryable();
+
             packages = ApplyFilters(packages, id, status);
             var dtos = packages.ProjectTo<PackageDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
