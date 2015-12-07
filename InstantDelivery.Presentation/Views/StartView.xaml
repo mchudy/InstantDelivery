@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InstantDelivery.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel Background="{DynamicResource AccentColorBrush2}" Orientation="Horizontal" Height="100" VerticalAlignment="Top">
+    <StackPanel Orientation="Horizontal" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">
         <StackPanel.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
