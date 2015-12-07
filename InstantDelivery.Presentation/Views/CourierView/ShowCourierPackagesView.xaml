@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ContentControl x:Name="PackagesFilterPanel" cal:View.Model="{Binding ActiveItem}" cal:View.Context="Toolbar"/>
+        <ContentControl x:Name="PackagesFilterPanel" />
         <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5" IsEnabledFitlerEmployeeId="False"></controls1:PackagesFilterPanel>
         <ListView Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, IsAsync=True}" Grid.Row="1"
                    SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -27,6 +27,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -45,6 +46,18 @@
                         <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Text="{Binding Cost}"></TextBlock>
                         <Label Grid.Row="2" Grid.Column="2" Content="Status:"></Label>
                         <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Text="{Binding Status, Converter={StaticResource EnumToDescription}}"></TextBlock>
+                        <TextBlock Grid.Column="4" Grid.Row="0" Grid.RowSpan="3" LineStackingStrategy="BlockLineHeight" LineHeight="20">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1} &#x0a;{2} {3}&#x0a;{4}, {5} ">
+                                    <Binding Path="ShippingAddress.Street" />
+                                    <Binding Path="ShippingAddress.Number" />
+                                    <Binding Path="ShippingAddress.PostalCode" />
+                                    <Binding Path="ShippingAddress.City" />
+                                    <Binding Path="ShippingAddress.State" />
+                                    <Binding Path="ShippingAddress.Country" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
