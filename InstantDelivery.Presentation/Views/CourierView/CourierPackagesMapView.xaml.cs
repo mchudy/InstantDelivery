@@ -10,6 +10,7 @@ namespace InstantDelivery.Views
         public CourierPackagesMapView()
         {
             InitializeComponent();
+            Browser.Navigate("pack://siteoforigin:,,,/Maps/map.html");
         }
     }
 }
