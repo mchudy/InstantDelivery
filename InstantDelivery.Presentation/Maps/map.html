@@ -3,7 +3,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Packages Map</title>
     <style>
         html, body {
@@ -21,9 +22,9 @@
     <div id="map"></div>
     <script>
         // suppresses script errors on the page; WPF control shows an annoying popup otherwise
-        window.onerror = function() { return true; }
+        window.onerror = function () { return true; }
     </script>
     <script src="map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initMap" async defer></script>
 </body>
 </html>

@@ -60,6 +60,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -214,6 +218,10 @@
     <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
       <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
       <Name>InstantDelivery.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstantDelivery.Model\InstantDelivery.Model.csproj">
+      <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>
+      <Name>InstantDelivery.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.ViewModel\InstantDelivery.ViewModel.csproj">
       <Project>{03199773-6AE0-4DDC-985F-BF4BC69111FD}</Project>
