@@ -18,5 +18,6 @@ namespace InstantDelivery.Domain
         public virtual IDbSet<Vehicle> Vehicles { get; set; }
         public virtual IDbSet<Package> Packages { get; set; }
         public virtual IDbSet<VehicleModel> VehicleModels { get; set; }
+        public virtual IDbSet<PackageEvent> PackageEvents { get; set; }
     }
 }
