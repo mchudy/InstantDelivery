@@ -2,7 +2,8 @@
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Model;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Packages;
 using InstantDelivery.Service;
 using InstantDelivery.Service.Controllers;
 using InstantDelivery.Service.Pricing;
@@ -11,8 +12,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http.Results;
-using InstantDelivery.Model.Employees;
-using InstantDelivery.Model.Packages;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -85,6 +84,24 @@ namespace InstantDelivery.Tests
         }
 
         [Fact]
+        public void RegisterPackage_ShouldAddEventToPackageHistory()
+        {
+            var mockSet = new Mock<IDbSet<PackageEvent>>();
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(new List<Package>());
+            mockContext.Setup(c => c.PackageEvents).Returns(mockSet.Object);
+            var packageDto = new PackageDto { Id = 1 };
+
+            var mockPricingStrategy = new Mock<IPricingStrategy>();
+            var controller = new PackagesController(mockContext.Object, mockPricingStrategy.Object);
+
+            controller.RegisterPackage(packageDto);
+
+            mockSet.Verify(m => m.Add(It.Is((PackageEvent p) => p.Package.Id == 1 &&
+                                                                p.EventType == PackageEventType.Registered)), Times.Once());
+        }
+
+        [Fact]
         public void AssignPackage_AssignsPackageToEmployee()
         {
             var package = new Package
@@ -110,6 +127,30 @@ namespace InstantDelivery.Tests
             Assert.Equal(1, employee.Packages.Count);
             Assert.Equal(package, employee.Packages.First());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+
+        [Fact]
+        public void AssignPackage_ShouldAddEventToPackageHistory()
+        {
+            var package = new Package
+            {
+                Id = 1,
+            };
+            var employee = new Employee { Id = 1, FirstName = "A", LastName = "B" };
+
+            var mockSet = new Mock<IDbSet<PackageEvent>>();
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(c => c.PackageEvents).Returns(mockSet.Object);
+            var controller = new PackagesController(mockContext.Object, null);
+
+            controller.AssignPackage(package.Id, employee.Id);
+
+            mockSet.Verify(m => m.Add(It.Is((PackageEvent pe) => pe.Package.Id == package.Id &&
+                                                                 pe.Employee.Id == employee.Id &&
+                                                                 pe.EventType == PackageEventType.HandedToCourier)));
         }
 
         [Fact]
@@ -205,7 +246,7 @@ namespace InstantDelivery.Tests
         public void MarkAsDelivered_ShouldSetPackageStatusToDelivered()
         {
             var package = new Package { Id = 1, Status = PackageStatus.InDelivery };
-            var employee = new Employee { Id = 1};
+            var employee = new Employee { Id = 1 };
             employee.Packages.Add(package);
             var mockContext = GetEmptyMockContext();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
@@ -215,6 +256,27 @@ namespace InstantDelivery.Tests
             controller.MarkAsDelivered(package.Id);
 
             Assert.Equal(PackageStatus.Delivered, package.Status);
+        }
+
+        [Fact]
+        public void MarkAsDelivered_ShouldAddEventToPackageHistory()
+        {
+            var package = new Package { Id = 1, Status = PackageStatus.InDelivery };
+            var employee = new Employee { Id = 1 };
+            employee.Packages.Add(package);
+
+            var mockSet = new Mock<IDbSet<PackageEvent>>();
+            var mockContext = GetEmptyMockContext();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(c => c.PackageEvents).Returns(mockSet.Object);
+
+            var controller = new PackagesController(mockContext.Object, null);
+            controller.MarkAsDelivered(package.Id);
+
+            mockSet.Verify(m => m.Add(It.Is((PackageEvent pe) => pe.Package.Id == package.Id &&
+                                                                 pe.Employee.Id == employee.Id &&
+                                                                 pe.EventType == PackageEventType.Delivered)));
         }
 
         [Fact]
