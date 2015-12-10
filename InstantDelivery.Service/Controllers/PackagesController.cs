@@ -3,15 +3,14 @@ using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Model;
-using InstantDelivery.Service.Paging;
-using InstantDelivery.Service.Pricing;
-using System.Linq;
-using System.Web.Http;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
+using InstantDelivery.Service.Paging;
+using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
+using System.Linq;
+using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -90,6 +89,11 @@ namespace InstantDelivery.Service.Controllers
             package.Cost = pricingStrategy.GetCost(package);
             var newPackage = Mapper.Map<Package>(package);
             context.Packages.Add(newPackage);
+            context.PackageEvents.Add(new PackageEvent
+            {
+                EventType = PackageEventType.Registered,
+                Package = newPackage
+            });
             context.SaveChanges();
             //TODO: return 201
             return Ok();
@@ -110,10 +114,16 @@ namespace InstantDelivery.Service.Controllers
             }
             package.Status = PackageStatus.Delivered;
             var owner = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
-            if(owner == null)
+            if (owner == null)
             {
                 return BadRequest();
             }
+            context.PackageEvents.Add(new PackageEvent
+            {
+                Package = package,
+                Employee = owner,
+                EventType = PackageEventType.Delivered
+            });
             owner.Packages.Remove(package);
             context.SaveChanges();
             return Ok();
@@ -133,6 +143,12 @@ namespace InstantDelivery.Service.Controllers
             var employee = context.Employees.Find(employeeId);
             package.Status = PackageStatus.InDelivery;
             employee.Packages.Add(package);
+            context.PackageEvents.Add(new PackageEvent
+            {
+                Employee = employee,
+                Package = package,
+                EventType = PackageEventType.HandedToCourier
+            });
             context.SaveChanges();
             return Ok();
         }

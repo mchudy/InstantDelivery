@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\PackageEventType.cs" />
     <Compile Include="Enums\PackageStatus.cs" />
     <Compile Include="Enums\PackageStatusFilter.cs" />
     <Compile Include="Enums\Role.cs" />

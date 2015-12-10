@@ -63,6 +63,7 @@
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Package.cs" />
+    <Compile Include="Entities\PackageEvent.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="Entities\VehicleModel.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="Migrations\201512061708017_AddEmployeeUserRelation.Designer.cs">
       <DependentUpon>201512061708017_AddEmployeeUserRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512091755497_AddPackageHistory.cs" />
+    <Compile Include="Migrations\201512091755497_AddPackageHistory.Designer.cs">
+      <DependentUpon>201512091755497_AddPackageHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512061708017_AddEmployeeUserRelation.resx">
       <DependentUpon>201512061708017_AddEmployeeUserRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512091755497_AddPackageHistory.resx">
+      <DependentUpon>201512091755497_AddPackageHistory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
