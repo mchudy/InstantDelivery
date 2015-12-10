@@ -13,18 +13,43 @@
             padding: 0;
         }
 
-        #map {
+        #map, #directionsPanel {
             height: 100%;
+            padding: 0 1%;
+        }
+
+        #directionsPanel {
+            width: 33%;
+            overflow: auto;
+            float: right;
+            display: none;
+        }
+
+        .label {
+            color: #2f4f4f;
+            background-color: white;
+            font-family: "Lucida Grande", "Arial", sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            width: 40px;
+            border: 2px solid black;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
+    <div id="directionsPanel"></div>
     <div id="map"></div>
     <script>
-        // suppresses script errors on the page; WPF control shows an annoying popup otherwise
-        window.onerror = function () { return true; }
+        // suppress script errors on the page; WPF control shows an annoying popup otherwise
+        window.onerror = function () {
+            return true;
+        }
     </script>
-    <script src="map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initMap" async defer></script>
+    <script src="map.js" type="text/javascript"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initMap"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
 </body>
 </html>

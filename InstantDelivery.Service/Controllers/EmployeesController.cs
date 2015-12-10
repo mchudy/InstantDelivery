@@ -3,14 +3,13 @@ using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Model;
+using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.Service.Paging;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
-using InstantDelivery.Model.Employees;
-using InstantDelivery.Model.Paging;
-using Microsoft.AspNet.Identity;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -35,8 +34,8 @@ namespace InstantDelivery.Service.Controllers
         [Route("LoggedCourierData"), HttpGet]
         public IHttpActionResult GetLoggedCourierData()
         {
-            var id= User.Identity.GetUserId();
-            var employee = context.Employees.FirstOrDefault(e=>e.User.Id==id);
+            var id = User.Identity.GetUserId();
+            var employee = context.Employees.FirstOrDefault(e => e.User.Id == id);
             var result = new EmployeeDto();
             Mapper.Map(employee, result, typeof(Employee), typeof(EmployeeDto));
             return Ok(result);

@@ -1,8 +1,5 @@
 ﻿using InstantDelivery.ViewModel;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace InstantDelivery.Views
 {
@@ -15,18 +12,18 @@ namespace InstantDelivery.Views
         {
             InitializeComponent();
             Browser.Navigate("pack://siteoforigin:,,,/Maps/map.html");
-            Browser.LoadCompleted += Browser_LoadCompleted;
+            Loaded += CourierPackagesMapView_Loaded;
         }
 
-        private void Browser_LoadCompleted(object sender, NavigationEventArgs navigationEventArgs)
+        private void CourierPackagesMapView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             var dataContext = (CourierPackagesMapViewModel)DataContext;
-            var json = JsonConvert.SerializeObject(dataContext.Packages,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
-            Browser.InvokeScript("showPackages", json);
+            dataContext.InvokeScript += DataContextOnInvokeScript;
+        }
+
+        private void DataContextOnInvokeScript(object sender, InvokeScriptEventArgs e)
+        {
+            Browser.InvokeScript(e.FunctionName, e.Parameters);
         }
     }
 }
