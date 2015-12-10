@@ -31,6 +31,7 @@ namespace InstantDelivery.Tests
             var mockSet = MockDbSetHelper.CreateMockSet(new Package[] { }.AsQueryable());
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(m => m.Packages).Returns(mockSet.Object);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
             var pricingMock = new Mock<IPricingStrategy>();
             var package = new Package
             {
@@ -54,6 +55,7 @@ namespace InstantDelivery.Tests
         public void RegisterPackage_SetsStatusToNew()
         {
             var mockContext = GetEmptyMockContext();
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
             var mockPricingStrategy = new Mock<IPricingStrategy>();
             var controller = new PackagesController(mockContext.Object, mockPricingStrategy.Object);
 
@@ -71,6 +73,7 @@ namespace InstantDelivery.Tests
         {
             var mockSet = new Mock<IDbSet<Package>>();
             var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
             mockContext.Setup(m => m.Packages).Returns(mockSet.Object);
             var packageDto = new PackageDto();
 
@@ -118,6 +121,7 @@ namespace InstantDelivery.Tests
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
             mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
 
             var controller = new PackagesController(mockContext.Object, null);
 
@@ -170,6 +174,7 @@ namespace InstantDelivery.Tests
 
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).Returns(packagesMockSet.Object);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
             var pricingStrategy = new Mock<IPricingStrategy>().Object;
             var controller = new PackagesController(mockContext.Object, pricingStrategy);
             var packageDto = new PackageDto();
@@ -251,6 +256,7 @@ namespace InstantDelivery.Tests
             var mockContext = GetEmptyMockContext();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
             mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
 
             var controller = new PackagesController(mockContext.Object, null);
             controller.MarkAsDelivered(package.Id);
@@ -288,6 +294,7 @@ namespace InstantDelivery.Tests
             var mockContext = GetEmptyMockContext();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
             mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
 
             var controller = new PackagesController(mockContext.Object, null);
             controller.MarkAsDelivered(package.Id);
@@ -304,6 +311,7 @@ namespace InstantDelivery.Tests
             var mockContext = GetEmptyMockContext();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
             mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
 
             var controller = new PackagesController(mockContext.Object, null);
             var response = controller.GetAssignedEmployee(package.Id) as OkNegotiatedContentResult<EmployeeDto>;

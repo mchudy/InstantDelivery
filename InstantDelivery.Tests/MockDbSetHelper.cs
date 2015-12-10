@@ -13,19 +13,6 @@ namespace InstantDelivery.Tests
     /// </summary>
     public static class MockDbSetHelper
     {
-        public static Mock<DbSet<T>> GetMockSet<T>(IQueryable<T> data) where T : Entity
-        {
-            var mockSet = new Mock<DbSet<T>>();
-            mockSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mockSet.As<IDbSet<T>>().Setup(m => m.Find(It.IsAny<object[]>()))
-                .Returns((object[] id) => data.FirstOrDefault(e => e.Id == (int)id[0]));
-            mockSet.Setup(m => m.Include(It.IsAny<string>())).Returns(mockSet.Object);
-            return mockSet;
-        }
-
         public static Mock<DbSet<T>> CreateMockSet<T>(IQueryable<T> data)
             where T : Entity
         {
