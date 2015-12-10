@@ -31,10 +31,7 @@ function initMap() {
  */
 function showPackages(packages) {
     packages = JSON.parse(packages);
-    cleanMarkers();
-    directionsDisplay.setPanel(null);
-    directionsDisplay.setMap(null);
-    document.getElementById('directionsPanel').style.display = 'none';
+    disableDirections();
     for (var i = 0; i < packages.length; i++) {
         geocodeAddress(getAddressString(packages[i]), packages[i]);
     }
@@ -54,9 +51,7 @@ function showRoute(packages) {
             stopover: true
         });
     }
-    document.getElementById('directionsPanel').style.display = 'block';
-    directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-    directionsDisplay.setMap(map);
+    enableDirections();
     directionsService.route({
         origin: firstPackageAddress,
         destination: firstPackageAddress,
@@ -67,11 +62,10 @@ function showRoute(packages) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0];
             var order = route.waypoint_order;
-            cleanMarkers();
             route.legs[0].start_address = 'Paczka do dostarczenia: ' +
-                    packages[0].id + '\n' + endAddress;
-            for (var i = 0; i < route.legs.length - 1; i++) {
-                var currentPackage = packages[order[i]];
+                    packages[0].id + '\n' + route.legs[0].start_address;
+            for (var i = 0; i < order.length; i++) {
+                var currentPackage = packages[order[i] + 1];
                 var endAddress = route.legs[i].end_address;
                 route.legs[i].end_address = 'Paczka do dostarczenia: ' + 
                     currentPackage.id + '\n' + endAddress;
@@ -123,4 +117,18 @@ function cleanMarkers() {
         markers[i].setMap(null);
     }
     markers.length = 0;
+}
+
+function enableDirections() {
+    cleanMarkers();
+    document.getElementById('directionsPanel').style.display = 'block';
+    directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+    directionsDisplay.setMap(map);
+}
+
+function disableDirections() {
+    cleanMarkers();
+    directionsDisplay.setPanel(null);
+    directionsDisplay.setMap(null);
+    document.getElementById('directionsPanel').style.display = 'none';
 }
