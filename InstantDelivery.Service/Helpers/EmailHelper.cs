@@ -14,12 +14,12 @@ namespace InstantDelivery.Service.Helpers
         {
             DefaultAccount = new EmailAccount
             {
-                DisplayName = "igal",
-                Email = "igal@gmail.com",
+                DisplayName = "Instant Delivery",
+                Email = "rosyjski031@gmail.com",
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Password = "password",
-                Username = "igal@gmail.com",
+                Password = "tajnehaslo",
+                Username = "rosyjski031@gmail.com",
                 Host = "smtp.gmail.com",
                 Port = 587
             };
