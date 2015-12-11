@@ -11,6 +11,7 @@ using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Http;
+using InstantDelivery.Service.Helpers;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -150,7 +151,11 @@ namespace InstantDelivery.Service.Controllers
                 EventType = PackageEventType.HandedToCourier
             });
             context.SaveChanges();
-            return Ok();
+            using (var eh = new EMailHelper())
+            {
+                eh.SendEmail(employee.Email,"Instant Delivery - Nowe zlecenie" , eh.AssignedPackageBody(employee));
+            }
+                return Ok();
         }
 
         /// <summary>

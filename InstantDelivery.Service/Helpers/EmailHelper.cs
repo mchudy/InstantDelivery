@@ -201,5 +201,12 @@ namespace InstantDelivery.Service.Helpers
                    "Hasło: <strong>" + password +
                    "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
+
+        public string AssignedPackageBody(Employee employee)
+        {
+            return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
+                   "<br />Otrzymałeś nowe zlecenie. Sprawdź stan w systemie."+
+                   "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
+        }
     }
 }
