@@ -1,4 +1,7 @@
-﻿using InstantDelivery.Model;
+﻿using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Packages;
+using InstantDelivery.Model.Paging;
+using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Extensions;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -6,33 +9,25 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using InstantDelivery.Model.Employees;
-using InstantDelivery.Model.Packages;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
     public class PackagesServiceProxy : ServiceProxyBase
     {
-        public PackagesServiceProxy() : base("Packages")
+        public PackagesServiceProxy(IDialogManager dialogManager)
+            : base("Packages", dialogManager)
         {
         }
 
         public async Task<PagedResult<PackageDto>> Page(PageQuery query)
         {
-            string queryString = "PageWithSpecifiedEmployee?" + query.ToQueryString();
-            return await Get<PagedResult<PackageDto>>(queryString);
-        }
-
-        public async Task<PagedResult<PackageDto>> PageWithSpecifiedEmployee(PageQuery query)
-        {
-            string queryString = "PageWithSpecifiedEmployee?" + query.ToQueryString();
+            string queryString = "Employee/Page?" + query.ToQueryString();
             return await Get<PagedResult<PackageDto>>(queryString);
         }
 
         public async Task<PagedResult<PackageDto>> PageForLoggedEmployee(PageQuery query)
         {
-            string queryString = "PageForLoggedEmployee?" + query.ToQueryString();
+            string queryString = "LoggedEmployee/Page?" + query.ToQueryString();
             return await Get<PagedResult<PackageDto>>(queryString);
         }
 

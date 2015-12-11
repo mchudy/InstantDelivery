@@ -23,7 +23,7 @@ namespace InstantDelivery.ViewModel
             UpdateData();
         }
 
-        public async void NoticeLeft(PackageDto package)
+        public void NoticeLeft(PackageDto package)
         {
             //TODO
         }

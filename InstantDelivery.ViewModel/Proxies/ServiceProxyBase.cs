@@ -1,119 +1,169 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using InstantDelivery.ViewModel.Dialogs;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
-    //TODO: proper error handling
-    //TODO: not sure if that's a right way to do this, it seems to work for now
     public abstract class ServiceProxyBase
     {
         private readonly string controllerName;
-        private static readonly Uri baseUri = new Uri(ConfigurationManager.AppSettings["ApiAddress"]);
+        private readonly IDialogManager dialogManager;
 
+        protected static readonly Uri baseUri = new Uri(ConfigurationManager.AppSettings["ApiAddress"]);
         protected static HttpClient client;
 
-        protected ServiceProxyBase(string controllerName)
+        protected ServiceProxyBase(string controllerName, IDialogManager dialogManager)
         {
             this.controllerName = controllerName;
+            this.dialogManager = dialogManager;
         }
 
         public async Task<TResult> Get<TResult>(string query)
         {
-            var response = await client.GetAsync($"{controllerName}/{query}");
-            //TODO: react according to the status code
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<TResult>();
+            try
+            {
+                var response = await client.GetAsync($"{controllerName}/{query}");
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<TResult>();
+                }
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
+            return default(TResult);
         }
 
         public async Task Delete(int id)
         {
-            var response = await client.DeleteAsync($"{controllerName}/{id}");
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.DeleteAsync($"{controllerName}/{id}");
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
         }
 
         public async Task Put<TRequest>(TRequest dto)
         {
-            var response = await client.PutAsJsonAsync(controllerName, dto);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.PutAsJsonAsync(controllerName, dto);
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
         }
 
         public async Task PostAsJson<TRequest>(string query, TRequest dto)
         {
-            var response = await client.PostAsJsonAsync($"{controllerName}/{query}", dto);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.PostAsJsonAsync($"{controllerName}/{query}", dto);
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
         }
 
         public async Task<TResult> PostAsJson<TRequest, TResult>(string query, TRequest dto)
         {
-            var response = await client.PostAsJsonAsync($"{controllerName}/{query}", dto);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<TResult>();
+            try
+            {
+                var response = await client.PostAsJsonAsync($"{controllerName}/{query}", dto);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<TResult>();
+                }
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
+            return default(TResult);
         }
 
         public async Task Post(string query, HttpContent content)
         {
-            var response = await client.PostAsync($"{controllerName}/{query}", content);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.PostAsync($"{controllerName}/{query}", content);
+                await HandleErrors(response);
+            }
+            catch (HttpRequestException)
+            {
+                await ShowConnectionError();
+            }
         }
 
         public async Task<TResult> Post<TResult>(string query, HttpContent content)
         {
-            var response = await client.PostAsync($"{controllerName}/{query}", content);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<TResult>();
-        }
-
-        public static bool Login(string username, string password)
-        {
-            var response = GetToken(username, password);
-            dynamic responseJson = JObject.Parse(response);
-            string token = responseJson["access_token"];
-            if (token != null)
+            try
             {
-                client = CreateClient(token);
-                return true;
+                var response = await client.PostAsync($"{controllerName}/{query}", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<TResult>();
+                }
+                await HandleErrors(response);
             }
-            return false;
-        }
-
-        public static void Logout()
-        {
-            client?.Dispose();
-            client = null;
-        }
-
-        private static string GetToken(string userName, string password)
-        {
-            var pairs = new List<KeyValuePair<string, string>>
-                        {
-                            new KeyValuePair<string, string>("grant_type", "password"),
-                            new KeyValuePair<string, string>("username", userName ),
-                            new KeyValuePair<string, string>("password", password )
-                        };
-            var content = new FormUrlEncodedContent(pairs);
-            using (var httpClient = new HttpClient())
+            catch (HttpRequestException)
             {
-                var response = httpClient.PostAsync(baseUri + "Token", content).Result;
-                return response.Content.ReadAsStringAsync().Result;
+                await ShowConnectionError();
+            }
+            return default(TResult);
+        }
+
+        private async Task HandleErrors(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                await ShowError(response.StatusCode);
             }
         }
 
-        private static HttpClient CreateClient(string accessToken)
+        private async Task ShowConnectionError()
         {
-            var newClient = new HttpClient();
-            newClient.BaseAddress = baseUri;
-            newClient.DefaultRequestHeaders.Accept.Clear();
-            newClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            if (!string.IsNullOrEmpty(accessToken))
+            await dialogManager.ShowDialogAsync(new ErrorDialogViewModel
             {
-                newClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                Title = "Błąd połączenia",
+                Message =
+                    "Nie można połączyć się z serwerem. Upewnij się, że komputer jest połączony z Internetem.",
+            });
+        }
+
+        private async Task ShowError(HttpStatusCode statusCode)
+        {
+            string title;
+            string message;
+            if (statusCode == HttpStatusCode.NotFound)
+            {
+                title = "Błąd";
+                message = "Nie znaleziono danego obiektu. Może to oznaczać, że został usunięty przez innego pracownika.";
             }
-            return newClient;
+            else
+            {
+                title = "Błąd";
+                message = "Wystąpił błąd. Spróbuj ponownie za chwilę.";
+            }
+            await dialogManager.ShowDialogAsync(new ErrorDialogViewModel
+            {
+                Title = title,
+                Message = message
+            });
         }
     }
 }

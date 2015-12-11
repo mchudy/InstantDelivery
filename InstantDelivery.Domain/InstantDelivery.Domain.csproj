@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201512091755497_AddPackageHistory.Designer.cs">
       <DependentUpon>201512091755497_AddPackageHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512112059594_PackageHistory_OnDeleteSetNull.cs" />
+    <Compile Include="Migrations\201512112059594_PackageHistory_OnDeleteSetNull.Designer.cs">
+      <DependentUpon>201512112059594_PackageHistory_OnDeleteSetNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512091755497_AddPackageHistory.resx">
       <DependentUpon>201512091755497_AddPackageHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512112059594_PackageHistory_OnDeleteSetNull.resx">
+      <DependentUpon>201512112059594_PackageHistory_OnDeleteSetNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

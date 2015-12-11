@@ -41,11 +41,9 @@
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -71,6 +69,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\DialogCoordinator.cs" />
+    <Compile Include="Dialogs\IDialogCoordinator.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Proxies\AccountServiceProxy.cs" />
     <Compile Include="Proxies\EmployeesServiceProxy.cs" />
@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\CourierViewModels\CourierPackagesMapViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\CourierPackagesViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\ShowCourierProfileViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModelBase.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeAddViewModel.cs" />
     <Compile Include="ViewModels\ConfirmDeleteViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeeEditViewModel.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesManagedPackagesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesUsedVehiclesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\ErrorDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\GeneralPackagesViewModel.cs" />
     <Compile Include="ViewModels\PackagesViewModels\PackageAddViewModel.cs" />
@@ -122,10 +124,6 @@
     <ProjectReference Include="..\InstantDelivery.Common\InstantDelivery.Common.csproj">
       <Project>{8202F229-FBDC-4F20-AAAA-7725AB893FC5}</Project>
       <Name>InstantDelivery.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InstantDelivery.Domain\InstantDelivery.Domain.csproj">
-      <Project>{35820C01-CD0A-42F3-9E39-3B6D7F0C8D66}</Project>
-      <Name>InstantDelivery.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\InstantDelivery.Model\InstantDelivery.Model.csproj">
       <Project>{58665073-0446-43AE-A66C-5EFC02B0D592}</Project>

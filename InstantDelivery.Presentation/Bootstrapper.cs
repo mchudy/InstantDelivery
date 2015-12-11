@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Caliburn.Micro;
 using InstantDelivery.ViewModel;
+using InstantDelivery.ViewModel.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -94,6 +95,8 @@ namespace InstantDelivery
             builder.Register<IWindowManager>(c => new WindowManager())
                 .InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator())
+                .SingleInstance();
+            builder.Register<IDialogManager>(c => new DialogManager())
                 .SingleInstance();
 
             builder.RegisterAssemblyTypes(typeof(EmployeeShellViewModel).Assembly)

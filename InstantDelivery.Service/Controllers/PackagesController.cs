@@ -38,7 +38,7 @@ namespace InstantDelivery.Service.Controllers
             return Ok(Mapper.Map<PackageDto>(package));
         }
 
-        [Route("PageWithSpecifiedEmployee"), HttpGet]
+        [Route("Employee/Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
         {
@@ -46,27 +46,29 @@ namespace InstantDelivery.Service.Controllers
 
             if (!string.IsNullOrEmpty(employeeId))
             {
-                var empId = employeeId;
-                var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id.ToString() == empId);
-                if (firstOrDefault != null)
-                    packages = firstOrDefault.Packages.AsQueryable();
+                var employee = context.Employees.Find(employeeId);
+                if (employee != null)
+                {
+                    packages = employee.Packages.AsQueryable();
+                }
             }
             packages = ApplyFilters(packages, id, status);
             var dtos = packages.ProjectTo<PackageDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
-        [Route("PageForLoggedEmployee"), HttpGet]
+        [Route("LoggedEmployee/Page"), HttpGet]
         public IHttpActionResult GetPageForLoggedEmployee([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
         {
             var packages = context.Set<Package>().AsQueryable();
 
             var userId = User.Identity.GetUserId();
-            var empId = context.Employees.AsQueryable().FirstOrDefault(e => e.User.Id == userId);
-            var firstOrDefault = context.Employees.AsQueryable().FirstOrDefault(e => e.Id == empId.Id);
-            if (firstOrDefault != null)
-                packages = firstOrDefault.Packages.AsQueryable();
+            var employee = context.Employees.AsQueryable().FirstOrDefault(e => e.User.Id == userId);
+            if (employee != null)
+            {
+                packages = employee.Packages.AsQueryable();
+            }
 
             packages = ApplyFilters(packages, id, status);
             var dtos = packages.ProjectTo<PackageDto>();

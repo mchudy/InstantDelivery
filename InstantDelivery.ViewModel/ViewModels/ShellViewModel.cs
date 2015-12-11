@@ -7,10 +7,12 @@ namespace InstantDelivery.ViewModel
     public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShell>
     {
         private readonly IEventAggregator eventAggregator;
+        private readonly AccountServiceProxy service;
 
-        public ShellViewModel(IEventAggregator eventAggregator)
+        public ShellViewModel(IEventAggregator eventAggregator, AccountServiceProxy service)
         {
             this.eventAggregator = eventAggregator;
+            this.service = service;
         }
 
         public void Handle(ShowShell @event)
@@ -21,7 +23,7 @@ namespace InstantDelivery.ViewModel
 
         public void Logout()
         {
-            ServiceProxyBase.Logout();
+            service.Logout();
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 

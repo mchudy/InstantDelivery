@@ -63,8 +63,11 @@ namespace InstantDelivery.ViewModel
             var query = GetPageQuery();
             AddFilters(query);
             var pageDto = await service.PageForLoggedEmployee(query);
-            PageCount = pageDto.PageCount;
-            Packages = pageDto.PageCollection;
+            if (pageDto != null)
+            {
+                PageCount = pageDto.PageCount;
+                Packages = pageDto.PageCollection;
+            }
         }
 
         private void AddFilters(PageQuery query)

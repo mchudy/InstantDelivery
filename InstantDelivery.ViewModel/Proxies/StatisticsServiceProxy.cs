@@ -1,11 +1,13 @@
 ﻿using InstantDelivery.Model.Statistics;
+using InstantDelivery.ViewModel.Dialogs;
 using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
     public class StatisticsServiceProxy : ServiceProxyBase
     {
-        public StatisticsServiceProxy() : base("Statistics")
+        public StatisticsServiceProxy(IDialogManager dialogManager)
+            : base("Statistics", dialogManager)
         {
         }
 

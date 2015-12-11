@@ -30,7 +30,7 @@ namespace InstantDelivery.ViewModel
             {
                 Message = "Podaj nazwę użytkownika i hasło";
             }
-            else if (ServiceProxyBase.Login(UserName, password))
+            else if (accountService.Login(UserName, password))
             {
                 Message = "";
                 Role[] roles = await accountService.GetRoles();
