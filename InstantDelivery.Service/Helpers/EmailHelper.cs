@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -15,11 +16,11 @@ namespace InstantDelivery.Service.Helpers
             DefaultAccount = new EmailAccount
             {
                 DisplayName = "Instant Delivery",
-                Email = "rosyjski031@gmail.com",
+                Email = ConfigurationManager.AppSettings["NotificationEmailUsername"],
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Password = "tajnehaslo",
-                Username = "rosyjski031@gmail.com",
+                Password = ConfigurationManager.AppSettings["NotificationEmailPassword"],
+                Username = ConfigurationManager.AppSettings["NotificationEmailUsername"],
                 Host = "smtp.gmail.com",
                 Port = 587
             };
