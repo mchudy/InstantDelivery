@@ -19,7 +19,7 @@
         <controls1:PackagesFilterPanel Grid.Row="0" Margin="0 5 0 5"></controls1:PackagesFilterPanel>
         <DataGrid Margin="0 5 0 0" SelectionMode="Single" ItemsSource="{Binding Packages, IsAsync=True}" Grid.Row="1"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"
-                  CanUserResizeRows="False" CanUserSortColumns="False"
+                  CanUserResizeRows="False" CanUserSortColumns="True"
                   EnableRowVirtualization="True" SelectedItem="{Binding SelectedPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditPackage()]">
             <DataGrid.Columns>

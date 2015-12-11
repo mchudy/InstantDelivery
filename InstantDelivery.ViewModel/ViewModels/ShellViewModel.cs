@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Proxies;
 using System;
 
@@ -8,10 +7,12 @@ namespace InstantDelivery.ViewModel
     public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShell>
     {
         private readonly IEventAggregator eventAggregator;
+        private readonly AccountServiceProxy service;
 
-        public ShellViewModel(IEventAggregator eventAggregator)
+        public ShellViewModel(IEventAggregator eventAggregator, AccountServiceProxy service)
         {
             this.eventAggregator = eventAggregator;
+            this.service = service;
         }
 
         public void Handle(ShowShell @event)
@@ -22,7 +23,7 @@ namespace InstantDelivery.ViewModel
 
         public void Logout()
         {
-            ServiceProxyBase.Logout();
+            service.Logout();
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 
@@ -32,18 +33,5 @@ namespace InstantDelivery.ViewModel
             DisplayName = "Instant Delivery";
             ActivateItem(IoC.Get<LoginViewModel>());
         }
-
-        protected override async void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-            await new DialogManager().ShowDialogAsync(new ErrorDialogViewModel
-            {
-                Title = "Błąd",
-                Message = "Wystąpił błąd"
-            });
-        }
     }
-
-
-
 }

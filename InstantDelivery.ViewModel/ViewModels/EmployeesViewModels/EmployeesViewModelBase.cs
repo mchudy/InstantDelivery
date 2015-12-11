@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using InstantDelivery.Model;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Paging;
 using InstantDelivery.ViewModel.Proxies;
@@ -83,8 +82,11 @@ namespace InstantDelivery.ViewModel
             var query = GetPageQuery();
             AddFilters(query);
             var pageDto = await service.Page(query);
-            PageCount = pageDto.PageCount;
-            Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
+            if (pageDto != null)
+            {
+                PageCount = pageDto.PageCount;
+                Employees = new BindableCollection<EmployeeDto>(pageDto.PageCollection);
+            }
         }
 
         protected void AddFilters(PageQuery query)

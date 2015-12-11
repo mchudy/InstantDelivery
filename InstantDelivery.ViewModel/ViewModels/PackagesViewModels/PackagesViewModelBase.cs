@@ -1,9 +1,8 @@
 ﻿using InstantDelivery.Common.Enums;
-using InstantDelivery.Model;
-using InstantDelivery.ViewModel.Proxies;
-using System.Collections.Generic;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
+using InstantDelivery.ViewModel.Proxies;
+using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
@@ -80,8 +79,8 @@ namespace InstantDelivery.ViewModel
             var query = GetPageQuery();
             AddFilters(query);
             var pageDto = await service.Page(query);
-            PageCount = pageDto.PageCount;
-            Packages = pageDto.PageCollection;
+            PageCount = pageDto?.PageCount ?? 0;
+            Packages = pageDto?.PageCollection;
         }
 
         private void AddFilters(PageQuery query)
@@ -99,8 +98,8 @@ namespace InstantDelivery.ViewModel
                     query.Filters[nameof(PackageDto.Status)] = PackageStatus.New.ToString();
                     break;
             }
-            if(!string.IsNullOrEmpty(EmployeeId))
-            query.Filters[nameof(PackageDto.EmployeeId)] = EmployeeId;
+            if (!string.IsNullOrEmpty(EmployeeId))
+                query.Filters[nameof(PackageDto.EmployeeId)] = EmployeeId;
         }
     }
 }

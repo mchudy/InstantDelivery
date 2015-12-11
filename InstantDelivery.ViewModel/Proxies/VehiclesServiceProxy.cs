@@ -1,15 +1,17 @@
 ﻿using InstantDelivery.Model;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.Model.Vehicles;
+using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
     public class VehiclesServiceProxy : ServiceProxyBase
     {
-        public VehiclesServiceProxy() : base("Vehicles")
+        public VehiclesServiceProxy(IDialogManager dialogManager)
+            : base("Vehicles", dialogManager)
         {
         }
 

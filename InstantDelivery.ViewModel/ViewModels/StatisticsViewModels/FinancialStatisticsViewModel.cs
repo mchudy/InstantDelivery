@@ -28,9 +28,12 @@ namespace InstantDelivery.ViewModel
         private async void GenerateChart()
         {
             var statistics = await service.FinancialStatistics();
-            Budget.Add(new Population { Name = "Wartość dostarczanych paczek", Count = (int)statistics.TotalPackagesValue });
-            Budget.Add(new Population { Name = "Pensje pracowników", Count = (int)statistics.TotalEmployeesSalaries });
-            Budget.Add(new Population { Name = "Podatki", Count = (int)statistics.TotalTaxes });
+            if (statistics != null)
+            {
+                Budget.Add(new Population { Name = "Wartość dostarczanych paczek", Count = (int)statistics.TotalPackagesValue });
+                Budget.Add(new Population { Name = "Pensje pracowników", Count = (int)statistics.TotalEmployeesSalaries });
+                Budget.Add(new Population { Name = "Podatki", Count = (int)statistics.TotalTaxes }); 
+            }
         }
     }
 }

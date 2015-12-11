@@ -46,7 +46,7 @@ namespace InstantDelivery.ViewModel
                 PageSize = 100,
                 PageIndex = 1
             });
-            return result.PageCollection;
+            return result?.PageCollection;
         }
 
         private void InvokeScriptFunction(string functionName)
