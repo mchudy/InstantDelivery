@@ -100,8 +100,10 @@ function showMarker(location, packageData) {
     marker.addListener('click', function () {
         infoWindow.close();
         var address = packageData.shippingAddress;
+        var dimensionsString = 'Wymiary: ' + [packageData.length, packageData.width, packageData.height].join('x') + ' mm';
         var addressString = address.street + ' ' + address.number + '<br>' + address.postalCode + ', ' + address.city;
-        infoWindow.setContent('<strong>Numer paczki: ' + packageData.id.toString() + '</strong><br><br>' + addressString);
+        infoWindow.setContent('<span class="infoWindowTitle">Numer paczki: ' + packageData.id.toString() + '</span><br><br>' +
+            addressString + '<br><br>Waga: ' + packageData.weight + 'kg<br>' + dimensionsString);
         infoWindow.open(map, marker);
     });
     markers.push(marker);

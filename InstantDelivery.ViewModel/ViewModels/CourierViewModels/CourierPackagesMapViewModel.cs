@@ -27,7 +27,11 @@ namespace InstantDelivery.ViewModel
                         Street = "Marszałkowska",
                         Number = "50",
                         PostalCode = "00-500"
-                    }
+                    },
+                    Weight = 20,
+                    Height = 20,
+                    Length = 50,
+                    Width = 60
                 },
                 new PackageDto
                 {
