@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\RequireHttpsAttribute.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
