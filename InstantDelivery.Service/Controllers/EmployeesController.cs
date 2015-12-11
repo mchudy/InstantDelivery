@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using InstantDelivery.Service.Helpers;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -98,8 +100,17 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
             Employee employee = Mapper.Map<Employee>(newEmployee);
+            employee.User=new User();
+            employee.User.UserName = employee.LastName + employee.FirstName;
+            employee.User.Roles.Add(new IdentityUserRole() {RoleId="1", UserId = employee.User.Id});
+            // randomize password lets say
+            // hash it and connect somehow to database
             context.Employees.Add(employee);
             context.SaveChanges();
+            using (var eh = new EMailHelper())
+            {
+                eh.SendEmail(employee.Email, "Instant Delivery - Rejestracja", eh.RegistrationBody(employee,"password"));
+            }
             //TODO: return 201
             return Ok(employee.Id);
         }

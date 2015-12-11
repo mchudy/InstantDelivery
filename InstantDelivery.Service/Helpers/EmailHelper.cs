@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
+using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Service.Helpers
 {
@@ -191,5 +192,14 @@ namespace InstantDelivery.Service.Helpers
         }
 
         public void Dispose(){}
+
+        public string RegistrationBody(Employee employee, string password)
+        {
+            return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
+                   "<br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>" 
+                   + employee.LastName + employee.FirstName + "</strong><br />" +
+                   "Hasło: <strong>" + password +
+                   "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
+        }
     }
 }
