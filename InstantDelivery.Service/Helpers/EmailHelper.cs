@@ -9,9 +9,9 @@ using System.Text.RegularExpressions;
 
 namespace InstantDelivery.Service.Helpers
 {
-    public static class EMailHelper
+    public class EMailHelper : IDisposable
     {
-        static EMailHelper()
+        public EMailHelper()
         {
             DefaultAccount = new EmailAccount
             {
@@ -26,7 +26,7 @@ namespace InstantDelivery.Service.Helpers
             };
         }
 
-        private static readonly EmailAccount DefaultAccount;
+        private readonly EmailAccount DefaultAccount;
 
         /// <summary>
         /// Sends an email
@@ -35,7 +35,7 @@ namespace InstantDelivery.Service.Helpers
         /// <param name="subject">Subject</param>
         /// <param name="body">Body</param>
         /// <param name="toAddress">To address</param>
-        public static void SendEmail(string toAddress, string subject, string body, string replyTo = null)
+        public void SendEmail(string toAddress, string subject, string body, string replyTo = null)
         {
             try
             {
@@ -189,5 +189,7 @@ namespace InstantDelivery.Service.Helpers
             public bool UseDefaultCredentials { get; set; }
 
         }
+
+        public void Dispose(){}
     }
 }
