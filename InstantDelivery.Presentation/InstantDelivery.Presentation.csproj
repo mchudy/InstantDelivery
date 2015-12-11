@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="Converters\EnumToDescriptionConverter.cs" />
     <Compile Include="Converters\PackageStatusConverters.cs" />
+    <Compile Include="Dialogs\ErrorDialogView.xaml.cs">
+      <DependentUpon>ErrorDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Views\AdministratorShellView.xaml.cs">
@@ -242,6 +245,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\VehiclesFilterPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ErrorDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Dialogs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

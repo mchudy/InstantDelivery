@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Proxies;
 using System;
 
@@ -31,5 +32,18 @@ namespace InstantDelivery.ViewModel
             DisplayName = "Instant Delivery";
             ActivateItem(IoC.Get<LoginViewModel>());
         }
+
+        protected override async void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+            await new DialogManager().ShowDialogAsync(new ErrorDialogViewModel
+            {
+                Title = "Błąd",
+                Message = "Wystąpił błąd"
+            });
+        }
     }
+
+
+
 }
