@@ -63,8 +63,22 @@ namespace InstantDelivery.Domain.Migrations
         {
             "Aleje Jerozolimskie",
             "Koszykowa",
-            "Noakowskiego",
             "Nowy Świat",
+            "Puławska",
+            "Jana Pawła II",
+            "Emilii Plater",
+            "Aleja Waszyngtona",
+            "Aleja Solidarności",
+            "Jagiellońska",
+            "Powstańców Śląskich",
+            "Aleja Wilanowska",
+            "Żelazna",
+            "Obozowa",
+            "Górczewska",
+            "Łopuszańska",
+            "Aleja Krakowska",
+            "Ostrobramska",
+            "Grójecka"
         };
 
         private static readonly string[] states =
@@ -84,7 +98,8 @@ namespace InstantDelivery.Domain.Migrations
             GenerateTestVehicles(context);
             GenerateTestPackages(context);
 
-            GeneratePackageEmployeeRelations(context);
+            SetPackagesInDelivery(context);
+            SetDeliveredPackages(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
         }
@@ -171,53 +186,88 @@ namespace InstantDelivery.Domain.Migrations
             }
         }
 
-        private static void GeneratePackageEmployeeRelations(InstantDeliveryContext context)
+        private static void SetPackagesInDelivery(InstantDeliveryContext context)
         {
-            for (int i = 0; i < 80; i++)
+            for (int i = 1; i < 150; i++)
             {
                 var package = context.Packages.Find(i);
                 if (package != null)
                 {
-                    int employeeId = random.Next() % 40;
+                    int employeeId = random.Next() % 20;
                     var employee = context.Employees.Find(employeeId);
                     if (employee != null)
                     {
                         employee.Packages.Add(package);
                         package.Status = PackageStatus.InDelivery;
+                        context.PackageEvents.Add(new PackageEvent
+                        {
+                            EventType = PackageEventType.HandedToCourier,
+                            Package = package,
+                            Employee = employee
+                        });
                     }
                 }
             }
         }
 
+        private static void SetDeliveredPackages(InstantDeliveryContext context)
+        {
+            for (int i = 100; i < 150; i++)
+            {
+                var package = context.Packages.Find(i);
+                if (package != null)
+                {
+                    var employee = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
+                    if (employee != null)
+                    {
+                        employee.Packages.Remove(package);
+                        package.Status = PackageStatus.Delivered;
+                        context.PackageEvents.Add(new PackageEvent
+                        {
+                            EventType = PackageEventType.Delivered,
+                            Package = package,
+                            Employee = employee
+                        });
+                    }
+                }
+            }
+        }
+
+
         private static void GenerateTestPackages(InstantDeliveryContext context)
         {
             var testPackages = new List<Package>();
-            for (var i = 0; i < 150; i++)
+            var packageEvents = new List<PackageEvent>();
+            for (var i = 0; i < 200; i++)
             {
-                var city = cities[random.Next() % cities.Length];
                 var tmp = new Package
                 {
-                    Height = random.Next() % 90 + 1,
                     Id = i + 1,
                     ShippingAddress =
-                        new Address()
+                        new Address
                         {
-                            City = city[0],
-                            Country = city[1],
-                            Number = (random.Next() % 500).ToString(),
-                            PostalCode = ((random.Next() % 99 + 1) + "-" + (random.Next() % 999 + 1)),
-                            State = states[random.Next() % states.Length],
+                            City = "Warszawa",
+                            Country = "Polska",
+                            Number = (random.Next() % 50).ToString(),
+                            PostalCode = random.Next() % 99 + 1 + "-" + (random.Next() % 999 + 1),
+                            State = "mazowieckie",
                             Street = streets[random.Next() % streets.Length],
                         },
                     Weight = random.Next() % 90 + 1,
                     Width = random.Next() % 90 + 1,
                     Length = random.Next() % 90 + 1,
-                    Cost = random.Next() % 1000,
-                    Status = PackageStatus.New
+                    Height = random.Next() % 90 + 1,
+                    Cost = random.Next() % 1000
                 };
                 testPackages.Add(tmp);
+                packageEvents.Add(new PackageEvent
+                {
+                    Package = tmp,
+                    EventType = PackageEventType.Registered,
+                });
             }
             context.Packages.AddOrUpdate(testPackages.ToArray());
+            context.PackageEvents.AddOrUpdate(packageEvents.ToArray());
         }
 
         private static void GenerateTestVehicleModels(InstantDeliveryContext context)
@@ -313,6 +363,5 @@ namespace InstantDelivery.Domain.Migrations
             context.Employees.AddOrUpdate(testEmployees.ToArray());
         }
     }
-
 
 }
