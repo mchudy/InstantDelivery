@@ -1,4 +1,5 @@
-﻿using InstantDelivery.ViewModel.Proxies;
+﻿using InstantDelivery.Model.Packages;
+using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
@@ -16,5 +17,15 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
+        public async void Delivered(PackageDto package)
+        {
+            await service.MarkAsDelivered(package.Id);
+            UpdateData();
+        }
+
+        public async void NoticeLeft(PackageDto package)
+        {
+            //TODO
+        }
     }
 }
