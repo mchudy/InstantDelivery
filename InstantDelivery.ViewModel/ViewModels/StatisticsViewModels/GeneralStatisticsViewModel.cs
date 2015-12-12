@@ -28,15 +28,18 @@ namespace InstantDelivery.ViewModel
         private async void GenerateChart()
         {
             var statistics = await service.GeneralStatistics();
-            Values.Add(new Population { Name = "Liczba pracowników", Count = statistics.EmployeesCount });
+            if (statistics != null)
+            {
+                Values.Add(new Population { Name = "Liczba pracowników", Count = statistics.EmployeesCount });
 
-            Values.Add(new Population { Name = "Liczba pojazdów", Count = statistics.AllVehiclesCount });
-            Values.Add(new Population { Name = "Używane pojazdy", Count = statistics.UsedVehicles });
-            Values.Add(new Population { Name = "Nieużywane pojazdy", Count = statistics.UnusedVehicles });
+                Values.Add(new Population { Name = "Liczba pojazdów", Count = statistics.AllVehiclesCount });
+                Values.Add(new Population { Name = "Używane pojazdy", Count = statistics.UsedVehicles });
+                Values.Add(new Population { Name = "Nieużywane pojazdy", Count = statistics.UnusedVehicles });
 
-            Values.Add(new Population { Name = "Wszystkie paczki", Count = statistics.AllPackagesCount });
-            Values.Add(new Population { Name = "Dostarczane paczki", Count = statistics.AssignedPackages });
-            Values.Add(new Population { Name = "Niedostarczane paczki", Count = statistics.UnassignedPackages });
+                Values.Add(new Population { Name = "Wszystkie paczki", Count = statistics.AllPackagesCount });
+                Values.Add(new Population { Name = "Dostarczane paczki", Count = statistics.AssignedPackages });
+                Values.Add(new Population { Name = "Niedostarczane paczki", Count = statistics.UnassignedPackages });
+            }
         }
     }
 }

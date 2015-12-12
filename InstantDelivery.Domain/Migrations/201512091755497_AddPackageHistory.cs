@@ -21,7 +21,6 @@ namespace InstantDelivery.Domain.Migrations
                 .ForeignKey("dbo.Packages", t => t.Package_Id)
                 .Index(t => t.Employee_Id)
                 .Index(t => t.Package_Id);
-
         }
 
         public override void Down()

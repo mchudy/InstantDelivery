@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:converters="clr-namespace:InstantDelivery.Converters">
 
     <Style TargetType="{x:Type Button}" x:Key="EditDialogButton" BasedOn="{StaticResource {x:Type Button}}">
@@ -63,18 +62,6 @@
 
     <Style x:Key="LeftPanel" TargetType="{x:Type StackPanel}">
         <Setter Property="Margin" Value="10"></Setter>
-    </Style>
-
-    <Style x:Key="DialogWindow" TargetType="controls:MetroWindow">
-        <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="BorderThickness" Value="2" />
-        <Setter Property="ShowTitleBar" Value="False" />
-        <Setter Property="ShowIconOnTitleBar" Value="False" />
-        <Setter Property="ShowMinButton" Value="False" />
-        <Setter Property="ShowMaxRestoreButton" Value="False" />
-        <Setter Property="ShowSystemMenuOnRightClick" Value="False" />
-        <Setter Property="ShowCloseButton" Value="False" />
     </Style>
 
     <converters:EnumToDescriptionConverter x:Key="EnumToDescription" />

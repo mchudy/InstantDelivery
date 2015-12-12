@@ -78,15 +78,6 @@ namespace InstantDelivery.Service
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            //builder.Register(c => new IdentityFactoryOptions<UserManager<User>>
-            //{
-            //    DataProtectionProvider = new DpapiDataProtectionProvider("Application​")
-            //});
-
-            //builder.RegisterType<ApplicationOAuthProvider>()
-            //    .As<IOAuthAuthorizationServerProvider>()
-            //    .InstancePerRequest();
-
             builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication)
                 .InstancePerRequest();
             builder.Register<IDataProtectionProvider>(c => app.GetDataProtectionProvider())

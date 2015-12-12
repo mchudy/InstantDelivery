@@ -20,7 +20,7 @@ using System.Web.Security;
 
 namespace InstantDelivery.Service.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
@@ -169,6 +169,10 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult Delete(int id)
         {
             var employee = context.Employees.Find(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
             foreach (var package in employee.Packages
                         .Where(p => p.Status == PackageStatus.InDelivery))
             {

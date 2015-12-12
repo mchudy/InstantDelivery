@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InstantDelivery.Views"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:cal="http://www.caliburnproject.org"
+        xmlns:dialogs="clr-namespace:InstantDelivery.ViewModel.Dialogs;assembly=InstantDelivery.ViewModel"
         mc:Ignorable="d"
         Title="ShellView" x:Name="Window">
     <controls:MetroWindow.RightWindowCommands>

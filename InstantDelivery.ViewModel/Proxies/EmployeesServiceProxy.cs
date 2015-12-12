@@ -1,21 +1,22 @@
-﻿using InstantDelivery.Model;
+﻿using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Paging;
+using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Extensions;
 using System.Threading.Tasks;
-using InstantDelivery.Model.Employees;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
     public class EmployeesServiceProxy : ServiceProxyBase
     {
-        public EmployeesServiceProxy() : base("Employees")
+        public EmployeesServiceProxy(IDialogManager dialogManager)
+            : base("Employees", dialogManager)
         { }
 
         public async Task<EmployeeDto> GetById(int employeeId)
         {
             return await Get<EmployeeDto>(employeeId.ToString());
         }
-        
+
         public async Task<EmployeeDto> GetLoggedData()
         {
             const string queryString = "LoggedCourierData";

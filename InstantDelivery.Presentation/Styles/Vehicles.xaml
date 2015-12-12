@@ -1,7 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                    xmlns:converters="clr-namespace:InstantDelivery.Converters">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="VehicleModelTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource EditDialogTextBox}">
         <Setter Property="Visibility" Value="{Binding ElementName=AddNewVehicleModel, Path=IsChecked, Converter={StaticResource BoolToVisibility}}"></Setter>
