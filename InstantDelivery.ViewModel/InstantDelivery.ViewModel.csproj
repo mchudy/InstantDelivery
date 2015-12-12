@@ -78,6 +78,7 @@
     <Compile Include="Proxies\PackagesServiceProxy.cs" />
     <Compile Include="Proxies\ServiceProxyBase.cs" />
     <Compile Include="Proxies\StatisticsServiceProxy.cs" />
+    <Compile Include="Proxies\UsersServiceProxy.cs" />
     <Compile Include="Proxies\VehiclesServiceProxy.cs" />
     <Compile Include="ShowShell.cs" />
     <Compile Include="ViewModels\AdministratorShellViewModel.cs" />

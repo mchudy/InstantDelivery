@@ -51,6 +51,10 @@ namespace InstantDelivery.Service
                 .ForMember(s => s.Id, c => c.Ignore());
             Mapper.CreateMap<AddVehicleDto, Vehicle>();
             Mapper.CreateMap<AddVehicleModelDto, VehicleModel>();
+
+            Mapper.CreateMap<Employee, UserDto>()
+                .ForMember(s => s.UserName, c => c.MapFrom(e => e.User.UserName))
+                .ForMember(s => s.Role, c => c.Ignore());
         }
     }
 }
