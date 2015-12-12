@@ -78,6 +78,10 @@ namespace InstantDelivery.Service.Controllers
         [Route("Register"), HttpPost]
         public IHttpActionResult RegisterPackage(PackageDto package)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             package.Status = PackageStatus.New;
             package.Cost = pricingStrategy.GetCost(package);
             var newPackage = Mapper.Map<Package>(package);

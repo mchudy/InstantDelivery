@@ -2,13 +2,12 @@
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Model;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.Model.Vehicles;
 using InstantDelivery.Service.Paging;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -55,27 +54,37 @@ namespace InstantDelivery.Service.Controllers
 
         public IHttpActionResult Post(AddVehicleDto newVehicle)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var model = context.VehicleModels.Find(newVehicle.VehicleModelId);
             var vehicle = Mapper.Map<Vehicle>(newVehicle);
             vehicle.VehicleModel = model;
             context.Vehicles.Add(vehicle);
             context.SaveChanges();
-            //TODO: return 201
             return Ok();
         }
 
         [Route("Models"), HttpPost]
         public IHttpActionResult PostVehicleModel(AddVehicleModelDto newVehicleModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var vehicleModel = Mapper.Map<VehicleModel>(newVehicleModel);
             context.VehicleModels.Add(vehicleModel);
             context.SaveChanges();
-            //TODO: return 201
             return Ok(vehicleModel.Id);
         }
 
         public IHttpActionResult Put(VehicleDto vehicle)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var oldVehicle = context.Vehicles.Find(vehicle.Id);
             if (oldVehicle == null)
             {

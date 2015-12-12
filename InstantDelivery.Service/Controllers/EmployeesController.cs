@@ -110,6 +110,10 @@ namespace InstantDelivery.Service.Controllers
         /// <param name="newEmployee">Nowy pracownik</param>
         public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             Employee employee = Mapper.Map<Employee>(newEmployee);
             var password = RandomString(15);
             var role = newEmployee.Role;
