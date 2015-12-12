@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
@@ -8,10 +10,13 @@ using InstantDelivery.Model.Paging;
 using InstantDelivery.Service.Paging;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Http;
 using InstantDelivery.Service.Helpers;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web;
+using System.Web.Security;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -20,10 +25,11 @@ namespace InstantDelivery.Service.Controllers
     public class EmployeesController : ApiController
     {
         private readonly InstantDeliveryContext context;
-
-        public EmployeesController(InstantDeliveryContext context)
+        private readonly UserManager<User> userManager; 
+        public EmployeesController(InstantDeliveryContext context, UserManager<User> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
 
@@ -93,6 +99,15 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        private static string RandomString(int Size)
+        {
+            var random = new Random();
+            string input = "abcdefghijklmnopqrstuvwxyz0123456789";
+            var chars = Enumerable.Range(0, Size)
+                                   .Select(x => input[random.Next(0, input.Length)]);
+            return new string(chars.ToArray());
+        }
+
         /// <summary>
         /// Dodaje pracownika do bazy danych
         /// </summary>
@@ -100,11 +115,26 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
             Employee employee = Mapper.Map<Employee>(newEmployee);
-            employee.User=new User();
-            employee.User.UserName = employee.LastName + employee.FirstName;
-            employee.User.Roles.Add(new IdentityUserRole() {RoleId="1", UserId = employee.User.Id});
-            // randomize password lets say
-            // hash it and connect somehow to database
+
+            // not sure what about the role
+            var users = new[]
+            {
+                new {User = new User {UserName = employee.LastName+employee.FirstName}, Password = RandomString(5), Role = Role.Courier}
+            };
+
+            foreach (var userData in users)
+            {
+                if (context.Users.Any(u => userData.User.UserName == u.UserName)) continue;
+                var result = userManager.Create(userData.User, userData.Password);
+                if (!result.Succeeded)
+                {
+                    var results =
+                        result.Errors.Select(
+                            e => new DbEntityValidationResult(context.Entry(userData), new[] { new DbValidationError("", e) }));
+                    throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                }
+                userManager.AddToRole(userData.User.Id, userData.Role.ToString());
+            }
             context.Employees.Add(employee);
             context.SaveChanges();
             using (var eh = new EMailHelper())

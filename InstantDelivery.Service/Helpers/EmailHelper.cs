@@ -38,11 +38,11 @@ namespace InstantDelivery.Service.Helpers
         /// <param name="toAddress">To address</param>
         public void SendEmail(string toAddress, string subject, string body, string replyTo = null)
         {
+            if (string.IsNullOrEmpty(toAddress)) return;
             try
             {
                 SendEmail(DefaultAccount, subject, body,
-                          new MailAddress(DefaultAccount.Email, DefaultAccount.DisplayName),
-                          (replyTo == null ? new MailAddress(DefaultAccount.Email, DefaultAccount.DisplayName) : new MailAddress(toAddress)), replyTo);
+                          new MailAddress("rosyjski031@gmail.com", "Instant Delivery"),new MailAddress(toAddress), replyTo);
             }
             catch (Exception)
             {
