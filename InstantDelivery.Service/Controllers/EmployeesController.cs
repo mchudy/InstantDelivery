@@ -67,14 +67,23 @@ namespace InstantDelivery.Service.Controllers
             var employees = context.Employees.AsQueryable();
             employees = ApplyFilters(employees, firstName, lastName, email);
             var dtos = employees.ProjectTo<EmployeeDto>();
-            return Ok(PagingHelper.GetPagedResult(dtos, query));
+            var result = PagingHelper.GetPagedResult(dtos, query);
+            foreach (var dto in result.PageCollection)
+            {
+                var user = context.Employees.Find(dto.Id).User;
+                if (user != null)
+                {
+                    dto.Role = (Role)Enum.Parse(typeof(Role), userManager.GetRoles(user.Id).First());
+                }
+            }
+            return Ok(result);
         }
 
         [Route("Packages/Page"), HttpGet]
         public IHttpActionResult PackagesPage([FromUri] PageQuery query, string firstName = "",
             string lastName = "", string email = "")
         {
-            var employees = context.Employees.AsQueryable();
+            var employees = GetAllCouriers();
             employees = ApplyFilters(employees, firstName, lastName, email);
             var dtos = employees.Include(e => e.Packages)
                                 .ProjectTo<EmployeePackagesDto>();
@@ -85,7 +94,7 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult VehiclesPage([FromUri] PageQuery query, string firstName = "",
                 string lastName = "", string email = "")
         {
-            var employees = context.Employees.AsQueryable();
+            var employees = GetAllCouriers();
             employees = ApplyFilters(employees, firstName, lastName, email);
             var dtos = employees.Include(e => e.Vehicle)
                                 .Include(e => e.Vehicle.VehicleModel)
@@ -212,6 +221,15 @@ namespace InstantDelivery.Service.Controllers
                 result = result.Where(e => e.Email.StartsWith(email));
             }
             return result;
+        }
+
+        private IQueryable<Employee> GetAllCouriers()
+        {
+            var courierRoleId = context.Roles.First(r => r.Name == Role.Courier.ToString()).Id;
+            var employees = context.Employees
+                    .Where(e => e.User.Roles.Any(r => r.RoleId == courierRoleId))
+                    .AsQueryable();
+            return employees;
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Common.Enums;
+﻿using InstantDelivery.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Model.Employees
 {
@@ -73,5 +73,7 @@ namespace InstantDelivery.Model.Employees
         /// Data zatrudnienia
         /// </summary>
         public DateTime? HireDate { get; set; }
+
+        public Role? Role { get; set; }
     }
 }

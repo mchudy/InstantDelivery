@@ -1,8 +1,7 @@
-﻿using InstantDelivery.Model;
+﻿using InstantDelivery.Model.Employees;
 using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
-using InstantDelivery.Model.Employees;
 
 namespace InstantDelivery.ViewModel
 {
@@ -27,8 +26,11 @@ namespace InstantDelivery.ViewModel
             var query = GetPageQuery();
             AddFilters(query);
             var pageDto = await service.PackagesPage(query);
-            PageCount = pageDto.PageCount;
-            Employees = pageDto.PageCollection;
+            if (pageDto != null)
+            {
+                PageCount = pageDto.PageCount;
+                Employees = pageDto.PageCollection;
+            }
         }
     }
 }

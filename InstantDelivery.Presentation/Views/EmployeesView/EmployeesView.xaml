@@ -27,17 +27,13 @@
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                   cal:Message.Attach="[Event MouseDoubleClick] = [Action EditEmployee()];[Event Sorting] = [Action Sort($eventArgs)];">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200" />
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="200"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="180" />
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="180"/>
                 <DataGridTextColumn Header="Data urodzenia" Width="150" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"/>
-                <controls:DataGridNumericUpDownColumn Header="Pensja" 
-                                                      Binding="{Binding Salary}"
-                                                      StringFormat="C" 
-                                                      Minimum="0" Width="100" />
                 <DataGridTextColumn Header="Data zatrudnienia" Width="150" Binding="{Binding HireDate, StringFormat=dd/MM/yyyy}"/>
                 <DataGridTextColumn Header="Numer telefonu" Binding="{Binding PhoneNumber}" Width="150" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
-                <DataGridTextColumn Header="PESEL" Binding="{Binding Pesel}" Width="150" />
+                <DataGridTextColumn Header="Pozycja" Binding="{Binding Role, Converter={StaticResource EnumToDescription}}" Width="150" />
             </DataGrid.Columns>
         </DataGrid>
         <controls1:DataPager Grid.Row="4" CurrentPage="{Binding CurrentPage, Mode=TwoWay}" PageCount="{Binding PageCount, Mode=TwoWay}"

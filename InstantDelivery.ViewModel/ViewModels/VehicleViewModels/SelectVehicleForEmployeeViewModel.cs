@@ -1,9 +1,8 @@
-﻿using InstantDelivery.Model;
+﻿using InstantDelivery.Model.Employees;
+using InstantDelivery.Model.Vehicles;
 using InstantDelivery.ViewModel.Proxies;
 using PropertyChanged;
 using System.Collections.Generic;
-using InstantDelivery.Model.Employees;
-using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.ViewModel
 {
@@ -75,12 +74,15 @@ namespace InstantDelivery.ViewModel
         {
             var query = GetPageQuery();
             var pageDto = await vehiclesService.AvailableVehiclesPage(query);
-            PageCount = pageDto.PageCount;
-            Vehicles = pageDto.PageCollection;
-            if (SelectedEmployee.Vehicle != null)
+            if (pageDto != null)
             {
-                Vehicles.Add(SelectedEmployee.Vehicle);
-                SelectedVehicle = SelectedEmployee?.Vehicle;
+                PageCount = pageDto.PageCount;
+                Vehicles = pageDto.PageCollection;
+                if (SelectedEmployee.Vehicle != null)
+                {
+                    Vehicles.Add(SelectedEmployee.Vehicle);
+                    SelectedVehicle = SelectedEmployee?.Vehicle;
+                }
             }
         }
     }

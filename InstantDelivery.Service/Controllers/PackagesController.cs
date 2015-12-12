@@ -168,7 +168,10 @@ namespace InstantDelivery.Service.Controllers
         {
             var employee = context.Employees
                            .FirstOrDefault(e => e.Packages.Count(p => p.Id == id) > 0);
-            //TODO: return 404 if not found
+            if (employee == null)
+            {
+                return NotFound();
+            }
             return Ok(Mapper.Map<EmployeeDto>(employee));
         }
 
@@ -184,8 +187,9 @@ namespace InstantDelivery.Service.Controllers
         {
             var package = context.Packages.Find(packageId);
             var employees = context.Employees.Where(
-                                e => (double)(e.Packages.Where(p => p.Id != packageId).Sum(p => p.Weight) + package.Weight) <
-                                    e.Vehicle.VehicleModel.Payload)
+                                e => e.Vehicle != null &&
+                                    (double)(e.Packages.Where(p => p.Id != packageId).Sum(p => p.Weight) + package.Weight) <
+                                        e.Vehicle.VehicleModel.Payload)
                             .ProjectTo<EmployeeDto>();
             return Ok(PagingHelper.GetPagedResult(employees, query));
         }
