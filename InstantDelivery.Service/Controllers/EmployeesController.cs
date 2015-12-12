@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
@@ -100,15 +102,6 @@ namespace InstantDelivery.Service.Controllers
                                 .Include(e => e.Vehicle.VehicleModel)
                                 .ProjectTo<EmployeeVehicleDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
-        }
-
-        private static string RandomString(int Size)
-        {
-            var random = new Random();
-            string input = "abcdefghijklmnopqrstuvwxyz0123456789";
-            var chars = Enumerable.Range(0, Size)
-                                   .Select(x => input[random.Next(0, input.Length)]);
-            return new string(chars.ToArray());
         }
 
         /// <summary>
@@ -230,6 +223,25 @@ namespace InstantDelivery.Service.Controllers
                     .Where(e => e.User.Roles.Any(r => r.RoleId == courierRoleId))
                     .AsQueryable();
             return employees;
+        }
+
+        private static string RandomString(int length)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@";
+            StringBuilder res = new StringBuilder();
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                byte[] uintBuffer = new byte[sizeof(uint)];
+
+                while (length-- > 0)
+                {
+                    rng.GetBytes(uintBuffer);
+                    uint num = BitConverter.ToUInt32(uintBuffer, 0);
+                    res.Append(valid[(int)(num % (uint)valid.Length)]);
+                }
+            }
+
+            return res.ToString();
         }
     }
 }
