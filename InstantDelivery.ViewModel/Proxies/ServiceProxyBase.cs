@@ -147,16 +147,18 @@ namespace InstantDelivery.ViewModel.Proxies
 
         private async Task ShowError(HttpStatusCode statusCode)
         {
-            string title;
+            string title = "Błąd";
             string message;
             if (statusCode == HttpStatusCode.NotFound)
             {
-                title = "Błąd";
                 message = "Nie znaleziono danego obiektu. Może to oznaczać, że został usunięty przez innego pracownika.";
+            }
+            else if (statusCode == HttpStatusCode.BadRequest)
+            {
+                message = "Upewnij się, czy wprowadzone zostały poprawne dane";
             }
             else
             {
-                title = "Błąd";
                 message = "Wystąpił błąd. Spróbuj ponownie za chwilę.";
             }
             await dialogManager.ShowDialogAsync(new ErrorDialogViewModel

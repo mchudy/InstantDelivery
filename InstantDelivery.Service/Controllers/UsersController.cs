@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
     {

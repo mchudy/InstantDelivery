@@ -54,6 +54,7 @@ namespace InstantDelivery.Service
 
             Mapper.CreateMap<Employee, UserDto>()
                 .ForMember(s => s.UserName, c => c.MapFrom(e => e.User.UserName))
+                .ForMember(s => s.Id, c => c.MapFrom(e => e.User.Id))
                 .ForMember(s => s.Role, c => c.Ignore());
         }
     }
