@@ -34,7 +34,11 @@
             <Label Content="Nazwisko:" Grid.Column="2" Grid.Row="0"  Style="{StaticResource EditDialogLabel}"  />
         <TextBox Grid.Column="3" Grid.Row="0" x:Name="NewEmployee_LastName" Style="{StaticResource EditDialogTextBox}" />
 
-            <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="1" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
+        <Label Content="Pozycja:" Grid.Column="2" Grid.Row="1"  Style="{StaticResource EditDialogLabel}"  />
+        <ComboBox Grid.Column="3" Grid.Row="1" SelectedValue="{Binding NewEmployee.Role}" Style="{StaticResource EditComboBoxLabel}"
+                  ItemsSource="{helpers:EnumSource {x:Type enums:Role}}" x:Name="NewEmployee_Role" DisplayMemberPath="Name" SelectedValuePath="Value" />
+
+        <Label Content="Data urodzenia:" Grid.Column="0" Grid.Row="1" Style="{StaticResource EditDialogLabel}"  VerticalAlignment="Center" />
         <DatePicker Grid.Column="1" Grid.Row="1" Height="25"  Margin="10" x:Name="NewEmployee_DateOfBirth" HorizontalAlignment="Left"
                         VerticalAlignment="Center" Width="120" />
 

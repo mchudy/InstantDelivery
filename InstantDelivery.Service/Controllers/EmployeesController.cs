@@ -111,10 +111,8 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult Post(EmployeeAddDto newEmployee)
         {
             Employee employee = Mapper.Map<Employee>(newEmployee);
-
-            // not sure what about the role
             var password = RandomString(15);
-            var role = Role.Courier;
+            var role = newEmployee.Role;
             var user = new User { UserName = employee.LastName + employee.FirstName };
             if (context.Users.Any(u => user.UserName == u.UserName))
             {
