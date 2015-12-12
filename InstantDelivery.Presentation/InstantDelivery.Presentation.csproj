@@ -103,11 +103,15 @@
     </Compile>
     <Compile Include="Helpers\EnumSource.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\PasswordBoxAssistant.cs" />
     <Compile Include="Views\AdministratorShellView.xaml.cs">
       <DependentUpon>AdministratorShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdministratorView\ManageUsersGroupsView.xaml.cs">
       <DependentUpon>ManageUsersGroupsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CourierShellView.xaml.cs">
       <DependentUpon>CourierShellView.xaml</DependentUpon>
@@ -261,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdministratorView\ManageUsersGroupsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

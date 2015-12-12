@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressDto.cs" />
+    <Compile Include="ChangePasswordDto.cs" />
     <Compile Include="Employees\EmployeeAddDto.cs" />
     <Compile Include="Employees\EmployeeDto.cs" />
     <Compile Include="Employees\EmployeePackagesDto.cs" />

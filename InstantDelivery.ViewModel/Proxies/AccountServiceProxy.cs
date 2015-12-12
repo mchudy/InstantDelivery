@@ -1,4 +1,5 @@
 ﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Model;
 using InstantDelivery.ViewModel.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -22,6 +23,11 @@ namespace InstantDelivery.ViewModel.Proxies
         public async Task<Role[]> GetRoles()
         {
             return await Get<Role[]>("Roles");
+        }
+
+        public async Task ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            await PostAsJson("ChangePassword", changePasswordDto);
         }
 
         public bool Login(string username, string password)

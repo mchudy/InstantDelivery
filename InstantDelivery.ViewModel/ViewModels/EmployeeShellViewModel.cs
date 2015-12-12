@@ -96,5 +96,13 @@ namespace InstantDelivery.ViewModel
         {
             ActivateItem(IoC.Get<VehicleManageViewModel>());
         }
+
+        /// <summary>
+        /// Widok zmiany hasła
+        /// </summary>
+        public void ChangePassword()
+        {
+            ActivateItem(IoC.Get<ChangePasswordViewModel>());
+        }
     }
 }

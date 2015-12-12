@@ -60,6 +60,7 @@ namespace InstantDelivery.Service
         {
             builder.RegisterType<UserStore<User>>()
                 .As<IUserStore<User, string>>()
+                .As<IUserStore<User>>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<UserManager<User, string>>()

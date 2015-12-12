@@ -22,8 +22,8 @@ namespace InstantDelivery.Service.Controllers
     public class EmployeesController : ApiController
     {
         private readonly InstantDeliveryContext context;
-        private readonly UserManager<User, string> userManager;
-        public EmployeesController(InstantDeliveryContext context, UserManager<User, string> userManager)
+        private readonly UserManager<User> userManager;
+        public EmployeesController(InstantDeliveryContext context, UserManager<User> userManager)
         {
             this.context = context;
             this.userManager = userManager;

@@ -23,7 +23,11 @@
             <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Panel administratora" Name="Kadry" VerticalAlignment="Center" IsExpanded="True">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ManageUsersGroups" Content="Zarządzaj grupami użytkowników"></Button>
-                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ExploreUsers" Content="Przeglądaj użytkowników"></Button>
+                </StackPanel>
+            </Expander>
+            <Expander Style="{StaticResource ExpanderLeftMenu}" Header="Konto" Name="Konto" IsExpanded="True">
+                <StackPanel>
+                    <Button Style="{StaticResource ButtonInExpanderLeftMenu}" x:Name="ChangePassword" Content="Zmień hasło"></Button>
                 </StackPanel>
             </Expander>
         </StackPanel>

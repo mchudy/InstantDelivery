@@ -83,6 +83,7 @@
     <Compile Include="ShowShell.cs" />
     <Compile Include="ViewModels\AdministratorShellViewModel.cs" />
     <Compile Include="ViewModels\AdministratorViewModels\ManageUsersGroupsViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\CourierShellViewModel.cs" />
     <Compile Include="ViewModels\CourierViewModels\CourierPackagesViewModelBase.cs" />
     <Compile Include="ViewModels\CourierViewModels\CourierPackagesMapViewModel.cs" />

@@ -50,6 +50,31 @@
         </Style.Triggers>
     </Style>
     
+     <Style TargetType="{x:Type PasswordBox}" x:Key="EditDialogPasswordBox" BasedOn="{StaticResource {x:Type PasswordBox}}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Height" Value="23"></Setter>
+        <Setter Property="MinWidth" Value="120"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self},  Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="BorderBrush" Value="Red"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style
        x:Key="ExpanderLeftMenu" TargetType="{x:Type Expander}" BasedOn="{StaticResource {x:Type Expander}}">
         <Setter Property="Margin" Value="2" />
@@ -62,6 +87,39 @@
 
     <Style x:Key="LeftPanel" TargetType="{x:Type StackPanel}">
         <Setter Property="Margin" Value="10"></Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="ChangePasswordSaveButton" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="MinWidth" Value="60"></Setter>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=ChangePasswordDto_CurrentPassword, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=ChangePasswordDto_NewPassword, Path=(Validation.HasError)}" Value="false" />
+                    <Condition Binding="{Binding ElementName=ChangePasswordDto_ConfirmNewPassword, Path=(Validation.HasError)}" Value="false" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="true" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=CurrentPasswordPasswordBox, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=NewPasswordPasswordBox, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=ConfirmNewPasswordPasswordBox, Path=(Validation.HasError)}" Value="true" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="false" />
+            </MultiDataTrigger>
+        </Style.Triggers>
     </Style>
 
     <converters:EnumToDescriptionConverter x:Key="EnumToDescription" />

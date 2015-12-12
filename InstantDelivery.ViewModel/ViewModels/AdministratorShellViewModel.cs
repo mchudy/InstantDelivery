@@ -17,5 +17,13 @@ namespace InstantDelivery.ViewModel
             ActivateItem(IoC.Get<ManageUsersGroupsViewModel>());
         }
 
+        /// <summary>
+        /// Widok zmiany hasła
+        /// </summary>
+        public void ChangePassword()
+        {
+            ActivateItem(IoC.Get<ChangePasswordViewModel>());
+        }
+
     }
 }
