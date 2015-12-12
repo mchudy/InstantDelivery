@@ -23,7 +23,8 @@
                   CanUserResizeRows="False" CanUserSortColumns="True" 
                   EnableRowVirtualization="True"
                   VerticalScrollBarVisibility="Auto" IsReadOnly="True"
-                  cal:Message.Attach="[Event Sorting] = [Action Sort($eventArgs)];">
+                  cal:Message.Attach="[Event MouseDoubleClick] = [Action EditUser()];[Event Sorting] = [Action Sort($eventArgs)];"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa użytkownika" Binding="{Binding UserName}" Width="200" />
                 <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="200" />

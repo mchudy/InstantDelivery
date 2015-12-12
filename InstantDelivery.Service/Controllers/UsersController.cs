@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
@@ -17,7 +18,7 @@ namespace InstantDelivery.Service.Controllers
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
     {
-        private InstantDeliveryContext context;
+        private readonly InstantDeliveryContext context;
         private readonly UserManager<User, string> userManager;
 
         public UsersController(InstantDeliveryContext context, UserManager<User, string> userManager)
@@ -39,6 +40,27 @@ namespace InstantDelivery.Service.Controllers
                 dto.Role = (Role)Enum.Parse(typeof(Role), userManager.GetRoles(dto.Id).First());
             }
             return Ok(result);
+        }
+
+        [Route("ChangeRole/{username}"), HttpPost]
+        public async Task<IHttpActionResult> ChangeRole(string username, [FromBody]Role newRole)
+        {
+            User user = await userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            string[] allRoles = context.Roles.Select(r => r.Name).ToArray();
+            foreach (var role in allRoles)
+            {
+                await userManager.RemoveFromRoleAsync(user.Id, role);
+            }
+            var result = await userManager.AddToRoleAsync(user.Id, newRole.ToString());
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

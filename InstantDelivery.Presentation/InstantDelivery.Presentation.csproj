@@ -107,6 +107,9 @@
     <Compile Include="Views\AdministratorShellView.xaml.cs">
       <DependentUpon>AdministratorShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AdministratorView\ChangeUserRoleView.xaml.cs">
+      <DependentUpon>ChangeUserRoleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdministratorView\ManageUsersGroupsView.xaml.cs">
       <DependentUpon>ManageUsersGroupsView.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdministratorShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdministratorView\ChangeUserRoleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

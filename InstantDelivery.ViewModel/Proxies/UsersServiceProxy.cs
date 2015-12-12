@@ -1,4 +1,5 @@
-﻿using InstantDelivery.Model;
+﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Model;
 using InstantDelivery.Model.Paging;
 using InstantDelivery.ViewModel.Dialogs;
 using InstantDelivery.ViewModel.Extensions;
@@ -15,6 +16,11 @@ namespace InstantDelivery.ViewModel.Proxies
         public async Task<PagedResult<UserDto>> Page(PageQuery query)
         {
             return await Get<PagedResult<UserDto>>("Page?" + query.ToQueryString());
+        }
+
+        public async Task ChangeRole(string userName, Role role)
+        {
+            await PostAsJson<Role>($"ChangeRole/{userName}", role);
         }
     }
 }

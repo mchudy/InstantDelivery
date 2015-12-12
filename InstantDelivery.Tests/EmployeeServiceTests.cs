@@ -1,17 +1,13 @@
-﻿using AutoMapper;
-using InstantDelivery.Common.Enums;
+﻿using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
-using InstantDelivery.Model;
+using InstantDelivery.Model.Employees;
 using InstantDelivery.Service;
 using InstantDelivery.Service.Controllers;
-using Moq;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http.Results;
-using InstantDelivery.Model.Employees;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Moq;
+using System.Web.Http.Results;
 using Xunit;
 
 namespace InstantDelivery.Tests
@@ -65,33 +61,6 @@ namespace InstantDelivery.Tests
             controller.Delete(employee.Id);
 
             Assert.Equal(PackageStatus.New, package.Status);
-        }
-
-        [Fact]
-        public void AddEmployee_ForAnyValidatedEmployee_ShouldAlwaysAddEmployee()
-        {
-            //var employees = new List<Employee>().AsQueryable();
-            //var users = new List<User>().AsQueryable();
-
-            //var employeeToAdd = new Employee { FirstName = "Ted", LastName = "Mosby" };
-
-            //var mockEmployees = MockDbSetHelper.CreateMockSet(employees);
-            //// User nie może dziedziczyć po entity to tam jest jakiś interfejs ważny help
-            //var mockUsers = MockDbSetHelper.CreateMockSet(users);
-
-            //var mockContext = new Mock<InstantDeliveryContext>();
-            //mockContext.Setup(c => c.Employees).Returns(mockEmployees.Object);
-            //mockContext.Setup(c => c.Users).Returns(mockUsers.Object);
-
-            //var userStore = new UserStore<User>(mockContext.Object);
-            //var userManager = new UserManager<User>(userStore);
-            //var controller = new EmployeesController(mockContext.Object, userManager);
-            //var employeeToAddDto = new EmployeeAddDto();
-            //Mapper.DynamicMap(employeeToAdd, employeeToAddDto);
-            //controller.Post(employeeToAddDto);
-
-            //mockEmployees.Verify(m => m.Add(It.IsAny<Employee>()), Times.Once());
-            //mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
         [Fact]
