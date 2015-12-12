@@ -196,17 +196,17 @@ namespace InstantDelivery.Service.Helpers
         public string RegistrationBody(Employee employee, string password)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
-                   "<br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>"
+                   "<br /><br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>"
                    + employee.LastName + employee.FirstName + "</strong><br />" +
                    "Hasło: <strong>" + password +
-                   "</strong><em><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
+                   "</strong><em><br /><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
 
         public string AssignedPackageBody(Employee employee)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
                    "<br />Otrzymałeś nowe zlecenie. Sprawdź stan w systemie." +
-                   "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
+                   "</strong><em><br /><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
     }
 }

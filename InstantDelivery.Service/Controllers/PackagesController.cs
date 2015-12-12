@@ -75,16 +75,6 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
-        [Route("Page"), HttpGet]
-        public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
-            PackageStatusFilter status = PackageStatusFilter.All)
-        {
-            var packages = context.Set<Package>().AsQueryable();
-            packages = ApplyFilters(packages, id, status);
-            var dtos = packages.ProjectTo<PackageDto>();
-            return Ok(PagingHelper.GetPagedResult(dtos, query));
-        }
-
         [Route("Register"), HttpPost]
         public IHttpActionResult RegisterPackage(PackageDto package)
         {

@@ -50,6 +50,7 @@ namespace InstantDelivery.ViewModel.Proxies
 
         public void Logout()
         {
+            client?.CancelPendingRequests();
             client?.Dispose();
             client = null;
         }
