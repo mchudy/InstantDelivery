@@ -6,12 +6,12 @@ using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
+using InstantDelivery.Service.Helpers;
 using InstantDelivery.Service.Paging;
 using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Http;
-using InstantDelivery.Service.Helpers;
 
 namespace InstantDelivery.Service.Controllers
 {
@@ -139,7 +139,6 @@ namespace InstantDelivery.Service.Controllers
         /// <param name="employeeId"></param>
         /// <returns></returns>
         [Route("Assign/{packageId:int}"), HttpPost]
-        //TODO: error handling
         public IHttpActionResult AssignPackage([FromUri]int packageId, [FromBody]int employeeId)
         {
             var package = context.Packages.Find(packageId);
@@ -155,9 +154,9 @@ namespace InstantDelivery.Service.Controllers
             context.SaveChanges();
             using (var eh = new EMailHelper())
             {
-                eh.SendEmail(employee.Email,"Instant Delivery - Nowe zlecenie" , eh.AssignedPackageBody(employee));
+                eh.SendEmail(employee.Email, "Instant Delivery - Nowe zlecenie", eh.AssignedPackageBody(employee));
             }
-                return Ok();
+            return Ok();
         }
 
         /// <summary>

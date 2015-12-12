@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InstantDelivery.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
-using InstantDelivery.Domain.Entities;
 
 namespace InstantDelivery.Service.Helpers
 {
@@ -42,7 +42,7 @@ namespace InstantDelivery.Service.Helpers
             try
             {
                 SendEmail(DefaultAccount, subject, body,
-                          new MailAddress("rosyjski031@gmail.com", "Instant Delivery"),new MailAddress(toAddress), replyTo);
+                          new MailAddress("rosyjski031@gmail.com", "Instant Delivery"), new MailAddress(toAddress), replyTo);
             }
             catch (Exception)
             {
@@ -66,7 +66,7 @@ namespace InstantDelivery.Service.Helpers
                                        MailAddress from, MailAddress to, string replyTo,
                                       IEnumerable<string> bcc = null, IEnumerable<string> cc = null)
         {
-            var message = new MailMessage {From = @from};
+            var message = new MailMessage { From = @from };
             message.To.Add(to);
             if (!string.IsNullOrEmpty(replyTo))
                 message.ReplyToList.Add(new MailAddress(replyTo));
@@ -191,21 +191,21 @@ namespace InstantDelivery.Service.Helpers
 
         }
 
-        public void Dispose(){}
+        public void Dispose() { }
 
         public string RegistrationBody(Employee employee, string password)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
-                   "<br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>" 
+                   "<br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>"
                    + employee.LastName + employee.FirstName + "</strong><br />" +
                    "Hasło: <strong>" + password +
-                   "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
+                   "</strong><em><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
 
         public string AssignedPackageBody(Employee employee)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
-                   "<br />Otrzymałeś nowe zlecenie. Sprawdź stan w systemie."+
+                   "<br />Otrzymałeś nowe zlecenie. Sprawdź stan w systemie." +
                    "</strong><em>Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
     }

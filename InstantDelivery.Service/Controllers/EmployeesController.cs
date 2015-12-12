@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Paging;
+using InstantDelivery.Service.Helpers;
 using InstantDelivery.Service.Paging;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Http;
-using InstantDelivery.Service.Helpers;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Web;
-using System.Web.Security;
 
 namespace InstantDelivery.Service.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
         private readonly InstantDeliveryContext context;
-        private readonly UserManager<User> userManager; 
-        public EmployeesController(InstantDeliveryContext context, UserManager<User> userManager)
+        private readonly UserManager<User, string> userManager;
+        public EmployeesController(InstantDeliveryContext context, UserManager<User, string> userManager)
         {
             this.context = context;
             this.userManager = userManager;
         }
-
 
         /// <summary>
         /// Zwraca dane zalogowanego kuriera
@@ -117,31 +111,26 @@ namespace InstantDelivery.Service.Controllers
             Employee employee = Mapper.Map<Employee>(newEmployee);
 
             // not sure what about the role
-            var users = new[]
+            var password = RandomString(15);
+            var role = Role.Courier;
+            var user = new User { UserName = employee.LastName + employee.FirstName };
+            if (context.Users.Any(u => user.UserName == u.UserName))
             {
-                new {User = new User {UserName = employee.LastName+employee.FirstName}, Password = RandomString(5), Role = Role.Courier}
-            };
-
-            foreach (var userData in users)
-            {
-                if (context.Users.Any(u => userData.User.UserName == u.UserName)) continue;
-                var result = userManager.Create(userData.User, userData.Password);
-                if (!result.Succeeded)
-                {
-                    var results =
-                        result.Errors.Select(
-                            e => new DbEntityValidationResult(context.Entry(userData), new[] { new DbValidationError("", e) }));
-                    throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
-                }
-                userManager.AddToRole(userData.User.Id, userData.Role.ToString());
+                return BadRequest();
             }
+            var result = userManager.Create(user, password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.ToString());
+            }
+            userManager.AddToRole(user.Id, role.ToString());
+            employee.User = user;
             context.Employees.Add(employee);
             context.SaveChanges();
             using (var eh = new EMailHelper())
             {
-                eh.SendEmail(employee.Email, "Instant Delivery - Rejestracja", eh.RegistrationBody(employee,"password"));
+                eh.SendEmail(employee.Email, "Instant Delivery - Rejestracja", eh.RegistrationBody(employee, password));
             }
-            //TODO: return 201
             return Ok(employee.Id);
         }
 
