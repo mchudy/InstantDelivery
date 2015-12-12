@@ -14,6 +14,9 @@ namespace InstantDelivery.Common.Enums
         InDelivery,
 
         [Description("Dostarczona")]
-        Delivered
+        Delivered,
+
+        [Description("Awizowana")]
+        NoticeLeft,
     }
 }

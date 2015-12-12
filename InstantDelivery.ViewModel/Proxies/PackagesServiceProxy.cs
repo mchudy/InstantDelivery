@@ -59,6 +59,16 @@ namespace InstantDelivery.ViewModel.Proxies
             await Delete(id);
         }
 
+        public async Task DetachPackageFromEmployee(int employeeId)
+        {
+            var content = new FormUrlEncodedContent(
+            new List<KeyValuePair<string, string>>
+            {
+                   new KeyValuePair<string, string>("", employeeId.ToString()),
+            });
+            await Post("DetachPackageFromEmployee", content);
+        }
+
         public async Task RegisterPackage(PackageDto newPackage)
         {
             await PostAsJson("Register", newPackage);

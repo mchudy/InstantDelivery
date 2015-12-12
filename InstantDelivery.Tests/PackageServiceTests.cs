@@ -225,6 +225,33 @@ namespace InstantDelivery.Tests
         }
 
         [Fact]
+        public void DetachPackageFromEmployee_ForCorrectConditions_ShouldDetachPackageFromEmployee()
+        {
+            var package = new Package
+            {
+                Id = 1,
+                Height = 100,
+                Weight = 100,
+                Width = 100,
+                Length = 100,
+                Status = PackageStatus.New
+            };
+            var employee = new Employee { Id = 1, FirstName = "A", LastName = "B" };
+
+            var mockContext = new Mock<InstantDeliveryContext>();
+            mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
+            mockContext.Setup(c => c.Employees).ReturnsDbSet(employee);
+            mockContext.Setup(m => m.PackageEvents).ReturnsDbSet(new List<PackageEvent>());
+
+            var controller = new PackagesController(mockContext.Object, null);
+
+            controller.AssignPackage(package.Id, employee.Id);
+
+            controller.DetachPackageFromEmployee(package.Id);
+            Assert.Equal(0, employee.Packages.Count);
+        }
+
+        [Fact]
         public void CalculatePackageCost()
         {
             var package = new Package

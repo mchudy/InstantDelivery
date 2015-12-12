@@ -23,9 +23,10 @@ namespace InstantDelivery.ViewModel
             UpdateData();
         }
 
-        public void NoticeLeft(PackageDto package)
+        public async void NoticeLeft(PackageDto package)
         {
-            //TODO
+            await service.DetachPackageFromEmployee(package.Id);
+            UpdateData();
         }
     }
 }

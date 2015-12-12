@@ -164,7 +164,7 @@ namespace InstantDelivery.Service.Controllers
                            .FirstOrDefault(e => e.Packages.Count(p => p.Id == id) > 0);
             if (employee == null)
             {
-                return NotFound();
+                return Ok();
             }
             return Ok(Mapper.Map<EmployeeDto>(employee));
         }
@@ -220,7 +220,7 @@ namespace InstantDelivery.Service.Controllers
             }
             if (status == PackageStatusFilter.InDelivery)
             {
-                result = result.Where(p => p.Status == PackageStatus.InDelivery);
+                result = result.Where(p => p.Status == PackageStatus.InDelivery || p.Status == PackageStatus.NoticeLeft);
             }
             else if (status == PackageStatusFilter.Delivered)
             {
@@ -231,6 +231,25 @@ namespace InstantDelivery.Service.Controllers
                 result = result.Where(p => p.Status == PackageStatus.New);
             }
             return result;
+        }
+        [Authorize]
+        [Route("DetachPackageFromEmployee"), HttpPost]
+        public IHttpActionResult DetachPackageFromEmployee([FromBody] int packageId)
+        {
+            var package = context.Packages.Find(packageId);
+            if (package == null)
+            {
+                return NotFound();
+            }
+            var employee = context.Employees.AsQueryable().FirstOrDefault(e => e.Packages.FirstOrDefault(p=>p.Id==packageId)!=null);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            employee.Packages.Remove(package);
+            package.Status = PackageStatus.NoticeLeft;
+            context.SaveChanges();
+            return Ok();
         }
     }
 }
