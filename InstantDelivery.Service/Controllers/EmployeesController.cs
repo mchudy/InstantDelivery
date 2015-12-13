@@ -149,7 +149,7 @@ namespace InstantDelivery.Service.Controllers
             Employee employee = Mapper.Map<Employee>(newEmployee);
             var password = RandomString(15);
             var role = newEmployee.Role;
-            var user = new User { UserName = employee.LastName + employee.FirstName };
+            var user = new User { UserName = GenerateUserName(employee) };
             if (context.Users.Any(u => user.UserName == u.UserName))
             {
                 return BadRequest();
@@ -276,6 +276,46 @@ namespace InstantDelivery.Service.Controllers
             }
 
             return res.ToString();
+        }
+
+        private string GenerateUserName(Employee employee)
+        {
+            string username = (employee.FirstName + employee.LastName).ToLower();
+            username = ReplaceNationalCharacters(username);
+            if (context.Users.Any(u => u.UserName == username))
+            {
+                int i = 1;
+                while (context.Users.Any(u => u.UserName == username + i))
+                {
+                    i++;
+                }
+                username = username + i;
+            }
+            return username;
+        }
+
+        private static string ReplaceNationalCharacters(string s)
+        {
+            StringBuilder sb = new StringBuilder(s);
+            sb.Replace('ą', 'a')
+              .Replace('ć', 'c')
+              .Replace('ę', 'e')
+              .Replace('ł', 'l')
+              .Replace('ń', 'n')
+              .Replace('ó', 'o')
+              .Replace('ś', 's')
+              .Replace('ż', 'z')
+              .Replace('ź', 'z')
+              .Replace('Ą', 'A')
+              .Replace('Ć', 'C')
+              .Replace('Ę', 'E')
+              .Replace('Ł', 'L')
+              .Replace('Ń', 'N')
+              .Replace('Ó', 'O')
+              .Replace('Ś', 'S')
+              .Replace('Ż', 'Z')
+              .Replace('Ź', 'Z');
+            return sb.ToString();
         }
     }
 }
