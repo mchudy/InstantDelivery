@@ -96,7 +96,6 @@ namespace InstantDelivery.Service.Controllers
                 Package = newPackage
             });
             context.SaveChanges();
-            //TODO: return 201
             return Ok();
         }
 
@@ -245,13 +244,19 @@ namespace InstantDelivery.Service.Controllers
             {
                 return NotFound();
             }
-            var employee = context.Employees.AsQueryable().FirstOrDefault(e => e.Packages.FirstOrDefault(p=>p.Id==packageId)!=null);
+            var employee = context.Employees.AsQueryable().FirstOrDefault(e => e.Packages.FirstOrDefault(p => p.Id == packageId) != null);
             if (employee == null)
             {
                 return NotFound();
             }
             employee.Packages.Remove(package);
             package.Status = PackageStatus.NoticeLeft;
+            context.PackageEvents.Add(new PackageEvent
+            {
+                Employee = employee,
+                Package = package,
+                EventType = PackageEventType.NoticeLeft
+            });
             context.SaveChanges();
             return Ok();
         }

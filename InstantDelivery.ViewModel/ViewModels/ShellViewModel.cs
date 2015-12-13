@@ -4,7 +4,7 @@ using System;
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShell>
+    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShellEvent>
     {
         private readonly IEventAggregator eventAggregator;
         private readonly AccountServiceProxy service;
@@ -15,7 +15,7 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
-        public void Handle(ShowShell @event)
+        public void Handle(ShowShellEvent @event)
         {
             Type viewModel = @event.ViewModel;
             ActivateItem(IoC.GetInstance(viewModel, ""));

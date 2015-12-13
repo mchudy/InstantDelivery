@@ -2,11 +2,11 @@
 
 namespace InstantDelivery.ViewModel
 {
-    public class ShowShell
+    public class ShowShellEvent
     {
         public Type ViewModel { get; private set; }
 
-        public ShowShell(Type viewModel)
+        public ShowShellEvent(Type viewModel)
         {
             ViewModel = viewModel;
         }

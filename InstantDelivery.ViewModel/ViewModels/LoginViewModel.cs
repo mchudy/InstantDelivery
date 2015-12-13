@@ -37,13 +37,13 @@ namespace InstantDelivery.ViewModel
                 switch (roles.FirstOrDefault())
                 {
                     case Role.Admin:
-                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(AdministratorShellViewModel)));
+                        eventAggregator.PublishOnUIThread(new ShowShellEvent(typeof(AdministratorShellViewModel)));
                         break;
                     case Role.AdministrativeEmployee:
-                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(EmployeeShellViewModel)));
+                        eventAggregator.PublishOnUIThread(new ShowShellEvent(typeof(EmployeeShellViewModel)));
                         break;
                     case Role.Courier:
-                        eventAggregator.PublishOnUIThread(new ShowShell(typeof(CourierShellViewModel)));
+                        eventAggregator.PublishOnUIThread(new ShowShellEvent(typeof(CourierShellViewModel)));
                         break;
                     default:
                         return;

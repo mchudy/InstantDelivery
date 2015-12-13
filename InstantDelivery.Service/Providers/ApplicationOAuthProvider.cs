@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using Microsoft.AspNet.Identity;
@@ -9,13 +5,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace InstantDelivery.Service.Providers
 {
-    //TODO: DI (complicated)
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private readonly string _publicClientId;
+        private readonly string publicClientId;
 
         public ApplicationOAuthProvider(string publicClientId)
         {
@@ -24,7 +23,7 @@ namespace InstantDelivery.Service.Providers
                 throw new ArgumentNullException(nameof(publicClientId));
             }
 
-            _publicClientId = publicClientId;
+            this.publicClientId = publicClientId;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -75,7 +74,7 @@ namespace InstantDelivery.Service.Providers
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId == _publicClientId)
+            if (context.ClientId == publicClientId)
             {
                 Uri expectedRootUri = new Uri(context.Request.Uri, "/");
 
