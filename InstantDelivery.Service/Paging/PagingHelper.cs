@@ -1,9 +1,8 @@
 ﻿using InstantDelivery.Domain.Extensions;
-using InstantDelivery.Model;
+using InstantDelivery.Model.Paging;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.Service.Paging
 {

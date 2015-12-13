@@ -19,18 +19,22 @@ namespace InstantDelivery.Model
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public Role Role { get; set; }
+
         /// <summary>
         /// Imię
         /// </summary>
         public string FirstName { get; set; }
+
         /// <summary>
         /// Nazwisko
         /// </summary>
         public string LastName { get; set; }
+
         /// <summary>
         /// Adres email
         /// </summary>
         public string Email { get; set; }
+
         /// <summary>
         /// ID użytkownika
         /// </summary>

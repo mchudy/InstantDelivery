@@ -9,10 +9,12 @@
         /// Wartość wszystkich paczek
         /// </summary>
         public decimal TotalPackagesValue { get; set; }
+
         /// <summary>
         /// Wartość wszystkich pensji
         /// </summary>
         public decimal TotalEmployeesSalaries { get; set; }
+
         /// <summary>
         /// Wartość wszystkich podatków
         /// </summary>

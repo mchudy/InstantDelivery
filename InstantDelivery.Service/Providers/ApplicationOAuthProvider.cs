@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.Service.Providers
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za uwierzytelnianie u¿ytkowników z u¿yciem OAuth
+    /// </summary>
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string publicClientId;

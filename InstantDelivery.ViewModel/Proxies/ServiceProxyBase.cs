@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.Proxies
 {
+    /// <summary>
+    /// Bazowa klasa dla proxy łączących się z Web API
+    /// </summary>
     public abstract class ServiceProxyBase
     {
         private readonly string controllerName;
@@ -21,6 +24,12 @@ namespace InstantDelivery.ViewModel.Proxies
             this.dialogManager = dialogManager;
         }
 
+        /// <summary>
+        /// Wywołuje metodę GET dla podanego adresu
+        /// </summary>
+        /// <typeparam name="TResult">Oczekiwany typ odpowiedzi</typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public async Task<TResult> Get<TResult>(string query)
         {
             try
@@ -39,6 +48,11 @@ namespace InstantDelivery.ViewModel.Proxies
             return default(TResult);
         }
 
+        /// <summary>
+        /// Wywołuje metodę DELETE
+        /// </summary>
+        /// <param name="id">Identyfikator zasobu</param>
+        /// <returns></returns>
         public async Task Delete(int id)
         {
             try
@@ -52,6 +66,12 @@ namespace InstantDelivery.ViewModel.Proxies
             }
         }
 
+        /// <summary>
+        /// Wywołuje metodę PUT
+        /// </summary>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task Put<TRequest>(TRequest dto)
         {
             try
@@ -65,6 +85,14 @@ namespace InstantDelivery.ViewModel.Proxies
             }
         }
 
+        /// <summary>
+        /// Wywołuje metodę POST pod danym adresem, która nie zwraca odpowiedzi.
+        /// Dane przesyłane są jako JSON
+        /// </summary>
+        /// <typeparam name="TRequest">Typ obiektu, który ma zostać przesłany jako JSON</typeparam>
+        /// <param name="query"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task PostAsJson<TRequest>(string query, TRequest dto)
         {
             try
@@ -78,6 +106,14 @@ namespace InstantDelivery.ViewModel.Proxies
             }
         }
 
+        /// <summary>
+        /// Wywołuje metodę POST pod danym adresem, która zwraca odpowiedź
+        /// Dane przesyłane są jako JSON
+        /// </summary>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<TResult> PostAsJson<TRequest, TResult>(string query, TRequest dto)
         {
             try
@@ -96,6 +132,13 @@ namespace InstantDelivery.ViewModel.Proxies
             return default(TResult);
         }
 
+        /// <summary>
+        /// Wywołuje metodę POST pod danym adresem, która nie zwraca odpowiedzi
+        /// Dane przesyłane są jako form-urlencoded
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public async Task Post(string query, HttpContent content)
         {
             try
@@ -109,6 +152,13 @@ namespace InstantDelivery.ViewModel.Proxies
             }
         }
 
+        /// <summary>
+        /// Wywołuje metodę POST pod danym adresem, która zwraca odpowiedź
+        /// Dane przesyłane są jako form-urlencoded
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public async Task<TResult> Post<TResult>(string query, HttpContent content)
         {
             try

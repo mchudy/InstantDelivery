@@ -21,12 +21,12 @@ namespace InstantDelivery.Domain.Extensions
             .Single(method => method.GetParameters().Length == 2);
 
         /// <summary>
-        /// Returns page collection of specified source query.
+        /// Returns page collection of the specified source query.
         /// </summary>
         /// <param name="source">Source query</param>
         /// <param name="pageNumber">Page number</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns></returns>
+        /// <returns>Ordered collection</returns>
         public static IList<T> Page<T>(this IQueryable<T> source, int pageNumber, int pageSize)
         {
             return source
@@ -36,11 +36,11 @@ namespace InstantDelivery.Domain.Extensions
         }
 
         /// <summary>
-        /// Returns source ordered by specified property.
+        /// Returns source ordered by the specified property.
         /// </summary>
         /// <param name="source">Source query</param>
         /// <param name="propertyName">Property name</param>
-        /// <returns></returns>
+        /// <returns>Ordered collection</returns>
         public static IQueryable<TSource> OrderByProperty<TSource>
             (this IQueryable<TSource> source, string propertyName)
         {
@@ -52,7 +52,7 @@ namespace InstantDelivery.Domain.Extensions
         }
 
         /// <summary>
-        /// Returnss source ordered by descending by specified property name.
+        /// Returns source ordered by specified property name in descending order.
         /// </summary>
         /// <param name="source">Source query</param>
         /// <param name="propertyName">Property name</param>

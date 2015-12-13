@@ -16,24 +16,29 @@ namespace InstantDelivery.Domain
             : base("LocalDbConnection")
         {
         }
+
         /// <summary>
         /// Tabela pracowników.
         /// </summary>
         public virtual IDbSet<Employee> Employees { get; set; }
+
         /// <summary>
         /// Tabela pojazdów.
         /// </summary>
         public virtual IDbSet<Vehicle> Vehicles { get; set; }
+
         /// <summary>
         /// Tabela przesyłek.
         /// </summary>
         public virtual IDbSet<Package> Packages { get; set; }
+
         /// <summary>
         /// Tabela modeli pojazdów.
         /// </summary>
         public virtual IDbSet<VehicleModel> VehicleModels { get; set; }
+
         /// <summary>
-        /// Tabela zdarzeń na paczkach.
+        /// Tabela zdarzeń związanych z paczkami
         /// </summary>
         public virtual IDbSet<PackageEvent> PackageEvents { get; set; }
     }

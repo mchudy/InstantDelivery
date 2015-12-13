@@ -4,8 +4,16 @@ using System.Web;
 
 namespace InstantDelivery.ViewModel.Extensions
 {
+    /// <summary>
+    /// Zawiera metody rozszerzaj¹ce klasy <see cref="PageQuery"/>
+    /// </summary>
     public static class PageQueryExtensions
     {
+        /// <summary>
+        /// Zamienia w³aœciwoœci obiektu <see cref="PageQuery"/> na URL
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public static string ToQueryString(this PageQuery query)
         {
             NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);

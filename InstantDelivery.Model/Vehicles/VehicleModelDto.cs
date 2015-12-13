@@ -9,10 +9,12 @@
         /// ID modelu pojazdu
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Marka
         /// </summary>
         public string Brand { get; set; }
+
         /// <summary>
         /// Model
         /// </summary>

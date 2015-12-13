@@ -11,7 +11,7 @@ namespace InstantDelivery.Domain.Entities
     public class User : IdentityUser
     {
         /// <summary>
-        /// Generuje identyfikator użytkownika.
+        /// Generuje tożsamość użytkownika
         /// </summary>
         /// <param name="manager">Obiekt menadżera użytkowników</param>
         /// <param name="authenticationType">Rodzaj autentykacji</param>

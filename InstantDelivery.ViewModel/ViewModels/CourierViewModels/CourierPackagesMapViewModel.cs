@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku wyświetlającego mapę z paczkami zalogowanego kuriera
+    /// </summary>
     public class CourierPackagesMapViewModel : Screen
     {
         private readonly PackagesServiceProxy service;
@@ -19,21 +22,37 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
+        /// <summary>
+        /// Lista paczek kuriera
+        /// </summary>
         public IList<PackageDto> Packages { get; set; }
 
+        /// <summary>
+        /// Zdarzenie uruchamiane, gdy konieczne jest wywołanie metody
+        /// po stronie JavaScriptu w zagnieżdżonej przeglądarce
+        /// </summary>
         public event EventHandler<InvokeScriptEventArgs> InvokeScript;
 
+        /// <summary>
+        /// Metoda wywoływana, gdy strona w przeglądarce kończy się ładować
+        /// </summary>
         public async void OnPageLoaded()
         {
             Packages = await LoadPackages();
             ShowPackages();
         }
 
+        /// <summary>
+        /// Wyświetla trasę
+        /// </summary>
         public void ShowRoute()
         {
             InvokeScriptFunction("showRoute");
         }
 
+        /// <summary>
+        /// Wyświetla paczki na mapie
+        /// </summary>
         public void ShowPackages()
         {
             InvokeScriptFunction("showPackages");
@@ -63,9 +82,20 @@ namespace InstantDelivery.ViewModel
         }
     }
 
+    /// <summary>
+    /// Zawiera informację konieczne do wywołania skryptu po stronie 
+    /// przeglądarki
+    /// </summary>
     public class InvokeScriptEventArgs : EventArgs
     {
+        /// <summary>
+        /// Nazwa funkcji
+        /// </summary>
         public string FunctionName { get; set; }
+
+        /// <summary>
+        /// Parametry przekazywane do funkcji
+        /// </summary>
         public object[] Parameters { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace InstantDelivery.Converters
         }
 
         /// <summary>
-        /// Konwertuje spowrotem.
+        /// Konwertuje z powrotem.
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -46,7 +46,7 @@ namespace InstantDelivery.Converters
         }
 
         /// <summary>
-        /// Konwertuje spowrotem.
+        /// Konwertuje z powrotem.
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
