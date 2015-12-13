@@ -45,6 +45,10 @@ namespace InstantDelivery.ViewModel.Proxies
             {
                 await ShowConnectionError();
             }
+            catch (TaskCanceledException)
+            {
+                // it is safe to cancel a GET request
+            }
             return default(TResult);
         }
 
@@ -64,6 +68,10 @@ namespace InstantDelivery.ViewModel.Proxies
             {
                 await ShowConnectionError();
             }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
+            }
         }
 
         /// <summary>
@@ -82,6 +90,10 @@ namespace InstantDelivery.ViewModel.Proxies
             catch (HttpRequestException)
             {
                 await ShowConnectionError();
+            }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
             }
         }
 
@@ -103,6 +115,10 @@ namespace InstantDelivery.ViewModel.Proxies
             catch (HttpRequestException)
             {
                 await ShowConnectionError();
+            }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
             }
         }
 
@@ -129,6 +145,10 @@ namespace InstantDelivery.ViewModel.Proxies
             {
                 await ShowConnectionError();
             }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
+            }
             return default(TResult);
         }
 
@@ -149,6 +169,10 @@ namespace InstantDelivery.ViewModel.Proxies
             catch (HttpRequestException)
             {
                 await ShowConnectionError();
+            }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
             }
         }
 
@@ -174,7 +198,21 @@ namespace InstantDelivery.ViewModel.Proxies
             {
                 await ShowConnectionError();
             }
+            catch (TaskCanceledException)
+            {
+                await ShowTaskCancelledError();
+            }
             return default(TResult);
+        }
+
+        private async Task ShowTaskCancelledError()
+        {
+            await dialogManager.ShowDialogAsync(new ErrorDialogViewModel
+            {
+                Title = "Błąd połączenia",
+                Message =
+                    "Połączenie zostało zerwane. Upewnij się, że wprowadzone zmiany zostały zapisane.",
+            });
         }
 
         private async Task HandleErrors(HttpResponseMessage response)
