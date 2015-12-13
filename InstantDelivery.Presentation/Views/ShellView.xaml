@@ -7,7 +7,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:dialogs="clr-namespace:InstantDelivery.ViewModel.Dialogs;assembly=InstantDelivery.ViewModel"
         mc:Ignorable="d"
-        Title="ShellView" x:Name="Window">
+        Title="ShellView" x:Name="Window" Icon="../icon.ico">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button cal:Message.Attach="Logout()" cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}">
