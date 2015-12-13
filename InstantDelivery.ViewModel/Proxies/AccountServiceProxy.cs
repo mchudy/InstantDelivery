@@ -20,16 +20,31 @@ namespace InstantDelivery.ViewModel.Proxies
             this.dialogManager = dialogManager;
         }
 
+        /// <summary>
+        /// Zwraca role danego pracownika.
+        /// </summary>
+        /// <returns></returns>
         public async Task<Role[]> GetRoles()
         {
             return await Get<Role[]>("Roles");
         }
 
+        /// <summary>
+        /// Zmienia hasło danego użutkownika.
+        /// </summary>
+        /// <param name="changePasswordDto"></param>
+        /// <returns></returns>
         public async Task ChangePassword(ChangePasswordDto changePasswordDto)
         {
             await PostAsJson("ChangePassword", changePasswordDto);
         }
 
+        /// <summary>
+        /// Loguje użytkownika.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool Login(string username, string password)
         {
             var response = GetToken(username, password);
@@ -54,6 +69,9 @@ namespace InstantDelivery.ViewModel.Proxies
             return false;
         }
 
+        /// <summary>
+        /// Wwylogowuje użytkownika.
+        /// </summary>
         public void Logout()
         {
             client?.CancelPendingRequests();

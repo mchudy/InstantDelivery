@@ -11,11 +11,19 @@ namespace InstantDelivery.ViewModel.Proxies
         {
         }
 
+        /// <summary>
+        /// Zwraca obiekt statystyk ogólnych.
+        /// </summary>
+        /// <returns></returns>
         public async Task<GeneralStatisticsDto> GeneralStatistics()
         {
             return await Get<GeneralStatisticsDto>("General");
         }
 
+        /// <summary>
+        /// Zwraca obiekt statystyk finansowych.
+        /// </summary>
+        /// <returns></returns>
         public async Task<FinancialStatisticsDto> FinancialStatistics()
         {
             return await Get<FinancialStatisticsDto>("Finance");

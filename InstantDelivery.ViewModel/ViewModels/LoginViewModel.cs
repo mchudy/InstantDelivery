@@ -30,7 +30,7 @@ namespace InstantDelivery.ViewModel
         public SecureString Password { private get; set; }
 
         /// <summary>
-        /// Invoked on logging
+        /// Metoda wywoływana na zalogowanie.
         /// </summary>
         public async void Login()
         {
@@ -65,7 +65,7 @@ namespace InstantDelivery.ViewModel
         }
 
         /// <summary>
-        /// Message
+        /// Wiadomość
         /// </summary>
         public string Message
         {
@@ -78,7 +78,7 @@ namespace InstantDelivery.ViewModel
         }
 
         /// <summary>
-        /// Invoked on deactivation
+        /// Metoda wywoływana na deaktywację okna
         /// </summary>
         /// <param name="close"></param>
         protected override void OnDeactivate(bool close)
@@ -88,7 +88,7 @@ namespace InstantDelivery.ViewModel
         }
 
         /// <summary>
-        /// Converts secure string to string
+        /// Konwertuje secure string do string
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
