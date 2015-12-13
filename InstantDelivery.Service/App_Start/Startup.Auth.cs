@@ -15,6 +15,7 @@ namespace InstantDelivery.Service
         /// Ustawienia autoryzacji
         /// </summary>
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
         /// <summary>
         /// ID klienta
         /// </summary>

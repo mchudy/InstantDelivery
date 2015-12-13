@@ -26,6 +26,7 @@ namespace InstantDelivery.Service.Controllers
     {
         private readonly InstantDeliveryContext context;
         private readonly UserManager<User> userManager;
+
         /// <summary>
         /// Konstruktor kontrolera
         /// </summary>
@@ -40,7 +41,6 @@ namespace InstantDelivery.Service.Controllers
         /// <summary>
         /// Zwraca dane zalogowanego kuriera
         /// </summary>
-        /// <param name="id">Id kuriera</param>
         /// <returns>Dane kuriera</returns>
         [Authorize]
         [Route("LoggedCourierData"), HttpGet]

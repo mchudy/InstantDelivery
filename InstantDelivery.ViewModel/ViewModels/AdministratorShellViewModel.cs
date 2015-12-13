@@ -2,6 +2,9 @@
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Główny model widoku dla okna administratora
+    /// </summary>
     public class AdministratorShellViewModel : Conductor<object>.Collection.OneActive
     {
         public AdministratorShellViewModel()

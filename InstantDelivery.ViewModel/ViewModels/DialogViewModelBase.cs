@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace InstantDelivery.ViewModel.ViewModels
 {
+    /// <summary>
+    /// Bazowa klasa dla modeli widoku okien dialogowych
+    /// </summary>
     public abstract class DialogViewModelBase : Screen
     {
         private readonly TaskCompletionSource<int> tcs;

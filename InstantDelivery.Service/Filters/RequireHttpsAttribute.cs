@@ -9,7 +9,7 @@ namespace InstantDelivery.Service.Filters
     public class RequireHttpsAttribute : AuthorizationFilterAttribute
     {
         /// <summary>
-        /// Metoda wywoływana podczas autoryzacji.
+        /// Filtr wymuszający użycie HTTPS podczas połączenia z serwerem
         /// </summary>
         /// <param name="actionContext"></param>
         public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)

@@ -3,6 +3,9 @@ using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku z paczkami zalogowanego kuriera
+    /// </summary>
     public class CourierPackagesViewModel : CourierPackagesViewModelBase
     {
         private readonly PackagesServiceProxy service;

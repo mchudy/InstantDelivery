@@ -9,6 +9,9 @@ using System.Windows;
 
 namespace InstantDelivery.ViewModel.Dialogs
 {
+    /// <summary>
+    /// Umożliwia wyświetlanie komunikatów w głównym oknie aplikacji
+    /// </summary>
     public class DialogManager : IDialogManager
     {
         public async Task ShowDialogAsync(DialogViewModelBase viewModel)

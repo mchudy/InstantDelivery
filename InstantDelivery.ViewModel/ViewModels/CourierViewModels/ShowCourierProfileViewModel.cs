@@ -4,24 +4,31 @@ using InstantDelivery.ViewModel.Proxies;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku z danymi zalogowanego kuriera
+    /// </summary>
     public class CourierProfileViewModel : Screen
     {
-        // the logged Employee
-        public EmployeeDto Employee { get; set; }
+        private readonly EmployeesServiceProxy service;
 
-        public async void GetLoggedEmployeeData()
-        {
-            Employee = await service.GetLoggedData();
-
-        }
-
-        private EmployeesServiceProxy service { get; set; }
-
-        // somehow load the employee
         public CourierProfileViewModel(EmployeesServiceProxy service)
         {
             this.service = service;
             GetLoggedEmployeeData();
+        }
+
+        /// <summary>
+        /// Zalogowany pracownik
+        /// </summary>
+        public EmployeeDto Employee { get; set; }
+
+        /// <summary>
+        /// Wczytuje dane zalogowanego użytkownika
+        /// </summary>
+        public async void GetLoggedEmployeeData()
+        {
+            Employee = await service.GetLoggedData();
+
         }
     }
 }

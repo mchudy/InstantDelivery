@@ -6,7 +6,7 @@ using InstantDelivery.ViewModel.Proxies;
 namespace InstantDelivery.ViewModel
 {
     /// <summary>
-    /// Bazowy modeul widoku dla widoków pracowników.
+    /// Bazowy model widoku dla widoków pracowników.
     /// </summary>
     public abstract class VehiclesViewModelBase : PagingViewModel
     {

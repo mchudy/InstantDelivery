@@ -3,6 +3,9 @@ using PropertyChanged;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku okna dialogowego z błędem
+    /// </summary>
     [ImplementPropertyChanged]
     public class ErrorDialogViewModel : DialogViewModelBase
     {

@@ -2,6 +2,9 @@
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku głównego okna dla pracowników administracyjnych
+    /// </summary>
     public class EmployeeShellViewModel : Conductor<object>.Collection.OneActive
     {
         public EmployeeShellViewModel()

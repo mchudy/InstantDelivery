@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Bazowa klasa dla modeli widoków z paczkami kuriera
+    /// </summary>
     public abstract class CourierPackagesViewModelBase : PagingViewModel
     {
         private IList<PackageDto> packages;
@@ -17,7 +20,6 @@ namespace InstantDelivery.ViewModel
         {
             this.service = service;
         }
-
 
         /// <summary>
         /// Kolekcja skojarzona z tabelą danych.

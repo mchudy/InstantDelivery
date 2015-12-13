@@ -5,6 +5,9 @@ using PropertyChanged;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku zarządzania użytkownikami
+    /// </summary>
     [ImplementPropertyChanged]
     public class ManageUsersGroupsViewModel : PagingViewModel
     {
@@ -31,6 +34,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Otwiera okno edycji użytkownika
+        /// </summary>
         public async void EditUser()
         {
             if (SelectedUser == null)

@@ -252,28 +252,7 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
-        
-        private IQueryable<Package> ApplyFilters(IQueryable<Package> source, string id, PackageStatusFilter status)
-        {
-            var result = source;
-            if (!string.IsNullOrEmpty(id))
-            {
-                result = result.Where(p => p.Id.ToString().StartsWith(id));
-            }
-            if (status == PackageStatusFilter.InDelivery)
-            {
-                result = result.Where(p => p.Status == PackageStatus.InDelivery || p.Status == PackageStatus.NoticeLeft);
-            }
-            else if (status == PackageStatusFilter.Delivered)
-            {
-                result = result.Where(p => p.Status == PackageStatus.Delivered);
-            }
-            else if (status == PackageStatusFilter.New)
-            {
-                result = result.Where(p => p.Status == PackageStatus.New);
-            }
-            return result;
-        }
+
         /// <summary>
         /// Odłącza paczkę od zalogowanego kuriera.
         /// </summary>
@@ -303,6 +282,28 @@ namespace InstantDelivery.Service.Controllers
             });
             context.SaveChanges();
             return Ok();
+        }
+
+        private IQueryable<Package> ApplyFilters(IQueryable<Package> source, string id, PackageStatusFilter status)
+        {
+            var result = source;
+            if (!string.IsNullOrEmpty(id))
+            {
+                result = result.Where(p => p.Id.ToString().StartsWith(id));
+            }
+            if (status == PackageStatusFilter.InDelivery)
+            {
+                result = result.Where(p => p.Status == PackageStatus.InDelivery || p.Status == PackageStatus.NoticeLeft);
+            }
+            else if (status == PackageStatusFilter.Delivered)
+            {
+                result = result.Where(p => p.Status == PackageStatus.Delivered);
+            }
+            else if (status == PackageStatusFilter.New)
+            {
+                result = result.Where(p => p.Status == PackageStatus.New);
+            }
+            return result;
         }
     }
 }

@@ -5,6 +5,9 @@ using System;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Model widoku zmiany hasła
+    /// </summary>
     public class ChangePasswordViewModel : Screen
     {
         private readonly AccountServiceProxy service;
@@ -14,8 +17,15 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
+        /// <summary>
+        /// Obiekt zawierający dane konieczne do zmiany hasła
+        /// </summary>
         public ChangePasswordDto ChangePasswordDto { get; set; } = new ChangePasswordDto();
 
+        /// <summary>
+        /// Metoda wywoływana po wciśnięciu przez użytkownika przycisku
+        /// zmiany hasła
+        /// </summary>
         public async void ChangePassword()
         {
             await service.ChangePassword(ChangePasswordDto);

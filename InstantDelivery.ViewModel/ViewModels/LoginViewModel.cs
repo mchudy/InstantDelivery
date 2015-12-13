@@ -24,6 +24,7 @@ namespace InstantDelivery.ViewModel
         /// Nazwa użytkownika
         /// </summary>
         public string UserName { get; set; }
+
         /// <summary>
         /// Hasło
         /// </summary>
