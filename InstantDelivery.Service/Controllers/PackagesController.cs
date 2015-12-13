@@ -46,10 +46,14 @@ namespace InstantDelivery.Service.Controllers
 
             if (!string.IsNullOrEmpty(employeeId))
             {
-                var employee = context.Employees.Find(employeeId);
-                if (employee != null)
+                int numericEmployeeId;
+                if (int.TryParse(employeeId, out numericEmployeeId))
                 {
-                    packages = employee.Packages.AsQueryable();
+                    var employee = context.Employees.Find(numericEmployeeId);
+                    if (employee != null)
+                    {
+                        packages = employee.Packages.AsQueryable();
+                    }
                 }
             }
             packages = ApplyFilters(packages, id, status);
