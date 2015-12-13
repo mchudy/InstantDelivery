@@ -4,6 +4,9 @@ using System;
 
 namespace InstantDelivery.ViewModel
 {
+    /// <summary>
+    /// Główny model widoku
+    /// </summary>
     public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<ShowShellEvent>
     {
         private readonly IEventAggregator eventAggregator;
@@ -15,18 +18,28 @@ namespace InstantDelivery.ViewModel
             this.service = service;
         }
 
+        /// <summary>
+        /// Invoked on handling event.
+        /// </summary>
+        /// <param name="@event"></param>
         public void Handle(ShowShellEvent @event)
         {
             Type viewModel = @event.ViewModel;
             ActivateItem(IoC.GetInstance(viewModel, ""));
         }
 
+        /// <summary>
+        /// Invoked on logout.
+        /// </summary>
         public void Logout()
         {
             service.Logout();
             ActivateItem(IoC.Get<LoginViewModel>());
         }
 
+        /// <summary>
+        /// Invoked on initializing.
+        /// </summary>
         protected override void OnInitialize()
         {
             eventAggregator.Subscribe(this);

@@ -20,9 +20,18 @@ namespace InstantDelivery.ViewModel
             this.accountService = accountService;
         }
 
+        /// <summary>
+        /// Nazwa użytkownika
+        /// </summary>
         public string UserName { get; set; }
+        /// <summary>
+        /// Hasło
+        /// </summary>
         public SecureString Password { private get; set; }
 
+        /// <summary>
+        /// Invoked on logging
+        /// </summary>
         public async void Login()
         {
             string password = SecureStringToString(Password);
@@ -55,6 +64,9 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Message
+        /// </summary>
         public string Message
         {
             get { return message; }
@@ -65,12 +77,21 @@ namespace InstantDelivery.ViewModel
             }
         }
 
+        /// <summary>
+        /// Invoked on deactivation
+        /// </summary>
+        /// <param name="close"></param>
         protected override void OnDeactivate(bool close)
         {
             Password?.Dispose();
             base.OnDeactivate(close);
         }
 
+        /// <summary>
+        /// Converts secure string to string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private static string SecureStringToString(SecureString value)
         {
             if (value == null)
