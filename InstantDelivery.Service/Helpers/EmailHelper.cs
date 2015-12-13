@@ -213,7 +213,7 @@ namespace InstantDelivery.Service.Helpers
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
                    "<br /><br />Twoje konto zostało zarejestrowane.<br />Nazwa użytkownika: <strong>"
-                   + employee.LastName + employee.FirstName + "</strong><br />" +
+                   + employee.User.UserName + "</strong><br />" +
                    "Hasło: <strong>" + password +
                    "</strong><em><br /><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
