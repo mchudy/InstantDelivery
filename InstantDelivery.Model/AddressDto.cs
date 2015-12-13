@@ -1,5 +1,8 @@
 ﻿namespace InstantDelivery.Model
 {
+    /// <summary>
+    /// Obiekt DTO reprezentujący adres.
+    /// </summary>
     public class AddressDto
     {
         /// <summary>

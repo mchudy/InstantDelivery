@@ -74,6 +74,9 @@ namespace InstantDelivery.Model.Employees
         /// </summary>
         public DateTime? HireDate { get; set; }
 
+        /// <summary>
+        /// Rola pracownika
+        /// </summary>
         public Role? Role { get; set; }
     }
 }

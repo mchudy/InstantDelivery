@@ -4,6 +4,9 @@ using InstantDelivery.Model.Packages;
 
 namespace InstantDelivery.Model.Employees
 {
+    /// <summary>
+    /// Obiekt DTO kuriera z jego paczkami.
+    /// </summary>
     public class EmployeePackagesDto : ValidationBase
     {
         /// <summary>
@@ -25,6 +28,9 @@ namespace InstantDelivery.Model.Employees
         [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
 
+        /// <summary>
+        /// Przesyłki pracownika
+        /// </summary>
         public List<PackageDto> Packages { get; set; }
     }
 }

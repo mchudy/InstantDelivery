@@ -5,6 +5,9 @@ using Newtonsoft.Json.Converters;
 
 namespace InstantDelivery.Model.Packages
 {
+    /// <summary>
+    /// Obiekt DTO paczki.
+    /// </summary>
     public class PackageDto : ValidationBase
     {
         /// <summary>
@@ -57,6 +60,9 @@ namespace InstantDelivery.Model.Packages
         /// </summary>
         public string EmployeeId { get; set; }
 
+        /// <summary>
+        /// Adres dostawy paczki.
+        /// </summary>
         public AddressDto ShippingAddress { get; set; } = new AddressDto();
     }
 }

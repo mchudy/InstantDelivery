@@ -3,6 +3,9 @@ using InstantDelivery.Model.Vehicles;
 
 namespace InstantDelivery.Model.Employees
 {
+    /// <summary>
+    /// Obiekt DTO kuriera z jego pojazdem.
+    /// </summary>
     public class EmployeeVehicleDto : ValidationBase
     {
         /// <summary>
@@ -24,6 +27,9 @@ namespace InstantDelivery.Model.Employees
         [RegularExpression("[A-ZĄĆĘŁŃÓŚŹŻ]{1}[a-ząćęłńóśżź]*", ErrorMessage = "Proszę podać poprawne nazwisko")]
         public string LastName { get; set; }
 
+        /// <summary>
+        /// Pojazd pracownika
+        /// </summary>
         public VehicleDto Vehicle { get; set; }
     }
 }
