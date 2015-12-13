@@ -11,6 +11,9 @@ namespace InstantDelivery.Converters
     /// </summary>
     public class StatusToEmployeesGridVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// Konwertuje status paczki do widoczności.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PackageStatus status = (PackageStatus)value;
@@ -18,6 +21,9 @@ namespace InstantDelivery.Converters
             return visible ? Visibility.Visible : Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Konwertuje spowrotem.
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
@@ -29,6 +35,9 @@ namespace InstantDelivery.Converters
     /// </summary>
     public class StatusToInDeliveryVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// Konwertuje status paczki do widoczności.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PackageStatus status = (PackageStatus)value;
@@ -36,6 +45,9 @@ namespace InstantDelivery.Converters
             return visible ? Visibility.Visible : Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Konwertuje spowrotem.
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

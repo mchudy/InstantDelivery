@@ -6,11 +6,24 @@ using System;
 
 namespace InstantDelivery.Service
 {
+    /// <summary>
+    /// Klasa konfigurująca autoryzację
+    /// </summary>
     public partial class Startup
     {
+        /// <summary>
+        /// Ustawienia autoryzacji
+        /// </summary>
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        /// <summary>
+        /// ID klienta
+        /// </summary>
         public static string PublicClientId { get; private set; }
 
+        /// <summary>
+        /// Konfiguruje autoryzację
+        /// </summary>
+        /// <param name="app"></param>
         public void ConfigureOAuth(IAppBuilder app)
         {
             PublicClientId = "self";

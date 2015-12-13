@@ -17,12 +17,20 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler pracowników
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Employees")]
     public class EmployeesController : ApiController
     {
         private readonly InstantDeliveryContext context;
         private readonly UserManager<User> userManager;
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="context">Kontekst danych</param>
+        /// <param name="userManager">Obiekt menadżera użytkowników</param>
         public EmployeesController(InstantDeliveryContext context, UserManager<User> userManager)
         {
             this.context = context;
@@ -62,6 +70,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Zwraca stronę z pracownikami.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [Route("Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query, string firstName = "",
             string lastName = "", string email = "")
@@ -81,6 +97,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Zwraca stronę paczek dla danego pracownika.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [Route("Packages/Page"), HttpGet]
         public IHttpActionResult PackagesPage([FromUri] PageQuery query, string firstName = "",
             string lastName = "", string email = "")
@@ -92,6 +116,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        /// <summary>
+        /// Zwraca stronę pojazdów.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [Route("Vehicles/Page"), HttpGet]
         public IHttpActionResult VehiclesPage([FromUri] PageQuery query, string firstName = "",
                 string lastName = "", string email = "")

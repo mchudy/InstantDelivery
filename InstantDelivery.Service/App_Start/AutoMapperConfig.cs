@@ -12,6 +12,9 @@ namespace InstantDelivery.Service
     /// </summary>
     public static class AutoMapperConfig
     {
+        /// <summary>
+        /// Rejestruje mapowania pomiędzy obiektami
+        /// </summary>
         public static void RegisterMappings()
         {
             Mapper.CreateMap<Employee, EmployeeAddDto>().ReverseMap();

@@ -5,6 +5,9 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler statystyk
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Statistics")]
     public class StatisticsController : ApiController
@@ -14,11 +17,19 @@ namespace InstantDelivery.Service.Controllers
 
         private InstantDeliveryContext context;
 
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="context"></param>
         public StatisticsController(InstantDeliveryContext context)
         {
             this.context = context;
         }
 
+        /// <summary>
+        /// Zwraca obiekt statystyk finansowych.
+        /// </summary>
+        /// <returns></returns>
         [Route("Finance"), HttpGet]
         public IHttpActionResult Finance()
         {
@@ -34,6 +45,10 @@ namespace InstantDelivery.Service.Controllers
             return Ok(statistics);
         }
 
+        /// <summary>
+        /// Zwraca obiekt statystyk ogólnych.
+        /// </summary>
+        /// <returns></returns>
         [Route("General"), HttpGet]
         public IHttpActionResult General()
         {

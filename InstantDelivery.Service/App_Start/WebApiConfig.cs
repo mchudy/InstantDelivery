@@ -7,6 +7,9 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service
 {
+    /// <summary>
+    /// Konfiguruje web api
+    /// </summary>
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)

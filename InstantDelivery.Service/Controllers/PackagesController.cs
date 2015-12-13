@@ -15,6 +15,9 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler przesyłek
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Packages")]
     public class PackagesController : ApiController
@@ -22,12 +25,21 @@ namespace InstantDelivery.Service.Controllers
         private readonly InstantDeliveryContext context;
         private readonly IPricingStrategy pricingStrategy;
 
+        /// <summary>
+        /// Konstruktor kontrolera przesyłek.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="pricingStrategy"></param>
         public PackagesController(InstantDeliveryContext context, IPricingStrategy pricingStrategy)
         {
             this.context = context;
             this.pricingStrategy = pricingStrategy;
         }
-
+        /// <summary>
+        /// Zwraca paczkę o danym ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
             var package = context.Packages.Find(id);
@@ -38,6 +50,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(Mapper.Map<PackageDto>(package));
         }
 
+        /// <summary>
+        /// Zwraca stronę przesyłek.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         [Route("Employee/Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
@@ -61,6 +81,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        /// <summary>
+        /// Zwraca stronę paczek zalogowanego użytkownika.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         [Route("LoggedEmployee/Page"), HttpGet]
         public IHttpActionResult GetPageForLoggedEmployee([FromUri] PageQuery query, string id = "",
             PackageStatusFilter status = PackageStatusFilter.All, string employeeId = "")
@@ -79,6 +107,11 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        /// <summary>
+        /// Rejestruje paczkę w bazie danych.
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         [Route("Register"), HttpPost]
         public IHttpActionResult RegisterPackage(PackageDto package)
         {
@@ -202,6 +235,11 @@ namespace InstantDelivery.Service.Controllers
             return Ok(pricingStrategy.GetCost(package));
         }
 
+        /// <summary>
+        /// Uusuwa paczkę o zadanym ID z bazy danych.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
             var package = context.Packages.Find(id);
@@ -214,6 +252,7 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
+        
         private IQueryable<Package> ApplyFilters(IQueryable<Package> source, string id, PackageStatusFilter status)
         {
             var result = source;
@@ -235,6 +274,11 @@ namespace InstantDelivery.Service.Controllers
             }
             return result;
         }
+        /// <summary>
+        /// Odłącza paczkę od zalogowanego kuriera.
+        /// </summary>
+        /// <param name="packageId">ID paczki</param>
+        /// <returns></returns>
         [Authorize]
         [Route("DetachPackageFromEmployee"), HttpPost]
         public IHttpActionResult DetachPackageFromEmployee([FromBody] int packageId)

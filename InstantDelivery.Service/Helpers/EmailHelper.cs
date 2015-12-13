@@ -10,8 +10,14 @@ using System.Text.RegularExpressions;
 
 namespace InstantDelivery.Service.Helpers
 {
+    /// <summary>
+    /// Klasa umożliwiające wysyłanie maila.
+    /// </summary>
     public class EMailHelper : IDisposable
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public EMailHelper()
         {
             DefaultAccount = new EmailAccount
@@ -108,7 +114,11 @@ namespace InstantDelivery.Service.Helpers
             }
         }
 
-
+        /// <summary>
+        /// Waliduje email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static bool ValidateEmail(string email)
         {
 
@@ -193,6 +203,12 @@ namespace InstantDelivery.Service.Helpers
 
         public void Dispose() { }
 
+        /// <summary>
+        /// Zwraca treść HTML wiadomomości po rejestracji.
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string RegistrationBody(Employee employee, string password)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +
@@ -202,6 +218,11 @@ namespace InstantDelivery.Service.Helpers
                    "</strong><em><br /><br />Pozdrawiamy, <br />Zespół Instant Delivery</em>";
         }
 
+        /// <summary>
+        /// Zwraca treść wiadomości HTML po przypisaniu paczki do kuriera.
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public string AssignedPackageBody(Employee employee)
         {
             return @"Witaj " + employee.FirstName + " " + employee.LastName + " , " +

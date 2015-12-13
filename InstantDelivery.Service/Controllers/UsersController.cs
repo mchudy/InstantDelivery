@@ -14,6 +14,9 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler użytkowników
+    /// </summary>
     [Authorize(Roles = "Admin")]
     [RoutePrefix("api/Users")]
     public class UsersController : ApiController
@@ -21,12 +24,22 @@ namespace InstantDelivery.Service.Controllers
         private readonly InstantDeliveryContext context;
         private readonly UserManager<User, string> userManager;
 
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userManager"></param>
         public UsersController(InstantDeliveryContext context, UserManager<User, string> userManager)
         {
             this.context = context;
             this.userManager = userManager;
         }
 
+        /// <summary>
+        /// Zwraca stronę użytkowników
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [Route("Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query)
         {
@@ -42,6 +55,12 @@ namespace InstantDelivery.Service.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Zmienia rolę użytkownika
+        /// </summary>
+        /// <param name="username">Nazwa użytkownika</param>
+        /// <param name="newRole">Nowa rola</param>
+        /// <returns></returns>
         [Route("ChangeRole/{username}"), HttpPost]
         public async Task<IHttpActionResult> ChangeRole(string username, [FromBody]Role newRole)
         {

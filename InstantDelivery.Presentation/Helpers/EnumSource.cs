@@ -16,7 +16,6 @@ namespace InstantDelivery.Helpers
         {
             this.type = type;
         }
-
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return Enum.GetValues(type)

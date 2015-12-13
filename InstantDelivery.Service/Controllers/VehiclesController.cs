@@ -11,17 +11,29 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler pojazdów
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Vehicles")]
     public class VehiclesController : ApiController
     {
         private InstantDeliveryContext context;
 
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="context"></param>
         public VehiclesController(InstantDeliveryContext context)
         {
             this.context = context;
         }
 
+        /// <summary>
+        /// Zwraca pojazd o zadanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
             var vehicle = context.Vehicles
@@ -34,6 +46,14 @@ namespace InstantDelivery.Service.Controllers
             return Ok(Mapper.Map<VehicleDto>(vehicle));
         }
 
+        /// <summary>
+        /// Zwraca stronę pojazdów
+        /// </summary>
+        /// <param name="query">Filtry</param>
+        /// <param name="registrationNumber">Numer rejestracyjny</param>
+        /// <param name="model">Model pojazdu</param>
+        /// <param name="brand">Marka pojazdu</param>
+        /// <returns></returns>
         [Route("Page"), HttpGet]
         public IHttpActionResult GetPage([FromUri] PageQuery query, string registrationNumber = "",
             string model = "", string brand = "")
@@ -46,12 +66,21 @@ namespace InstantDelivery.Service.Controllers
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
 
+        /// <summary>
+        /// Zwraca wszystkie modele pojazdów
+        /// </summary>
+        /// <returns></returns>
         [Route("Models"), HttpGet]
         public IHttpActionResult GetModels()
         {
             return Ok(context.VehicleModels.ToList());
         }
 
+        /// <summary>
+        /// Dodaje pojazd do bazy danych.
+        /// </summary>
+        /// <param name="newVehicle"></param>
+        /// <returns></returns>
         public IHttpActionResult Post(AddVehicleDto newVehicle)
         {
             if (!ModelState.IsValid)
@@ -66,6 +95,11 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Dodaje model pojazdu do bazy danych.
+        /// </summary>
+        /// <param name="newVehicleModel"></param>
+        /// <returns></returns>
         [Route("Models"), HttpPost]
         public IHttpActionResult PostVehicleModel(AddVehicleModelDto newVehicleModel)
         {
@@ -78,7 +112,11 @@ namespace InstantDelivery.Service.Controllers
             context.SaveChanges();
             return Ok(vehicleModel.Id);
         }
-
+        /// <summary>
+        /// Aktualizuje pojazd w bazie danych.
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         public IHttpActionResult Put(VehicleDto vehicle)
         {
             if (!ModelState.IsValid)
@@ -95,6 +133,11 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Usuwa pojazd o zadanym ID z bazy danych.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
             var vehicle = context.Vehicles.Find(id);
@@ -107,6 +150,11 @@ namespace InstantDelivery.Service.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Zwraca wszystkie dostępne pojazdy dla danego pracownika.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [Route("Available/Page"), HttpGet]
         public IHttpActionResult GetAllAvailable([FromUri] PageQuery query)
         {

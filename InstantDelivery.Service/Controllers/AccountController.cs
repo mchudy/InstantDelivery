@@ -10,17 +10,27 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
+    /// <summary>
+    /// Kontroler kont użytkowników
+    /// </summary>
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private readonly UserManager<User> userManager;
 
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="userManager">Obiekt menadżera użytkowników</param>
         public AccountController(UserManager<User> userManager)
         {
             this.userManager = userManager;
         }
 
+        /// <summary>
+        /// Zwraca role danego użytkownika. 
+        /// </summary>
         [HttpGet]
         [Route("Roles")]
         public IHttpActionResult GetRoles()
@@ -32,6 +42,10 @@ namespace InstantDelivery.Service.Controllers
             return Ok(roles);
         }
 
+        /// <summary>
+        /// Zmienia hasło użytkownika
+        /// </summary>
+        /// <param name="dto"></param>
         [Route("ChangePassword"), HttpPost]
         public async Task<IHttpActionResult> ChangePassword([FromBody] ChangePasswordDto dto)
         {

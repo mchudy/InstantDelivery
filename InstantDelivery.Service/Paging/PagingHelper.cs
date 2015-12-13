@@ -9,6 +9,12 @@ namespace InstantDelivery.Service.Paging
 {
     public static class PagingHelper
     {
+        /// <summary>
+        /// Zwraca stronę danych z danej kolekcji.
+        /// </summary>
+        /// <param name="source">Kolekcja</param>
+        /// <param name="query">Filtry</param>
+        /// <returns></returns>
         public static PagedResult<T> GetPagedResult<T>(IQueryable<T> source, PageQuery query)
         {
             if (string.IsNullOrEmpty(query.SortProperty))
