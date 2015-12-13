@@ -1,7 +1,6 @@
-using InstantDelivery.Model;
+using InstantDelivery.Model.Paging;
 using System.Collections.Specialized;
 using System.Web;
-using InstantDelivery.Model.Paging;
 
 namespace InstantDelivery.ViewModel.Extensions
 {

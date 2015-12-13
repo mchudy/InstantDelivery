@@ -6,7 +6,7 @@ using System.Reflection;
 namespace InstantDelivery.Domain.Extensions
 {
     /// <summary>
-    /// Metody rozszerzające klasy IQuerable
+    /// Metody rozszerzające klasy <see cref="IQueryable{T}"/>
     /// </summary>
     public static class IQueryableExtensions
     {

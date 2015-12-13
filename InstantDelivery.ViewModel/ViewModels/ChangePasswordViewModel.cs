@@ -19,6 +19,7 @@ namespace InstantDelivery.ViewModel
         public async void ChangePassword()
         {
             await service.ChangePassword(ChangePasswordDto);
+            Close();
         }
 
         public void Close()
