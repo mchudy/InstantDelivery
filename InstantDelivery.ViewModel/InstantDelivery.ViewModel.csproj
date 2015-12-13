@@ -69,8 +69,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dialogs\DialogCoordinator.cs" />
-    <Compile Include="Dialogs\IDialogCoordinator.cs" />
+    <Compile Include="Dialogs\DialogManager.cs" />
+    <Compile Include="Dialogs\IDialogManager.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Proxies\AccountServiceProxy.cs" />
     <Compile Include="Proxies\EmployeesServiceProxy.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Proxies\StatisticsServiceProxy.cs" />
     <Compile Include="Proxies\UsersServiceProxy.cs" />
     <Compile Include="Proxies\VehiclesServiceProxy.cs" />
-    <Compile Include="ShowShell.cs" />
+    <Compile Include="ShowShellEvent.cs" />
     <Compile Include="ViewModels\AdministratorShellViewModel.cs" />
     <Compile Include="ViewModels\AdministratorViewModels\ChangeUserRoleView.cs" />
     <Compile Include="ViewModels\AdministratorViewModels\ManageUsersGroupsViewModel.cs" />

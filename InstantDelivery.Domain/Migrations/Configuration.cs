@@ -93,7 +93,6 @@ namespace InstantDelivery.Domain.Migrations
             GenerateRoles(context);
             GenerateTestEmployees(context);
             GenerateUsers(context);
-            GenerateEmployeesUsersRelations(context);
             GenerateTestVehicleModels(context);
             GenerateTestVehicles(context);
             GenerateTestPackages(context);
@@ -102,22 +101,6 @@ namespace InstantDelivery.Domain.Migrations
             SetDeliveredPackages(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
-        }
-
-        private static void GenerateEmployeesUsersRelations(InstantDeliveryContext context)
-        {
-            // to repair
-            var employee = context.Employees.Find(1);
-            if (employee != null)
-                employee.User = context.Users.Find("1");
-            var employee2 = context.Employees.Find(2);
-            if (employee2 != null)
-                employee2.User = context.Users.Find("2");
-            var employee3 = context.Employees.Find(3);
-            if (employee3 != null)
-                employee3.User = context.Users.Find("3");
-
-
         }
 
         private static void GenerateRoles(InstantDeliveryContext context)
@@ -134,33 +117,82 @@ namespace InstantDelivery.Domain.Migrations
             }
         }
 
+        private struct UserData
+        {
+            public UserData(User user, string password, Role role)
+            {
+                User = user;
+                Password = password;
+                Role = role;
+            }
+
+            public User User { get; }
+            public string Password { get; }
+            public Role Role { get; }
+        }
+
         private static void GenerateUsers(InstantDeliveryContext context)
         {
-            var users = new[]
-            {
-                new {User = new User {UserName = "admin", Id="1"}, Password = "admin123", Role = Role.Admin},
-                new {User = new User {UserName = "employee", Id="2"}, Password = "employee123", Role = Role.AdministrativeEmployee},
-                new {User = new User {UserName = "courier", Id="3"}, Password = "courier123", Role = Role.Courier}
-            };
-
             var userStore = new UserStore<User>(context);
             var userManager = new UserManager<User>(userStore);
 
-            foreach (var userData in users)
+            for (int i = 1; i < 50; i++)
             {
-                if (!context.Users.Any(u => userData.User.UserName == u.UserName))
-                {
-                    var result = userManager.Create(userData.User, userData.Password);
-                    if (!result.Succeeded)
-                    {
-                        var results =
-                            result.Errors.Select(
-                                e => new DbEntityValidationResult(context.Entry(userData), new[] { new DbValidationError("", e) }));
-                        throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
-                    }
-                    userManager.AddToRole(userData.User.Id, userData.Role.ToString());
-                }
+                var employee = context.Employees.Find(i);
+                var username = i == 1 ? "courier" : GenerateUserName(employee, context);
+                var user = new User { UserName = username };
+                AddUser(context, userManager, new UserData(user, "courier123", Role.Courier), employee);
             }
+
+            for (int i = 51; i < 90; i++)
+            {
+                var employee = context.Employees.Find(i);
+                var username = i == 51 ? "employee" : GenerateUserName(employee, context);
+                var user = new User { UserName = username };
+                AddUser(context, userManager, new UserData(user, "employee123", Role.AdministrativeEmployee), employee);
+            }
+
+            for (int i = 91; i <= 100; i++)
+            {
+                var employee = context.Employees.Find(i);
+                var username = i == 91 ? "admin" : GenerateUserName(employee, context);
+                var user = new User { UserName = username };
+                AddUser(context, userManager, new UserData(user, "admin123", Role.Admin), employee);
+            }
+        }
+
+        private static void AddUser(InstantDeliveryContext context, UserManager<User> userManager, UserData userData, Employee employee)
+        {
+            if (!context.Users.Any(u => userData.User.UserName == u.UserName))
+            {
+                var result = userManager.Create(userData.User, userData.Password);
+                if (!result.Succeeded)
+                {
+                    var results =
+                        result.Errors.Select(
+                            e => new DbEntityValidationResult(context.Entry(userData.User), new[] { new DbValidationError("", e) }));
+                    throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
+                }
+                userManager.AddToRole(userData.User.Id, userData.Role.ToString());
+                employee.User = userData.User;
+            }
+        }
+
+
+        private static string GenerateUserName(Employee employee, InstantDeliveryContext context)
+        {
+            string username = (employee.FirstName + employee.LastName).ToLower();
+            username = ReplaceNationalCharacters(username);
+            if (context.Users.Any(u => u.UserName == username))
+            {
+                int i = 1;
+                while (context.Users.Any(u => u.UserName == username + i))
+                {
+                    i++;
+                }
+                username = username + i;
+            }
+            return username;
         }
 
         private static void GenerateEmployeeVehicleRelations(InstantDeliveryContext context)
@@ -361,6 +393,30 @@ namespace InstantDelivery.Domain.Migrations
             }
 
             context.Employees.AddOrUpdate(testEmployees.ToArray());
+        }
+
+        private static string ReplaceNationalCharacters(string s)
+        {
+            StringBuilder sb = new StringBuilder(s);
+            sb.Replace('ą', 'a')
+              .Replace('ć', 'c')
+              .Replace('ę', 'e')
+              .Replace('ł', 'l')
+              .Replace('ń', 'n')
+              .Replace('ó', 'o')
+              .Replace('ś', 's')
+              .Replace('ż', 'z')
+              .Replace('ź', 'z')
+              .Replace('Ą', 'A')
+              .Replace('Ć', 'C')
+              .Replace('Ę', 'E')
+              .Replace('Ł', 'L')
+              .Replace('Ń', 'N')
+              .Replace('Ó', 'O')
+              .Replace('Ś', 'S')
+              .Replace('Ż', 'Z')
+              .Replace('Ź', 'Z');
+            return sb.ToString();
         }
     }
 
