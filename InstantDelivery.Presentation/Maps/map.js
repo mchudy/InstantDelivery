@@ -43,6 +43,9 @@ function showPackages(packages) {
  */
 function showRoute(packages) {
     packages = JSON.parse(packages);
+    if (!packages || packages.length === 0) {
+        return;
+    }
     var waypoints = [];
     var firstPackageAddress = getAddressString(packages[0]);
     for (var i = 1; i < packages.length; i++) {
