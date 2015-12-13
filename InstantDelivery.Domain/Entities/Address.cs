@@ -3,7 +3,7 @@
 namespace InstantDelivery.Domain.Entities
 {
     /// <summary>
-    /// Klasa reprezentująca adres.
+    /// Klasa reprezentująca adres
     /// </summary>
     [ComplexType]
     public class Address

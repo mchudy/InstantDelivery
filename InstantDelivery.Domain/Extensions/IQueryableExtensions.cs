@@ -20,6 +20,13 @@ namespace InstantDelivery.Domain.Extensions
             .Where(method => method.Name == "OrderByDescending")
             .Single(method => method.GetParameters().Length == 2);
 
+        /// <summary>
+        /// Returns page collection of specified source query.
+        /// </summary>
+        /// <param name="source">Source query</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns></returns>
         public static IList<T> Page<T>(this IQueryable<T> source, int pageNumber, int pageSize)
         {
             return source
@@ -28,6 +35,12 @@ namespace InstantDelivery.Domain.Extensions
                 .ToList();
         }
 
+        /// <summary>
+        /// Returns source ordered by specified property.
+        /// </summary>
+        /// <param name="source">Source query</param>
+        /// <param name="propertyName">Property name</param>
+        /// <returns></returns>
         public static IQueryable<TSource> OrderByProperty<TSource>
             (this IQueryable<TSource> source, string propertyName)
         {
@@ -38,6 +51,12 @@ namespace InstantDelivery.Domain.Extensions
             return GetSortedSource(source, genericMethod, lambda);
         }
 
+        /// <summary>
+        /// Returnss source ordered by descending by specified property name.
+        /// </summary>
+        /// <param name="source">Source query</param>
+        /// <param name="propertyName">Property name</param>
+        /// <returns></returns>
         public static IQueryable<TSource> OrderByDescendingProperty<TSource>
             (this IQueryable<TSource> source, string propertyName)
         {

@@ -2,8 +2,14 @@ namespace InstantDelivery.Domain.Migrations
 {
     using System.Data.Entity.Migrations;
 
+    /// <summary>
+    /// Ta migracja umo¿liwia stworzenie tabeli historii paczek.
+    /// </summary>
     public partial class AddPackageHistory : DbMigration
     {
+        /// <summary>
+        /// Tworzy tabele danych.
+        /// </summary>
         public override void Up()
         {
             CreateTable(
@@ -22,7 +28,9 @@ namespace InstantDelivery.Domain.Migrations
                 .Index(t => t.Employee_Id)
                 .Index(t => t.Package_Id);
         }
-
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
             DropForeignKey("dbo.PackageHistory", "Package_Id", "dbo.Packages");

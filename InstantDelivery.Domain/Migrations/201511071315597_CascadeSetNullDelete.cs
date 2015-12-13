@@ -2,8 +2,14 @@ using System.Data.Entity.Migrations;
 
 namespace InstantDelivery.Domain.Migrations
 {
+    /// <summary>
+    /// Ta migracja umo¿liwia w³¹czenie ustawiania wartoœci null w momencie usuwania relacji w bazie danych.
+    /// </summary>
     public partial class CascadeSetNullDelete : DbMigration
     {
+        /// <summary>
+        /// W³¹cza kaskadowe ustawianie wartoœci null w momencie usuwania relacji w bazie danych.
+        /// </summary>
         public override void Up()
         {
             Sql(@"ALTER TABLE [dbo].[Vehicles] DROP CONSTRAINT [FK_dbo.Vehicles_dbo.VehicleModels_VehicleModel_Id]");
@@ -21,7 +27,9 @@ namespace InstantDelivery.Domain.Migrations
                     REFERENCES [dbo].[Vehicles] ([Id])
                     ON DELETE SET NULL");
         }
-
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
         }

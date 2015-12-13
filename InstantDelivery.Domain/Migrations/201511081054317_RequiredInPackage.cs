@@ -2,8 +2,14 @@ using System.Data.Entity.Migrations;
 
 namespace InstantDelivery.Domain.Migrations
 {
+    /// <summary>
+    /// Ta migracja pozwala na ustawienei walidacji na encji paczki w bazie danych.
+    /// </summary>
     public partial class RequiredInPackage : DbMigration
     {
+        /// <summary>
+        /// Dodaje walidacje na encji paczki w bazie danych.
+        /// </summary>
         public override void Up()
         {
             AddColumn("dbo.Employees", "PlaceOfResidence_Id", c => c.Int(nullable: false));
@@ -21,7 +27,9 @@ namespace InstantDelivery.Domain.Migrations
             AlterColumn("dbo.Packages", "ShippingAddress_State", c => c.String(nullable: false));
             AlterColumn("dbo.Packages", "ShippingAddress_Country", c => c.String(nullable: false));
         }
-        
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
             AlterColumn("dbo.Packages", "ShippingAddress_Country", c => c.String());

@@ -2,8 +2,14 @@ using System.Data.Entity.Migrations;
 
 namespace InstantDelivery.Domain.Migrations
 {
+    /// <summary>
+    /// Ta migracja tworzy pocz¹tkow¹ instancjê bazy.
+    /// </summary>
     public partial class Initial_Create : DbMigration
     {
+        /// <summary>
+        /// Tworzy pocz¹tkow¹ instancjê bazy.
+        /// </summary>
         public override void Up()
         {
             CreateTable(
@@ -85,7 +91,9 @@ namespace InstantDelivery.Domain.Migrations
                 .PrimaryKey(t => t.Id);
 
         }
-
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
             DropForeignKey("dbo.Employees", "Vehicle_Id", "dbo.Vehicles");

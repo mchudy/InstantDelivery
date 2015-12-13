@@ -2,6 +2,9 @@
 
 namespace InstantDelivery.Common.Enums
 {
+    /// <summary>
+    /// Definicja filtra  po statusie paczki
+    /// </summary>
     public enum PackageStatusFilter
     {
         [Description("Dostarczone")]

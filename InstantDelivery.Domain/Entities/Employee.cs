@@ -87,6 +87,9 @@ namespace InstantDelivery.Domain.Entities
         /// </summary>
         public virtual Vehicle Vehicle { get; set; }
 
+        /// <summary>
+        /// Relacja pomiędzy pracownikiem a użytkownikiem
+        /// </summary>
         public virtual User User { get; set; }
     }
 

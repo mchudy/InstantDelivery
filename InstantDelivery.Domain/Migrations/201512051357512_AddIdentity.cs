@@ -2,9 +2,14 @@ namespace InstantDelivery.Domain.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+    /// <summary>
+    /// Ta migracja tworzy tabele potrzebne by korzystaæ z Identity framework'a.
+    /// </summary>
     public partial class AddUser : DbMigration
     {
+        /// <summary>
+        /// Tworzy tabele danych.
+        /// </summary>
         public override void Up()
         {
             CreateTable(
@@ -76,7 +81,9 @@ namespace InstantDelivery.Domain.Migrations
                 .Index(t => t.UserId);
             
         }
-        
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");

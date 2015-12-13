@@ -17,6 +17,9 @@ namespace InstantDelivery.Domain.Migrations
     /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<InstantDeliveryContext>
     {
+        /// <summary>
+        /// Konstruktor konfiguratora bazy danych.
+        /// </summary>
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;

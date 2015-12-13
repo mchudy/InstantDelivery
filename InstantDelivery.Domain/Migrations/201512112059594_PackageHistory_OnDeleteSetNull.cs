@@ -2,8 +2,14 @@ namespace InstantDelivery.Domain.Migrations
 {
     using System.Data.Entity.Migrations;
 
+    /// <summary>
+    /// Ta migracja umo¿liwia w³¹czenie kaskadowego ustawiania wartoœci null podczas usuwania relacji w tabeli historii paczek.
+    /// </summary>
     public partial class PackageHistory_OnDeleteSetNull : DbMigration
     {
+        /// <summary>
+        /// W³¹cza kaskadowe ustawianie wartoœci null podczas usuwania relacji w tabeli historii paczek.
+        /// </summary>
         public override void Up()
         {
             Sql(@"ALTER TABLE [dbo].[PackageHistory] DROP CONSTRAINT [FK_dbo.PackageHistory_dbo.Packages_Package_Id]");
@@ -16,7 +22,9 @@ namespace InstantDelivery.Domain.Migrations
                     REFERENCES[dbo].[Employees]([Id])
                     ON DELETE SET NULL");
         }
-
+        /// <summary>
+        /// Cofa wprowadzone przez migracjê zmiany.
+        /// </summary>
         public override void Down()
         {
 
