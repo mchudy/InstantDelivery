@@ -168,6 +168,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <None Include="AppSettingsSecrets.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

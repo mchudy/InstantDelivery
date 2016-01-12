@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Model", "In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Common", "InstantDelivery.Common\InstantDelivery.Common.csproj", "{8202F229-FBDC-4F20-AAAA-7725AB893FC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantDelivery.Web", "InstantDelivery.Web\InstantDelivery.Web.csproj", "{3DF5CC7A-3FDF-41A3-8FB7-CA96F769715E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8202F229-FBDC-4F20-AAAA-7725AB893FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8202F229-FBDC-4F20-AAAA-7725AB893FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8202F229-FBDC-4F20-AAAA-7725AB893FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF5CC7A-3FDF-41A3-8FB7-CA96F769715E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF5CC7A-3FDF-41A3-8FB7-CA96F769715E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF5CC7A-3FDF-41A3-8FB7-CA96F769715E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF5CC7A-3FDF-41A3-8FB7-CA96F769715E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
