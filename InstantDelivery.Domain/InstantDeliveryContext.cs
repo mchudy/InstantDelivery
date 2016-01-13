@@ -13,7 +13,7 @@ namespace InstantDelivery.Domain
         /// Konstruktor kontekstu bazy danych.
         /// </summary>
         public InstantDeliveryContext()
-            : base("LocalDbConnection")
+            : base("DbConnection")
         {
         }
 
