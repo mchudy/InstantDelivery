@@ -9,7 +9,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler statystyk
     /// </summary>
     [Authorize]
-    [RoutePrefix("api/Statistics")]
+    [RoutePrefix("Statistics")]
     public class StatisticsController : ApiController
     {
         private const decimal packageTax = 0.25m;

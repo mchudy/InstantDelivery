@@ -18,7 +18,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler użytkowników
     /// </summary>
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/Users")]
+    [RoutePrefix("Users")]
     public class UsersController : ApiController
     {
         private readonly InstantDeliveryContext context;

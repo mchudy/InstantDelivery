@@ -19,7 +19,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler przesyłek
     /// </summary>
     [Authorize]
-    [RoutePrefix("api/Packages")]
+    [RoutePrefix("Packages")]
     public class PackagesController : ApiController
     {
         private readonly InstantDeliveryContext context;

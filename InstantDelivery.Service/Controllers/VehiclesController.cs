@@ -15,7 +15,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler pojazdów
     /// </summary>
     [Authorize]
-    [RoutePrefix("api/Vehicles")]
+    [RoutePrefix("Vehicles")]
     public class VehiclesController : ApiController
     {
         private InstantDeliveryContext context;

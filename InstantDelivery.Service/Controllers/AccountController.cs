@@ -14,7 +14,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler kont użytkowników
     /// </summary>
     [Authorize]
-    [RoutePrefix("api/Account")]
+    [RoutePrefix("Account")]
     public class AccountController : ApiController
     {
         private readonly UserManager<User> userManager;

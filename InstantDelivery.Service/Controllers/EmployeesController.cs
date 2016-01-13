@@ -21,7 +21,7 @@ namespace InstantDelivery.Service.Controllers
     /// Kontroler pracowników
     /// </summary>
     [Authorize]
-    [RoutePrefix("api/Employees")]
+    [RoutePrefix("Employees")]
     public class EmployeesController : ApiController
     {
         private readonly InstantDeliveryContext context;
