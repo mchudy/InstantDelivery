@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
+using InstantDelivery.Common.Extensions;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model.Employees;
@@ -281,7 +282,7 @@ namespace InstantDelivery.Service.Controllers
         private string GenerateUserName(Employee employee)
         {
             string username = (employee.FirstName + employee.LastName).ToLower();
-            username = ReplaceNationalCharacters(username);
+            username = username.ReplaceNationalCharacters();
             if (context.Users.Any(u => u.UserName == username))
             {
                 int i = 1;
@@ -292,30 +293,6 @@ namespace InstantDelivery.Service.Controllers
                 username = username + i;
             }
             return username;
-        }
-
-        private static string ReplaceNationalCharacters(string s)
-        {
-            StringBuilder sb = new StringBuilder(s);
-            sb.Replace('ą', 'a')
-              .Replace('ć', 'c')
-              .Replace('ę', 'e')
-              .Replace('ł', 'l')
-              .Replace('ń', 'n')
-              .Replace('ó', 'o')
-              .Replace('ś', 's')
-              .Replace('ż', 'z')
-              .Replace('ź', 'z')
-              .Replace('Ą', 'A')
-              .Replace('Ć', 'C')
-              .Replace('Ę', 'E')
-              .Replace('Ł', 'L')
-              .Replace('Ń', 'N')
-              .Replace('Ó', 'O')
-              .Replace('Ś', 'S')
-              .Replace('Ż', 'Z')
-              .Replace('Ź', 'Z');
-            return sb.ToString();
         }
     }
 }
