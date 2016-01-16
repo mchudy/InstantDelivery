@@ -35,6 +35,7 @@ namespace InstantDelivery.Service.Controllers
             this.context = context;
             this.pricingStrategy = pricingStrategy;
         }
+
         /// <summary>
         /// Zwraca paczkę o danym ID.
         /// </summary>
@@ -48,6 +49,21 @@ namespace InstantDelivery.Service.Controllers
                 return NotFound();
             }
             return Ok(Mapper.Map<PackageDto>(package));
+        }
+
+        [AllowAnonymous]
+        [Route("{id}/History"), HttpGet]
+        public IHttpActionResult GetHistory(int id)
+        {
+            var events = context.PackageEvents
+                                .Where(pe => pe.Package.Id == id)
+                                .OrderByDescending(pe => pe.Date)
+                                .ProjectTo<PackageEventDto>();
+            if (!events.Any())
+            {
+                return NotFound();
+            }
+            return Ok(events);
         }
 
         /// <summary>

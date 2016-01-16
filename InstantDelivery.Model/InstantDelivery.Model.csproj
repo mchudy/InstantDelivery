@@ -50,6 +50,7 @@
     <Compile Include="Employees\EmployeePackagesDto.cs" />
     <Compile Include="Employees\EmployeeVehicleDto.cs" />
     <Compile Include="Packages\PackageDto.cs" />
+    <Compile Include="Packages\PackageEventDto.cs" />
     <Compile Include="Paging\PagedResult.cs" />
     <Compile Include="Paging\PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

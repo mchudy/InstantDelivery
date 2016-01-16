@@ -37,6 +37,7 @@ namespace InstantDelivery.Service
                 .ReverseMap();
             Mapper.CreateMap<Employee, EmployeePackagesDto>()
                 .ForMember(s => s.Packages, c => c.MapFrom(m => m.Packages));
+            Mapper.CreateMap<PackageEvent, PackageEventDto>();
 
             Mapper.CreateMap<Employee, EmployeeVehicleDto>();
             Mapper.CreateMap<Vehicle, VehicleDto>()

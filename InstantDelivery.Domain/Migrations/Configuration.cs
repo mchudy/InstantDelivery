@@ -230,7 +230,7 @@ namespace InstantDelivery.Domain.Migrations
                 {
                     int employeeId = random.Next() % 20;
                     var employee = context.Employees.Find(employeeId);
-                    if (employee != null)
+                    if (employee != null && package.Status != PackageStatus.New)
                     {
                         employee.Packages.Add(package);
                         package.Status = PackageStatus.InDelivery;
@@ -253,7 +253,7 @@ namespace InstantDelivery.Domain.Migrations
                 if (package != null)
                 {
                     var employee = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
-                    if (employee != null)
+                    if (employee != null && package.Status != PackageStatus.Delivered)
                     {
                         employee.Packages.Remove(package);
                         package.Status = PackageStatus.Delivered;
@@ -275,6 +275,10 @@ namespace InstantDelivery.Domain.Migrations
             var packageEvents = new List<PackageEvent>();
             for (var i = 0; i < 200; i++)
             {
+                if (context.Packages.Find(i) != null)
+                {
+                    continue;
+                }
                 var tmp = new Package
                 {
                     Id = i + 1,
