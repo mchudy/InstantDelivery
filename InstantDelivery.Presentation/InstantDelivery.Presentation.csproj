@@ -105,7 +105,6 @@
       <DependentUpon>ErrorDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumSource.cs" />
-    <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\PasswordBoxAssistant.cs" />
     <Compile Include="Views\AdministratorShellView.xaml.cs">
       <DependentUpon>AdministratorShellView.xaml</DependentUpon>

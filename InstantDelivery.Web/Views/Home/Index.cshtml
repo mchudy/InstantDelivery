@@ -1,92 +1,153 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<h2 id="sec0">Content</h2>
-                At Bootply we like to build simple Bootstrap templates that utilize the code Bootstap CSS without a lot of customization. Sure you can
-                find a lot of Bootstrap themes and inspiration, but these templates tend to be heavy on customization.
+@section Scripts
+{
+    <script>
+        $('.carousel').carousel({
+            interval: 5000
+        })
+    </script>
+}
+<div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-
-
-<hr class="col-md-12">
-                Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores
-                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut.
-                Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores
-                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut!
-
-
-
-<h2 id="sec1">Content</h2>
-<p>
-    Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut.
-</p>
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                Aliquam in felis sit amet augue.
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="carousel-caption">
+                <h1>Modern Business - A Bootstrap 3 Template</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="carousel-caption">
+                <h1>Ready to Style &amp; Add Content</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+            <div class="carousel-caption">
+                <h1>
+                    Additional Layout Options at <a href="http://startbootstrap.com">http://startbootstrap.com</a>
+                </h1>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3>Hello.</h3></div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-                Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-                dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-                Aliquam in felis sit amet augue.
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-location-arrow"></i> Śledź przesyłkę</h3>
+                <p>
+                    Bądź na bieżąco. Sprawdź aktualny stan swojej przesyłki.
+                </p>
+                @using (Html.BeginForm("Track", "Home", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        <input type="search" name="packageId" placeholder="Numer przesyłki..." class="form-control" id="track-package" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-pencil"></i> Ready to Style &amp; Edit</h3>
+                <p>You're ready to go with this pre-built page structure, now all you need to do is add your own custom stylings! You can see some free themes over at <a href="http://bootswatch.com">Bootswatch</a>, or come up with your own using <a href="http://getbootstrap.com/customize/">the Bootstrap customizer</a>!</p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3>
+                    <i class="fa fa-folder-open"></i> Many Page Options
+                </h3>
+                <p>This template features many common pages that you might see on a business website. Pages include: about, contact, portfolio variations, blog, pricing, FAQ, 404, services, and general multi-purpose pages.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-colored">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>Modern Business Features Include:</h2>
+                    <ul>
+                        <li>Bootstrap 3 Framework</li>
+                        <li>Mobile Responsive Design</li>
+                        <li>Predefined File Paths</li>
+                        <li>Working PHP Contact Page</li>
+                        <li>Minimal Custom CSS Styles</li>
+                        <li>Unstyled: Add Your Own Style and Content!</li>
+                        <li>Font-Awesome fonts come pre-installed!</li>
+                        <li>100% <strong>Free</strong> to Use</li>
+                        <li>Open Source: Use for any project, private or commercial!</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive" src="http://placehold.it/700x450/ffffff/cccccc">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive" src="http://placehold.it/700x450">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>Modern Business Features Include:</h2>
+                    <ul>
+                        <li>Bootstrap 3 Framework</li>
+                        <li>Mobile Responsive Design</li>
+                        <li>Predefined File Paths</li>
+                        <li>Working PHP Contact Page</li>
+                        <li>Minimal Custom CSS Styles</li>
+                        <li>Unstyled: Add Your Own Style and Content!</li>
+                        <li>Font-Awesome fonts come pre-installed!</li>
+                        <li>100% <strong>Free</strong> to Use</li>
+                        <li>Open Source: Use for any project, private or commercial!</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row well">
+            <div class="col-lg-8 col-md-8">
+                <h4>'Modern Business' is a ready-to-use, Bootstrap 3 updated, multi-purpose HTML theme!</h4>
+                <p>For more templates and more page options that you can integrate into this website template, visit Start Bootstrap!</p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <a class="btn btn-lg btn-primary pull-right" href="http://startbootstrap.com">See More Templates!</a>
             </div>
         </div>
     </div>
 </div>
-
-<hr>
-
-<h2 id="sec2">Section 2</h2>
-<p>
-    Rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores
-    eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut!
-</p>
-<div class="row">
-    <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-    <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-    <div class="col-md-4"><img src="//placehold.it/300x300" class="img-responsive"></div>
-</div>
-
-<hr>
-
-<h2 id="sec3">Section 3</h2>
-                Images are responsive sed mdo but sum are more fun peratis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores
-                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut..
-<br>
-                Fos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut..
-
-
-<h2 id="sec4">Section 4</h2>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores
-                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-<hr>
