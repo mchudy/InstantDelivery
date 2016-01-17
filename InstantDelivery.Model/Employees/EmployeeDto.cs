@@ -8,7 +8,7 @@ namespace InstantDelivery.Model.Employees
 {
     /// <summary>
     /// Obiekt DTO zawierający dane osobowe pracownika
-    /// </summary
+    /// </summary>
     public class EmployeeDto : ValidationBase
     {
         /// <summary>
@@ -77,6 +77,7 @@ namespace InstantDelivery.Model.Employees
         /// <summary>
         /// Rola pracownika
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public Role? Role { get; set; }
     }
 }

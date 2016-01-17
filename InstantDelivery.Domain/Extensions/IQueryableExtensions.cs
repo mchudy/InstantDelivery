@@ -29,10 +29,13 @@ namespace InstantDelivery.Domain.Extensions
         /// <returns>Ordered collection</returns>
         public static IList<T> Page<T>(this IQueryable<T> source, int pageNumber, int pageSize)
         {
-            return source
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            return source.PageQueryable(pageNumber, pageSize).ToList();
+        }
+
+        public static IQueryable<T> PageQueryable<T>(this IQueryable<T> source, int pageNumber, int pageSize)
+        {
+            return source.Skip((pageNumber - 1) * pageSize)
+                         .Take(pageSize);
         }
 
         /// <summary>
