@@ -1,0 +1,32 @@
+﻿@using InstantDelivery.Common.Extensions
+@model IEnumerable<InstantDelivery.Model.Packages.PackageEventDto>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<div class="container">
+    <div class="section">
+        <h2>Paczka numer @ViewBag.PackageId</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Data i czas</th>
+                        <th>Zdarzenie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dto in Model)
+                    {
+                        <tr>
+                            <td>@dto.Date</td>
+                            <td>@dto.EventType.GetDescription()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

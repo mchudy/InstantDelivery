@@ -62,3 +62,7 @@ footer {
  /* increases the carousel height so it looks good on phones */
   }
 }
+
+#track-package {
+    height: 39px;
+}

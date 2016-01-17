@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using InstantDelivery.Common.Extensions;
 
 namespace InstantDelivery.Helpers
 {
