@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
+using InstantDelivery.Common.Extensions;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
+using InstantDelivery.Domain.Extensions;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Paging;
 using InstantDelivery.Service.Helpers;
 using InstantDelivery.Service.Paging;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
@@ -82,18 +86,41 @@ namespace InstantDelivery.Service.Controllers
         public IHttpActionResult GetPage([FromUri] PageQuery query, string firstName = "",
             string lastName = "", string email = "")
         {
-            var employees = context.Employees.AsQueryable();
-            employees = ApplyFilters(employees, firstName, lastName, email);
-            var dtos = employees.ProjectTo<EmployeeDto>();
-            var result = PagingHelper.GetPagedResult(dtos, query);
-            foreach (var dto in result.PageCollection)
+            var employees = ApplyFilters(context.Employees, firstName, lastName, email);
+            if (string.IsNullOrEmpty(query.SortProperty))
             {
-                var user = context.Employees.Find(dto.Id).User;
-                if (user != null)
-                {
-                    dto.Role = (Role)Enum.Parse(typeof(Role), userManager.GetRoles(user.Id).First());
-                }
+                employees = employees.OrderBy(e => e.Id);
             }
+            else if (query.SortDirection == ListSortDirection.Descending)
+            {
+                employees = employees.OrderByDescendingProperty(query.SortProperty);
+            }
+            else
+            {
+                employees = employees.OrderByProperty(query.SortProperty);
+            }
+            int pageCount = (int)Math.Ceiling(employees.Count() / (double)query.PageSize);
+            employees = employees.PageQueryable(query.PageIndex, query.PageSize);
+            var data = (from e in employees
+                        from ur in e.User.Roles
+                        join r in context.Roles on ur.RoleId equals r.Id
+                        select new
+                        {
+                            Employee = e,
+                            RoleName = r.Name,
+                        }).ToList();
+            var dtos = new List<EmployeeDto>();
+            foreach (var d in data)
+            {
+                var dto = Mapper.Map<EmployeeDto>(d.Employee);
+                dto.Role = (Role)Enum.Parse(typeof(Role), d.RoleName);
+                dtos.Add(dto);
+            }
+            var result = new PagedResult<EmployeeDto>
+            {
+                PageCount = pageCount,
+                PageCollection = dtos
+            };
             return Ok(result);
         }
 
@@ -281,7 +308,7 @@ namespace InstantDelivery.Service.Controllers
         private string GenerateUserName(Employee employee)
         {
             string username = (employee.FirstName + employee.LastName).ToLower();
-            username = ReplaceNationalCharacters(username);
+            username = username.ReplaceNationalCharacters();
             if (context.Users.Any(u => u.UserName == username))
             {
                 int i = 1;
@@ -292,30 +319,6 @@ namespace InstantDelivery.Service.Controllers
                 username = username + i;
             }
             return username;
-        }
-
-        private static string ReplaceNationalCharacters(string s)
-        {
-            StringBuilder sb = new StringBuilder(s);
-            sb.Replace('ą', 'a')
-              .Replace('ć', 'c')
-              .Replace('ę', 'e')
-              .Replace('ł', 'l')
-              .Replace('ń', 'n')
-              .Replace('ó', 'o')
-              .Replace('ś', 's')
-              .Replace('ż', 'z')
-              .Replace('ź', 'z')
-              .Replace('Ą', 'A')
-              .Replace('Ć', 'C')
-              .Replace('Ę', 'E')
-              .Replace('Ł', 'L')
-              .Replace('Ń', 'N')
-              .Replace('Ó', 'O')
-              .Replace('Ś', 'S')
-              .Replace('Ż', 'Z')
-              .Replace('Ź', 'Z');
-            return sb.ToString();
         }
     }
 }

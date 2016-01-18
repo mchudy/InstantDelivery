@@ -1,4 +1,5 @@
 ﻿using InstantDelivery.Common.Enums;
+using InstantDelivery.Common.Extensions;
 using InstantDelivery.Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -185,7 +186,7 @@ namespace InstantDelivery.Domain.Migrations
         private static string GenerateUserName(Employee employee, InstantDeliveryContext context)
         {
             string username = (employee.FirstName + employee.LastName).ToLower();
-            username = ReplaceNationalCharacters(username);
+            username = username.ReplaceNationalCharacters();
             if (context.Users.Any(u => u.UserName == username))
             {
                 int i = 1;
@@ -230,7 +231,7 @@ namespace InstantDelivery.Domain.Migrations
                 {
                     int employeeId = random.Next() % 20;
                     var employee = context.Employees.Find(employeeId);
-                    if (employee != null)
+                    if (employee != null && package.Status != PackageStatus.New)
                     {
                         employee.Packages.Add(package);
                         package.Status = PackageStatus.InDelivery;
@@ -253,7 +254,7 @@ namespace InstantDelivery.Domain.Migrations
                 if (package != null)
                 {
                     var employee = context.Employees.FirstOrDefault(e => e.Packages.Any(p => p.Id == package.Id));
-                    if (employee != null)
+                    if (employee != null && package.Status != PackageStatus.Delivered)
                     {
                         employee.Packages.Remove(package);
                         package.Status = PackageStatus.Delivered;
@@ -275,6 +276,10 @@ namespace InstantDelivery.Domain.Migrations
             var packageEvents = new List<PackageEvent>();
             for (var i = 0; i < 200; i++)
             {
+                if (context.Packages.Find(i) != null)
+                {
+                    continue;
+                }
                 var tmp = new Package
                 {
                     Id = i + 1,
@@ -396,30 +401,6 @@ namespace InstantDelivery.Domain.Migrations
             }
 
             context.Employees.AddOrUpdate(testEmployees.ToArray());
-        }
-
-        private static string ReplaceNationalCharacters(string s)
-        {
-            StringBuilder sb = new StringBuilder(s);
-            sb.Replace('ą', 'a')
-              .Replace('ć', 'c')
-              .Replace('ę', 'e')
-              .Replace('ł', 'l')
-              .Replace('ń', 'n')
-              .Replace('ó', 'o')
-              .Replace('ś', 's')
-              .Replace('ż', 'z')
-              .Replace('ź', 'z')
-              .Replace('Ą', 'A')
-              .Replace('Ć', 'C')
-              .Replace('Ę', 'E')
-              .Replace('Ł', 'L')
-              .Replace('Ń', 'N')
-              .Replace('Ó', 'O')
-              .Replace('Ś', 'S')
-              .Replace('Ż', 'Z')
-              .Replace('Ź', 'Z');
-            return sb.ToString();
         }
     }
 

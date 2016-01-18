@@ -2,14 +2,14 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace InstantDelivery.Helpers
+namespace InstantDelivery.Common.Extensions
 {
     public static class EnumExtensions
     {
         /// <summary>
         /// Zwraca opis wartości obiektu typu wyliczeniowego korzystając z <see cref="DescriptionAttribute"/>
         /// </summary>
-        /// <param name="@enum"></param>
+        /// <param name="enum"></param>
         /// <returns>Opis enuma</returns>
         public static string GetDescription(this Enum @enum)
         {
