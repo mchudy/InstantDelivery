@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Package.cs" />
@@ -105,6 +106,14 @@
     <Compile Include="Migrations\201512112059594_PackageHistory_OnDeleteSetNull.Designer.cs">
       <DependentUpon>201512112059594_PackageHistory_OnDeleteSetNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601180928344_CustomerTable_SenderRecipientInPackage.cs" />
+    <Compile Include="Migrations\201601180928344_CustomerTable_SenderRecipientInPackage.Designer.cs">
+      <DependentUpon>201601180928344_CustomerTable_SenderRecipientInPackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601180934124_CustomerEntity.cs" />
+    <Compile Include="Migrations\201601180934124_CustomerEntity.Designer.cs">
+      <DependentUpon>201601180934124_CustomerEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +151,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512112059594_PackageHistory_OnDeleteSetNull.resx">
       <DependentUpon>201512112059594_PackageHistory_OnDeleteSetNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601180928344_CustomerTable_SenderRecipientInPackage.resx">
+      <DependentUpon>201601180928344_CustomerTable_SenderRecipientInPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601180934124_CustomerEntity.resx">
+      <DependentUpon>201601180934124_CustomerEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

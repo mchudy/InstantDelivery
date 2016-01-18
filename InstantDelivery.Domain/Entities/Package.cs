@@ -13,6 +13,16 @@ namespace InstantDelivery.Domain.Entities
         public Address ShippingAddress { get; set; } = new Address();
 
         /// <summary>
+        /// Nadawca
+        /// </summary>
+        public string Sender { get; set; }
+
+        /// <summary>
+        /// Odbiorca
+        /// </summary>
+        public string Recipient { get; set; }
+
+        /// <summary>
         /// Waga paczki
         /// </summary>
         public decimal Weight { get; set; }
