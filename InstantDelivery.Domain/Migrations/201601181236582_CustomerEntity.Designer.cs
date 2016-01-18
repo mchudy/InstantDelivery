@@ -13,7 +13,7 @@ namespace InstantDelivery.Domain.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601180934124_CustomerEntity"; }
+            get { return "201601181236582_CustomerEntity"; }
         }
         
         string IMigrationMetadata.Source

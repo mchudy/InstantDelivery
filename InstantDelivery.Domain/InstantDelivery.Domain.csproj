@@ -110,9 +110,9 @@
     <Compile Include="Migrations\201601180928344_CustomerTable_SenderRecipientInPackage.Designer.cs">
       <DependentUpon>201601180928344_CustomerTable_SenderRecipientInPackage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601180934124_CustomerEntity.cs" />
-    <Compile Include="Migrations\201601180934124_CustomerEntity.Designer.cs">
-      <DependentUpon>201601180934124_CustomerEntity.cs</DependentUpon>
+    <Compile Include="Migrations\201601181240256_CustomerEntity.cs" />
+    <Compile Include="Migrations\201601181240256_CustomerEntity.Designer.cs">
+      <DependentUpon>201601181240256_CustomerEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -155,8 +155,8 @@
     <EmbeddedResource Include="Migrations\201601180928344_CustomerTable_SenderRecipientInPackage.resx">
       <DependentUpon>201601180928344_CustomerTable_SenderRecipientInPackage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601180934124_CustomerEntity.resx">
-      <DependentUpon>201601180934124_CustomerEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601181240256_CustomerEntity.resx">
+      <DependentUpon>201601181240256_CustomerEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

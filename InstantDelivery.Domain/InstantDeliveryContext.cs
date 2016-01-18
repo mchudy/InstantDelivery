@@ -23,6 +23,11 @@ namespace InstantDelivery.Domain
         public virtual IDbSet<Employee> Employees { get; set; }
 
         /// <summary>
+        /// Tabela klientów
+        /// </summary>
+        public virtual IDbSet<Customer> Customers { get; set; }
+
+        /// <summary>
         /// Tabela pojazdów.
         /// </summary>
         public virtual IDbSet<Vehicle> Vehicles { get; set; }
