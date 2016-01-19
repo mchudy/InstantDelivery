@@ -948,6 +948,8 @@
     <Content Include="Views\Home\Track.cshtml" />
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Portal\MyPackages.cshtml" />
+    <Content Include="Views\Portal\SendPackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

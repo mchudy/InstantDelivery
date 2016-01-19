@@ -1,16 +1,19 @@
-﻿@model dynamic
-
-@{
+﻿@{
     ViewBag.Title = "title";
 }
 @section Scripts
 {
     <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-route.min.js"></script>
     <script type="text/javascript" src="~/App/app.js"></script>
     <script type="text/javascript" src="~/App/controllers/MainCtrl.js"></script>
 }
 <div class="container">
-    <div class="section" ng-app="app" ng-controller="MainController as main">
-        <h2>{{main.title}}</h2>
+    <div class="section" ng-app="app">
+        <ul>
+            <li><a href="packages">Moje paczki</a></li>
+            <li><a href="sendPackage">Nadaj paczkę</a></li>
+        </ul>
+        <div ng-view></div>
     </div>
 </div>
