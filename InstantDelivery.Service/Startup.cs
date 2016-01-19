@@ -15,6 +15,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 [assembly: OwinStartup(typeof(InstantDelivery.Service.Startup))]
 namespace InstantDelivery.Service
@@ -42,6 +43,9 @@ namespace InstantDelivery.Service
             builder.RegisterWebApiFilterProvider(config);
 
             WebApiConfig.Register(config);
+
+            var corsAttribute = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttribute);
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
