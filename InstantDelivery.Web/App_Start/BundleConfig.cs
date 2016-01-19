@@ -24,6 +24,11 @@ namespace InstantDelivery.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/yeti.bootstrap.css",
                       "~/Content/site.css", "~/Content/font-awesome.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/portal")
+                .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js")
+                .Include("~/App/app.js")
+                .IncludeDirectory("~/App/controllers", "*.js", true));
         }
     }
 }

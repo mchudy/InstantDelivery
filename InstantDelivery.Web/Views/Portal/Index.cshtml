@@ -3,10 +3,7 @@
 }
 @section Scripts
 {
-    <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/angular-route.min.js"></script>
-    <script type="text/javascript" src="~/App/app.js"></script>
-    <script type="text/javascript" src="~/App/controllers/MainCtrl.js"></script>
+    @Scripts.Render("~/bundles/portal")
 }
 <div class="container">
     <div class="section" ng-app="app">

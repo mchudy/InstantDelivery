@@ -1,5 +1,5 @@
 ﻿angular.module("app", ['ngRoute'])
-.config(function($routeProvider, $locationProvider) {
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'Index',
@@ -15,4 +15,4 @@
             });
 
         $locationProvider.html5Mode(true);
-    });
+    }]);
