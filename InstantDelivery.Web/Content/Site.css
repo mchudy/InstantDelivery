@@ -94,6 +94,10 @@ footer {
         color: #eee;
     }
 
+    #sidebar a:hover, #sidebar a:visited, #sidebar a:focus {
+        background: #006687;
+    }
+
 #wrapper {
     margin: 0 0 0 250px;
     -moz-transition: margin-left ease .25s;
@@ -115,7 +119,7 @@ footer {
     margin-right: 5px;
 }
 
-    #sidebar-toggle:visited {
+    #sidebar-toggle:visited, #sidebar-toggle:focus {
         background: #008cba;
     }
 
