@@ -1,16 +1,41 @@
 ﻿@{
-    ViewBag.Title = "title";
+    Layout = null;
 }
-@section Scripts
-{
-    @Scripts.Render("~/bundles/portal")
-}
-<div class="container">
-    <div class="section" ng-app="app">
-        <ul>
-            <li><a href="packages">Moje paczki</a></li>
+<!doctype html>
+<html lang="pl">
+<head>
+    <title>Instant Delivery</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <base href="/portal/">
+    @Styles.Render("~/Content/css")
+</head>
+<body ng-app="app">
+    <div id="sidebar">
+        <ul class="nav">
+            <li class="active"><a href="packages">Moje przesyłki</a></li>
             <li><a href="sendPackage">Nadaj paczkę</a></li>
         </ul>
-        <div ng-view></div>
     </div>
-</div>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="#" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+                    </li>
+                </ul>
+                <a class="navbar-brand" href="/">Instant Delivery</a>
+            </div>
+        </nav>
+        <div id="main" class="container-fluid">
+            <div ng-view></div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/portal")
+</body>
+</html>
