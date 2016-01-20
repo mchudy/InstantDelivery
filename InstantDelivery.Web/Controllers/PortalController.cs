@@ -13,7 +13,7 @@ namespace InstantDelivery.Web.Controllers
         {
             return PartialView();
         }
-        
+
         public ActionResult SendPackage()
         {
             return PartialView();
