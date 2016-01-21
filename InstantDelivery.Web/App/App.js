@@ -7,7 +7,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 controller: 'MainController'
             })
             .when('/login', {
-                templateUrl: 'Login',
+                templateUrl: 'login',
                 controller: 'LoginController'
             })
             .when('/packages', {
@@ -24,7 +24,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 app.constant('config', {
-    baseUri: 'https://instantdelivery.azurewebsites.com/api/'
+    baseUri: 'https://instantdelivery.azurewebsites.net/api/'
     //baseUri: 'https://localhost:44300/'
 });
 
