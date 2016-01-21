@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute']);
+﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
@@ -21,4 +21,13 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
+}]);
+
+app.constant('config', {
+    baseUri: 'https://instantdelivery.azurewebsites.com/api/'
+    //baseUri: 'https://localhost:44300/'
+});
+
+app.run(['authService', function (authService) {
+    authService.fillAuthData();
 }]);

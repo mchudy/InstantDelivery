@@ -1,11 +1,15 @@
-﻿app.controller('LoginController', [ '$scope', function ($scope) {
-        $scope.loginData = {
-            userName: "",
-            password: ""
-        };
+﻿app.controller('LoginController', ['$scope', 'authService', function ($scope, authService) {
+    $scope.loginData = {
+        userName: "",
+        password: ""
+    };
 
-        $scope.login = function () {
-            console.log('Tried to login');
-        }
-    }
-]);
+    $scope.login = function () {
+        authService.login($scope.loginData).then(function () {
+            $location.path('/packages');
+        },
+         function (err) {
+             $scope.message = err.error_description;
+         });
+    };
+}]);
