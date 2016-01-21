@@ -118,7 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\controllers\MainCtrl.js" />
+    <Content Include="App\controllers\LoginController.js" />
+    <Content Include="App\controllers\MainController.js" />
+    <Content Include="App\services\authService.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -139,6 +141,8 @@
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-local-storage.js" />
+    <Content Include="Scripts\angular-local-storage.min.js" />
     <Content Include="Scripts\angular-message-format.js" />
     <Content Include="Scripts\angular-message-format.min.js" />
     <Content Include="Scripts\angular-messages.js" />
@@ -950,6 +954,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Portal\MyPackages.cshtml" />
     <Content Include="Views\Portal\SendPackage.cshtml" />
+    <None Include="Views\Portal\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

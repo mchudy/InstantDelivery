@@ -1,0 +1,22 @@
+﻿<section class="container" ng-controller="LoginController">
+    <section class="login-form">
+        <form>
+            <div class="outer">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <input type="text" ng-model="loginData.userName" placeholder="Nazwa użytkownika" required class="form-control" autofocus />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="password" ng-model="loginData.password" placeholder="Hasło" required class="form-control" />
+                        <i class="fa fa-key"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-info" ng-click="login()">Zaloguj</button>
+            </div>
+        </form>
+        <section class="text-center">
+            Nie posiadasz jeszcze konta? <a href="#">Zarejestruj się</a>
+        </section>
+    </section>
+</section>

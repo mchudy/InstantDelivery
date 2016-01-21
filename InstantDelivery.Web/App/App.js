@@ -1,9 +1,14 @@
-﻿angular.module("app", ['ngRoute'])
-.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule']);
+
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'MyPackages',
                 controller: 'MainController'
+            })
+            .when('/login', {
+                templateUrl: 'Login',
+                controller: 'LoginController'
             })
             .when('/packages', {
                 templateUrl: 'MyPackages',
@@ -16,4 +21,13 @@
             .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
+}]);
+
+app.constant('config', {
+    baseUri: 'https://instantdelivery.azurewebsites.com/api/'
+    //baseUri: 'https://localhost:44300/'
+});
+
+app.run(['authService', function (authService) {
+    authService.fillAuthData();
 }]);
