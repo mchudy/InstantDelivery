@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule']);
+﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ngAnimate']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
@@ -35,3 +35,8 @@ app.constant('config', {
 app.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
+
+app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeBar = true;
+}])

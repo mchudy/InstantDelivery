@@ -181,3 +181,15 @@ footer {
             top: 24%;
             padding: 8px 0 0 27px;
         }
+
+#loading-bar .bar {
+    background: #fff;
+     height: 3px;
+}
+
+#loading-bar .peg {
+    -moz-box-shadow: #fff 1px 0 6px 1px;
+    -webkit-box-shadow: #fff 1px 0 6px 1px;
+    box-shadow: #fff 1px 0 6px 1px;
+     height: 3px;
+}

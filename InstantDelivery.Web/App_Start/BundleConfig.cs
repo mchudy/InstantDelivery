@@ -26,7 +26,8 @@ namespace InstantDelivery.Web
                       "~/Content/site.css", "~/Content/font-awesome.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/portal")
-                .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js", "~/Scripts/angular-local-storage.js")
+                .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js",
+                        "~/Scripts/angular-local-storage.js", "~/Scripts/angular-animate.js", "~/Scripts/loading-bar.js")
                 .Include("~/App/app.js")
                 .IncludeDirectory("~/App/services", "*.js", true)
                 .IncludeDirectory("~/App/controllers", "*.js", true));
