@@ -1,0 +1,58 @@
+﻿<div class="container">
+    <form class="form-horizontal" role="form">
+        <h3>Dołącz do Instant Delivery</h3>
+        <div class="form-group">
+            <label for="firstName" class="col-sm-3 control-label">Imię</label>
+            <div class="col-sm-9">
+                <input type="text" id="firstName" placeholder="Imię" class="form-control" autofocus ng-model="signupData.firstName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-3 control-label">Nazwisko</label>
+            <div class="col-sm-9">
+                <input type="text" id="lastName" placeholder="Nazwisko" class="form-control" ng-model="signupData.lastName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9">
+                <input type="email" id="email" placeholder="Email" class="form-control" ng-model="signupData.email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Hasło</label>
+            <div class="col-sm-9">
+                <input type="password" id="password" placeholder="Hasło" class="form-control" ng-model="signupData.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="birthDate" class="col-sm-3 control-label">Data urodzenia</label>
+            <div class="col-sm-9">
+                <input type="date" id="birthDate" class="form-control" ng-model="signupData.dateOfBirth">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Płeć</label>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            <input type="radio" value="female" ng-model="signupData.gender">Kobieta
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            <input type="radio" value="male" ng-model="signupData.gender">Mężczyzna
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary btn-block" ng-click="signup()">Zarejestruj się</button>
+            </div>
+        </div>
+    </form>
+    <p>{{signupData | json}}</p>
+</div>

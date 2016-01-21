@@ -12,25 +12,33 @@
     <base href="/portal/">
     @Styles.Render("~/Content/css")
 </head>
-<body ng-app="app">
-    <div id="sidebar" ng-init="hideSidebar = false" ng-class="{'hide-sidebar': hideSidebar}">
+<body ng-app="app" ng-controller="MainController">
+    <div id="sidebar" ng-class="{'hide-sidebar': hideSidebar || !loggedIn()}"
+         class="hide-sidebar">
         <ul class="nav">
             <li><a href="packages">Moje przesyłki</a></li>
             <li><a href="sendPackage">Nadaj paczkę</a></li>
-            <li><a href="login">LOGIN (temporary)</a></li>
         </ul>
     </div>
-    <div id="wrapper" ng-class="{'hide-sidebar': hideSidebar}">
+    <div id="wrapper" ng-class="{'hide-sidebar': hideSidebar || !loggedIn()}" class="hide-sidebar">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="#" id="sidebar-toggle" ng-click="hideSidebar = !hideSidebar">
+                        <a href="#" id="sidebar-toggle" ng-click="hideSidebar = !hideSidebar"
+                           ng-show="loggedIn()">
                             <i class="fa fa-bars"></i>
                         </a>
                     </li>
                 </ul>
                 <a class="navbar-brand" href="/">Instant Delivery</a>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right text-center">
+                        <li ng-click="logOut()" ng-show="loggedIn()">
+                            <a href="#">Wyloguj</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div id="main" class="container-fluid">

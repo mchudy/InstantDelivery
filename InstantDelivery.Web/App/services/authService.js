@@ -35,6 +35,11 @@
                 this.isAuth = true;
                 this.userName = authData.userName;
             }
+        },
+
+        register: function () {
+            this.logOut();
+            //TODO
         }
     };
 }]);

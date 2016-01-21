@@ -10,6 +10,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 templateUrl: 'login',
                 controller: 'LoginController'
             })
+            .when('/signup', {
+                templateUrl: 'Signup',
+                controller: 'SignupController'
+            })
             .when('/packages', {
                 templateUrl: 'MyPackages',
                 controller: 'MainController'

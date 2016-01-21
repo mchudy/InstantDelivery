@@ -9,6 +9,11 @@ namespace InstantDelivery.Web.Controllers
             return View();
         }
 
+        public ActionResult Signup()
+        {
+            return PartialView();
+        }
+
         public ActionResult Login()
         {
             return PartialView();
