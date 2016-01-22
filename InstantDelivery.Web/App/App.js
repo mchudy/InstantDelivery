@@ -7,7 +7,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 controller: 'MainController'
             })
             .when('/login', {
-                templateUrl: 'login',
+                templateUrl: 'Login',
                 controller: 'LoginController'
             })
             .when('/signup', {
@@ -39,4 +39,8 @@ app.run(['authService', function (authService) {
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.includeBar = true;
-}])
+}]);
+
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+}]);
