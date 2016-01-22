@@ -14,6 +14,9 @@ namespace InstantDelivery.Common.Enums
         Courier,
 
         [Description("Pracownik administracyjny")]
-        AdministrativeEmployee
+        AdministrativeEmployee,
+
+        [Description("Klient")]
+        Customer
     }
 }

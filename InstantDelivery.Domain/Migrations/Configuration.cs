@@ -50,7 +50,7 @@ namespace InstantDelivery.Domain.Migrations
             }
         }
 
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
 
         private static readonly string[][] cities =
         {
@@ -92,10 +92,30 @@ namespace InstantDelivery.Domain.Migrations
             "małopolskie"
         };
 
+        private static readonly string[] firstNames = {
+                "Jessie", "Jessie", "Justin", "Britney", "Ariana", "David", "Adam", "Enrique", "Ashton", "Lisa", "Bruno",
+                "Jan",
+                "Denis", "Richard", "Witold", "Cezary", "Bartłomiej", "Anastazja", "Mariusz", "Janusz", "Helena",
+                "Dorota",
+                "Anna", "Henryk", "Markus", "Łukasz", "Mateusz", "Adrian", "Michał", "Ted", "Robin", "Marshall", "Lily",
+                "Barney", "Brad", "Elliot", "John", "Jan", "Norbert", "Damian"
+        };
+
+        private static readonly string[] lastNames = {
+                "James", "Rogers", "Timberlake", "Spears", "Grande", "Beckham", "Levine", "Iglesias", "Kutcher", "Row",
+                "Mars",
+                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "Żak", "Dąbrowski", "Bąk", "Kolonko", "Swojski",
+                "Romański",
+                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "Jakubiak", "Piasecki", "Dudek", "Nachtman", "Mosby",
+                "Scherbatsky",
+                "Erickson", "Aldrin", "Stinson", "Pitt", "Reid", "Dorian", "Andrzejewski", "Gierczak", "Damil"
+            };
+
         private static void GenerateTestData(InstantDeliveryContext context)
         {
             GenerateRoles(context);
             GenerateTestEmployees(context);
+            GenerateCustomers(context);
             GenerateUsers(context);
             GenerateTestVehicleModels(context);
             GenerateTestVehicles(context);
@@ -105,6 +125,39 @@ namespace InstantDelivery.Domain.Migrations
             SetDeliveredPackages(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
+        }
+
+        private static void GenerateCustomers(InstantDeliveryContext context)
+        {
+            var customers = new List<Customer>();
+            DateTime startDate = new DateTime(1950, 1, 1);
+            int daysUntilNow = (DateTime.Now - startDate).Days;
+            for (var i = 0; i < 10; i++)
+            {
+                var city = cities[random.Next() % cities.Length];
+                customers.Add(new Customer
+                {
+                    Id = i + 1,
+                    FirstName = firstNames[random.Next() % firstNames.Length],
+                    LastName = lastNames[random.Next() % lastNames.Length],
+                    Gender = (Gender)(random.Next() % 2),
+                    PlaceOfResidence = new Address
+                    {
+                        City = city[0],
+                        Country = city[1],
+                        Number = (random.Next() % 10).ToString(),
+                        PostalCode = "00-34" + (random.Next() % 9),
+                        State = states[random.Next() % states.Length],
+                        Street = streets[random.Next() % streets.Length]
+                    },
+                    DateOfBirth = startDate.AddDays(random.Next() % daysUntilNow),
+                    PhoneNumber =
+                        (random.Next() % 300) + 700 + (random.Next() % 300 + 700).ToString() +
+                        (random.Next() % 300 + 700)
+                });
+            }
+
+            context.Customers.AddOrUpdate(customers.ToArray());
         }
 
         private static void GenerateRoles(InstantDeliveryContext context)
@@ -143,29 +196,49 @@ namespace InstantDelivery.Domain.Migrations
             for (int i = 1; i < 50; i++)
             {
                 var employee = context.Employees.Find(i);
-                var username = i == 1 ? "courier" : GenerateUserName(employee, context);
+                var username = i == 1 ? "courier" : GenerateUserName(employee.FirstName, employee.LastName, context);
                 var user = new User { UserName = username };
-                AddUser(context, userManager, new UserData(user, "courier123", Role.Courier), employee);
+                if (AddUser(context, userManager, new UserData(user, "courier123", Role.Courier)))
+                {
+                    employee.User = user;
+                }
             }
 
             for (int i = 51; i < 90; i++)
             {
                 var employee = context.Employees.Find(i);
-                var username = i == 51 ? "employee" : GenerateUserName(employee, context);
+                var username = i == 51 ? "employee" : GenerateUserName(employee.FirstName, employee.LastName, context);
                 var user = new User { UserName = username };
-                AddUser(context, userManager, new UserData(user, "employee123", Role.AdministrativeEmployee), employee);
+                if (AddUser(context, userManager, new UserData(user, "employee123", Role.AdministrativeEmployee)))
+                {
+                    employee.User = user;
+                }
             }
 
             for (int i = 91; i <= 100; i++)
             {
                 var employee = context.Employees.Find(i);
-                var username = i == 91 ? "admin" : GenerateUserName(employee, context);
+                var username = i == 1 ? "admin" : GenerateUserName(employee.FirstName, employee.LastName, context);
                 var user = new User { UserName = username };
-                AddUser(context, userManager, new UserData(user, "admin123", Role.Admin), employee);
+                if (AddUser(context, userManager, new UserData(user, "admin123", Role.Admin)))
+                {
+                    employee.User = user;
+                }
+            }
+
+            for (int i = 1; i <= 10; i++)
+            {
+                var customer = context.Customers.Find(i);
+                var username = i == 1 ? "customer" : GenerateUserName(customer.FirstName, customer.LastName, context);
+                var user = new User { UserName = username };
+                if (AddUser(context, userManager, new UserData(user, "customer123", Role.Customer)))
+                {
+                    customer.User = user;
+                }
             }
         }
 
-        private static void AddUser(InstantDeliveryContext context, UserManager<User> userManager, UserData userData, Employee employee)
+        private static bool AddUser(InstantDeliveryContext context, UserManager<User> userManager, UserData userData)
         {
             if (!context.Users.Any(u => userData.User.UserName == u.UserName))
             {
@@ -178,14 +251,15 @@ namespace InstantDelivery.Domain.Migrations
                     throw new DbEntityValidationException("", new List<DbEntityValidationResult>(results));
                 }
                 userManager.AddToRole(userData.User.Id, userData.Role.ToString());
-                employee.User = userData.User;
+                return true;
             }
+            return false;
         }
 
 
-        private static string GenerateUserName(Employee employee, InstantDeliveryContext context)
+        private static string GenerateUserName(string firstName, string lastName, InstantDeliveryContext context)
         {
-            string username = (employee.FirstName + employee.LastName).ToLower();
+            string username = (firstName + lastName).ToLower();
             username = username.ReplaceNationalCharacters();
             if (context.Users.Any(u => u.UserName == username))
             {
@@ -269,7 +343,6 @@ namespace InstantDelivery.Domain.Migrations
             }
         }
 
-
         private static void GenerateTestPackages(InstantDeliveryContext context)
         {
             var testPackages = new List<Package>();
@@ -350,26 +423,6 @@ namespace InstantDelivery.Domain.Migrations
 
         private static void GenerateTestEmployees(InstantDeliveryContext context)
         {
-            var firstName = new[]
-            {
-                "Jessie", "Jessie", "Justin", "Britney", "Ariana", "David", "Adam", "Enrique", "Ashton", "Lisa", "Bruno",
-                "Jan",
-                "Denis", "Richard", "Witold", "Cezary", "Bartłomiej", "Anastazja", "Mariusz", "Janusz", "Helena",
-                "Dorota",
-                "Anna", "Henryk", "Markus", "Łukasz", "Mateusz", "Adrian", "Michał", "Ted", "Robin", "Marshall", "Lily",
-                "Barney", "Brad", "Elliot", "John", "Jan", "Norbert", "Damian"
-            };
-
-            var lastName = new[]
-            {
-                "James", "Rogers", "Timberlake", "Spears", "Grande", "Beckham", "Levine", "Iglesias", "Kutcher", "Row",
-                "Mars",
-                "Andrzejewski", "Rozrabiaka", "Marx", "Tacikiewicz", "Żak", "Dąbrowski", "Bąk", "Kolonko", "Swojski",
-                "Romański",
-                "Zawadzka", "Mucha", "Sienkiewicz", "Ellen", "Jakubiak", "Piasecki", "Dudek", "Nachtman", "Mosby",
-                "Scherbatsky",
-                "Erickson", "Aldrin", "Stinson", "Pitt", "Reid", "Dorian", "Andrzejewski", "Gierczak", "Damil"
-            };
             var testEmployees = new List<Employee>();
             DateTime startDate = new DateTime(1950, 1, 1);
             int daysUntilNow = (DateTime.Now - startDate).Days;
@@ -379,8 +432,8 @@ namespace InstantDelivery.Domain.Migrations
                 testEmployees.Add(new Employee
                 {
                     Id = i + 1,
-                    FirstName = firstName[random.Next() % firstName.Length],
-                    LastName = lastName[random.Next() % lastName.Length],
+                    FirstName = firstNames[random.Next() % firstNames.Length],
+                    LastName = lastNames[random.Next() % lastNames.Length],
                     Gender = (Gender)(random.Next() % 2),
                     PlaceOfResidence = new Address
                     {
@@ -399,7 +452,6 @@ namespace InstantDelivery.Domain.Migrations
                     HireDate = startDate.AddDays(random.Next() % daysUntilNow)
                 });
             }
-
             context.Employees.AddOrUpdate(testEmployees.ToArray());
         }
     }
