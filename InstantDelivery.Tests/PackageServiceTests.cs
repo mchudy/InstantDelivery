@@ -101,7 +101,7 @@ namespace InstantDelivery.Tests
             controller.RegisterPackage(packageDto);
 
             mockSet.Verify(m => m.Add(It.Is((PackageEvent p) => p.Package.Id == 1 &&
-                                                                p.EventType == PackageEventType.Registered)), Times.Once());
+                                                                p.EventType == PackageEventType.RegisteredInWarehouse)), Times.Once());
         }
 
         [Fact]

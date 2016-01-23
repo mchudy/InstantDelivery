@@ -141,7 +141,7 @@ namespace InstantDelivery.Service.Controllers
             context.Packages.Add(newPackage);
             context.PackageEvents.Add(new PackageEvent
             {
-                EventType = PackageEventType.Registered,
+                EventType = PackageEventType.RegisteredInWarehouse,
                 Package = newPackage
             });
             context.SaveChanges();

@@ -9,8 +9,16 @@ namespace InstantDelivery.Common.Enums
     public enum PackageEventType
     {
         [Display(Name = "Paczka zarejestrowana")]
-        [Description("Paczka zarejestrowana")]
-        Registered,
+        [Description("Paczka czeka na odebranie od nadawcy")]
+        ReadyToPickFromSender,
+
+        [Display(Name = "Paczka zarejestrowana")]
+        [Description("Przydzielono kuriera do odebrania paczki od klienta")]
+        CourierAssignedToPickFrom,
+
+        [Display(Name = "Paczka zarejestrowana")]
+        [Description("Paczka zarejestrowana w magazynie")]
+        RegisteredInWarehouse,
 
         [Display(Name = "Paczka zarejestrowana")]
         [Description("Paczka przekazana kurierowi")]

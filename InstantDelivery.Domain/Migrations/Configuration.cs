@@ -376,7 +376,7 @@ namespace InstantDelivery.Domain.Migrations
                 packageEvents.Add(new PackageEvent
                 {
                     Package = tmp,
-                    EventType = PackageEventType.Registered,
+                    EventType = PackageEventType.RegisteredInWarehouse,
                 });
             }
             context.Packages.AddOrUpdate(testPackages.ToArray());
