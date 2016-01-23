@@ -28,7 +28,7 @@ namespace InstantDelivery.ViewModel
         /// <summary>
         /// Flaga informująca, czy jest możliwa edycja danych przesyłki
         /// </summary>
-        public bool IsPackageDataReadOnly => Package.Status != PackageStatus.New;
+        public bool IsPackageDataReadOnly => Package.Status != PackageStatus.InWarehouse;
 
         /// <summary>
         /// Aktualnie edytowana przesyłka
@@ -55,7 +55,7 @@ namespace InstantDelivery.ViewModel
         /// </summary>
         public async void Save()
         {
-            if (Package.Status == PackageStatus.New && SelectedEmployee != null)
+            if (Package.Status == PackageStatus.InWarehouse && SelectedEmployee != null)
             {
                 await packagesService.AssignPackage(Package.Id, SelectedEmployee.Id);
             }

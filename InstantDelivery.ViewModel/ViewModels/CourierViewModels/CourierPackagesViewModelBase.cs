@@ -84,7 +84,7 @@ namespace InstantDelivery.ViewModel
                     query.Filters[nameof(PackageDto.Status)] = PackageStatus.InDelivery.ToString();
                     break;
                 case PackageStatusFilter.New:
-                    query.Filters[nameof(PackageDto.Status)] = PackageStatus.New.ToString();
+                    query.Filters[nameof(PackageDto.Status)] = PackageStatus.InWarehouse.ToString();
                     break;
             }
             query.Filters[nameof(PackageDto.EmployeeId)] = "User.Id";

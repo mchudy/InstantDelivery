@@ -305,7 +305,7 @@ namespace InstantDelivery.Domain.Migrations
                 {
                     int employeeId = random.Next() % 20;
                     var employee = context.Employees.Find(employeeId);
-                    if (employee != null && package.Status == PackageStatus.New)
+                    if (employee != null && package.Status == PackageStatus.InWarehouse)
                     {
                         employee.Packages.Add(package);
                         package.Status = PackageStatus.InDelivery;

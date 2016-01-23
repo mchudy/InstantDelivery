@@ -65,7 +65,7 @@ namespace InstantDelivery.Tests
 
             controller.RegisterPackage(packageDto);
 
-            Assert.Equal(PackageStatus.New, package.Status);
+            Assert.Equal(PackageStatus.InWarehouse, package.Status);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace InstantDelivery.Tests
                 Weight = 100,
                 Width = 100,
                 Length = 100,
-                Status = PackageStatus.New
+                Status = PackageStatus.InWarehouse
             };
             var employee = new Employee { Id = 1, FirstName = "A", LastName = "B" };
 
@@ -167,7 +167,7 @@ namespace InstantDelivery.Tests
                 Weight = 100,
                 Width = 100,
                 Length = 100,
-                Status = PackageStatus.New
+                Status = PackageStatus.InWarehouse
             };
             var packages = new List<Package>().AsQueryable();
             var packagesMockSet = MockDbSetHelper.CreateMockSet(packages);
@@ -188,7 +188,7 @@ namespace InstantDelivery.Tests
         [Fact]
         public void GetById_ShouldReturnPackage()
         {
-            var package = new Package { Height = 5, Width = 10, Length = 10, Weight = 10, Status = PackageStatus.New, Id = 1 };
+            var package = new Package { Height = 5, Width = 10, Length = 10, Weight = 10, Status = PackageStatus.InWarehouse, Id = 1 };
             var mockContext = new Mock<InstantDeliveryContext>();
             mockContext.Setup(c => c.Packages).ReturnsDbSet(package);
 
@@ -234,7 +234,7 @@ namespace InstantDelivery.Tests
                 Weight = 100,
                 Width = 100,
                 Length = 100,
-                Status = PackageStatus.New
+                Status = PackageStatus.InWarehouse
             };
             var employee = new Employee { Id = 1, FirstName = "A", LastName = "B" };
 

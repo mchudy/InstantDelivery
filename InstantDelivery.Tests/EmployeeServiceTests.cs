@@ -60,7 +60,7 @@ namespace InstantDelivery.Tests
             var controller = new EmployeesController(mockContext.Object, userManager.Object);
             controller.Delete(employee.Id);
 
-            Assert.Equal(PackageStatus.New, package.Status);
+            Assert.Equal(PackageStatus.InWarehouse, package.Status);
         }
 
         [Fact]

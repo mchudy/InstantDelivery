@@ -228,7 +228,7 @@ namespace InstantDelivery.Service.Controllers
             foreach (var package in employee.Packages
                         .Where(p => p.Status == PackageStatus.InDelivery))
             {
-                package.Status = PackageStatus.New;
+                package.Status = PackageStatus.InWarehouse;
             }
             context.Employees.Remove(employee);
             context.SaveChanges();

@@ -135,7 +135,7 @@ namespace InstantDelivery.Service.Controllers
             {
                 return BadRequest();
             }
-            package.Status = PackageStatus.New;
+            package.Status = PackageStatus.InWarehouse;
             package.Cost = pricingStrategy.GetCost(package);
             var newPackage = Mapper.Map<Package>(package);
             context.Packages.Add(newPackage);
@@ -317,7 +317,11 @@ namespace InstantDelivery.Service.Controllers
             }
             else if (status == PackageStatusFilter.New)
             {
-                result = result.Where(p => p.Status == PackageStatus.New);
+                result = result.Where(p => p.Status == PackageStatus.InWarehouse || p.Status==PackageStatus.InClient);
+            }
+            else if (status == PackageStatusFilter.ToPickUp)
+            {
+                result = result.Where(p => p.Status == PackageStatus.ToPickUp);
             }
             return result;
         }

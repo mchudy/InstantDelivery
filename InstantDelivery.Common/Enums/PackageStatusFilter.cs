@@ -11,6 +11,8 @@ namespace InstantDelivery.Common.Enums
         Delivered,
         [Description("Nowe")]
         New,
+        [Description("Do odebrania")]
+        ToPickUp,
         [Description("W dostawie")]
         InDelivery,
         [Description("Wszystkie")]
