@@ -1,34 +1,61 @@
 ﻿<div class="container">
     <form class="form-horizontal" role="form">
         <h3>Dołącz do Instant Delivery</h3>
+        <br>
+        <div class="form-group">
+            <label for="userName" class="col-sm-3 control-label">Nazwa użytkownika</label>
+            <div class="col-sm-9">
+                <input type="text" id="userName" placeholder="Imię" class="form-control" autofocus 
+                       ng-model="signupData.userName">
+            </div>
+        </div>
         <div class="form-group">
             <label for="firstName" class="col-sm-3 control-label">Imię</label>
             <div class="col-sm-9">
-                <input type="text" id="firstName" placeholder="Imię" class="form-control" autofocus ng-model="signupData.firstName">
+                <input type="text" id="firstName" placeholder="Imię" class="form-control"
+                       ng-model="signupData.firstName">
             </div>
         </div>
         <div class="form-group">
             <label for="lastName" class="col-sm-3 control-label">Nazwisko</label>
             <div class="col-sm-9">
-                <input type="text" id="lastName" placeholder="Nazwisko" class="form-control" ng-model="signupData.lastName">
+                <input type="text" id="lastName" placeholder="Nazwisko" class="form-control" 
+                       ng-model="signupData.lastName">
             </div>
         </div>
         <div class="form-group">
             <label for="email" class="col-sm-3 control-label">Email</label>
             <div class="col-sm-9">
-                <input type="email" id="email" placeholder="Email" class="form-control" ng-model="signupData.email">
+                <input type="email" id="email" placeholder="Email" class="form-control" 
+                       ng-model="signupData.email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9">
+                <input type="number" placeholder="Numer telefonu" class="form-control" 
+                       ng-model="signupData.phoneNumber">
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-3 control-label">Hasło</label>
             <div class="col-sm-9">
-                <input type="password" id="password" placeholder="Hasło" class="form-control" ng-model="signupData.password">
+                <input type="password" id="password" placeholder="Hasło" class="form-control" 
+                       ng-model="signupData.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="col-sm-3 control-label">Potwierdź hasło</label>
+            <div class="col-sm-9">
+                <input type="password" id="confirmPassword" placeholder="Potwierdź hasło" class="form-control" 
+                       ng-model="signupData.confirmPassword">
             </div>
         </div>
         <div class="form-group">
             <label for="birthDate" class="col-sm-3 control-label">Data urodzenia</label>
-            <div class="col-sm-9">
-                <input type="date" id="birthDate" class="form-control" ng-model="signupData.dateOfBirth">
+            <div class="col-sm-3">
+                <input type="date" id="birthDate" class="form-control" 
+                       ng-model="signupData.dateOfBirth">
             </div>
         </div>
         <div class="form-group">
@@ -44,6 +71,60 @@
                         <label class="radio-inline">
                             <input type="radio" value="male" ng-model="signupData.gender">Mężczyzna
                         </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Ulica</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="signupData.address.street">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Numer domu</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="signupData.address.number">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Kod pocztowy</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="signupData.address.postalCode">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Miejscowość</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="signupData.address.city">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Województwo</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="signupData.address.state">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Kraj</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="signupData.address.country">
                     </div>
                 </div>
             </div>

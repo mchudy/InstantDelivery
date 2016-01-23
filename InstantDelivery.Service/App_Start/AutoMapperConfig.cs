@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model;
+using InstantDelivery.Model.Customers;
 using InstantDelivery.Model.Employees;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Vehicles;
@@ -60,6 +61,9 @@ namespace InstantDelivery.Service
                 .ForMember(s => s.UserName, c => c.MapFrom(e => e.User.UserName))
                 .ForMember(s => s.Id, c => c.MapFrom(e => e.User.Id))
                 .ForMember(s => s.Role, c => c.Ignore());
+
+            Mapper.CreateMap<CustomerRegisterDto, Customer>()
+                .ForMember(s => s.PlaceOfResidence, c => c.MapFrom(cu => cu.Address));
         }
     }
 }

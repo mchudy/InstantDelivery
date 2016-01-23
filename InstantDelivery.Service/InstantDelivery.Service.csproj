@@ -159,6 +159,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\RequireHttpsAttribute.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />

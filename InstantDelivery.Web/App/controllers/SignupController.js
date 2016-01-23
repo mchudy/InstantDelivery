@@ -3,11 +3,15 @@
         //TODO
         userName: "",
         password: "",
+        confirmPassword: "",
         firstName: "",
         lastName: "",
         gender: "",
         dateOfBirth: "",
-        email: ""
+        email: "",
+        address: {
+            
+        }
     }
 
     $scope.signup = function() {
