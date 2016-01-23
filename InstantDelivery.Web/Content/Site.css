@@ -184,12 +184,25 @@ footer {
 
 #loading-bar .bar {
     background: #fff;
-     height: 3px;
+    height: 3px;
 }
 
 #loading-bar .peg {
     -moz-box-shadow: #fff 1px 0 6px 1px;
     -webkit-box-shadow: #fff 1px 0 6px 1px;
     box-shadow: #fff 1px 0 6px 1px;
-     height: 3px;
+    height: 3px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+}
+
+.package-cost {
+    color: #008000;
+    font-size: 25px;
 }

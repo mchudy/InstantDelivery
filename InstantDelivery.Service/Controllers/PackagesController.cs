@@ -245,6 +245,7 @@ namespace InstantDelivery.Service.Controllers
         /// </summary>
         /// <param name="package"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [Route("Cost"), HttpGet]
         public IHttpActionResult GetPackageCost([FromUri] PackageDto package)
         {

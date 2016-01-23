@@ -57,7 +57,7 @@
                 <p>
                     Bądź na bieżąco. Sprawdź aktualny stan swojej przesyłki.
                 </p>
-                @using (Html.BeginForm("Track", "Home", FormMethod.Get))
+                @using (Html.BeginForm("Track", "Package", FormMethod.Get))
                 {
                     <div class="input-group">
                         <input type="search" name="packageId" placeholder="Numer przesyłki..." class="form-control" id="track-package" />
@@ -70,17 +70,16 @@
                 }
             </div>
             <div class="col-lg-4 col-md-4">
-                <h3><i class="fa fa-pencil"></i> Ready to Style &amp; Edit</h3>
-                <p>You're ready to go with this pre-built page structure, now all you need to do is add your own custom stylings! You can see some free themes over at <a href="http://bootswatch.com">Bootswatch</a>, or come up with your own using <a href="http://getbootstrap.com/customize/">the Bootstrap customizer</a>!</p>
+                <h3><i class="fa fa-pencil"></i> Koszt paczki</h3>
+                <p>Oblicz koszt nadania Twojej paczki na podstawie jej wymiarów oraz wagi.</p>
+                @Html.ActionLink("Oblicz koszt", "Cost", "Package", null, new { @class = "btn btn-primary" })
             </div>
             <div class="col-lg-4 col-md-4">
                 <h3>
                     <i class="fa fa-folder-open"></i> Załóż konto
                 </h3>
                 <p>Konto klienta Instant Delivery umożliwia nadawanie paczek przez Internet.</p>
-                <button class="btn btn-primary">
-                    @Html.ActionLink("Przejdź do portalu", "Index", "Portal")
-                </button>
+                @Html.ActionLink("Przejdź do portalu", "Index", "Portal", null, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
