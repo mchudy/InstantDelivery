@@ -31,24 +31,24 @@ namespace InstantDelivery.Service.Controllers
         [Route("Register"), HttpPost]
         public IHttpActionResult Register(CustomerRegisterDto newCustomer)
         {
-            if (!ModelState.IsValid)
+            if (newCustomer == null || !ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
             Customer customer = Mapper.Map<Customer>(newCustomer);
             var user = new User { UserName = newCustomer.UserName };
             if (context.Users.Any(u => user.UserName == u.UserName))
             {
-                return BadRequest();
+                return BadRequest("Ta nazwa użytkownika jest już zajęta");
             }
+            context.Customers.Add(customer);
+            customer.User = user;
             var result = userManager.Create(user, newCustomer.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors.ToString());
             }
             userManager.AddToRole(user.Id, Role.Customer.ToString());
-            customer.User = user;
-            context.Customers.Add(customer);
             context.SaveChanges();
             using (var eh = new EMailHelper())
             {

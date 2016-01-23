@@ -1,54 +1,76 @@
 ﻿<div class="container">
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" name="signupForm" novalidate>
         <h3>Dołącz do Instant Delivery</h3>
         <br>
-        <div class="form-group">
-            <label for="userName" class="col-sm-3 control-label">Nazwa użytkownika</label>
+        <div class="form-group" ng-class="{ 'has-error': signupForm.userName.$touched && signupForm.userName.$invalid }">
+            <label class="col-sm-3 control-label">Nazwa użytkownika</label>
             <div class="col-sm-9">
-                <input type="text" id="userName" placeholder="Imię" class="form-control" autofocus 
-                       ng-model="signupData.userName">
+                <input type="text" name="userName" placeholder="Nazwa użytkownika" class="form-control" autofocus
+                       ng-model="signupData.userName" required>
+                <div class="help-block" ng-messages="signupForm.userName.$error" ng-if="signupForm.userName.$touched && signupForm.userName.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="firstName" class="col-sm-3 control-label">Imię</label>
+        <div class="form-group" ng-class="{ 'has-error': signupForm.firstName.$touched && signupForm.firstName.$invalid }">
+            <label class="col-sm-3 control-label">Imię</label>
             <div class="col-sm-9">
-                <input type="text" id="firstName" placeholder="Imię" class="form-control"
+                <input type="text" name="firstName" placeholder="Imię" class="form-control" required
                        ng-model="signupData.firstName">
+                <div class="help-block" ng-messages="signupForm.firstName.$error" ng-if="signupForm.firstName.$touched && signupForm.firstName.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">Nazwisko</label>
+        <div class="form-group" ng-class="{ 'has-error': signupForm.lastName.$touched && signupForm.lastName.$invalid }">
+            <label class="col-sm-3 control-label">Nazwisko</label>
             <div class="col-sm-9">
-                <input type="text" id="lastName" placeholder="Nazwisko" class="form-control" 
+                <input type="text" name="lastName" placeholder="Nazwisko" class="form-control" required
                        ng-model="signupData.lastName">
+                <div class="help-block" ng-messages="signupForm.lastName.$error" ng-if="signupForm.lastName.$touched && signupForm.lastName.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="email" class="col-sm-3 control-label">Email</label>
-            <div class="col-sm-9">
-                <input type="email" id="email" placeholder="Email" class="form-control" 
-                       ng-model="signupData.email">
-            </div>
-        </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-error': signupForm.email.$touched && signupForm.email.$invalid }">
             <label class="col-sm-3 control-label">Email</label>
             <div class="col-sm-9">
-                <input type="number" placeholder="Numer telefonu" class="form-control" 
+                <input type="email" name="email" placeholder="Email" class="form-control" required
+                       ng-model="signupData.email">
+                <div class="help-block" ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched && signupForm.email.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="email">Wprowadź poprawny adres email</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Numer telefonu</label>
+            <div class="col-sm-9">
+                <input type="text" placeholder="Numer telefonu" class="form-control" 
                        ng-model="signupData.phoneNumber">
             </div>
         </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">Hasło</label>
+        <div class="form-group" ng-class="{ 'has-error': signupForm.password.$touched && signupForm.password.$invalid }">
+            <label class="col-sm-3 control-label">Hasło</label>
             <div class="col-sm-9">
-                <input type="password" id="password" placeholder="Hasło" class="form-control" 
-                       ng-model="signupData.password">
+                <input type="password" name="password" placeholder="Hasło" class="form-control" required
+                       ng-model="signupData.password" ng-minlength="6">
+                <div class="help-block" ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched && signupForm.password.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="minlength">Hasło musi składać się z co najmniej 6 znaków</p>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="confirmPassword" class="col-sm-3 control-label">Potwierdź hasło</label>
+        <div class="form-group" ng-class="{ 'has-error': signupForm.confirmPassword.$touched && signupForm.confirmPassword.$invalid }">
+            <label class="col-sm-3 control-label">Potwierdź hasło</label>
             <div class="col-sm-9">
-                <input type="password" id="confirmPassword" placeholder="Potwierdź hasło" class="form-control" 
-                       ng-model="signupData.confirmPassword">
+                <input type="password" name="confirmPassword" placeholder="Potwierdź hasło" class="form-control" required
+                       ng-model="signupData.confirmPassword" input-match="signupData.password">
+                <div class="help-block" ng-messages="signupForm.confirmPassword.$error" 
+                     ng-if="signupForm.confirmPassword.$touched && signupForm.confirmPassword.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="match">Hasła muszą się zgadzać</p>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -64,12 +86,12 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <label class="radio-inline">
-                            <input type="radio" value="female" ng-model="signupData.gender">Kobieta
+                            <input type="radio" value="male" ng-model="signupData.gender" checked>Mężczyzna
                         </label>
                     </div>
                     <div class="col-sm-4">
                         <label class="radio-inline">
-                            <input type="radio" value="male" ng-model="signupData.gender">Mężczyzna
+                            <input type="radio" value="female" ng-model="signupData.gender">Kobieta
                         </label>
                     </div>
                 </div>
@@ -131,9 +153,11 @@
         </div>
         <div class="form-group">
             <div class="col-sm-9 col-sm-offset-3">
-                <button type="submit" class="btn btn-primary btn-block" ng-click="signup()">Zarejestruj się</button>
+                <div class="alert alert-danger" ng-show="message">{{message}}</div>
+                <button type="submit" class="btn btn-primary btn-block" ng-click="signup(signupForm.$valid)">
+                    Zarejestruj się
+                </button>
             </div>
         </div>
     </form>
-    <p>{{signupData | json}}</p>
 </div>

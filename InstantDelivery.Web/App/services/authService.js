@@ -50,9 +50,9 @@
             }
         },
 
-        register: function () {
+        signup: function (signupData) {
             this.logOut();
-            //TODO
+            return $http.post(config.baseUri + 'customers/register', signupData);
         }
     };
 }]);

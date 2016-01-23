@@ -28,5 +28,10 @@ namespace InstantDelivery.Web.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult AccountCreated()
+        {
+            return PartialView();
+        }
     }
 }
