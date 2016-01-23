@@ -58,5 +58,10 @@ namespace InstantDelivery.Domain.Entities
         /// Relacja pomiędzy klientem a użytkownikiem
         /// </summary>
         public virtual User User { get; set; }
+
+        /// <summary>
+        /// Ranga klienta
+        /// </summary>
+        public Rank Rank { get; set; }
     }
 }
