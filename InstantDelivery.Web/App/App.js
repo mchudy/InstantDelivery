@@ -1,10 +1,11 @@
-﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ngAnimate', 'ngMessages']);
+﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 
+    'ngAnimate', 'ngMessages', 'angularUtils.directives.dirPagination']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'MyPackages',
-            controller: 'MainController'
+            controller: 'MyPackagesController'
         })
         .when('/login', {
             templateUrl: 'Login',
@@ -46,4 +47,8 @@ app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
 
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
+}]);
+
+app.config(['paginationTemplateProvider', function (paginationTemplateProvider) {
+    paginationTemplateProvider.setPath('../Templates/dirPagination.tpl.html');
 }]);

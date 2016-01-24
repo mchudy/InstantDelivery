@@ -1,2 +1,10 @@
-﻿<h2>My packages view</h2>
-<h2>{{title}}</h2>
+﻿<h3>Moje przesyłki</h3>
+
+<div class="datatable" id="datatable">
+    <table class="table table-striped table-condensed table-hover">
+        <tr dir-paginate="package in packages | itemsPerPage: packagesPerPage" total-items="totalPackages" current-page="pagination.current">
+            <td>{{ package | json }}</td>
+        </tr>
+    </table>
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+</div>

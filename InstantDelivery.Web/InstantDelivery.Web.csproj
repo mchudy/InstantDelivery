@@ -124,10 +124,13 @@
     <Content Include="App\app.js" />
     <Content Include="App\controllers\LoginController.js" />
     <Content Include="App\controllers\MainController.js" />
+    <Content Include="App\controllers\MyPackagesController.js" />
     <Content Include="App\controllers\SignupController.js" />
     <Content Include="App\directives\inputMatch.js" />
     <Content Include="App\services\authInterceptorService.js" />
     <Content Include="App\services\authService.js" />
+    <Content Include="App\services\packagesService.js" />
+    <Content Include="Templates\dirPagination.tpl.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -183,6 +186,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\dirPagination.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />

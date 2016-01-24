@@ -27,7 +27,8 @@ namespace InstantDelivery.Web
 
             bundles.Add(new ScriptBundle("~/bundles/portal")
                 .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js", "~/Scripts/angular-messages.js",
-                        "~/Scripts/angular-local-storage.js", "~/Scripts/angular-animate.js", "~/Scripts/loading-bar.js")
+                        "~/Scripts/angular-local-storage.js", "~/Scripts/angular-animate.js", "~/Scripts/loading-bar.js",
+                        "~/Scripts/dirPagination.js")
                 .Include("~/App/app.js")
                 .IncludeDirectory("~/App/services", "*.js", true)
                 .IncludeDirectory("~/App/directives", "*.js", true)

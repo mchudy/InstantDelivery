@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model.Customers;
+using InstantDelivery.Model.Packages;
+using InstantDelivery.Model.Paging;
 using InstantDelivery.Service.Helpers;
+using InstantDelivery.Service.Paging;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Http;
@@ -56,6 +60,23 @@ namespace InstantDelivery.Service.Controllers
                 //eh.SendEmail(customer.Email, "Instant Delivery - Rejestracja", eh.RegistrationBody(employee, password));
             }
             return Ok();
+        }
+
+        /// <summary>
+        /// Zwraca stronę paczek dla zalogowanego klienta
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [Route("Packages/Page"), HttpGet]
+        public IHttpActionResult PackagesPage([FromUri] PageQuery query)
+        {
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            var dtos = customer.Packages.AsQueryable().ProjectTo<PackageDto>();
+            return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
     }
 }
