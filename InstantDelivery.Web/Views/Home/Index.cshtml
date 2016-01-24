@@ -5,8 +5,24 @@
 {
     <script>
         $('.carousel').carousel({
-            interval: 5000
-        })
+            interval: 15000
+        });
+
+
+        $(document).ready(function() {
+            var source = document.getElementById("moveToCalculation");
+            var target = document.getElementById("calculationSection");
+            if (target) {
+                var targetOffset = target.offsetTop;
+                $(source).click(function() {
+                    $('html, body').animate({ scrollTop: targetOffset }, 400, function() {
+                        location.hash = target.hash;
+                    });
+                });
+            }
+        });
+
+
     </script>
 }
 <div id="myCarousel" class="carousel slide">
@@ -18,22 +34,22 @@
 
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="fill" style="background-image: url('../../Content/Resources/img3.jpg');"></div>
             <div class="carousel-caption">
-                <h1>Modern Business - A Bootstrap 3 Template</h1>
+                <h1>Instant Delivery - dostarczymy twoje paczki do celu!</h1>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="fill" style="background-image: url('../../Content/Resources/img2.jpg');"></div>
             <div class="carousel-caption">
-                <h1>Ready to Style &amp; Add Content</h1>
+                <h1>Poznaj naszą firmę - @Html.ActionLink("Kliknij tutaj", "About", "Home", null)</h1>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image: url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+            <div class="fill" style="background-image: url('../../Content/Resources/img1.jpg');"></div>
             <div class="carousel-caption">
                 <h1>
-                    Additional Layout Options at <a href="http://startbootstrap.com">http://startbootstrap.com</a>
+                    Dla nas każdy klient jest ważny
                 </h1>
             </div>
         </div>
@@ -70,15 +86,20 @@
                 }
             </div>
             <div class="col-lg-4 col-md-4">
-                <h3><i class="fa fa-pencil"></i> Ready to Style &amp; Edit</h3>
-                <p>You're ready to go with this pre-built page structure, now all you need to do is add your own custom stylings! You can see some free themes over at <a href="http://bootswatch.com">Bootswatch</a>, or come up with your own using <a href="http://getbootstrap.com/customize/">the Bootstrap customizer</a>!</p>
+                <h3>
+                    <i class="fa fa-pencil"></i>Oblicz koszt przesyłki
+                </h3>
+                <p>Przejdź do formularza umożliwiającego obliczenie kosztu przesyłki</p>
+                <button class="btn btn-primary center-block" id="moveToCalculation">
+                    Oblicz koszt przesyłki
+                </button>
             </div>
             <div class="col-lg-4 col-md-4">
                 <h3>
                     <i class="fa fa-folder-open"></i> Załóż konto
                 </h3>
                 <p>Konto klienta Instant Delivery umożliwia nadawanie paczek przez Internet.</p>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary center-block">
                     @Html.ActionLink("Przejdź do portalu", "Index", "Portal")
                 </button>
             </div>
@@ -91,21 +112,17 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h2>Modern Business Features Include:</h2>
-                    <ul>
-                        <li>Bootstrap 3 Framework</li>
-                        <li>Mobile Responsive Design</li>
-                        <li>Predefined File Paths</li>
-                        <li>Working PHP Contact Page</li>
-                        <li>Minimal Custom CSS Styles</li>
-                        <li>Unstyled: Add Your Own Style and Content!</li>
-                        <li>Font-Awesome fonts come pre-installed!</li>
-                        <li>100% <strong>Free</strong> to Use</li>
-                        <li>Open Source: Use for any project, private or commercial!</li>
+                    <ul class="">
+                        <li>Zapewniamy kompleksowe dostawy dla klientów indywidualnych</li>
+                        <li>Jesteśmy młodą rozwijającą się firmą</li>
+                        <li>Zadowolenie klienta jest naszym priorytetem</li>
+                        <li>Cenimy sobie szybkość działania</li>
+                        <li>Chętnie przyjmujemy uwagi od klientów na temat usług</li>
+                        <li>Zapraszamy do skorzystania z naszych usług!</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <img class="img-responsive" src="http://placehold.it/700x450/ffffff/cccccc">
+                    <img class="img-responsive" src="../../Content/Resources/img4.jpg">
                 </div>
             </div>
 
@@ -113,44 +130,43 @@
 
     </div>
 
-    <div class="section">
+    <div class="section" id="calculationSection">
 
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <img class="img-responsive" src="http://placehold.it/700x450">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h2>Modern Business Features Include:</h2>
-                    <ul>
-                        <li>Bootstrap 3 Framework</li>
-                        <li>Mobile Responsive Design</li>
-                        <li>Predefined File Paths</li>
-                        <li>Working PHP Contact Page</li>
-                        <li>Minimal Custom CSS Styles</li>
-                        <li>Unstyled: Add Your Own Style and Content!</li>
-                        <li>Font-Awesome fonts come pre-installed!</li>
-                        <li>100% <strong>Free</strong> to Use</li>
-                        <li>Open Source: Use for any project, private or commercial!</li>
-                    </ul>
+                    <h2>Oblicz kosz przesyłki</h2>
+                    <div>
+                        <div class="form-group">
+                            <label for="widthId">Szerokość [cm]:</label>
+                            <input type="text" pattern="[0-9]*" name="widthId" placeholder="3" class="form-control" id="widthId" />
+                        </div>
+                        <div class="form-group">
+                            <label for="heightId">Wysokość [cm]:</label>
+                            <input type="text" pattern="[0-9]*" width="30" name="heightId" placeholder="3" class="form-control" id="heightId" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lengthId">Długość [cm]:</label>
+                            <input type="text" pattern="[0-9]*" name="lengthId" placeholder="3" class="form-control" id="lengthId" />
+                        </div>
+                        <div class="form-group">
+                            <label for="weightId">Waga [kg]:</label>
+                            <input type="text" pattern="[0-9]*" name="weightId" placeholder="3" class="form-control" id="weightId" />
+                        </div>
+                        <div class="input-group-btn">
+                            <button class="btn btn-info">
+                                Oblicz
+                            </button>
+                        </div>
+                        <div id="costSection">
+                            @{ Html.RenderAction("PackageCost");}
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-    </div>
-
-    <div class="container">
-
-        <div class="row well">
-            <div class="col-lg-8 col-md-8">
-                <h4>'Modern Business' is a ready-to-use, Bootstrap 3 updated, multi-purpose HTML theme!</h4>
-                <p>For more templates and more page options that you can integrate into this website template, visit Start Bootstrap!</p>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <a class="btn btn-lg btn-primary pull-right" href="http://startbootstrap.com">See More Templates!</a>
-            </div>
-        </div>
     </div>
 </div>

@@ -51,5 +51,11 @@ namespace InstantDelivery.Web.Controllers
             //TODO: dedicated error page
             return View();
         }
+
+        public ActionResult PackageCost()
+        {
+            //TODO
+            return null;// View();
+        }
     }
 }
