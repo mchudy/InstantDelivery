@@ -7,8 +7,14 @@ namespace InstantDelivery.Common.Enums
     /// </summary>
     public enum PackageStatus
     {
-        [Description("Nowa")]
-        New,
+        [Description("W magazynie")]
+        InWarehouse,
+
+        [Description("U klienta")]
+        InClient,
+
+        [Description("Do odebrania")]
+        ToPickUp,
 
         [Description("W dostawie")]
         InDelivery,

@@ -17,7 +17,7 @@ namespace InstantDelivery.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PackageStatus status = (PackageStatus)value;
-            bool visible = status == PackageStatus.New;
+            bool visible = status == PackageStatus.InWarehouse;
             return visible ? Visibility.Visible : Visibility.Hidden;
         }
 

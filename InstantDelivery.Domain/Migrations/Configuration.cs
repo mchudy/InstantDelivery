@@ -313,7 +313,7 @@ namespace InstantDelivery.Domain.Migrations
                 {
                     int employeeId = random.Next() % 20;
                     var employee = context.Employees.Find(employeeId);
-                    if (employee != null && package.Status == PackageStatus.New)
+                    if (employee != null && package.Status == PackageStatus.InWarehouse)
                     {
                         employee.Packages.Add(package);
                         package.Status = PackageStatus.InDelivery;
@@ -384,7 +384,7 @@ namespace InstantDelivery.Domain.Migrations
                 packageEvents.Add(new PackageEvent
                 {
                     Package = tmp,
-                    EventType = PackageEventType.Registered,
+                    EventType = PackageEventType.RegisteredInWarehouse,
                 });
             }
             context.Packages.AddOrUpdate(testPackages.ToArray());

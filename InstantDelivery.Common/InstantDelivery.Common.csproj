@@ -43,6 +43,7 @@
     <Compile Include="Enums\PackageEventType.cs" />
     <Compile Include="Enums\PackageStatus.cs" />
     <Compile Include="Enums\PackageStatusFilter.cs" />
+    <Compile Include="Enums\Rank.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
