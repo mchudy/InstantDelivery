@@ -5,7 +5,7 @@ namespace InstantDelivery.Common.Enums
     public enum Rank
     {
         [Description("Początkujący")]
-        Begginer,
+        Beginner,
 
         [Description("Zaawansowany")]
         Advanced,

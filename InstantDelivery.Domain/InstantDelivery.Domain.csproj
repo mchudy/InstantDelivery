@@ -114,6 +114,10 @@
     <Compile Include="Migrations\201601181240256_CustomerEntity.Designer.cs">
       <DependentUpon>201601181240256_CustomerEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601241853016_AddRank.cs" />
+    <Compile Include="Migrations\201601241853016_AddRank.Designer.cs">
+      <DependentUpon>201601241853016_AddRank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601181240256_CustomerEntity.resx">
       <DependentUpon>201601181240256_CustomerEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601241853016_AddRank.resx">
+      <DependentUpon>201601241853016_AddRank.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

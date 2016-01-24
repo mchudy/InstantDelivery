@@ -158,7 +158,7 @@ namespace InstantDelivery.Domain.Migrations
                         State = states[random.Next() % states.Length],
                         Street = streets[random.Next() % streets.Length]
                     },
-                    Rank= Rank.Begginer,
+                    Rank = Rank.Beginner,
                     DateOfBirth = startDate.AddDays(random.Next() % daysUntilNow),
                     PhoneNumber =
                         (random.Next() % 300) + 700 + (random.Next() % 300 + 700).ToString() +
@@ -227,7 +227,7 @@ namespace InstantDelivery.Domain.Migrations
             for (int i = 91; i <= 100; i++)
             {
                 var employee = context.Employees.Find(i);
-                var username = i == 1 ? "admin" : GenerateUserName(employee.FirstName, employee.LastName, context);
+                var username = i == 91 ? "admin" : GenerateUserName(employee.FirstName, employee.LastName, context);
                 var user = new User { UserName = username };
                 if (AddUser(context, userManager, new UserData(user, "admin123", Role.Admin)))
                 {

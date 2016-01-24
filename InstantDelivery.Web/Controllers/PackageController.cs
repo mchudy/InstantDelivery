@@ -14,7 +14,7 @@ namespace InstantDelivery.Web.Controllers
 {
     public class PackageController : Controller
     {
-        private const string baseUri = "https://localhost:44300/";
+        private const string baseUri = "https://instantdelivery.azurewebsites.net/api/";
         private readonly HttpClient client = new HttpClient();
 
         public PackageController()
