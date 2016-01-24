@@ -158,6 +158,7 @@ namespace InstantDelivery.Domain.Migrations
                         State = states[random.Next() % states.Length],
                         Street = streets[random.Next() % streets.Length]
                     },
+                    Rank= Rank.Begginer,
                     DateOfBirth = startDate.AddDays(random.Next() % daysUntilNow),
                     PhoneNumber =
                         (random.Next() % 300) + 700 + (random.Next() % 300 + 700).ToString() +
