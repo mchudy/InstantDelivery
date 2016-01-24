@@ -1,0 +1,53 @@
+﻿@model InstantDelivery.Web.Models.PackageCostModel
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<div class="container">
+    <div class="section">
+        <h2>Koszt nadania paczki</h2>
+        <br>
+        <div class="col-lg-6 col-lg-offset-3">
+            @using (Html.BeginForm("Cost", "Package", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Weight, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Weight)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Length, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Length, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Length)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Width, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Width, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Width)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Height, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Height)
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary pull-right" value="Oblicz">
+            }
+        </div>
+        @if (ViewBag.Cost != null)
+            {
+            <div class="col-lg-6 col-lg-offset-3">
+                <br>
+                <p class="pull-right">
+                    Koszt paczki wynosi: <span class="package-cost">@ViewBag.Cost zł</span>
+                </p>
+            </div>
+        }
+    </div>
+</div>

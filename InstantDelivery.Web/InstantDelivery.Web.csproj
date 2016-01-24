@@ -49,6 +49,7 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +64,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -110,10 +112,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JasmineController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PackageCostModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,13 +126,16 @@
     <Content Include="App\controllers\LoginController.js" />
     <Content Include="App\controllers\MainController.js" />
     <Content Include="App\controllers\SignupController.js" />
-    <Content Include="App\directives\input-match.js" />
+    <Content Include="App\directives\inputMatch.js" />
     <Content Include="App\services\authInterceptorService.js" />
     <Content Include="App\services\authService.js" />
+    <Content Include="App\tests\test.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\Resources\img1.jpg" />
     <Content Include="Content\Resources\img2.jpg" />
@@ -934,6 +942,14 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\jasmine-samples\Player.js" />
+    <Content Include="Scripts\jasmine-samples\PlayerSpec.js" />
+    <Content Include="Scripts\jasmine-samples\Song.js" />
+    <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -962,7 +978,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Home\Track.cshtml" />
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Portal\MyPackages.cshtml" />
@@ -970,6 +985,9 @@
     <Content Include="Views\Portal\Login.cshtml" />
     <Content Include="Views\Portal\Signup.cshtml" />
     <Content Include="Views\Portal\AccountCreated.cshtml" />
+    <Content Include="Views\Package\Track.cshtml" />
+    <Content Include="Views\Package\Cost.cshtml" />
+    <Content Include="Views\Jasmine\SpecRunner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
