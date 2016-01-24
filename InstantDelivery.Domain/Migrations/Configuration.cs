@@ -125,6 +125,14 @@ namespace InstantDelivery.Domain.Migrations
             SetDeliveredPackages(context);
             GenerateVehicleVehicleModelRelations(context);
             GenerateEmployeeVehicleRelations(context);
+            GenerateCustomersPackageRelations(context);
+        }
+
+        private static void GenerateCustomersPackageRelations(InstantDeliveryContext context)
+        {
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == "customer");
+            var package = context.Packages.FirstOrDefault();
+            customer?.Packages.Add(package);
         }
 
         private static void GenerateCustomers(InstantDeliveryContext context)
