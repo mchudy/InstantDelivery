@@ -130,6 +130,7 @@
     <Content Include="App\services\authInterceptorService.js" />
     <Content Include="App\services\authService.js" />
     <Content Include="App\services\packagesService.js" />
+    <Content Include="App\tests\authServiceTests.js" />
     <Content Include="Templates\dirPagination.tpl.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
