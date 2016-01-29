@@ -14,7 +14,7 @@ using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    //[Authorize(Roles = "Customer")]
     [RoutePrefix("Customers")]
     public class CustomersController : ApiController
     {
