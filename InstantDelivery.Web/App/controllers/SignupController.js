@@ -1,4 +1,6 @@
-﻿app.controller('SignupController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
+﻿'use strict';
+
+app.controller('SignupController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
     $scope.message = "";
     $scope.signupData = {
         userName: "",

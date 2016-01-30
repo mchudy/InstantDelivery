@@ -216,3 +216,11 @@ footer {
     margin-top: -30px;
     margin-bottom: 30px;
 }
+
+.row-offset-small {
+    margin-top: 0.5em;
+}
+
+.row-offset-large {
+    margin-top: 2em;
+}

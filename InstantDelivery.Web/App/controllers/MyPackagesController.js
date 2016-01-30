@@ -1,4 +1,6 @@
-﻿app.controller("MyPackagesController", ['$scope', 'packagesService', function ($scope, packagesService) {
+﻿'use strict';
+
+app.controller("MyPackagesController", ['$scope', 'packagesService', function ($scope, packagesService) {
     $scope.packages = [];
     $scope.totalPackages = 0;
     $scope.packagesPerPage = 2;

@@ -1,4 +1,6 @@
-﻿app.factory('authService', ['$http', '$q', 'localStorageService', 'config', function ($http, $q, localStorageService, config) {
+﻿'use strict';
+
+app.factory('authService', ['$http', '$q', 'localStorageService', 'config', function ($http, $q, localStorageService, config) {
     var CUSTOMER_ROLE = 3;
 
     return {

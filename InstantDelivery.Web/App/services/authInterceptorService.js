@@ -1,4 +1,6 @@
-﻿app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
+﻿'use strict';
+
+app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
     return {
         request: function (config) {
             config.headers = config.headers || {};

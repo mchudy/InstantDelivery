@@ -17,3 +17,51 @@
     </li>
 </ul>
 <br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Nadawca</h4>
+            Imię <br>
+            Adres <br>
+            Adres <br>
+            Adres
+        </div>
+        <div class="col-md-4">
+            <h4>Odbiorca</h4>
+            {{package.recipient}} <br>
+            {{package.address.street}} {{package.address.number}} <br>
+            {{package.address.postalCode}} {{package.address.city}} <br>
+            <span ng-if="package.address.state">{{package.address.state}}<br></span>
+            {{package.address.country}}
+        </div>
+        <div class="col-md-4">
+            <h4>Wymiary</h4>
+            Długość: {{package.length}} cm <br>
+            Szerokość: {{package.width}} cm <br>
+            Wysokość: {{package.height}} cm <br>
+            Waga: {{package.weight}} kg
+        </div>
+        <br><br>
+        <div class="col-sm-6 col-sm-offset-5">
+            <div class="row row-offset-small">
+                <div class="pull-right">
+                    <label>Sposób płatności: </label>
+                    <input type="radio" checked> Płatność przy odbiorze
+                    <br>
+                </div>
+            </div>
+            <div class="row row-offset-small">
+                <div class="pull-right">
+                    Łączny koszt: <span class="package-cost"> {{package.cost}} zł</span>
+                    <br>
+                </div>
+            </div>
+            <div class="row row-offset-large">
+                <div class="alert alert-danger" ng-show="message">{{message}}</div>
+                <button type="submit" class="btn btn-primary pull-right" ng-click="sendPackage()">
+                    Nadaj paczkę
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-﻿app.controller("MainController", ['$scope', '$http', 'authService', '$location', function ($scope, $http, authService, $location) {
+﻿'use strict';
+
+app.controller("MainController", ['$scope', '$http', 'authService', '$location', function ($scope, $http, authService, $location) {
     if (!authService.isAuth) {
         $location.path('/login');
     }
