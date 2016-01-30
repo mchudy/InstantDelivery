@@ -128,9 +128,11 @@
     <Content Include="App\controllers\SendPackageController.js" />
     <Content Include="App\controllers\SignupController.js" />
     <Content Include="App\directives\inputMatch.js" />
+    <Content Include="App\services\accountService.js" />
     <Content Include="App\services\authInterceptorService.js" />
     <Content Include="App\services\authService.js" />
     <Content Include="App\services\packagesService.js" />
+    <Content Include="App\services\sendPackageDataService.js" />
     <Content Include="App\tests\authServiceTests.js" />
     <Content Include="App\tests\defaultReferences.js" />
     <Content Include="App\views\sendPackageDimensions.html" />

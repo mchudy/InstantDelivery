@@ -78,5 +78,20 @@ namespace InstantDelivery.Service.Controllers
             var dtos = customer.Packages.AsQueryable().ProjectTo<PackageDto>();
             return Ok(PagingHelper.GetPagedResult(dtos, query));
         }
+
+        /// <summary>
+        /// Zwraca dane adresowe zalogowanego klienta
+        /// </summary>
+        [Route("Address"), HttpGet]
+        public IHttpActionResult GetAddress()
+        {
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            var dto = Mapper.Map<CustomerAddressDto>(customer);
+            return Ok(dto);
+        }
     }
 }

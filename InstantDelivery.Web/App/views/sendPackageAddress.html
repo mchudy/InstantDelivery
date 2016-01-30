@@ -20,10 +20,10 @@
 <div class="container">
     <div class="col-md-3">
         <h4>Nadawca</h4>
-        Imię <br>
-        Adres <br>
-        Adres <br>
-        Adres 
+        {{userData.name}} <br>
+        {{userData.address.street}} {{userData.address.number}}<br>
+        {{userData.address.postalCode}} {{userData.address.city}}<br>
+        {{userData.address.country}}
     </div>
     <div class="col-md-9">
         <h4>Odbiorca</h4>

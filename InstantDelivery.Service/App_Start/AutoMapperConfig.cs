@@ -64,6 +64,8 @@ namespace InstantDelivery.Service
 
             Mapper.CreateMap<CustomerRegisterDto, Customer>()
                 .ForMember(s => s.PlaceOfResidence, c => c.MapFrom(cu => cu.Address));
+            Mapper.CreateMap<Customer, CustomerAddressDto>()
+                .ForMember(s => s.Address, c => c.MapFrom(cu => cu.PlaceOfResidence));
         }
     }
 }
