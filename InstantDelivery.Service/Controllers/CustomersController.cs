@@ -8,23 +8,27 @@ using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
 using InstantDelivery.Service.Helpers;
 using InstantDelivery.Service.Paging;
+using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
-    //[Authorize(Roles = "Customer")]
+    [Authorize]//(Roles = "Customer")]
     [RoutePrefix("Customers")]
     public class CustomersController : ApiController
     {
         private readonly InstantDeliveryContext context;
         private readonly UserManager<User, string> userManager;
+        private readonly IPricingStrategy pricingStrategy;
 
-        public CustomersController(InstantDeliveryContext context, UserManager<User, string> userManager)
+        public CustomersController(InstantDeliveryContext context, UserManager<User, string> userManager,
+            IPricingStrategy pricingStrategy)
         {
             this.context = context;
             this.userManager = userManager;
+            this.pricingStrategy = pricingStrategy;
         }
 
         /// <summary>
@@ -92,6 +96,32 @@ namespace InstantDelivery.Service.Controllers
             }
             var dto = Mapper.Map<CustomerAddressDto>(customer);
             return Ok(dto);
+        }
+
+        [Route("SendPackage"), HttpPost]
+        public IHttpActionResult SendPackage(PackageDto package)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            package.Status = PackageStatus.ToPickUp;
+            package.Cost = pricingStrategy.GetCost(package);
+            var newPackage = Mapper.Map<Package>(package);
+            context.Packages.Add(newPackage);
+            customer.Packages.Add(newPackage);
+            context.PackageEvents.Add(new PackageEvent
+            {
+                Package = newPackage,
+                EventType = PackageEventType.ReadyToPickFromSender
+            });
+            context.SaveChanges();
+            return Ok();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using InstantDelivery.Common.Enums;
+﻿using InstantDelivery.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
 
 namespace InstantDelivery.Model.Packages
 {
@@ -64,5 +64,8 @@ namespace InstantDelivery.Model.Packages
         /// Adres dostawy paczki.
         /// </summary>
         public AddressDto ShippingAddress { get; set; } = new AddressDto();
+
+        public string Sender { get; set; }
+        public string Recipient { get; set; }
     }
 }

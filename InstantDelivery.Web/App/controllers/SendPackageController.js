@@ -1,12 +1,13 @@
 ﻿'use strict';
 
 app.controller("SendPackageController", ['$scope', '$location', 'packagesService', 'sendPackageDataService',
-    function ($scope, $location, packagesService, sendPackageDataService) {
-        $scope.service = sendPackageDataService;
-        $scope.package = sendPackageDataService.currentPackage;
-        $scope.userData = sendPackageDataService.userData;
+    function ($scope, $location, packagesService, dataService) {
+        $scope.service = dataService;
+        $scope.package = dataService.currentPackage;
+        $scope.userData = dataService.userData;
         $scope.$watch("service", function () {
-            $scope.userData = sendPackageDataService.userData;
+            $scope.userData = dataService.userData;
+            $scope.package.sender = dataService.userData.name;
         }, true);
         $scope.message = "";
 
@@ -32,9 +33,10 @@ app.controller("SendPackageController", ['$scope', '$location', 'packagesService
         };
 
         $scope.sendPackage = function () {
+            $scope.package.shippingAddress = $scope.package.address;
             packagesService.sendPackage($scope.package).then(function () {
-                sendPackageDataService.currentPackage = {};
-                location.path('myPackages');
+                dataService.currentPackage = {};
+                $location.path('myPackages');
             }, function () {
                 $scope.message = "Wystąpił błąd podczas nadawania paczki";
             });
