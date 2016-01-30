@@ -42,7 +42,7 @@ describe("authService", function () {
         authService.login({ userName: "user", password: "password" }).then(function () {
             expect(store["authorizationData"]).toEqual({ token: "aaa", userName: "user" });
         }, function () {
-            throw new Error("login has succedeed");
+            throw new Error("login has failed");
         });
         httpBackend.flush();
     });
@@ -57,7 +57,7 @@ describe("authService", function () {
             expect(authService.isAuth).toEqual(true);
             expect(authService.userName).toEqual("user2");
         }, function () {
-            throw new Error("login has succedeed");
+            throw new Error("login has failed");
         });
         httpBackend.flush();
     });
