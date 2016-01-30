@@ -8,30 +8,5 @@ namespace InstantDelivery.Web.Controllers
         {
             return View();
         }
-
-        public ActionResult Signup()
-        {
-            return PartialView();
-        }
-
-        public ActionResult Login()
-        {
-            return PartialView();
-        }
-
-        public ActionResult MyPackages()
-        {
-            return PartialView();
-        }
-
-        public ActionResult SendPackage()
-        {
-            return PartialView();
-        }
-
-        public ActionResult AccountCreated()
-        {
-            return PartialView();
-        }
     }
 }

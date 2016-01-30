@@ -9,6 +9,3 @@
 /// <reference path="~/Scripts/loading-bar.js"/>
 /// <reference path="~/App/app.js"/>
 /// <reference path="~/App/services/authInterceptorService.js"/>
-
-// allows debugging in the browser (after refresh)
-ReSharperReporter.prototype.jasmineDone = function () { };

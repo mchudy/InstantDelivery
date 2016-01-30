@@ -42,12 +42,12 @@ describe("authService", function () {
         authService.login({ userName: "user", password: "password" }).then(function () {
             expect(store["authorizationData"]).toEqual({ token: "aaa", userName: "user" });
         }, function () {
-            expect(error).toBeUndefined();
+            throw new Error("login has succedeed");
         });
         httpBackend.flush();
     });
 
-    it("given the correct credentials should save token to local storage", function () {
+    it("given the correct credentials should set its properties", function () {
         httpBackend.whenPOST("https://instantdelivery.azurewebsites.net/api/token").respond({
             access_token: "aaa"
         });
@@ -57,7 +57,7 @@ describe("authService", function () {
             expect(authService.isAuth).toEqual(true);
             expect(authService.userName).toEqual("user2");
         }, function () {
-            expect(error).toBeUndefined();
+            throw new Error("login has succedeed");
         });
         httpBackend.flush();
     });
@@ -66,7 +66,7 @@ describe("authService", function () {
         httpBackend.whenPOST("https://instantdelivery.azurewebsites.net/api/token").respond(400, "");
         spyOn(authService, "logOut");
         authService.login({ userName: "user", password: "password" }).then(function () {
-            expect(error).toBeUndefined();
+            throw new Error("login has succedeed");
         }, function () {
             expect(authService.logOut).toHaveBeenCalled();
         });
@@ -80,7 +80,7 @@ describe("authService", function () {
         httpBackend.whenGET("https://instantdelivery.azurewebsites.net/api/account/roles").respond([2]);
         spyOn(authService, "logOut");
         authService.login({ userName: "user", password: "password" }).then(function () {
-            expect(error).toBeUndefined();
+            throw new Error("login has succedeed");
         }, function () {
             expect(authService.logOut).toHaveBeenCalled();
         });

@@ -4,26 +4,26 @@
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'MyPackages',
+            templateUrl: '../App/views/myPackages.html',
             controller: 'MyPackagesController'
         })
         .when('/login', {
-            templateUrl: 'Login',
+            templateUrl: '../App/views/login.html',
             controller: 'LoginController'
         })
         .when('/signup', {
-            templateUrl: 'Signup',
+            templateUrl: '../App/views/signup.html',
             controller: 'SignupController'
         })
         .when('/accountCreated', {
-            templateUrl: 'AccountCreated'
+            templateUrl: '../App/views/accountCreated.html'
         })
         .when('/packages', {
-            templateUrl: 'MyPackages',
+            templateUrl: '../App/views/myPackages.html',
             controller: 'MainController'
         })
         .when('/sendPackage', {
-            templateUrl: 'SendPackage',
+            templateUrl: '../App/views/sendPackage.html',
             controller: 'MainController'
         })
         .otherwise({ redirectTo: '/' });
@@ -50,5 +50,5 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['paginationTemplateProvider', function (paginationTemplateProvider) {
-    paginationTemplateProvider.setPath('../Templates/dirPagination.tpl.html');
+    paginationTemplateProvider.setPath('../App/views/dirPagination.tpl.html');
 }]);
