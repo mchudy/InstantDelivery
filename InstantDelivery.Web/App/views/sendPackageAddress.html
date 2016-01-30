@@ -27,51 +27,66 @@
     </div>
     <div class="col-md-9">
         <h4>Odbiorca</h4>
-        <form class="form-horizontal" name="sendPackageAddressForm">
+        <form class="form-horizontal" name="addressForm" novalidate>
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.recipient.$touched && addressForm.recipient.$invalid }">
                         <label class="col-sm-6 control-label">Imię i nazwisko</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.street">
+                            <input type="text" class="form-control" ng-model="package.recipient" name="recipient" required>
+                            <div class="help-block" ng-messages="addressForm.recipient.$error" ng-if="addressForm.recipient.$touched && addressForm.recipient.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.street.$touched && addressForm.street.$invalid }">
                         <label class="col-sm-6 control-label">Ulica</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.street">
+                            <input type="text" class="form-control" ng-model="package.address.street" required name="street">
+                            <div class="help-block" ng-messages="addressForm.street.$error" ng-if="addressForm.street.$touched && addressForm.street.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.number.$touched && addressForm.number.$invalid }">
                         <label class="col-sm-3 control-label">Numer domu</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.number">
+                            <input type="text" class="form-control" ng-model="package.address.number" name="number" required>
+                            <div class="help-block" ng-messages="addressForm.number.$error" ng-if="addressForm.number.$touched && addressForm.number.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.postalCode.$touched && addressForm.postalCode.$invalid }">
                         <label class="col-sm-6 control-label">Kod pocztowy</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.postalCode">
+                            <input type="text" class="form-control" ng-model="package.address.postalCode" name="postalCode" required>
+                            <div class="help-block" ng-messages="addressForm.postalCode.$error" ng-if="addressForm.postalCode.$touched && addressForm.postalCode.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.city.$touched && addressForm.city.$invalid }">
                         <label class="col-sm-6 control-label">Miejscowość</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.city">
+                            <input type="text" class="form-control" ng-model="package.address.city" name="city" required>
+                            <div class="help-block" ng-messages="addressForm.city.$error" ng-if="addressForm.city.$touched && addressForm.city.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,17 +96,20 @@
                     <div class="form-group">
                         <label class="col-sm-6 control-label">Województwo</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.state">
+                            <input type="text" class="form-control" ng-model="package.address.state" name="state">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': addressForm.country.$touched && addressForm.country.$invalid }">
                         <label class="col-sm-6 control-label">Kraj</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" ng-model="package.address.country">
+                            <input type="text" class="form-control" ng-model="package.address.country" name="country" required>
+                            <div class="help-block" ng-messages="addressForm.country.$error" ng-if="addressForm.country.$touched && addressForm.country.$invalid">
+                                <p ng-message="required">To pole jest wymagane</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,7 +117,7 @@
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-3">
                     <div class="alert alert-danger" ng-show="message">{{message}}</div>
-                    <button type="submit" class="btn btn-primary pull-right" ng-click="moveToDimensions(sendPackageAddressForm.$valid)">
+                    <button type="submit" class="btn btn-primary pull-right" ng-click="moveToDimensions(addressForm.$valid)">
                         Dalej
                     </button>
                 </div>
