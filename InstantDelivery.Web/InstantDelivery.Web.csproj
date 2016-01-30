@@ -125,6 +125,7 @@
     <Content Include="App\controllers\LoginController.js" />
     <Content Include="App\controllers\MainController.js" />
     <Content Include="App\controllers\MyPackagesController.js" />
+    <Content Include="App\controllers\SendPackageController.js" />
     <Content Include="App\controllers\SignupController.js" />
     <Content Include="App\directives\inputMatch.js" />
     <Content Include="App\services\authInterceptorService.js" />
@@ -132,11 +133,14 @@
     <Content Include="App\services\packagesService.js" />
     <Content Include="App\tests\authServiceTests.js" />
     <Content Include="App\tests\defaultReferences.js" />
+    <Content Include="App\views\sendPackageDimensions.html" />
+    <Content Include="App\views\sendPackageSummary.html" />
+    <Content Include="Content\timeline.css" />
     <Content Include="Scripts\jasmine\boot.js" />
     <Content Include="Scripts\jasmine\console.js" />
     <Content Include="Scripts\jasmine\jasmine-html.js" />
     <Content Include="Scripts\jasmine\jasmine.js" />
-    <Content Include="App\views\dirPagination.tpl.html" />
+    <Content Include="App\templates\dirPagination.tpl.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -979,7 +983,7 @@
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="App\views\myPackages.html" />
-    <Content Include="App\views\sendPackage.html" />
+    <Content Include="App\views\sendPackageAddress.html" />
     <Content Include="App\views\login.html" />
     <Content Include="App\views\signup.html" />
     <Content Include="App\views\accountCreated.html" />

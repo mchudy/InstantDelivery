@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 
+﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar',
     'ngAnimate', 'ngMessages', 'angularUtils.directives.dirPagination']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -22,9 +22,17 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: '../App/views/myPackages.html',
             controller: 'MainController'
         })
-        .when('/sendPackage', {
-            templateUrl: '../App/views/sendPackage.html',
-            controller: 'MainController'
+        .when('/sendPackage/address', {
+            templateUrl: '../App/views/sendPackageAddress.html',
+            controller: 'SendPackageController'
+        })
+        .when('/sendPackage/dimensions', {
+            templateUrl: '../App/views/sendPackageDimensions.html',
+            controller: 'SendPackageController'
+        })
+        .when('/sendPackage/summary', {
+            templateUrl: '../App/views/sendPackageSummary.html',
+            controller: 'SendPackageController'
         })
         .otherwise({ redirectTo: '/' });
 
@@ -50,5 +58,5 @@ app.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 app.config(['paginationTemplateProvider', function (paginationTemplateProvider) {
-    paginationTemplateProvider.setPath('../App/views/dirPagination.tpl.html');
+    paginationTemplateProvider.setPath('../App/templates/dirPagination.tpl.html');
 }]);

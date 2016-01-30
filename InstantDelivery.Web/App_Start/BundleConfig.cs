@@ -23,7 +23,7 @@ namespace InstantDelivery.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/yeti.bootstrap.css",
-                      "~/Content/site.css", "~/Content/font-awesome.css"));
+                      "~/Content/site.css", "~/Content/font-awesome.css", "~/Content/timeline.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/portal")
                 .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js", "~/Scripts/angular-messages.js",
