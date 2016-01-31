@@ -137,6 +137,7 @@
     <Content Include="App\services\sendPackageDataService.js" />
     <Content Include="App\tests\authServiceTests.js" />
     <Content Include="App\tests\defaultReferences.js" />
+    <Content Include="App\tests\MainControllerTests.js" />
     <Content Include="App\views\profile.html" />
     <Content Include="App\views\sendPackageDimensions.html" />
     <Content Include="App\views\sendPackageSummary.html" />
@@ -988,7 +989,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Portal\Index.cshtml" />

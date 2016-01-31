@@ -48,8 +48,8 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 app.constant('config', {
-    //baseUri: 'https://instantdelivery.azurewebsites.net/api/'
-    baseUri: 'https://localhost:44300/'
+    baseUri: 'https://instantdelivery.azurewebsites.net/api/'
+    //baseUri: 'https://localhost:44300/'
 });
 
 app.run(['authService', function (authService) {
