@@ -13,16 +13,5 @@ namespace InstantDelivery.Web.Controllers
         {
             return View();
         }
-
-        public ActionResult Contact()
-        {
-            return View();
-        }
-
-        public ActionResult PackageCost()
-        {
-            //TODO
-            return null;// View();
-        }
     }
 }

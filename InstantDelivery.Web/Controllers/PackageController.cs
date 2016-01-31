@@ -34,7 +34,6 @@ namespace InstantDelivery.Web.Controllers
                 var dtos = await response.Content.ReadAsAsync<IEnumerable<PackageEventDto>>();
                 return View(dtos);
             }
-            //TODO: dedicated error page
             return View();
         }
 

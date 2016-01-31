@@ -7,22 +7,6 @@
         $('.carousel').carousel({
             interval: 15000
         });
-
-
-        $(document).ready(function () {
-            var source = document.getElementById("moveToCalculation");
-            var target = document.getElementById("calculationSection");
-            if (target) {
-                var targetOffset = target.offsetTop;
-                $(source).click(function () {
-                    $('html, body').animate({ scrollTop: targetOffset }, 400, function () {
-                        location.hash = target.hash;
-                    });
-                });
-            }
-        });
-
-
     </script>
 }
 <div id="myCarousel" class="carousel slide">
@@ -90,9 +74,7 @@
                     <i class="fa fa-pencil"></i> Oblicz koszt przesyłki
                 </h3>
                 <p>Przejdź do formularza umożliwiającego obliczenie kosztu przesyłki</p>
-                <a class="btn btn-primary center-block" id="moveToCalculation" href="#">
-                    Oblicz koszt przesyłki
-                </a>
+                @Html.ActionLink("Oblicz koszt przesyłki", "Cost", "Package", null, new { @class = "btn btn-primary center-block" })
             </div>
             <div class="col-lg-4 col-md-4">
                 <h3>
@@ -121,46 +103,6 @@
                 </div>
                 <div class="col-md-5">
                     <img class="img-responsive" src="../../Content/Resources/img4.jpg">
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="section" id="calculationSection">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h2>Oblicz kosz przesyłki</h2>
-                    <div>
-                        <div class="form-group">
-                            <label for="widthId">Szerokość [cm]:</label>
-                            <input type="text" pattern="[0-9]*" name="widthId" placeholder="3" class="form-control" id="widthId" />
-                        </div>
-                        <div class="form-group">
-                            <label for="heightId">Wysokość [cm]:</label>
-                            <input type="text" pattern="[0-9]*" width="30" name="heightId" placeholder="3" class="form-control" id="heightId" />
-                        </div>
-                        <div class="form-group">
-                            <label for="lengthId">Długość [cm]:</label>
-                            <input type="text" pattern="[0-9]*" name="lengthId" placeholder="3" class="form-control" id="lengthId" />
-                        </div>
-                        <div class="form-group">
-                            <label for="weightId">Waga [kg]:</label>
-                            <input type="text" pattern="[0-9]*" name="weightId" placeholder="3" class="form-control" id="weightId" />
-                        </div>
-                        <div class="input-group-btn">
-                            <button class="btn btn-info">
-                                Oblicz
-                            </button>
-                        </div>
-                        <div id="costSection">
-                            @{ Html.RenderAction("PackageCost");}
-                        </div>
-                    </div>
                 </div>
             </div>
 
