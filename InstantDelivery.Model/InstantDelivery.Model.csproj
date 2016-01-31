@@ -52,6 +52,7 @@
     <Compile Include="Employees\EmployeeDto.cs" />
     <Compile Include="Employees\EmployeePackagesDto.cs" />
     <Compile Include="Employees\EmployeeVehicleDto.cs" />
+    <Compile Include="Packages\PackageCustomerDto.cs" />
     <Compile Include="Packages\PackageDto.cs" />
     <Compile Include="Packages\PackageEventDto.cs" />
     <Compile Include="Paging\PagedResult.cs" />

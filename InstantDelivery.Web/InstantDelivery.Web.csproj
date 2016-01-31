@@ -138,6 +138,7 @@
     <Content Include="App\tests\authServiceTests.js" />
     <Content Include="App\tests\defaultReferences.js" />
     <Content Include="App\tests\MainControllerTests.js" />
+    <Content Include="App\tests\SendPackageControllerTests.js" />
     <Content Include="App\views\profile.html" />
     <Content Include="App\views\sendPackageDimensions.html" />
     <Content Include="App\views\sendPackageSummary.html" />

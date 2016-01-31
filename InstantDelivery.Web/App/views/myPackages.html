@@ -12,7 +12,7 @@
         <tbody>
         <tr dir-paginate="package in packages | itemsPerPage: packagesPerPage" total-items="totalPackages" current-page="pagination.current">
             <td>{{package.id}}</td>
-            <td>{{package.status}}</td>
+            <td>{{package.statusDescription}}</td>
             <td>
                 {{package.shippingAddress.street}} {{package.shippingAddress.number}} <br>
                 {{package.shippingAddress.postalCode}} {{package.shippingAddress.city}}, {{package.shippingAddress.country}}

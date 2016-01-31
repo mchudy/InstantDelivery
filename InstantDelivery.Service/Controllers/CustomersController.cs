@@ -76,8 +76,13 @@ namespace InstantDelivery.Service.Controllers
             {
                 return BadRequest();
             }
-            var dtos = customer.Packages.AsQueryable().ProjectTo<PackageDto>();
-            return Ok(PagingHelper.GetPagedResult(dtos, query));
+            var dtos = customer.Packages.AsQueryable().ProjectTo<PackageCustomerDto>();
+            var page = PagingHelper.GetPagedResult(dtos, query);
+            foreach (var dto in page.PageCollection)
+            {
+                dto.StatusDescription = dto.Status.GetDescription();
+            }
+            return Ok(page);
         }
 
         /// <summary>

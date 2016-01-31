@@ -39,6 +39,7 @@ namespace InstantDelivery.Service
             Mapper.CreateMap<Employee, EmployeePackagesDto>()
                 .ForMember(s => s.Packages, c => c.MapFrom(m => m.Packages));
             Mapper.CreateMap<PackageEvent, PackageEventDto>();
+            Mapper.CreateMap<Package, PackageCustomerDto>();
 
             Mapper.CreateMap<Employee, EmployeeVehicleDto>();
             Mapper.CreateMap<Vehicle, VehicleDto>()
