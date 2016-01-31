@@ -1,21 +1,23 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using InstantDelivery.Common.Enums;
+using InstantDelivery.Common.Extensions;
 using InstantDelivery.Domain;
 using InstantDelivery.Domain.Entities;
 using InstantDelivery.Model.Customers;
 using InstantDelivery.Model.Packages;
 using InstantDelivery.Model.Paging;
-using InstantDelivery.Service.Helpers;
+using InstantDelivery.Model.Statistics;
 using InstantDelivery.Service.Paging;
 using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Web.Http;
 
 namespace InstantDelivery.Service.Controllers
 {
-    [Authorize]//(Roles = "Customer")]
+    [Authorize]
     [RoutePrefix("Customers")]
     public class CustomersController : ApiController
     {
@@ -58,11 +60,6 @@ namespace InstantDelivery.Service.Controllers
             }
             userManager.AddToRole(user.Id, Role.Customer.ToString());
             context.SaveChanges();
-            using (var eh = new EMailHelper())
-            {
-                //TODO
-                //eh.SendEmail(customer.Email, "Instant Delivery - Rejestracja", eh.RegistrationBody(employee, password));
-            }
             return Ok();
         }
 
@@ -122,6 +119,47 @@ namespace InstantDelivery.Service.Controllers
             });
             context.SaveChanges();
             return Ok();
+        }
+
+        [Route("Profile"), HttpGet]
+        public IHttpActionResult Profile()
+        {
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            var dto = Mapper.Map<CustomerProfileDto>(customer);
+            dto.RankDescription = customer.Rank.GetDescription();
+            return Ok(dto);
+        }
+
+        [Route("Packages/Statistics"), HttpGet]
+        public IHttpActionResult GetPackageStatistics()
+        {
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            var now = DateTime.Now;
+            var monthStatistics = from package in customer.Packages
+                                  join @event in context.PackageEvents on package.Id equals @event.Package.Id
+                                  where @event.Date.Year == now.Year
+                                  group package by @event.Date.Month into packages
+                                  select new MonthStatisticDto { Month = packages.Key, Cost = packages.Sum(p => p.Cost), Count = packages.Count() };
+            DateTime weekStart = now.Date.AddDays(-(int)now.DayOfWeek);
+            var weekStatistics = from package in customer.Packages
+                                 join @event in context.PackageEvents on package.Id equals @event.Package.Id
+                                 where @event.Date >= weekStart
+                                 group package by @event.Date.DayOfWeek into packages
+                                 select new WeekStatisticDto { Day = packages.Key, Cost = packages.Sum(p => p.Cost), Count = packages.Count() };
+            var result = new CustomerPackageStatisticsDto
+            {
+                MonthStatistics = monthStatistics.ToList(),
+                WeekStatistics = weekStatistics.ToList()
+            };
+            return Ok(result);
         }
     }
 }

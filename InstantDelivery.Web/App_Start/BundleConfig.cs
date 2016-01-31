@@ -23,12 +23,12 @@ namespace InstantDelivery.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/yeti.bootstrap.css",
-                      "~/Content/site.css", "~/Content/font-awesome.css", "~/Content/timeline.css"));
+                      "~/Content/site.css", "~/Content/font-awesome.css", "~/Content/timeline.css", "~/Content/angular-chart.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/portal")
                 .Include("~/Scripts/angular.js", "~/Scripts/angular-route.js", "~/Scripts/angular-messages.js",
                         "~/Scripts/angular-local-storage.js", "~/Scripts/angular-animate.js", "~/Scripts/loading-bar.js",
-                        "~/Scripts/dirPagination.js")
+                        "~/Scripts/dirPagination.js", "~/Scripts/Chart.js", "~/Scripts/angular-chart.js")
                 .Include("~/App/app.js")
                 .IncludeDirectory("~/App/services", "*.js", true)
                 .IncludeDirectory("~/App/directives", "*.js", true)

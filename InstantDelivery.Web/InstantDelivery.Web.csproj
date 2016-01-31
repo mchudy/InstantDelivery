@@ -125,8 +125,10 @@
     <Content Include="App\controllers\LoginController.js" />
     <Content Include="App\controllers\MainController.js" />
     <Content Include="App\controllers\MyPackagesController.js" />
+    <Content Include="App\controllers\ProfileController.js" />
     <Content Include="App\controllers\SendPackageController.js" />
     <Content Include="App\controllers\SignupController.js" />
+    <Content Include="App\controllers\StatisticsController.js" />
     <Content Include="App\directives\inputMatch.js" />
     <Content Include="App\services\accountService.js" />
     <Content Include="App\services\authInterceptorService.js" />
@@ -135,9 +137,16 @@
     <Content Include="App\services\sendPackageDataService.js" />
     <Content Include="App\tests\authServiceTests.js" />
     <Content Include="App\tests\defaultReferences.js" />
+    <Content Include="App\views\profile.html" />
     <Content Include="App\views\sendPackageDimensions.html" />
     <Content Include="App\views\sendPackageSummary.html" />
+    <Content Include="App\views\statistics.html" />
+    <Content Include="Content\angular-chart.css" />
+    <Content Include="Content\angular-chart.min.css" />
     <Content Include="Content\timeline.css" />
+    <Content Include="Scripts\angular-chart.js" />
+    <Content Include="Scripts\angular-chart.min.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jasmine\boot.js" />
     <Content Include="Scripts\jasmine\console.js" />
     <Content Include="Scripts\jasmine\jasmine-html.js" />

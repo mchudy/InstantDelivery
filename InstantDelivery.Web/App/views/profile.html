@@ -1,0 +1,13 @@
+﻿<h3>Mój profil</h3>
+<br>
+<h4>{{userData.firstName}} {{userData.lastName}}</h4>
+<p>Ranga: {{userData.rankDescription}}</p>
+<div class="container">
+    <div class="row">
+        <h5>Adres</h5>
+        {{userData.name}} <br>
+        {{userData.address.street}} {{userData.address.number}}<br>
+        {{userData.address.postalCode}} {{userData.address.city}}<br>
+        {{userData.address.country}}
+    </div>
+</div>

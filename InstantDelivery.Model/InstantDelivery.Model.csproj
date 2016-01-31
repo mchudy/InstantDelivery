@@ -46,6 +46,7 @@
     <Compile Include="AddressDto.cs" />
     <Compile Include="ChangePasswordDto.cs" />
     <Compile Include="Customers\CustomerAddressDto.cs" />
+    <Compile Include="Customers\CustomerProfileDto.cs" />
     <Compile Include="Customers\CustomerRegisterDto.cs" />
     <Compile Include="Employees\EmployeeAddDto.cs" />
     <Compile Include="Employees\EmployeeDto.cs" />
@@ -56,8 +57,11 @@
     <Compile Include="Paging\PagedResult.cs" />
     <Compile Include="Paging\PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistics\CustomerPackageStatisticsDto.cs" />
     <Compile Include="Statistics\FinancialStatisticsDto.cs" />
     <Compile Include="Statistics\GeneralStatisticsDto.cs" />
+    <Compile Include="Statistics\MonthStatisticDto.cs" />
+    <Compile Include="Statistics\WeekStatisticDto.cs" />
     <Compile Include="UserDto.cs" />
     <Compile Include="ValidationBase.cs" />
     <Compile Include="Vehicles\AddVehicleDto.cs" />

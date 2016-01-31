@@ -1,5 +1,5 @@
 ﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar',
-    'ngAnimate', 'ngMessages', 'angularUtils.directives.dirPagination']);
+    'ngAnimate', 'ngMessages', 'angularUtils.directives.dirPagination', 'chart.js']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -22,6 +22,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: '../App/views/myPackages.html',
             controller: 'MainController'
         })
+        .when('/profile', {
+            templateUrl: '../App/views/profile.html',
+            controller: 'ProfileController'
+        })
+        .when('/statistics', {
+            templateUrl: '../App/views/statistics.html',
+            controller: 'StatisticsController'
+        })
         .when('/sendPackage/address', {
             templateUrl: '../App/views/sendPackageAddress.html',
             controller: 'SendPackageController'
@@ -40,8 +48,8 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 app.constant('config', {
-    baseUri: 'https://instantdelivery.azurewebsites.net/api/'
-    //baseUri: 'https://localhost:44300/'
+    //baseUri: 'https://instantdelivery.azurewebsites.net/api/'
+    baseUri: 'https://localhost:44300/'
 });
 
 app.run(['authService', function (authService) {
