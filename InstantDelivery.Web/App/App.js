@@ -68,3 +68,10 @@ app.config(['$httpProvider', function ($httpProvider) {
 app.config(['paginationTemplateProvider', function (paginationTemplateProvider) {
     paginationTemplateProvider.setPath('../App/templates/dirPagination.tpl.html');
 }]);
+
+app.config(['ChartJsProvider', function (ChartJsProvider) {
+    ChartJsProvider.setOptions({
+        colours: ['#FF5252', '#FF8A80'],
+        responsive: false
+    });
+}])

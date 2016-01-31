@@ -1,4 +1,12 @@
-﻿<h3>Statystyki nadanych paczek</h3>
-<canvas id="line" class="chart chart-line" chart-data="data"
-        chart-labels="monthLabels" chart-legend="true" chart-series="series">
-</canvas>
+﻿<h3>Ilość nadanych paczek</h3><br>
+
+<div class="col-md-6">
+    <h5>Ten tydzień</h5>
+    <canvas id="weekChart" class="chart chart-line" chart-data="weekData" width="600" height="400"
+            chart-labels="weekLabels" chart-series="series"></canvas>
+</div>
+<div class="col-md-6">
+    <h5>Ten miesiąc</h5>
+    <canvas id="monthChart" class="chart chart-line" chart-data="monthData" width="600" height="400"
+            chart-labels="monthLabels" chart-series="series"></canvas>
+</div>
