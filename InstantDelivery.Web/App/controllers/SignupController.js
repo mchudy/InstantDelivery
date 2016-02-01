@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Kontroler dla widoku rejestracji
+ */
 app.controller('SignupController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
     $scope.message = "";
     $scope.signupData = {

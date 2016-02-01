@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Kontroler dla widoku statystyk
+ */
 app.controller('StatisticsController', ['$scope', 'packagesService', function ($scope, packagesService) {
     $scope.monthLabels = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec",
         "sierpień", "wrzesień", "październik", "listopad", "grudzień"];

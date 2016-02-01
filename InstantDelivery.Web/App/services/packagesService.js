@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Serwis wykonujący zapytania do API związane z paczkami
+ */
 app.factory('packagesService', ['$http', 'config', function ($http, config) {
     return {
         getPage: function (pageIndex, pageSize) {

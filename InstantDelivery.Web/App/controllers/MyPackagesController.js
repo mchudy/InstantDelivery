@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Kontroler dla widoku z paczkami
+ */
 app.controller("MyPackagesController", ['$scope', 'packagesService', function ($scope, packagesService) {
     $scope.packages = [];
     $scope.totalPackages = 0;

@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Kontroler odpowiadający za logowanie
+ */
 app.controller('LoginController', ['$scope', 'authService', '$location', function ($scope, authService, $location) {
     $scope.message = "";
     $scope.loginData = {
@@ -7,6 +10,9 @@ app.controller('LoginController', ['$scope', 'authService', '$location', functio
         password: ""
     };
 
+    /**
+     * Loguje użytkownika
+     */
     $scope.login = function () {
         authService.login($scope.loginData).then(function () {
             $location.path('/packages');

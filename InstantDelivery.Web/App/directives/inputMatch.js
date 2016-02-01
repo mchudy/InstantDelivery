@@ -1,4 +1,8 @@
-﻿app.directive('inputMatch', ['$parse', function ($parse) {
+﻿/**
+ * Dyrektywa umożliwiająca sprawdzanie, czy pewne właściwości modelu na formularzu
+ * są ze sobą zgodne. W przypadku braku zgodności ustawiany jest błąd walidacji 'match'
+ */
+app.directive('inputMatch', ['$parse', function ($parse) {
     var directiveId = 'inputMatch';
     var directive = {
         link: link,

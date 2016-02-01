@@ -1,5 +1,8 @@
 ﻿'use strict';
 
+/**
+ * Kontroler dla widoków nadawania paczki
+ */
 app.controller("SendPackageController", ['$scope', '$location', 'packagesService', 'sendPackageDataService',
     function ($scope, $location, packagesService, dataService) {
         $scope.service = dataService;

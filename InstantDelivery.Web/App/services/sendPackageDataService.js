@@ -1,5 +1,9 @@
 ﻿'use strict';
 
+/**
+ * Serwis przechowujący dane współdzielone przez wiele instancji SendPackageController
+ * podczas procesu nadawania paczki
+ */
 app.factory('sendPackageDataService', ['accountService', function (accountService) {
     var data = {
         currentPackage: {},

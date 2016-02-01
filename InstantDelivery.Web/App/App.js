@@ -1,6 +1,12 @@
-﻿var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar',
+﻿/**
+ * Główny moduł aplikacji
+ */
+var app = angular.module('app', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar',
     'ngAnimate', 'ngMessages', 'angularUtils.directives.dirPagination', 'chart.js']);
 
+/**
+ * Konfiguracja routingu po stronie klienta
+ */
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
