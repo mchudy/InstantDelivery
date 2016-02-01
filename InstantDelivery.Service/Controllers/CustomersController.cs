@@ -12,6 +12,7 @@ using InstantDelivery.Service.Paging;
 using InstantDelivery.Service.Pricing;
 using Microsoft.AspNet.Identity;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Web.Http;
 
@@ -77,9 +78,10 @@ namespace InstantDelivery.Service.Controllers
                 return BadRequest();
             }
             var dtos = customer.Packages
-                                .OrderByDescending(p => p.Id)
                                 .AsQueryable()
                                 .ProjectTo<PackageCustomerDto>();
+            query.SortProperty = "Id";
+            query.SortDirection = ListSortDirection.Descending;
             var page = PagingHelper.GetPagedResult(dtos, query);
             foreach (var dto in page.PageCollection)
             {
@@ -168,6 +170,31 @@ namespace InstantDelivery.Service.Controllers
                 WeekStatistics = weekStatistics.ToList()
             };
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Zmienia dane klienta
+        /// </summary>
+        /// <param name="dto">Obiekt z nowymi danymi klienta</param>
+        /// <returns></returns>
+        [Route("UpdateProfile"), HttpPost]
+        public IHttpActionResult UpdateProfile(CustomerUpdateProfileDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var customer = context.Customers.FirstOrDefault(c => c.User.UserName == User.Identity.Name);
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+            customer.PlaceOfResidence = Mapper.Map<Address>(dto.Address);
+            customer.PhoneNumber = dto.PhoneNumber;
+            customer.FirstName = dto.FirstName;
+            customer.LastName = dto.LastName;
+            context.SaveChanges();
+            return Ok();
         }
     }
 }

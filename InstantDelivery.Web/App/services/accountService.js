@@ -11,6 +11,14 @@ app.factory('accountService', ['$http', 'config', function ($http, config) {
 
         getProfileData: function () {
             return $http.get(config.baseUri + 'customers/profile');
+        },
+
+        changePassword: function(changePasswordData) {
+            return $http.post(config.baseUri + 'account/changePassword', changePasswordData);
+        },
+
+        updateProfile: function(userData) {
+            return $http.post(config.baseUri + 'customers/updateProfile', userData);
         }
     };
 }]);

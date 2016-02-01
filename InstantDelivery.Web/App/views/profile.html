@@ -2,12 +2,165 @@
 <br>
 <h4>{{userData.firstName}} {{userData.lastName}}</h4>
 <p>Ranga: {{userData.rankDescription}}</p>
-<div class="container">
-    <div class="row">
-        <h5>Adres</h5>
-        {{userData.name}} <br>
-        {{userData.address.street}} {{userData.address.number}}<br>
-        {{userData.address.postalCode}} {{userData.address.city}}<br>
-        {{userData.address.country}}
-    </div>
+<div class="col-md-6">
+    <form class="form-horizontal" name="updateProfileForm" novalidate>
+        <h5>Zmień dane</h5>
+        <br>
+        <div class="form-group" ng-class="{ 'has-error': updateProfileForm.firstName.$touched && updateProfileForm.firstName.$invalid }">
+            <label class="col-sm-3 control-label">Imię</label>
+            <div class="col-sm-9">
+                <input type="text" name="firstName" placeholder="Imię" class="form-control" required
+                       ng-model="userData.firstName">
+                <div class="help-block" ng-messages="updateProfileForm.firstName.$error" ng-if="updateProfileForm.firstName.$touched && updateProfileForm.firstName.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': updateProfileForm.lastName.$touched && updateProfileForm.lastName.$invalid }">
+            <label class="col-sm-3 control-label">Nazwisko</label>
+            <div class="col-sm-9">
+                <input type="text" name="lastName" placeholder="Nazwisko" class="form-control" required
+                       ng-model="userData.lastName">
+                <div class="help-block" ng-messages="updateProfileForm.lastName.$error" ng-if="updateProfileForm.lastName.$touched && updateProfileForm.lastName.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Numer telefonu</label>
+            <div class="col-sm-9">
+                <input type="text" placeholder="Numer telefonu" class="form-control"
+                       ng-model="userData.phoneNumber">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-4 control-label">Ulica</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="userData.address.street" name="street">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-6 control-label">Numer domu</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="userData.address.number" name="number">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-6 control-label">Kod pocztowy</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="userData.address.postalCode" name="postalCode">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-3 control-label">Miejscowość</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="userData.address.city" name="city">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-6 control-label">Województwo</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="userData.address.state" name="state">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group" ng-class="{ 'has-error': updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid }">
+                    <label class="col-sm-3 control-label">Kraj</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" ng-model="userData.address.country" name="country">
+                        <div class="help-block" ng-messages="updateProfileForm.userName.$error" ng-if="updateProfileForm.userName.$touched && updateProfileForm.userName.$invalid">
+                            <p ng-message="required">To pole jest wymagane</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <div class="alert alert-danger" ng-show="updateProfileErrorMessage">{{updateProfileErrorMessage}}</div>
+                <div class="alert alert-success" ng-show="updateProfileSuccessMessage">{{updateProfileSuccessMessage}}</div>
+                <button type="submit" class="btn btn-primary" ng-click="updateProfile(updateProfileForm.$valid)">
+                    Zmień dane
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-md-6">
+    <form class="form-horizontal" name="changePasswordForm" novalidate>
+        <h5>Zmień hasło</h5>
+        <div class="form-group" ng-class="{ 'has-error': changePasswordForm.currentPassword.$touched && changePasswordForm.currentPassword.$invalid }">
+            <label class="col-sm-3 control-label">Stare Hasło</label>
+            <div class="col-sm-9">
+                <input type="password" name="currentPassword" placeholder="Hasło" class="form-control" required
+                       ng-model="changePasswordData.currentPassword" ng-minlength="6">
+                <div class="help-block" ng-messages="changePasswordForm.currentPassword.$error" ng-if="changePasswordForm.currentPassword.$touched && changePasswordForm.currentPassword.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="minlength">Hasło musi składać się z co najmniej 6 znaków</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': changePasswordForm.newPassword.$touched && changePasswordForm.newPassword.$invalid }">
+            <label class="col-sm-3 control-label">Nowe hasło</label>
+            <div class="col-sm-9">
+                <input type="password" name="newPassword" placeholder="Hasło" class="form-control" required
+                       ng-model="changePasswordData.newPassword" ng-minlength="6">
+                <div class="help-block" ng-messages="changePasswordForm.newPassword.$error" ng-if="changePasswordForm.newPassword.$touched && changePasswordForm.newPassword.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="minlength">Hasło musi składać się z co najmniej 6 znaków</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': changePasswordForm.confirmNewPassword.$touched && changePasswordForm.confirmNewPassword.$invalid }">
+            <label class="col-sm-3 control-label">Potwierdź nowe hasło</label>
+            <div class="col-sm-9">
+                <input type="password" name="confirmNewPassword" placeholder="Potwierdź hasło" class="form-control" required
+                       ng-model="changePasswordData.confirmNewPassword" input-match="changePasswordData.newPassword">
+                <div class="help-block" ng-messages="changePasswordForm.confirmNewPassword.$error"
+                     ng-if="changePasswordForm.confirmNewPassword.$touched && changePasswordForm.confirmNewPassword.$invalid">
+                    <p ng-message="required">To pole jest wymagane</p>
+                    <p ng-message="match">Hasła muszą się zgadzać</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <div class="alert alert-danger" ng-show="changePasswordErrorMessage">{{changePasswordErrorMessage}}</div>
+                <div class="alert alert-success" ng-show="changePasswordSuccessMessage">{{changePasswordSuccessMessage}}</div>
+                <button type="submit" class="btn btn-primary" ng-click="changePassword(changePasswordForm.$valid)">
+                    Zmień hasło
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

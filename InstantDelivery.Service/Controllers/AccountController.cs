@@ -59,7 +59,7 @@ namespace InstantDelivery.Service.Controllers
                     return Ok();
                 }
             }
-            return BadRequest();
+            return BadRequest(ModelState);
         }
     }
 }

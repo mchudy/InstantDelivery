@@ -48,6 +48,7 @@
     <Compile Include="Customers\CustomerAddressDto.cs" />
     <Compile Include="Customers\CustomerProfileDto.cs" />
     <Compile Include="Customers\CustomerRegisterDto.cs" />
+    <Compile Include="Customers\CustomerUpdateProfileDto.cs" />
     <Compile Include="Employees\EmployeeAddDto.cs" />
     <Compile Include="Employees\EmployeeDto.cs" />
     <Compile Include="Employees\EmployeePackagesDto.cs" />
