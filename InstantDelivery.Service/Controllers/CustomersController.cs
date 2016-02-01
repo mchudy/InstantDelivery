@@ -112,7 +112,7 @@ namespace InstantDelivery.Service.Controllers
             {
                 return BadRequest();
             }
-            package.Status = PackageStatus.ToPickUp;
+            package.Status = PackageStatus.InClient
             package.Cost = pricingStrategy.GetCost(package);
             var newPackage = Mapper.Map<Package>(package);
             context.Packages.Add(newPackage);

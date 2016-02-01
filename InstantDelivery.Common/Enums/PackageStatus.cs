@@ -11,7 +11,7 @@ namespace InstantDelivery.Common.Enums
         InWarehouse,
 
         [Description("U klienta")]
-        InClient,
+        AtClientsLocation,
 
         [Description("Do odebrania")]
         ToPickUp,
