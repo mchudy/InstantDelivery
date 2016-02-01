@@ -53,6 +53,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     $locationProvider.html5Mode(true);
 }]);
 
+/**
+ * Globalne stałe aplikacji
+ */
 app.constant('config', {
     baseUri: 'https://instantdelivery.azurewebsites.net/api/'
     //baseUri: 'https://localhost:44300/'
