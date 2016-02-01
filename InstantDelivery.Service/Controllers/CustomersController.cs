@@ -76,7 +76,10 @@ namespace InstantDelivery.Service.Controllers
             {
                 return BadRequest();
             }
-            var dtos = customer.Packages.AsQueryable().ProjectTo<PackageCustomerDto>();
+            var dtos = customer.Packages
+                                .OrderByDescending(p => p.Id)
+                                .AsQueryable()
+                                .ProjectTo<PackageCustomerDto>();
             var page = PagingHelper.GetPagedResult(dtos, query);
             foreach (var dto in page.PageCollection)
             {
@@ -112,7 +115,7 @@ namespace InstantDelivery.Service.Controllers
             {
                 return BadRequest();
             }
-            package.Status = PackageStatus.InClient
+            package.Status = PackageStatus.AtClientsLocation;
             package.Cost = pricingStrategy.GetCost(package);
             var newPackage = Mapper.Map<Package>(package);
             context.Packages.Add(newPackage);

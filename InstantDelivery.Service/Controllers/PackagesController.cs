@@ -318,7 +318,7 @@ namespace InstantDelivery.Service.Controllers
             }
             else if (status == PackageStatusFilter.New)
             {
-                result = result.Where(p => p.Status == PackageStatus.InWarehouse || p.Status==PackageStatus.InClient);
+                result = result.Where(p => p.Status == PackageStatus.InWarehouse || p.Status == PackageStatus.AtClientsLocation);
             }
             else if (status == PackageStatusFilter.ToPickUp)
             {
