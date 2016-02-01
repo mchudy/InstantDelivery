@@ -26,7 +26,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         })
         .when('/packages', {
             templateUrl: '../App/views/myPackages.html',
-            controller: 'MainController'
+            controller: 'MyPackagesController'
         })
         .when('/profile', {
             templateUrl: '../App/views/profile.html',

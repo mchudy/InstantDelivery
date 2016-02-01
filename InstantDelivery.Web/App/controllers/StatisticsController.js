@@ -19,12 +19,12 @@ app.controller('StatisticsController', ['$scope', 'packagesService', function ($
         for (var i = 0; i < data.monthStatistics.length; i++) {
             var month = data.monthStatistics[i];
             var monthNum = month.month;
-            $scope.monthData[0][monthNum] = month.count;
+            $scope.monthData[0][monthNum - 1] = month.count;
         }
         for (var j = 0; j < data.weekStatistics.length; j++) {
             var day = data.weekStatistics[j];
             var dayNum = day.day;
-            $scope.weekData[0][dayNum] = day.count;
+            $scope.weekData[0][dayNum - 1] = day.count;
         }
     }
 }]);

@@ -6,7 +6,7 @@
 app.controller("MyPackagesController", ['$scope', 'packagesService', function ($scope, packagesService) {
     $scope.packages = [];
     $scope.totalPackages = 0;
-    $scope.packagesPerPage = 2;
+    $scope.packagesPerPage = 20;
     getResultsPage(1);
 
     $scope.pagination = {
