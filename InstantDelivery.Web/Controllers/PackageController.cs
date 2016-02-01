@@ -12,6 +12,9 @@ using System.Web.Mvc;
 
 namespace InstantDelivery.Web.Controllers
 {
+    /// <summary>
+    /// Kontroler zwracający widoki związane z paczkami
+    /// </summary>
     public class PackageController : Controller
     {
         private const string baseUri = "https://instantdelivery.azurewebsites.net/api/";
@@ -24,6 +27,11 @@ namespace InstantDelivery.Web.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        /// <summary>
+        /// Pokazuje historię zdarzeń związanych z daną paczką
+        /// </summary>
+        /// <param name="packageId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> Track(int packageId)
         {
@@ -37,12 +45,21 @@ namespace InstantDelivery.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Wyświetla formularz do obliczenia kosztu paczki
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Cost()
         {
             return View();
         }
 
+        /// <summary>
+        /// Wyświetla wynik obliczenia kosztu paczki
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Cost(PackageCostModel model)
         {

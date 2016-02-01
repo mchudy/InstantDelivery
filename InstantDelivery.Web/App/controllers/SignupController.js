@@ -25,6 +25,10 @@ app.controller('SignupController', ['$scope', '$location', 'authService', functi
         }
     }
 
+    /**
+     * Rejestruje użytkownika
+     * @param {} isValid flaga informująca, czy formularz został poprawnie zwalidowany
+     */
     $scope.signup = function (isValid) {
         if (isValid) {
             authService.signup($scope.signupData).then(function() {

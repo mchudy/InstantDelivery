@@ -8,7 +8,15 @@ app.controller('StatisticsController', ['$scope', 'packagesService', function ($
         "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     $scope.weekLabels = ["poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"];
     $scope.series = ['Ilość paczek'];
+
+    /**
+     * Dane z ilością paczek dla obecnego roku (grupowane po miesiącach)
+     */
     $scope.monthData = [[]];
+
+    /**
+     * Dane z ilością paczek dla obecnego tygodnia
+     */
     $scope.weekData = [[]];
 
     packagesService.getStatistics().then(function(response) {

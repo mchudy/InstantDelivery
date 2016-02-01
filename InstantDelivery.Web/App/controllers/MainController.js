@@ -8,6 +8,9 @@ app.controller("MainController", ['$scope', '$http', 'authService', '$location',
         $location.path('/login');
     }
 
+    /**
+     * Flaga informująca, czy boczny panel nawigacyjny jest schowany
+     */
     $scope.hideSidebar = false;
 
     /**

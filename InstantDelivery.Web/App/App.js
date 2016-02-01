@@ -61,26 +61,40 @@ app.constant('config', {
     //baseUri: 'https://localhost:44300/'
 });
 
+/**
+ * Wymusza aktualizację danych zalogowanego użytkownika
+ */
 app.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
 
+/**
+ * Konfiguracja paska ładowania na górze strony
+ */
 app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.includeBar = true;
 }]);
 
+/**
+ * Konfiguracja $httpProvider, dodaje odpowiednie interceptory
+ */
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 }]);
 
+/**
+ * Konfiguracja modułu do paginacji
+ */
 app.config(['paginationTemplateProvider', function (paginationTemplateProvider) {
     paginationTemplateProvider.setPath('../App/templates/dirPagination.tpl.html');
 }]);
 
+/**
+ * Konfiguracja Chart.js do rysowania wykresów
+ */
 app.config(['ChartJsProvider', function (ChartJsProvider) {
     ChartJsProvider.setOptions({
-        colours: ['#FF5252', '#FF8A80'],
         responsive: false
     });
 }])

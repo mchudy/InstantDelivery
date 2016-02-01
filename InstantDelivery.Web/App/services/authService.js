@@ -10,12 +10,20 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'config', func
         isAuth: false,
         userName: "",
 
+        /**
+         * Wylogowywuje użytkownika
+         */
         logOut: function () {
             localStorageService.remove('authorizationData');
             this.isAuth = false;
             this.userName = "";
         },
-
+        
+        /**
+         * Loguje użytkownika
+         * @param {object} loginData dane logowania
+         * @returns {Promise}
+         */
         login: function (loginData) {
             var self = this;
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
@@ -47,6 +55,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'config', func
             return deferred.promise;
         },
 
+        /**
+         * Zapisuje nazwę użytkownika i flagę isAuth do local storage
+         * @returns {} 
+         */
         fillAuthData: function () {
             var authData = localStorageService.get('authorizationData');
             if (authData) {
@@ -55,6 +67,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'config', func
             }
         },
 
+        /**
+         * Rejestruje użytkownika
+         * @param {object} signupData dane do rejestracji
+         * @returns {Promise} 
+         */
         signup: function (signupData) {
             this.logOut();
             return $http.post(config.baseUri + 'customers/register', signupData);

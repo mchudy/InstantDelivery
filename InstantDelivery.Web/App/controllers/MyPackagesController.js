@@ -13,6 +13,10 @@ app.controller("MyPackagesController", ['$scope', 'packagesService', function ($
         current: 1
     };
 
+    /**
+     * Funkcja wywoływana podczas zmiany strony
+     * @param {number} newPage numer nowej strony
+     */
     $scope.pageChanged = function (newPage) {
         getResultsPage(newPage);
     };

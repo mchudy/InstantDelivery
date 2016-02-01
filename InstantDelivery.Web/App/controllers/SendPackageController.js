@@ -14,6 +14,10 @@ app.controller("SendPackageController", ['$scope', '$location', 'packagesService
         }, true);
         $scope.message = "";
 
+        /**
+         * Przenosi do formularza z wymiarami paczki
+         * @param {} isValid flaga informująca, czy formularz został poprawnie zwalidowany
+         */
         $scope.moveToDimensions = function (isValid) {
             if (isValid) {
                 $location.path('sendPackage/dimensions');
@@ -22,6 +26,10 @@ app.controller("SendPackageController", ['$scope', '$location', 'packagesService
             }
         };
 
+        /**
+         * Przenosi do widoku podsumowania nadania paczki
+         * @param {} isValid flaga informująca, czy formularz został poprawnie zwalidowany
+         */
         $scope.moveToSummary = function (isValid) {
             if (isValid) {
                 packagesService.getCost($scope.package).then(function (response) {
@@ -35,6 +43,9 @@ app.controller("SendPackageController", ['$scope', '$location', 'packagesService
             }
         };
 
+        /**
+         * Nadaje paczkę
+         */
         $scope.sendPackage = function () {
             $scope.package.shippingAddress = $scope.package.address;
             packagesService.sendPackage($scope.package).then(function () {
