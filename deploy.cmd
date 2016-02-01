@@ -1,5 +1,6 @@
 @echo off
     echo Deploying the website...
-    call InstantDelivery.Web.deploy.cmd
+    call InstantDelivery.Web\InstantDelivery.Web.deploy.cmd
+
     echo Deploying the API...
-    call InstantDelivery.Service.deploy.cmd
+    call InstantDelivery.Service\InstantDelivery.Service.deploy.cmd
